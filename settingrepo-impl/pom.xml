@@ -103,6 +103,11 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
         </dependency>
+        <!-- Curator框架 -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+        </dependency>
         <!-- dutil模块 -->
         <dependency>
             <groupId>com.dwarfeng</groupId>
@@ -112,15 +117,16 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
+            <scope>test</scope>
         </dependency>
-        <!-- SnowFlake服务 -->
         <dependency>
-            <groupId>com.dwarfeng</groupId>
-            <artifactId>snowflake-distributed-service-api</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <!-- subgrade组件 -->
         <dependency>

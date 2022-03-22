@@ -100,10 +100,14 @@
             <artifactId>dozer-spring</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- SnowFlake服务 -->
+        <!-- subgrade组件 -->
         <dependency>
             <groupId>com.dwarfeng</groupId>
-            <artifactId>snowflake-distributed-service-api</artifactId>
+            <artifactId>subgrade-stack</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dwarfeng</groupId>
+            <artifactId>subgrade-sdk</artifactId>
         </dependency>
         <!-- 程序自身模块 -->
         <dependency>

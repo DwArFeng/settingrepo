@@ -6,6 +6,11 @@
 
 - 程序结构建立，清理测试通过。
 
+- 实体建立，单元测试通过。
+  - com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode。
+
 #### Bug修复
 
 - (无)
