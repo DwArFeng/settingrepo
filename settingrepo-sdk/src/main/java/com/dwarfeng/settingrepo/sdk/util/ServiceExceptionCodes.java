@@ -20,6 +20,8 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(2), "formatter make failed");
     public static final ServiceException.Code UNSUPPORTED_FORMATTER_TYPE =
             new ServiceException.Code(offset(3), "unsupported formatter type");
+    public static final ServiceException.Code SETTING_CATEGORY_NOT_EXISTS =
+            new ServiceException.Code(offset(10), "setting category not exists");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -48,6 +50,7 @@ public final class ServiceExceptionCodes {
         FORMATTER_EXECUTION_FAILED.setCode(offset(1));
         FORMATTER_MAKE_FAILED.setCode(offset(2));
         UNSUPPORTED_FORMATTER_TYPE.setCode(offset(3));
+        SETTING_CATEGORY_NOT_EXISTS.setCode(offset(10));
     }
 
     private ServiceExceptionCodes() {

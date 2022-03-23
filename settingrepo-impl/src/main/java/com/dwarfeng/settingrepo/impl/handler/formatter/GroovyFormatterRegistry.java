@@ -106,11 +106,9 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
         }
 
         @Override
-        public StringIdKey format(Object[] args) throws FormatterExecutionException {
+        public StringIdKey format(String[] args) throws FormatterExecutionException {
             try {
                 return processor.format(settingCategory, args);
-            } catch (FormatterExecutionException e) {
-                throw e;
             } catch (Exception e) {
                 throw new FormatterExecutionException(e);
             }
@@ -141,6 +139,6 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
          * @return 参数格式化后形成的配置节点主键。
          * @throws Exception 格式化过程中出现的任何异常。
          */
-        StringIdKey format(SettingCategory settingCategory, Object[] args) throws Exception;
+        StringIdKey format(SettingCategory settingCategory, String[] args) throws Exception;
     }
 }

@@ -13,6 +13,9 @@
 
 - 实现设置节点主键的格式化机制。
 
+- 实现操作服务。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeOperateService。
+
 #### Bug修复
 
 - (无)
