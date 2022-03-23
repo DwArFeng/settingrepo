@@ -2,6 +2,7 @@ package com.dwarfeng.settingrepo.stack.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.service.BatchCrudService;
 import com.dwarfeng.subgrade.stack.service.EntireLookupService;
 import com.dwarfeng.subgrade.stack.service.PresetLookupService;
@@ -17,4 +18,11 @@ public interface FormatterSupportMaintainService extends BatchCrudService<String
 
     String ID_LIKE = "id_like";
     String LABEL_LIKE = "label_like";
+
+    /**
+     * 重置格式化器支持。
+     *
+     * @throws ServiceException 服务异常。
+     */
+    void reset() throws ServiceException;
 }

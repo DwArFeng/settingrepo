@@ -16,6 +16,8 @@
 - 实现操作服务。
   - com.dwarfeng.settingrepo.stack.service.SettingNodeOperateService。
 
+- 程序开发完成，运行测试通过，打包测试通过。
+
 #### Bug修复
 
 - (无)

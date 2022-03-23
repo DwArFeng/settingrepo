@@ -34,7 +34,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         try {
             StringIdKey settingCategoryKey = new StringIdKey(settingNodeInspectInfo.getCategory());
 
-            // 1. 确认设置类型存在。
+            // 1. 确认设置类别存在。
             makeSureSettingCategoryExists(settingCategoryKey);
 
             // 2. 获取格式化器。
@@ -57,7 +57,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         try {
             StringIdKey settingCategoryKey = new StringIdKey(settingNodePutInfo.getCategory());
 
-            // 1. 确认设置类型存在。
+            // 1. 确认设置类别存在。
             makeSureSettingCategoryExists(settingCategoryKey);
 
             // 2. 获取格式化器。
@@ -87,7 +87,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         try {
             StringIdKey settingCategoryKey = new StringIdKey(settingNodeRemoveInfo.getCategory());
 
-            // 1. 确认设置类型存在。
+            // 1. 确认设置类别存在。
             makeSureSettingCategoryExists(settingCategoryKey);
 
             // 2. 获取格式化器。

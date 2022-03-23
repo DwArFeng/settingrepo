@@ -60,3 +60,18 @@ buildNumber.properties
 #################
 /settingrepo-impl/conf/
 /settingrepo-node/conf/
+
+#################
+## Libext Files
+#################
+/settingrepo-node/libext/
+
+#################
+## Opt Files
+#################
+/settingrepo-node/opt/
+
+#################
+## Optext Files
+#################
+/settingrepo-node/optext/
