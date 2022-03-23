@@ -11,6 +11,8 @@
   - com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory。
   - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode。
 
+- 实现设置节点主键的格式化机制。
+
 #### Bug修复
 
 - (无)

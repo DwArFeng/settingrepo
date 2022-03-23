@@ -31,7 +31,7 @@ public class SettingCategoryMaintainServiceImplTest {
         settingCategories = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             SettingCategory settingCategory = new SettingCategory(
-                    new StringIdKey("test.setting_category." + i), "formatterUsing", "formatterParam", "remark"
+                    new StringIdKey("test.setting_category." + i), "formatterType", "formatterParam", "remark"
             );
             settingCategories.add(settingCategory);
         }

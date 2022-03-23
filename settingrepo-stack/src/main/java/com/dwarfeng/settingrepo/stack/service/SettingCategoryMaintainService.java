@@ -7,7 +7,7 @@ import com.dwarfeng.subgrade.stack.service.EntireLookupService;
 import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 
 /**
- * 设置类型维护服务。
+ * 设置类别维护服务。
  *
  * @author DwArFeng
  * @since 1.0.0

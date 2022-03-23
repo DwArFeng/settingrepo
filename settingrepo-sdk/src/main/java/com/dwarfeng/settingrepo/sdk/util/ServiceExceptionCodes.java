@@ -12,14 +12,14 @@ public final class ServiceExceptionCodes {
 
     private static int EXCEPTION_CODE_OFFSET = 10000;
 
-    public static final ServiceException.Code PROFILE_NOT_EXISTS =
-            new ServiceException.Code(offset(0), "profile not exists");
-    public static final ServiceException.Code USER_NOT_EXISTS =
-            new ServiceException.Code(offset(10), "user not exists");
-    public static final ServiceException.Code AVATAR_NOT_EXISTS =
-            new ServiceException.Code(offset(20), "avatar not exists");
-    public static final ServiceException.Code NOTIFICATION_NOT_EXISTS =
-            new ServiceException.Code(offset(30), "notification not exists");
+    public static final ServiceException.Code FORMATTER_FAILED =
+            new ServiceException.Code(offset(0), "formatter failed");
+    public static final ServiceException.Code FORMATTER_EXECUTION_FAILED =
+            new ServiceException.Code(offset(1), "formatter execution failed");
+    public static final ServiceException.Code FORMATTER_MAKE_FAILED =
+            new ServiceException.Code(offset(2), "formatter make failed");
+    public static final ServiceException.Code UNSUPPORTED_FORMATTER_TYPE =
+            new ServiceException.Code(offset(3), "unsupported formatter type");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -44,10 +44,10 @@ public final class ServiceExceptionCodes {
         EXCEPTION_CODE_OFFSET = exceptionCodeOffset;
 
         // 以新的 EXCEPTION_CODE_OFFSET 为基准，更新异常代码的值。
-        PROFILE_NOT_EXISTS.setCode(offset(0));
-        USER_NOT_EXISTS.setCode(offset(10));
-        AVATAR_NOT_EXISTS.setCode(offset(20));
-        NOTIFICATION_NOT_EXISTS.setCode(offset(30));
+        FORMATTER_FAILED.setCode(offset(0));
+        FORMATTER_EXECUTION_FAILED.setCode(offset(1));
+        FORMATTER_MAKE_FAILED.setCode(offset(2));
+        UNSUPPORTED_FORMATTER_TYPE.setCode(offset(3));
     }
 
     private ServiceExceptionCodes() {

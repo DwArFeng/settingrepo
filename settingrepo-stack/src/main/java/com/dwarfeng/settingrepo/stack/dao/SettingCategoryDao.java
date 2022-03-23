@@ -7,7 +7,7 @@ import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
 import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 
 /**
- * 设置类型支持器数据访问层。
+ * 设置类别支持器数据访问层。
  *
  * @author DwArFeng
  * @since 1.0.0

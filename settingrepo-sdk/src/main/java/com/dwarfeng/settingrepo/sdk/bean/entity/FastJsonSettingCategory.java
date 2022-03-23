@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class FastJsonSettingCategory implements Bean {
 
-    private static final long serialVersionUID = 3742608095639169224L;
+    private static final long serialVersionUID = -6649033031821010466L;
 
     public static FastJsonSettingCategory of(SettingCategory settingCategory) {
         if (Objects.isNull(settingCategory)) {
@@ -23,7 +23,7 @@ public class FastJsonSettingCategory implements Bean {
         } else {
             return new FastJsonSettingCategory(
                     FastJsonStringIdKey.of(settingCategory.getKey()),
-                    settingCategory.getFormatterUsing(), settingCategory.getFormatterParam(),
+                    settingCategory.getFormatterType(), settingCategory.getFormatterParam(),
                     settingCategory.getRemark()
             );
         }
@@ -32,8 +32,8 @@ public class FastJsonSettingCategory implements Bean {
     @JSONField(name = "key", ordinal = 1)
     private FastJsonStringIdKey key;
 
-    @JSONField(name = "formatter_using", ordinal = 2)
-    private String formatterUsing;
+    @JSONField(name = "formatter_type", ordinal = 2)
+    private String formatterType;
 
     @JSONField(name = "formatter_param", ordinal = 3)
     private String formatterParam;
@@ -45,10 +45,10 @@ public class FastJsonSettingCategory implements Bean {
     }
 
     public FastJsonSettingCategory(
-            FastJsonStringIdKey key, String formatterUsing, String formatterParam, String remark
+            FastJsonStringIdKey key, String formatterType, String formatterParam, String remark
     ) {
         this.key = key;
-        this.formatterUsing = formatterUsing;
+        this.formatterType = formatterType;
         this.formatterParam = formatterParam;
         this.remark = remark;
     }
@@ -61,12 +61,12 @@ public class FastJsonSettingCategory implements Bean {
         this.key = key;
     }
 
-    public String getFormatterUsing() {
-        return formatterUsing;
+    public String getFormatterType() {
+        return formatterType;
     }
 
-    public void setFormatterUsing(String formatterUsing) {
-        this.formatterUsing = formatterUsing;
+    public void setFormatterType(String formatterType) {
+        this.formatterType = formatterType;
     }
 
     public String getFormatterParam() {
@@ -89,7 +89,7 @@ public class FastJsonSettingCategory implements Bean {
     public String toString() {
         return "FastJsonSettingCategory{" +
                 "key=" + key +
-                ", formatterUsing='" + formatterUsing + '\'' +
+                ", formatterType='" + formatterType + '\'' +
                 ", formatterParam='" + formatterParam + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';

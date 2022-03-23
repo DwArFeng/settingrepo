@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class WebInputSettingCategory implements Bean {
 
-    private static final long serialVersionUID = 4219337316980965582L;
+    private static final long serialVersionUID = 6525417544234163644L;
 
     public static SettingCategory toStackBean(WebInputSettingCategory webInputSettingCategory) {
         if (Objects.isNull(webInputSettingCategory)) {
@@ -27,7 +27,7 @@ public class WebInputSettingCategory implements Bean {
         } else {
             return new SettingCategory(
                     WebInputStringIdKey.toStackBean(webInputSettingCategory.getKey()),
-                    webInputSettingCategory.getFormatterUsing(), webInputSettingCategory.getFormatterParam(),
+                    webInputSettingCategory.getFormatterType(), webInputSettingCategory.getFormatterParam(),
                     webInputSettingCategory.getRemark()
             );
         }
@@ -36,11 +36,11 @@ public class WebInputSettingCategory implements Bean {
     @JSONField(name = "key")
     private WebInputStringIdKey key;
 
-    @JSONField(name = "formatter_using")
+    @JSONField(name = "formatter_type")
     @NotNull
     @NotEmpty
     @Length(max = Constraints.LENGTH_TYPE)
-    private String formatterUsing;
+    private String formatterType;
 
     @JSONField(name = "formatter_param")
     private String formatterParam;
@@ -60,12 +60,12 @@ public class WebInputSettingCategory implements Bean {
         this.key = key;
     }
 
-    public String getFormatterUsing() {
-        return formatterUsing;
+    public String getFormatterType() {
+        return formatterType;
     }
 
-    public void setFormatterUsing(String formatterUsing) {
-        this.formatterUsing = formatterUsing;
+    public void setFormatterType(String formatterType) {
+        this.formatterType = formatterType;
     }
 
     public String getFormatterParam() {
@@ -88,7 +88,7 @@ public class WebInputSettingCategory implements Bean {
     public String toString() {
         return "WebInputSettingCategory{" +
                 "key=" + key +
-                ", formatterUsing='" + formatterUsing + '\'' +
+                ", formatterType='" + formatterType + '\'' +
                 ", formatterParam='" + formatterParam + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';

@@ -1,5 +1,10 @@
 package com.dwarfeng.settingrepo.impl.configuration;
 
+import com.dwarfeng.settingrepo.sdk.util.ServiceExceptionCodes;
+import com.dwarfeng.settingrepo.stack.exception.FormatterException;
+import com.dwarfeng.settingrepo.stack.exception.FormatterExecutionException;
+import com.dwarfeng.settingrepo.stack.exception.FormatterMakeException;
+import com.dwarfeng.settingrepo.stack.exception.UnsupportedFormatterTypeException;
 import com.dwarfeng.subgrade.impl.exception.MapServiceExceptionMapper;
 import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
@@ -14,6 +19,10 @@ public class ServiceExceptionMapperConfiguration {
     @Bean
     public MapServiceExceptionMapper mapServiceExceptionMapper() {
         Map<Class<? extends Exception>, ServiceException.Code> destination = ServiceExceptionHelper.putDefaultDestination(null);
+        destination.put(FormatterException.class, ServiceExceptionCodes.FORMATTER_FAILED);
+        destination.put(FormatterExecutionException.class, ServiceExceptionCodes.FORMATTER_EXECUTION_FAILED);
+        destination.put(FormatterMakeException.class, ServiceExceptionCodes.FORMATTER_MAKE_FAILED);
+        destination.put(UnsupportedFormatterTypeException.class, ServiceExceptionCodes.UNSUPPORTED_FORMATTER_TYPE);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINE);
     }
 }

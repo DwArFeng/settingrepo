@@ -12,7 +12,7 @@ import java.util.Optional;
 @Table(name = "tbl_setting_category")
 public class HibernateSettingCategory implements Bean {
 
-    private static final long serialVersionUID = -2998868495836912807L;
+    private static final long serialVersionUID = -6782085393272867428L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -20,8 +20,8 @@ public class HibernateSettingCategory implements Bean {
     private String stringId;
 
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------
-    @Column(name = "formatter_using", length = Constraints.LENGTH_TYPE)
-    private String formatterUsing;
+    @Column(name = "formatter_type", length = Constraints.LENGTH_TYPE)
+    private String formatterType;
 
     @Column(name = "formatter_param", columnDefinition = "TEXT")
     private String formatterParam;
@@ -50,12 +50,12 @@ public class HibernateSettingCategory implements Bean {
         this.stringId = stringId;
     }
 
-    public String getFormatterUsing() {
-        return formatterUsing;
+    public String getFormatterType() {
+        return formatterType;
     }
 
-    public void setFormatterUsing(String formatterUsing) {
-        this.formatterUsing = formatterUsing;
+    public void setFormatterType(String formatterType) {
+        this.formatterType = formatterType;
     }
 
     public String getFormatterParam() {
@@ -78,7 +78,7 @@ public class HibernateSettingCategory implements Bean {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "stringId = " + stringId + ", " +
-                "formatterUsing = " + formatterUsing + ", " +
+                "formatterType = " + formatterType + ", " +
                 "formatterParam = " + formatterParam + ", " +
                 "remark = " + remark + ")";
     }

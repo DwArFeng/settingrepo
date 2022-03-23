@@ -11,19 +11,19 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class SettingCategory implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -3983781748313933519L;
+    private static final long serialVersionUID = -2037886562008953343L;
 
     private StringIdKey key;
-    private String formatterUsing;
+    private String formatterType;
     private String formatterParam;
     private String remark;
 
     public SettingCategory() {
     }
 
-    public SettingCategory(StringIdKey key, String formatterUsing, String formatterParam, String remark) {
+    public SettingCategory(StringIdKey key, String formatterType, String formatterParam, String remark) {
         this.key = key;
-        this.formatterUsing = formatterUsing;
+        this.formatterType = formatterType;
         this.formatterParam = formatterParam;
         this.remark = remark;
     }
@@ -38,12 +38,12 @@ public class SettingCategory implements Entity<StringIdKey> {
         this.key = key;
     }
 
-    public String getFormatterUsing() {
-        return formatterUsing;
+    public String getFormatterType() {
+        return formatterType;
     }
 
-    public void setFormatterUsing(String formatterUsing) {
-        this.formatterUsing = formatterUsing;
+    public void setFormatterType(String formatterType) {
+        this.formatterType = formatterType;
     }
 
     public String getFormatterParam() {
@@ -66,7 +66,7 @@ public class SettingCategory implements Entity<StringIdKey> {
     public String toString() {
         return "SettingCategory{" +
                 "key=" + key +
-                ", formatterUsing='" + formatterUsing + '\'' +
+                ", formatterType='" + formatterType + '\'' +
                 ", formatterParam='" + formatterParam + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
