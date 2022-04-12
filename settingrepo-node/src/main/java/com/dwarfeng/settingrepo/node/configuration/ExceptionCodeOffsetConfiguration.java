@@ -9,11 +9,11 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class ExceptionCodeOffsetConfiguration {
 
-    @Value("${familyhelper.exception_code_offset}")
+    @Value("${settingrepo.exception_code_offset}")
     private int exceptionCodeOffset;
-    @Value("${familyhelper.exception_code_offset.subgrade}")
+    @Value("${settingrepo.exception_code_offset.subgrade}")
     private int subgradeExceptionCodeOffset;
-    @Value("${familyhelper.exception_code_offset.snowflake}")
+    @Value("${settingrepo.exception_code_offset.snowflake}")
     private int snowflakeExceptionCodeOffset;
 
     @PostConstruct
