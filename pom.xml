@@ -6,7 +6,7 @@
 
     <groupId>com.dwarfeng</groupId>
     <artifactId>settingrepo</artifactId>
-    <version>1.0.1.a-SNAPSHOT</version>
+    <version>1.0.1.a</version>
 
     <packaging>pom</packaging>
 
@@ -397,22 +397,22 @@
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-stack</artifactId>
-                <version>1.0.1.a-SNAPSHOT</version>
+                <version>1.0.1.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-sdk</artifactId>
-                <version>1.0.1.a-SNAPSHOT</version>
+                <version>1.0.1.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-impl</artifactId>
-                <version>1.0.1.a-SNAPSHOT</version>
+                <version>1.0.1.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-node</artifactId>
-                <version>1.0.1.a-SNAPSHOT</version>
+                <version>1.0.1.a</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
