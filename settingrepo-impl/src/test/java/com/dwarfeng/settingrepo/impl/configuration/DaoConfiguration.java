@@ -1,6 +1,7 @@
 package com.dwarfeng.settingrepo.impl.configuration;
 
 import com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport;
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateMapper;
 import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory;
 import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode;
 import com.dwarfeng.settingrepo.impl.dao.preset.FormatterSupportPresetCriteriaMaker;
@@ -9,14 +10,13 @@ import com.dwarfeng.settingrepo.impl.dao.preset.SettingNodePresetCriteriaMaker;
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.subgrade.impl.bean.DozerBeanTransformer;
+import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
 import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
 import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.sdk.hibernate.modification.DefaultDeletionMod;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,6 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 public class DaoConfiguration {
 
     private final HibernateTemplate template;
-    private final Mapper mapper;
 
     private final FormatterSupportPresetCriteriaMaker formatterSupportPresetCriteriaMaker;
     private final SettingCategoryPresetCriteriaMaker settingCategoryPresetCriteriaMaker;
@@ -36,13 +35,12 @@ public class DaoConfiguration {
     private int batchSize;
 
     public DaoConfiguration(
-            HibernateTemplate template, Mapper mapper,
+            HibernateTemplate template,
             FormatterSupportPresetCriteriaMaker formatterSupportPresetCriteriaMaker,
             SettingCategoryPresetCriteriaMaker settingCategoryPresetCriteriaMaker,
             SettingNodePresetCriteriaMaker settingNodePresetCriteriaMaker
     ) {
         this.template = template;
-        this.mapper = mapper;
         this.formatterSupportPresetCriteriaMaker = formatterSupportPresetCriteriaMaker;
         this.settingCategoryPresetCriteriaMaker = settingCategoryPresetCriteriaMaker;
         this.settingNodePresetCriteriaMaker = settingNodePresetCriteriaMaker;
@@ -53,8 +51,10 @@ public class DaoConfiguration {
     formatterSupportHibernateBatchBaseDao() {
         return new HibernateBatchBaseDao<>(
                 template,
-                new DozerBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, mapper),
-                new DozerBeanTransformer<>(FormatterSupport.class, HibernateFormatterSupport.class, mapper),
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, HibernateMapper.class),
+                new MapStructBeanTransformer<>(
+                        FormatterSupport.class, HibernateFormatterSupport.class, HibernateMapper.class
+                ),
                 HibernateFormatterSupport.class,
                 new DefaultDeletionMod<>(),
                 batchSize
@@ -66,7 +66,9 @@ public class DaoConfiguration {
     formatterSupportHibernateEntireLookupDao() {
         return new HibernateEntireLookupDao<>(
                 template,
-                new DozerBeanTransformer<>(FormatterSupport.class, HibernateFormatterSupport.class, mapper),
+                new MapStructBeanTransformer<>(
+                        FormatterSupport.class, HibernateFormatterSupport.class, HibernateMapper.class
+                ),
                 HibernateFormatterSupport.class
         );
     }
@@ -76,7 +78,9 @@ public class DaoConfiguration {
     formatterSupportHibernatePresetLookupDao() {
         return new HibernatePresetLookupDao<>(
                 template,
-                new DozerBeanTransformer<>(FormatterSupport.class, HibernateFormatterSupport.class, mapper),
+                new MapStructBeanTransformer<>(
+                        FormatterSupport.class, HibernateFormatterSupport.class, HibernateMapper.class
+                ),
                 HibernateFormatterSupport.class,
                 formatterSupportPresetCriteriaMaker
         );
@@ -87,8 +91,10 @@ public class DaoConfiguration {
     settingCategoryHibernateBatchBaseDao() {
         return new HibernateBatchBaseDao<>(
                 template,
-                new DozerBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, mapper),
-                new DozerBeanTransformer<>(SettingCategory.class, HibernateSettingCategory.class, mapper),
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, HibernateMapper.class),
+                new MapStructBeanTransformer<>(
+                        SettingCategory.class, HibernateSettingCategory.class, HibernateMapper.class
+                ),
                 HibernateSettingCategory.class,
                 new DefaultDeletionMod<>(),
                 batchSize
@@ -100,7 +106,9 @@ public class DaoConfiguration {
     settingCategoryHibernateEntireLookupDao() {
         return new HibernateEntireLookupDao<>(
                 template,
-                new DozerBeanTransformer<>(SettingCategory.class, HibernateSettingCategory.class, mapper),
+                new MapStructBeanTransformer<>(
+                        SettingCategory.class, HibernateSettingCategory.class, HibernateMapper.class
+                ),
                 HibernateSettingCategory.class
         );
     }
@@ -110,7 +118,9 @@ public class DaoConfiguration {
     settingCategoryHibernatePresetLookupDao() {
         return new HibernatePresetLookupDao<>(
                 template,
-                new DozerBeanTransformer<>(SettingCategory.class, HibernateSettingCategory.class, mapper),
+                new MapStructBeanTransformer<>(
+                        SettingCategory.class, HibernateSettingCategory.class, HibernateMapper.class
+                ),
                 HibernateSettingCategory.class,
                 settingCategoryPresetCriteriaMaker
         );
@@ -121,8 +131,8 @@ public class DaoConfiguration {
     settingNodeHibernateBatchBaseDao() {
         return new HibernateBatchBaseDao<>(
                 template,
-                new DozerBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, mapper),
-                new DozerBeanTransformer<>(SettingNode.class, HibernateSettingNode.class, mapper),
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, HibernateMapper.class),
+                new MapStructBeanTransformer<>(SettingNode.class, HibernateSettingNode.class, HibernateMapper.class),
                 HibernateSettingNode.class,
                 new DefaultDeletionMod<>(),
                 batchSize
@@ -133,7 +143,7 @@ public class DaoConfiguration {
     public HibernateEntireLookupDao<SettingNode, HibernateSettingNode> settingNodeHibernateEntireLookupDao() {
         return new HibernateEntireLookupDao<>(
                 template,
-                new DozerBeanTransformer<>(SettingNode.class, HibernateSettingNode.class, mapper),
+                new MapStructBeanTransformer<>(SettingNode.class, HibernateSettingNode.class, HibernateMapper.class),
                 HibernateSettingNode.class
         );
     }
@@ -142,7 +152,7 @@ public class DaoConfiguration {
     public HibernatePresetLookupDao<SettingNode, HibernateSettingNode> settingNodeHibernatePresetLookupDao() {
         return new HibernatePresetLookupDao<>(
                 template,
-                new DozerBeanTransformer<>(SettingNode.class, HibernateSettingNode.class, mapper),
+                new MapStructBeanTransformer<>(SettingNode.class, HibernateSettingNode.class, HibernateMapper.class),
                 HibernateSettingNode.class,
                 settingNodePresetCriteriaMaker
         );
