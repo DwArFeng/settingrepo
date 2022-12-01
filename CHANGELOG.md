@@ -4,6 +4,8 @@
 
 #### 功能构建
 
+- Dubbo 微服务增加分组配置。
+
 - 优化 `assembly.xml`，减少无用的依赖项目输出。
 
 - 使用 `MapStruct` 重构 `BeanTransformer`。

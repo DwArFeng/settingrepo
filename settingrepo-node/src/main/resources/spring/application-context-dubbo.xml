@@ -21,12 +21,24 @@
                     dispatcher="message" threadpool="fixed" threads="100"/>
 
     <!-- 向注册中心注册暴露服务地址,注册服务 -->
-    <dubbo:service interface="com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService"
-                   ref="formatterSupportMaintainServiceImpl"/>
-    <dubbo:service interface="com.dwarfeng.settingrepo.stack.service.SettingCategoryMaintainService"
-                   ref="settingCategoryMaintainServiceImpl"/>
-    <dubbo:service interface="com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService"
-                   ref="settingNodeMaintainServiceImpl"/>
-    <dubbo:service interface="com.dwarfeng.settingrepo.stack.service.SettingNodeOperateService"
-                   ref="settingNodeOperateServiceImpl"/>
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService"
+            ref="formatterSupportMaintainServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.SettingCategoryMaintainService"
+            ref="settingCategoryMaintainServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService"
+            ref="settingNodeMaintainServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.SettingNodeOperateService"
+            ref="settingNodeOperateServiceImpl"
+            group="${dubbo.provider.group}"
+    />
 </beans>
