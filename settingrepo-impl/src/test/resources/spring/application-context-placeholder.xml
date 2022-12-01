@@ -14,7 +14,8 @@
             location="classpath:database/*.properties,classpath:dubbo/*.properties,classpath:settingrepo/*.properties,
             classpath:redis/*.properties"
             local-override="true"
-            properties-ref="refProperties"/>
+            properties-ref="refProperties"
+    />
 
     <!-- 设置本地文件覆盖的路径 -->
     <bean id="refProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
