@@ -4,6 +4,8 @@
 
 #### 功能构建
 
+- 优化 `assembly.xml`，减少无用的依赖项目输出。
+
 - 使用 `MapStruct` 重构 `BeanTransformer`。
 
 - 增加依赖。

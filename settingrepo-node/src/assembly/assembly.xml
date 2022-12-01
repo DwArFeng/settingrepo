@@ -12,6 +12,9 @@
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <fileMode>0755</fileMode>
+            <excludes>
+                <exclude>org.apache.groovy:groovy-all</exclude>
+            </excludes>
         </dependencySet>
     </dependencySets>
 
