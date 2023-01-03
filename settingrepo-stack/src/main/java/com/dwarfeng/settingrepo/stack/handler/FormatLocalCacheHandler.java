@@ -1,8 +1,7 @@
 package com.dwarfeng.settingrepo.stack.handler;
 
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
-import com.dwarfeng.subgrade.stack.handler.Handler;
+import com.dwarfeng.subgrade.stack.handler.LocalCacheHandler;
 
 /**
  * 格式化本地缓存处理器。
@@ -14,21 +13,5 @@ import com.dwarfeng.subgrade.stack.handler.Handler;
  * @author DwArFeng
  * @since beta-1.0.0
  */
-public interface FormatLocalCacheHandler extends Handler {
-
-    /**
-     * 获取指定的设置类别对应的格式化器。
-     *
-     * @param settingCategoryKey 指定的设置类别。
-     * @return 指定的设置类别对应的格式化器。
-     * @throws HandlerException 处理器异常。
-     */
-    Formatter getFormatter(StringIdKey settingCategoryKey) throws HandlerException;
-
-    /**
-     * 清除本地缓存。
-     *
-     * @throws HandlerException 处理器异常。
-     */
-    void clear() throws HandlerException;
+public interface FormatLocalCacheHandler extends LocalCacheHandler<StringIdKey, Formatter> {
 }

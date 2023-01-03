@@ -38,7 +38,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
             makeSureSettingCategoryExists(settingCategoryKey);
 
             // 2. 获取格式化器。
-            Formatter formatter = formatLocalCacheHandler.getFormatter(settingCategoryKey);
+            Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
 
             // 3. 使用格式化器获取 settingNode 的主键。
             StringIdKey settingNodeKey = formatter.format(settingNodeInspectInfo.getArgs());
@@ -61,7 +61,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
             makeSureSettingCategoryExists(settingCategoryKey);
 
             // 2. 获取格式化器。
-            Formatter formatter = formatLocalCacheHandler.getFormatter(settingCategoryKey);
+            Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
 
             // 3. 使用格式化器获取 settingNode 的主键。
             StringIdKey settingNodeKey = formatter.format(settingNodePutInfo.getArgs());
@@ -91,7 +91,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
             makeSureSettingCategoryExists(settingCategoryKey);
 
             // 2. 获取格式化器。
-            Formatter formatter = formatLocalCacheHandler.getFormatter(settingCategoryKey);
+            Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
 
             // 3. 使用格式化器获取 settingNode 的主键。
             StringIdKey settingNodeKey = formatter.format(settingNodeRemoveInfo.getArgs());
@@ -106,7 +106,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
     }
 
     private void makeSureSettingCategoryExists(StringIdKey settingCategoryKey) throws HandlerException {
-        Formatter formatter = formatLocalCacheHandler.getFormatter(settingCategoryKey);
+        Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
         if (Objects.isNull(formatter)) {
             throw new SettingCategoryNotExistsException(settingCategoryKey);
         }

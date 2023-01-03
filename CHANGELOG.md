@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 使用 `subgrade` 预设的 `GeneralLocalCacheHandler` 重写本地缓存。
+  - com.dwarfeng.settingrepo.impl.handler.FormatLocalCacheHandlerImpl。
+
 - 增加重置机制，实现格式化本地缓存的动态重置。
   - com.dwarfeng.settingrepo.impl.handler.resetter.CronResetter。
   - com.dwarfeng.settingrepo.impl.handler.resetter.DubboResetter。

@@ -31,7 +31,7 @@ public class FormatQosServiceImpl implements FormatQosService {
     public Formatter getFormatter(StringIdKey settingCategoryKey) throws ServiceException {
         lock.lock();
         try {
-            return formatLocalCacheHandler.getFormatter(settingCategoryKey);
+            return formatLocalCacheHandler.get(settingCategoryKey);
         } catch (Exception e) {
             throw ServiceExceptionHelper.logAndThrow("获取格式化器时发生异常", LogLevel.WARN, sem, e);
         } finally {
