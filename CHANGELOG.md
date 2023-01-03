@@ -4,7 +4,13 @@
 
 #### 功能构建
 
-- (无)
+- 增加重置机制，实现格式化本地缓存的动态重置。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.CronResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.DubboResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.FixedDelayResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.FixedRateResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.KafkaResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.NeverResetter。
 
 #### Bug修复
 

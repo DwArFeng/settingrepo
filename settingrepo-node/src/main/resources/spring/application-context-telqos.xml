@@ -20,6 +20,7 @@
             <telqos:command-impl ref="dubboCommand"/>
             <telqos:command-impl ref="memoryCommand"/>
             <telqos:command-impl ref="formatLocalCacheCommand"/>
+            <telqos:command-impl ref="resetCommand"/>
         </telqos:command>
     </telqos:config>
 
