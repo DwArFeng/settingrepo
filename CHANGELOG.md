@@ -4,7 +4,10 @@
 
 #### 功能构建
 
-- (无)
+- 实现推送机制，并开发预设推送器。
+  - com.dwarfeng.settingrepo.impl.handler.pusher.DrainPusher。
+  - com.dwarfeng.settingrepo.impl.handler.pusher.LogPusher。
+  - com.dwarfeng.settingrepo.impl.handler.pusher.MultiPusher。
 
 #### Bug修复
 
