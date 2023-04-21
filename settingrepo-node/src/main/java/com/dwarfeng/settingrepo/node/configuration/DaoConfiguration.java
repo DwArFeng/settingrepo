@@ -1,7 +1,7 @@
 package com.dwarfeng.settingrepo.node.configuration;
 
+import com.dwarfeng.settingrepo.impl.bean.HibernateMapper;
 import com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateMapper;
 import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory;
 import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode;
 import com.dwarfeng.settingrepo.impl.dao.preset.FormatterSupportPresetCriteriaMaker;

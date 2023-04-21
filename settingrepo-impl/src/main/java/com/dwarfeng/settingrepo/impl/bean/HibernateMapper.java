@@ -1,5 +1,8 @@
-package com.dwarfeng.settingrepo.impl.bean.entity;
+package com.dwarfeng.settingrepo.impl.bean;
 
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport;
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory;
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode;
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;

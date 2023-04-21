@@ -1,5 +1,8 @@
-package com.dwarfeng.settingrepo.sdk.bean.entity;
+package com.dwarfeng.settingrepo.sdk.bean;
 
+import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonFormatterSupport;
+import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingCategory;
+import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingNode;
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
