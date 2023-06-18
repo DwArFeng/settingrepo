@@ -54,7 +54,7 @@ public class KafkaResetter extends AbstractResetter implements ConsumerSeekAware
     }
 
     @Override
-    public void start() throws HandlerException {
+    protected void doStart() throws Exception {
         lock.lock();
         try {
             LOGGER.info("Kafka resetter 开启...");
@@ -80,7 +80,7 @@ public class KafkaResetter extends AbstractResetter implements ConsumerSeekAware
     }
 
     @Override
-    public void stop() throws HandlerException {
+    protected void doStop() throws Exception {
         lock.lock();
         try {
             LOGGER.info("Kafka resetter 停止...");
@@ -134,6 +134,14 @@ public class KafkaResetter extends AbstractResetter implements ConsumerSeekAware
     public void onPartitionsAssigned(Map<TopicPartition, Long> assignments, ConsumerSeekCallback callback) {
         LOGGER.info("将 id 为 {} 的监听器的 offset 移动至最后, 避免处理过期的消息...", listenerId);
         callback.seekToEnd(assignments.keySet());
+    }
+
+    @Override
+    public String toString() {
+        return "KafkaResetter{" +
+                "registry=" + registry +
+                ", listenerId='" + listenerId + '\'' +
+                '}';
     }
 
     @Configuration("kafkaResetter.kafkaConfiguration")

@@ -4,6 +4,14 @@
 
 #### 功能构建
 
+- 优化了 AbstractResetter 的代码结构，同时对其实现进行了修改。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.CronResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.DubboResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.FixedDelayResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.FixedRateResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.KafkaResetter。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.NeverResetter。
+
 - 依赖升级。
   - 升级 `dubbo` 依赖版本为 `2.7.22` 以规避漏洞。
   - 升级 `guava` 依赖版本为 `32.0.1-jre` 以规避漏洞。
