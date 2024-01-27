@@ -11,7 +11,6 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import groovy.lang.GroovyClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -34,11 +33,11 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroovyFormatterRegistry.class);
 
-    @Autowired
-    private ApplicationContext ctx;
+    private final ApplicationContext ctx;
 
-    public GroovyFormatterRegistry() {
+    public GroovyFormatterRegistry(ApplicationContext ctx) {
         super(FORMATTER_TYPE);
+        this.ctx = ctx;
     }
 
     @Override
