@@ -72,11 +72,11 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
 
     @Override
     public Formatter makeFormatter(SettingCategory settingCategory) throws FormatterException {
-        try {
+        try (GroovyClassLoader classLoader = new GroovyClassLoader()) {
             // 通过Groovy脚本生成处理器。
-            GroovyClassLoader classLoader = new GroovyClassLoader();
             Class<?> aClass = classLoader.parseClass(settingCategory.getFormatterParam());
             Processor processor = (Processor) aClass.newInstance();
+            ctx.getAutowireCapableBeanFactory().autowireBean(processor);
             // 构建过滤器对象。
             return ctx.getBean(GroovyFormatter.class, settingCategory, processor);
         } catch (Exception e) {
