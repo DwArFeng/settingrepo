@@ -21,6 +21,6 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(FormatterMakeException.class, ServiceExceptionCodes.FORMATTER_MAKE_FAILED);
         destination.put(UnsupportedFormatterTypeException.class, ServiceExceptionCodes.UNSUPPORTED_FORMATTER_TYPE);
         destination.put(SettingCategoryNotExistsException.class, ServiceExceptionCodes.SETTING_CATEGORY_NOT_EXISTS);
-        return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINE);
+        return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }

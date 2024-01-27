@@ -250,9 +250,7 @@ public class FormatterSupportMaintainServiceImpl implements FormatterSupportMain
                         )
                 );
             } catch (Exception e) {
-                throw ServiceExceptionHelper.logAndThrow("重置格式化器支持时发生异常",
-                        LogLevel.WARN, sem, e
-                );
+                throw ServiceExceptionHelper.logParse("重置格式化器支持时发生异常", LogLevel.WARN, e, sem);
             }
         }
     }

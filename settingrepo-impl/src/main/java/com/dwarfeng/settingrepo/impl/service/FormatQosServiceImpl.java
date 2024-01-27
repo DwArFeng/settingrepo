@@ -33,7 +33,7 @@ public class FormatQosServiceImpl implements FormatQosService {
         try {
             return formatLocalCacheHandler.get(settingCategoryKey);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logAndThrow("获取格式化器时发生异常", LogLevel.WARN, sem, e);
+            throw ServiceExceptionHelper.logParse("获取格式化器时发生异常", LogLevel.WARN, e, sem);
         } finally {
             lock.unlock();
         }
@@ -45,7 +45,7 @@ public class FormatQosServiceImpl implements FormatQosService {
         try {
             formatLocalCacheHandler.clear();
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logAndThrow("清除本地缓存时发生异常", LogLevel.WARN, sem, e);
+            throw ServiceExceptionHelper.logParse("清除本地缓存时发生异常", LogLevel.WARN, e, sem);
         } finally {
             lock.unlock();
         }

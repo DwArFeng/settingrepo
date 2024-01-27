@@ -31,7 +31,7 @@ public class SettingNodeOperateServiceImpl implements SettingNodeOperateService 
         try {
             return settingNodeOperateHandler.inspect(settingNodeInspectInfo);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logAndThrow("查看设置节点时发生异常", LogLevel.WARN, sem, e);
+            throw ServiceExceptionHelper.logParse("查看设置节点时发生异常", LogLevel.WARN, e, sem);
         }
     }
 
@@ -40,7 +40,7 @@ public class SettingNodeOperateServiceImpl implements SettingNodeOperateService 
         try {
             settingNodeOperateHandler.put(settingNodePutInfo);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logAndThrow("放置设置节点时发生异常", LogLevel.WARN, sem, e);
+            throw ServiceExceptionHelper.logParse("放置设置节点时发生异常", LogLevel.WARN, e, sem);
         }
     }
 
@@ -49,7 +49,7 @@ public class SettingNodeOperateServiceImpl implements SettingNodeOperateService 
         try {
             settingNodeOperateHandler.remove(settingNodeRemoveInfo);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logAndThrow("移除设置节点时发生异常", LogLevel.WARN, sem, e);
+            throw ServiceExceptionHelper.logParse("移除设置节点时发生异常", LogLevel.WARN, e, sem);
         }
     }
 }

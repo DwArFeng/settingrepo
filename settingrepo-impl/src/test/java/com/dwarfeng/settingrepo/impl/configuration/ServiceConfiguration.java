@@ -9,7 +9,7 @@ import com.dwarfeng.settingrepo.stack.cache.SettingNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.FormatterSupportDao;
 import com.dwarfeng.settingrepo.stack.dao.SettingCategoryDao;
 import com.dwarfeng.settingrepo.stack.dao.SettingNodeDao;
-import com.dwarfeng.subgrade.impl.bean.key.ExceptionKeyFetcher;
+import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
@@ -58,7 +58,7 @@ public class ServiceConfiguration {
         return new GeneralBatchCrudService<>(
                 formatterSupportDao,
                 formatterSupportCache,
-                new ExceptionKeyFetcher<>(),
+                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 formatterSupportTimeout
@@ -88,7 +88,7 @@ public class ServiceConfiguration {
         return new GeneralBatchCrudService<>(
                 settingCategoryDao,
                 settingCategoryCache,
-                new ExceptionKeyFetcher<>(),
+                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 settingCategoryTimeout
@@ -118,7 +118,7 @@ public class ServiceConfiguration {
         return new GeneralBatchCrudService<>(
                 settingNodeDao,
                 settingNodeCache,
-                new ExceptionKeyFetcher<>(),
+                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 settingNodeTimeout
