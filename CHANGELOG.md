@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- 升级 spring-telqos 并应用其新功能。
+  - 使用包扫描的方式注册指令。
+  - 优化 `telqos/connection.properties` 中配置的键名。
+
 - 依赖升级。
   - 升级 `subgrade` 依赖版本为 `1.4.8.b` 并解决兼容性问题，以应用其新功能。
   - 升级 `spring-terminator` 依赖版本为 `1.0.12.a` 并解决兼容性问题，以应用其新功能。
