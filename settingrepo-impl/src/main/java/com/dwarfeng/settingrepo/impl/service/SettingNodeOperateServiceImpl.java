@@ -42,6 +42,15 @@ public class SettingNodeOperateServiceImpl implements SettingNodeOperateService 
     }
 
     @Override
+    public void init(SettingNodeInitInfo info) throws ServiceException {
+        try {
+            settingNodeOperateHandler.init(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("初始化设置节点时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
+
+    @Override
     public void remove(SettingNodeRemoveInfo info) throws ServiceException {
         try {
             settingNodeOperateHandler.remove(info);

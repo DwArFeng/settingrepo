@@ -31,6 +31,14 @@ public interface SettingNodeOperateService extends Service {
     SettingNodeInspectResult inspect(SettingNodeInspectInfo info) throws ServiceException;
 
     /**
+     * 初始化指定的设置节点。
+     *
+     * @param info 初始化信息。
+     * @throws ServiceException 服务异常。
+     */
+    void init(SettingNodeInitInfo info) throws ServiceException;
+
+    /**
      * 删除指定的设置节点。
      *
      * @param info 删除信息。

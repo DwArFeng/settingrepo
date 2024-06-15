@@ -31,6 +31,14 @@ public interface SettingNodeOperateHandler extends Handler {
     SettingNodeInspectResult inspect(SettingNodeInspectInfo info) throws HandlerException;
 
     /**
+     * 初始化指定的设置节点。
+     *
+     * @param info 初始化信息。
+     * @throws HandlerException 处理器异常。
+     */
+    void init(SettingNodeInitInfo info) throws HandlerException;
+
+    /**
      * 删除指定的设置节点。
      *
      * @param info 删除信息。

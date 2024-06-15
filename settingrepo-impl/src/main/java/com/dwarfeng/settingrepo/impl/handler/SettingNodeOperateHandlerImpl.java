@@ -10,6 +10,8 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler {
 
@@ -79,6 +81,35 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
             return new SettingNodeInspectResult(
                     settingNode.getType(), settingNode.getLastModifiedDate(), settingNode.getRemark()
             );
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
+    @Override
+    public void init(SettingNodeInitInfo info) throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+            int type = info.getType();
+            String remark = info.getRemark();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 确认设置节点不存在。
+            handlerValidator.makeSureSettingNodeNotExists(settingNodeKey);
+
+            // 构造设置节点。
+            SettingNode settingNode = new SettingNode(settingNodeKey, type, new Date(), remark);
+
+            // 调用维护服务插入实体。
+            settingNodeMaintainService.insert(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
