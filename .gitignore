@@ -75,3 +75,8 @@ buildNumber.properties
 ## Optext Files
 #################
 /settingrepo-node/optext/
+
+#################
+## Confext Files
+#################
+/settingrepo-node/confext/
