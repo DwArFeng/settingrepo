@@ -1,10 +1,8 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodePutInfo;
+import com.dwarfeng.settingrepo.stack.bean.dto.TextNodePutInfo;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,22 +10,23 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * WebInput 设置节点推送信息。
+ * WebInput 文本节点推送信息。
  *
  * @author DwArFeng
- * @since 1.0.0
+ * @since 2.0.0
  */
-public class WebInputSettingNodePutInfo implements Dto {
+public class WebInputTextNodePutInfo implements Dto {
 
-    private static final long serialVersionUID = -1523921755143460717L;
+    private static final long serialVersionUID = -5971158452589559916L;
 
-    public static SettingNodePutInfo toStackBean(WebInputSettingNodePutInfo webInputSettingNodePutInfo) {
-        if (Objects.isNull(webInputSettingNodePutInfo)) {
+    public static TextNodePutInfo toStackBean(WebInputTextNodePutInfo webInput) {
+        if (Objects.isNull(webInput)) {
             return null;
         } else {
-            return new SettingNodePutInfo(
-                    webInputSettingNodePutInfo.getCategory(), webInputSettingNodePutInfo.getArgs(),
-                    webInputSettingNodePutInfo.getValue(), webInputSettingNodePutInfo.getRemark()
+            return new TextNodePutInfo(
+                    webInput.getCategory(),
+                    webInput.getArgs(),
+                    webInput.getValue()
             );
         }
     }
@@ -44,11 +43,7 @@ public class WebInputSettingNodePutInfo implements Dto {
     @JSONField(name = "value")
     private String value;
 
-    @JSONField(name = "remark")
-    @Length(max = Constraints.LENGTH_REMARK)
-    private String remark;
-
-    public WebInputSettingNodePutInfo() {
+    public WebInputTextNodePutInfo() {
     }
 
     public String getCategory() {
@@ -75,21 +70,12 @@ public class WebInputSettingNodePutInfo implements Dto {
         this.value = value;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
-        return "WebInputSettingNodePutInfo{" +
+        return "WebInputTextNodePutInfo{" +
                 "category='" + category + '\'' +
                 ", args=" + Arrays.toString(args) +
                 ", value='" + value + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

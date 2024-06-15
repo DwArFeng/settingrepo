@@ -3,6 +3,8 @@ package com.dwarfeng.settingrepo.stack.bean.entity;
 import com.dwarfeng.subgrade.stack.bean.entity.Entity;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 
+import java.util.Date;
+
 /**
  * 设置节点。
  *
@@ -11,18 +13,43 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class SettingNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -2052258912837334808L;
+    private static final long serialVersionUID = -8109769646978028850L;
 
     private StringIdKey key;
-    private String value;
+
+    /**
+     * 设置节点的类型。
+     *
+     * <p>
+     * int 枚举，可能的值为：
+     * <ul>
+     *     <li>文本</li>
+     *     <li>长文本</li>
+     *     <li>图片</li>
+     *     <li>图片集</li>
+     * </ul>
+     * 详细值参考 sdk 模块的常量工具类。
+     *
+     * @since 2.0.0
+     */
+    private int type;
+
+    /**
+     * 节点最后一次修改的日期。
+     *
+     * @since 2.0.0
+     */
+    private Date lastModifiedDate;
+
     private String remark;
 
     public SettingNode() {
     }
 
-    public SettingNode(StringIdKey key, String value, String remark) {
+    public SettingNode(StringIdKey key, int type, Date lastModifiedDate, String remark) {
         this.key = key;
-        this.value = value;
+        this.type = type;
+        this.lastModifiedDate = lastModifiedDate;
         this.remark = remark;
     }
 
@@ -36,12 +63,20 @@ public class SettingNode implements Entity<StringIdKey> {
         this.key = key;
     }
 
-    public String getValue() {
-        return value;
+    public int getType() {
+        return type;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public String getRemark() {
@@ -56,7 +91,8 @@ public class SettingNode implements Entity<StringIdKey> {
     public String toString() {
         return "SettingNode{" +
                 "key=" + key +
-                ", value='" + value + '\'' +
+                ", type=" + type +
+                ", lastModifiedDate=" + lastModifiedDate +
                 ", remark='" + remark + '\'' +
                 '}';
     }

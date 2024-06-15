@@ -8,7 +8,7 @@ import java.util.Arrays;
  * 设置节点查看信息。
  *
  * @author DwArFeng
- * @since 1.0.0
+ * @since 2.0
  */
 public class SettingNodeInspectInfo implements Dto {
 

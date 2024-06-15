@@ -1,19 +1,14 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodeInspectInfo;
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodePutInfo;
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodeRemoveInfo;
+import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.settingrepo.stack.exception.SettingCategoryNotExistsException;
 import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
-import com.dwarfeng.settingrepo.stack.handler.Formatter;
 import com.dwarfeng.settingrepo.stack.handler.SettingNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
+import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler {
@@ -22,93 +17,94 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
 
     private final FormatLocalCacheHandler formatLocalCacheHandler;
 
+    private final HandlerValidator handlerValidator;
+
     public SettingNodeOperateHandlerImpl(
-            SettingNodeMaintainService settingNodeMaintainService, FormatLocalCacheHandler formatLocalCacheHandler
+            SettingNodeMaintainService settingNodeMaintainService,
+            FormatLocalCacheHandler formatLocalCacheHandler,
+            HandlerValidator handlerValidator
     ) {
         this.settingNodeMaintainService = settingNodeMaintainService;
         this.formatLocalCacheHandler = formatLocalCacheHandler;
+        this.handlerValidator = handlerValidator;
     }
 
     @Override
-    public SettingNode inspect(SettingNodeInspectInfo settingNodeInspectInfo) throws HandlerException {
+    public SettingNodeExistsResult exists(SettingNodeExistsInfo info) throws HandlerException {
         try {
-            StringIdKey settingCategoryKey = new StringIdKey(settingNodeInspectInfo.getCategory());
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
 
-            // 1. 确认设置类别存在。
-            makeSureSettingCategoryExists(settingCategoryKey);
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
 
-            // 2. 获取格式化器。
-            Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
 
-            // 3. 使用格式化器获取 settingNode 的主键。
-            StringIdKey settingNodeKey = formatter.format(settingNodeInspectInfo.getArgs());
+            // 确认设置节点存在。
+            boolean exists = settingNodeMaintainService.exists(settingNodeKey);
 
-            // 4. 获取设置节点实体并返回。
-            return settingNodeMaintainService.getIfExists(settingNodeKey);
-        } catch (HandlerException e) {
-            throw e;
+            // 构造返回值并返回。
+            return new SettingNodeExistsResult(exists);
         } catch (Exception e) {
-            throw new HandlerException(e);
+            throw HandlerExceptionHelper.parse(e);
         }
     }
 
     @Override
-    public void put(SettingNodePutInfo settingNodePutInfo) throws HandlerException {
+    public SettingNodeInspectResult inspect(SettingNodeInspectInfo info) throws HandlerException {
         try {
-            StringIdKey settingCategoryKey = new StringIdKey(settingNodePutInfo.getCategory());
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
 
-            // 1. 确认设置类别存在。
-            makeSureSettingCategoryExists(settingCategoryKey);
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
 
-            // 2. 获取格式化器。
-            Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
 
-            // 3. 使用格式化器获取 settingNode 的主键。
-            StringIdKey settingNodeKey = formatter.format(settingNodePutInfo.getArgs());
+            // 获取设置节点。
+            SettingNode settingNode = settingNodeMaintainService.getIfExists(settingNodeKey);
 
-            // 4. 构造新的设置节点实体。
-            SettingNode settingNode = new SettingNode(
-                    settingNodeKey,
-                    settingNodePutInfo.getValue(),
-                    settingNodePutInfo.getRemark()
+            // 如果设置节点不存在，则返回 null。
+            if (settingNode == null) {
+                return null;
+            }
+
+            // 构造返回值并返回。
+            return new SettingNodeInspectResult(
+                    settingNode.getType(), settingNode.getLastModifiedDate(), settingNode.getRemark()
             );
-
-            // 5. 添加或更新设置节点实体。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
-        } catch (HandlerException e) {
-            throw e;
         } catch (Exception e) {
-            throw new HandlerException(e);
+            throw HandlerExceptionHelper.parse(e);
         }
     }
 
     @Override
-    public void remove(SettingNodeRemoveInfo settingNodeRemoveInfo) throws HandlerException {
+    public void remove(SettingNodeRemoveInfo info) throws HandlerException {
         try {
-            StringIdKey settingCategoryKey = new StringIdKey(settingNodeRemoveInfo.getCategory());
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
 
-            // 1. 确认设置类别存在。
-            makeSureSettingCategoryExists(settingCategoryKey);
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
 
-            // 2. 获取格式化器。
-            Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
 
-            // 3. 使用格式化器获取 settingNode 的主键。
-            StringIdKey settingNodeKey = formatter.format(settingNodeRemoveInfo.getArgs());
+            // 确认设置节点存在。
+            handlerValidator.makeSureSettingNodeExists(settingNodeKey);
 
-            // 4. 删除设置节点实体。
-            settingNodeMaintainService.deleteIfExists(settingNodeKey);
-        } catch (HandlerException e) {
-            throw e;
+            // 调用维护服务删除实体。
+            settingNodeMaintainService.delete(settingNodeKey);
         } catch (Exception e) {
-            throw new HandlerException(e);
-        }
-    }
-
-    private void makeSureSettingCategoryExists(StringIdKey settingCategoryKey) throws HandlerException {
-        Formatter formatter = formatLocalCacheHandler.get(settingCategoryKey);
-        if (Objects.isNull(formatter)) {
-            throw new SettingCategoryNotExistsException(settingCategoryKey);
+            throw HandlerExceptionHelper.parse(e);
         }
     }
 }

@@ -1,9 +1,6 @@
 package com.dwarfeng.settingrepo.impl.service;
 
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodeInspectInfo;
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodePutInfo;
-import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodeRemoveInfo;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
+import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.handler.SettingNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeOperateService;
 import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
@@ -27,27 +24,27 @@ public class SettingNodeOperateServiceImpl implements SettingNodeOperateService 
     }
 
     @Override
-    public SettingNode inspect(SettingNodeInspectInfo settingNodeInspectInfo) throws ServiceException {
+    public SettingNodeExistsResult exists(SettingNodeExistsInfo info) throws ServiceException {
         try {
-            return settingNodeOperateHandler.inspect(settingNodeInspectInfo);
+            return settingNodeOperateHandler.exists(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("查看设置节点是否存在时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
+
+    @Override
+    public SettingNodeInspectResult inspect(SettingNodeInspectInfo info) throws ServiceException {
+        try {
+            return settingNodeOperateHandler.inspect(info);
         } catch (Exception e) {
             throw ServiceExceptionHelper.logParse("查看设置节点时发生异常", LogLevel.WARN, e, sem);
         }
     }
 
     @Override
-    public void put(SettingNodePutInfo settingNodePutInfo) throws ServiceException {
+    public void remove(SettingNodeRemoveInfo info) throws ServiceException {
         try {
-            settingNodeOperateHandler.put(settingNodePutInfo);
-        } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("放置设置节点时发生异常", LogLevel.WARN, e, sem);
-        }
-    }
-
-    @Override
-    public void remove(SettingNodeRemoveInfo settingNodeRemoveInfo) throws ServiceException {
-        try {
-            settingNodeOperateHandler.remove(settingNodeRemoveInfo);
+            settingNodeOperateHandler.remove(info);
         } catch (Exception e) {
             throw ServiceExceptionHelper.logParse("移除设置节点时发生异常", LogLevel.WARN, e, sem);
         }

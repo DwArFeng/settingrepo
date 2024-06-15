@@ -13,18 +13,19 @@ import java.util.Objects;
  * WebInput 设置节点查看信息。
  *
  * @author DwArFeng
- * @since 1.0.0
+ * @since 2.0.0
  */
 public class WebInputSettingNodeInspectInfo implements Dto {
 
     private static final long serialVersionUID = 5989683822681749451L;
 
-    public static SettingNodeInspectInfo toStackBean(WebInputSettingNodeInspectInfo webInputSettingNodeInspectInfo) {
-        if (Objects.isNull(webInputSettingNodeInspectInfo)) {
+    public static SettingNodeInspectInfo toStackBean(WebInputSettingNodeInspectInfo webInput) {
+        if (Objects.isNull(webInput)) {
             return null;
         } else {
             return new SettingNodeInspectInfo(
-                    webInputSettingNodeInspectInfo.getCategory(), webInputSettingNodeInspectInfo.getArgs()
+                    webInput.getCategory(),
+                    webInput.getArgs()
             );
         }
     }

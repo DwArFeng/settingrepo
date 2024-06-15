@@ -2,9 +2,9 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
+import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
@@ -19,12 +19,12 @@ import java.util.List;
 @Service
 public class SettingNodeMaintainServiceImpl implements SettingNodeMaintainService {
 
-    private final GeneralBatchCrudService<StringIdKey, SettingNode> crudService;
+    private final CustomBatchCrudService<StringIdKey, SettingNode> crudService;
     private final DaoOnlyEntireLookupService<SettingNode> entireLookupService;
     private final DaoOnlyPresetLookupService<SettingNode> presetLookupService;
 
     public SettingNodeMaintainServiceImpl(
-            GeneralBatchCrudService<StringIdKey, SettingNode> crudService,
+            CustomBatchCrudService<StringIdKey, SettingNode> crudService,
             DaoOnlyEntireLookupService<SettingNode> entireLookupService,
             DaoOnlyPresetLookupService<SettingNode> presetLookupService
     ) {

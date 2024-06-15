@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,9 @@ public class SettingNodeMaintainServiceImplTest {
     public void setUp() {
         settingNodes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            SettingNode settingNode = new SettingNode(new StringIdKey("test.setting_node." + i), "value", "remark");
+            SettingNode settingNode = new SettingNode(
+                    new StringIdKey("test.setting_node." + i), 12450, new Date(), "remark"
+            );
             settingNodes.add(settingNode);
         }
     }

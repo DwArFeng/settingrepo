@@ -5,6 +5,7 @@ import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Optional;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Table(name = "tbl_setting_node")
 public class HibernateSettingNode implements Bean {
 
-    private static final long serialVersionUID = 5724695013120500505L;
+    private static final long serialVersionUID = -7851354031399610505L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -20,8 +21,12 @@ public class HibernateSettingNode implements Bean {
     private String stringId;
 
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------
-    @Column(name = "value", columnDefinition = "MEDIUMTEXT")
-    private String value;
+    @Column(name = "type")
+    private int type;
+
+    @Column(name = "last_modified_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
@@ -47,12 +52,20 @@ public class HibernateSettingNode implements Bean {
         this.stringId = stringId;
     }
 
-    public String getValue() {
-        return value;
+    public int getType() {
+        return type;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public String getRemark() {
@@ -67,7 +80,8 @@ public class HibernateSettingNode implements Bean {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "stringId = " + stringId + ", " +
-                "value = " + value + ", " +
+                "type = " + type + ", " +
+                "lastModifiedDate = " + lastModifiedDate + ", " +
                 "remark = " + remark + ")";
     }
 }

@@ -5,6 +5,7 @@ import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonSettingNode implements Bean {
 
-    private static final long serialVersionUID = -8440846072414473223L;
+    private static final long serialVersionUID = -4546049175785067703L;
 
     public static FastJsonSettingNode of(SettingNode settingNode) {
         if (Objects.isNull(settingNode)) {
@@ -23,7 +24,9 @@ public class FastJsonSettingNode implements Bean {
         } else {
             return new FastJsonSettingNode(
                     FastJsonStringIdKey.of(settingNode.getKey()),
-                    settingNode.getValue(), settingNode.getRemark()
+                    settingNode.getType(),
+                    settingNode.getLastModifiedDate(),
+                    settingNode.getRemark()
             );
         }
     }
@@ -31,18 +34,22 @@ public class FastJsonSettingNode implements Bean {
     @JSONField(name = "key", ordinal = 1)
     private FastJsonStringIdKey key;
 
-    @JSONField(name = "value", ordinal = 2)
-    private String value;
+    @JSONField(name = "type", ordinal = 2)
+    private int type;
 
-    @JSONField(name = "remark", ordinal = 3)
+    @JSONField(name = "last_modified_date", ordinal = 3)
+    private Date lastModifiedDate;
+
+    @JSONField(name = "remark", ordinal = 4)
     private String remark;
 
     public FastJsonSettingNode() {
     }
 
-    public FastJsonSettingNode(FastJsonStringIdKey key, String value, String remark) {
+    public FastJsonSettingNode(FastJsonStringIdKey key, int type, Date lastModifiedDate, String remark) {
         this.key = key;
-        this.value = value;
+        this.type = type;
+        this.lastModifiedDate = lastModifiedDate;
         this.remark = remark;
     }
 
@@ -54,12 +61,20 @@ public class FastJsonSettingNode implements Bean {
         this.key = key;
     }
 
-    public String getValue() {
-        return value;
+    public int getType() {
+        return type;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public String getRemark() {
@@ -74,7 +89,8 @@ public class FastJsonSettingNode implements Bean {
     public String toString() {
         return "FastJsonSettingNode{" +
                 "key=" + key +
-                ", value='" + value + '\'' +
+                ", type=" + type +
+                ", lastModifiedDate=" + lastModifiedDate +
                 ", remark='" + remark + '\'' +
                 '}';
     }

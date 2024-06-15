@@ -5,28 +5,26 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 import java.util.Arrays;
 
 /**
- * 设置节点推送信息。
+ * 文本节点推送信息。
  *
  * @author DwArFeng
- * @since 1.0.0
+ * @since 2.0.0
  */
-public class SettingNodePutInfo implements Dto {
+public class TextNodePutInfo implements Dto {
 
-    private static final long serialVersionUID = -4979575344450207333L;
+    private static final long serialVersionUID = -2782471676851624839L;
 
     private String category;
     private String[] args;
     private String value;
-    private String remark;
 
-    public SettingNodePutInfo() {
+    public TextNodePutInfo() {
     }
 
-    public SettingNodePutInfo(String category, String[] args, String value, String remark) {
+    public TextNodePutInfo(String category, String[] args, String value) {
         this.category = category;
         this.args = args;
         this.value = value;
-        this.remark = remark;
     }
 
     public String getCategory() {
@@ -53,21 +51,12 @@ public class SettingNodePutInfo implements Dto {
         this.value = value;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
-        return "SettingNodePutInfo{" +
+        return "TextNodePutInfo{" +
                 "category='" + category + '\'' +
                 ", args=" + Arrays.toString(args) +
                 ", value='" + value + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonFormatterSupport;
 import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingCategory;
 import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingNode;
+import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonTextNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ public class FastJsonConfiguration {
         ParserConfig.getGlobalInstance().addAccept(FastJsonFormatterSupport.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonSettingCategory.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonSettingNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonTextNode.class.getCanonicalName());
         LOGGER.debug("FastJson autotype 白名单配置完毕");
     }
 }

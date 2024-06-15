@@ -13,18 +13,19 @@ import java.util.Objects;
  * WebInput 设置节点移除信息。
  *
  * @author DwArFeng
- * @since 1.0.0
+ * @since 2.0.0
  */
 public class WebInputSettingNodeRemoveInfo implements Dto {
 
     private static final long serialVersionUID = -7264808900538970951L;
 
-    public static SettingNodeRemoveInfo toStackBean(WebInputSettingNodeRemoveInfo webInputSettingNodeRemoveInfo) {
-        if (Objects.isNull(webInputSettingNodeRemoveInfo)) {
+    public static SettingNodeRemoveInfo toStackBean(WebInputSettingNodeRemoveInfo webInput) {
+        if (Objects.isNull(webInput)) {
             return null;
         } else {
             return new SettingNodeRemoveInfo(
-                    webInputSettingNodeRemoveInfo.getCategory(), webInputSettingNodeRemoveInfo.getArgs()
+                    webInput.getCategory(),
+                    webInput.getArgs()
             );
         }
     }

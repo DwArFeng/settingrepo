@@ -41,4 +41,14 @@
             ref="settingNodeOperateServiceImpl"
             group="${dubbo.provider.group}"
     />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.TextNodeMaintainService"
+            ref="textNodeMaintainServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.TextNodeOperateService"
+            ref="textNodeOperateServiceImpl"
+            group="${dubbo.provider.group}"
+    />
 </beans>
