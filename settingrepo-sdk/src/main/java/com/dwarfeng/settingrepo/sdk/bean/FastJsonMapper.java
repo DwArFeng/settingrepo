@@ -1,13 +1,7 @@
 package com.dwarfeng.settingrepo.sdk.bean;
 
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonFormatterSupport;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingCategory;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingNode;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonTextNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.TextNode;
+import com.dwarfeng.settingrepo.sdk.bean.entity.*;
+import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import org.mapstruct.InheritInverseConfiguration;
@@ -46,4 +40,9 @@ public interface FastJsonMapper {
 
     @InheritInverseConfiguration
     TextNode textNodeFromFastJson(FastJsonTextNode fastJsonTextNode);
+
+    FastJsonImageNode imageNodeToFastJson(ImageNode imageNode);
+
+    @InheritInverseConfiguration
+    ImageNode imageNodeFromFastJson(FastJsonImageNode fastJsonImageNode);
 }

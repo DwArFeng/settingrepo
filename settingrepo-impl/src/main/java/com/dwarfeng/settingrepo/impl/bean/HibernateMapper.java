@@ -1,13 +1,7 @@
 package com.dwarfeng.settingrepo.impl.bean;
 
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateTextNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.TextNode;
+import com.dwarfeng.settingrepo.impl.bean.entity.*;
+import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import org.mapstruct.InheritInverseConfiguration;
@@ -51,4 +45,10 @@ public interface HibernateMapper {
 
     @InheritInverseConfiguration
     TextNode textNodeFromHibernate(HibernateTextNode hibernateTextNode);
+
+    @Mapping(target = "stringId", ignore = true)
+    HibernateImageNode imageNodeToHibernate(ImageNode imageNode);
+
+    @InheritInverseConfiguration
+    ImageNode imageNodeFromHibernate(HibernateImageNode hibernateImageNode);
 }

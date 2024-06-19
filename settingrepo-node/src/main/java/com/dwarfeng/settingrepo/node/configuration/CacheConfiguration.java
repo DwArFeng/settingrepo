@@ -1,14 +1,8 @@
 package com.dwarfeng.settingrepo.node.configuration;
 
 import com.dwarfeng.settingrepo.sdk.bean.FastJsonMapper;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonFormatterSupport;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingCategory;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonSettingNode;
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonTextNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.TextNode;
+import com.dwarfeng.settingrepo.sdk.bean.entity.*;
+import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.redis.formatter.StringIdStringKeyFormatter;
@@ -31,6 +25,8 @@ public class CacheConfiguration {
     private String settingNodePrefix;
     @Value("${cache.prefix.entity.text_node}")
     private String textNodePrefix;
+    @Value("${cache.prefix.entity.image_node}")
+    private String imageNodePrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -82,6 +78,18 @@ public class CacheConfiguration {
                 new StringIdStringKeyFormatter(textNodePrefix),
                 new MapStructBeanTransformer<>(
                         TextNode.class, FastJsonTextNode.class, FastJsonMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, ImageNode, FastJsonImageNode> imageNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonImageNode>) template,
+                new StringIdStringKeyFormatter(imageNodePrefix),
+                new MapStructBeanTransformer<>(
+                        ImageNode.class, FastJsonImageNode.class, FastJsonMapper.class
                 )
         );
     }

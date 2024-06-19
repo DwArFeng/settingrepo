@@ -1,18 +1,9 @@
 package com.dwarfeng.settingrepo.node.configuration;
 
 import com.dwarfeng.settingrepo.impl.bean.HibernateMapper;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode;
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateTextNode;
-import com.dwarfeng.settingrepo.impl.dao.preset.FormatterSupportPresetCriteriaMaker;
-import com.dwarfeng.settingrepo.impl.dao.preset.SettingCategoryPresetCriteriaMaker;
-import com.dwarfeng.settingrepo.impl.dao.preset.SettingNodePresetCriteriaMaker;
-import com.dwarfeng.settingrepo.impl.dao.preset.TextNodePresetCriteriaMaker;
-import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.TextNode;
+import com.dwarfeng.settingrepo.impl.bean.entity.*;
+import com.dwarfeng.settingrepo.impl.dao.preset.*;
+import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
 import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
@@ -34,6 +25,7 @@ public class DaoConfiguration {
     private final SettingCategoryPresetCriteriaMaker settingCategoryPresetCriteriaMaker;
     private final SettingNodePresetCriteriaMaker settingNodePresetCriteriaMaker;
     private final TextNodePresetCriteriaMaker textNodePresetCriteriaMaker;
+    private final ImageNodePresetCriteriaMaker imageNodePresetCriteriaMaker;
 
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -43,13 +35,15 @@ public class DaoConfiguration {
             FormatterSupportPresetCriteriaMaker formatterSupportPresetCriteriaMaker,
             SettingCategoryPresetCriteriaMaker settingCategoryPresetCriteriaMaker,
             SettingNodePresetCriteriaMaker settingNodePresetCriteriaMaker,
-            TextNodePresetCriteriaMaker textNodePresetCriteriaMaker
+            TextNodePresetCriteriaMaker textNodePresetCriteriaMaker,
+            ImageNodePresetCriteriaMaker imageNodePresetCriteriaMaker
     ) {
         this.template = template;
         this.formatterSupportPresetCriteriaMaker = formatterSupportPresetCriteriaMaker;
         this.settingCategoryPresetCriteriaMaker = settingCategoryPresetCriteriaMaker;
         this.settingNodePresetCriteriaMaker = settingNodePresetCriteriaMaker;
         this.textNodePresetCriteriaMaker = textNodePresetCriteriaMaker;
+        this.imageNodePresetCriteriaMaker = imageNodePresetCriteriaMaker;
     }
 
     @Bean
@@ -193,6 +187,38 @@ public class DaoConfiguration {
                 new MapStructBeanTransformer<>(TextNode.class, HibernateTextNode.class, HibernateMapper.class),
                 HibernateTextNode.class,
                 textNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, ImageNode, HibernateImageNode>
+    imageNodeHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, HibernateMapper.class),
+                new MapStructBeanTransformer<>(ImageNode.class, HibernateImageNode.class, HibernateMapper.class),
+                HibernateImageNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<ImageNode, HibernateImageNode> imageNodeHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(ImageNode.class, HibernateImageNode.class, HibernateMapper.class),
+                HibernateImageNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<ImageNode, HibernateImageNode> imageNodeHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(ImageNode.class, HibernateImageNode.class, HibernateMapper.class),
+                HibernateImageNode.class,
+                imageNodePresetCriteriaMaker
         );
     }
 }

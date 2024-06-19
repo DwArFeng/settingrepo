@@ -3,6 +3,7 @@ package com.dwarfeng.settingrepo.impl.service.operation;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.settingrepo.stack.cache.SettingNodeCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
+import com.dwarfeng.settingrepo.stack.dao.ImageNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.SettingNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.TextNodeDao;
 import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
@@ -24,6 +25,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final TextNodeDao textNodeDao;
     private final TextNodeCache textNodeCache;
 
+    private final ImageNodeDao imageNodeDao;
+    private final ImageNodeCrudOperation imageNodeCrudOperation;
+
     @Value("${cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
@@ -31,12 +35,16 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             SettingNodeDao settingNodeDao,
             SettingNodeCache settingNodeCache,
             TextNodeDao textNodeDao,
-            TextNodeCache textNodeCache
+            TextNodeCache textNodeCache,
+            ImageNodeDao imageNodeDao,
+            ImageNodeCrudOperation imageNodeCrudOperation
     ) {
         this.settingNodeDao = settingNodeDao;
         this.settingNodeCache = settingNodeCache;
         this.textNodeDao = textNodeDao;
         this.textNodeCache = textNodeCache;
+        this.imageNodeDao = imageNodeDao;
+        this.imageNodeCrudOperation = imageNodeCrudOperation;
     }
 
     @Override
@@ -76,6 +84,11 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         if (textNodeDao.exists(key)) {
             textNodeDao.delete(key);
             textNodeCache.delete(key);
+        }
+
+        // 删除与该设置节点相关的图片节点。
+        if (imageNodeDao.exists(key)) {
+            imageNodeCrudOperation.delete(key);
         }
 
         settingNodeDao.delete(key);

@@ -1,17 +1,12 @@
 package com.dwarfeng.settingrepo.impl.configuration;
 
+import com.dwarfeng.settingrepo.impl.service.operation.ImageNodeCrudOperation;
 import com.dwarfeng.settingrepo.impl.service.operation.SettingNodeCrudOperation;
-import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
-import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.settingrepo.stack.bean.entity.TextNode;
+import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.cache.FormatterSupportCache;
 import com.dwarfeng.settingrepo.stack.cache.SettingCategoryCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
-import com.dwarfeng.settingrepo.stack.dao.FormatterSupportDao;
-import com.dwarfeng.settingrepo.stack.dao.SettingCategoryDao;
-import com.dwarfeng.settingrepo.stack.dao.SettingNodeDao;
-import com.dwarfeng.settingrepo.stack.dao.TextNodeDao;
+import com.dwarfeng.settingrepo.stack.dao.*;
 import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
 import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
@@ -36,6 +31,8 @@ public class ServiceConfiguration {
     private final SettingNodeDao settingNodeDao;
     private final TextNodeDao textNodeDao;
     private final TextNodeCache textNodeCache;
+    private final ImageNodeCrudOperation imageNodeCrudOperation;
+    private final ImageNodeDao imageNodeDao;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -53,7 +50,9 @@ public class ServiceConfiguration {
             SettingNodeCrudOperation settingNodeCrudOperation,
             SettingNodeDao settingNodeDao,
             TextNodeDao textNodeDao,
-            TextNodeCache textNodeCache
+            TextNodeCache textNodeCache,
+            ImageNodeCrudOperation imageNodeCrudOperation,
+            ImageNodeDao imageNodeDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.formatterSupportDao = formatterSupportDao;
@@ -64,6 +63,8 @@ public class ServiceConfiguration {
         this.settingNodeDao = settingNodeDao;
         this.textNodeDao = textNodeDao;
         this.textNodeCache = textNodeCache;
+        this.imageNodeCrudOperation = imageNodeCrudOperation;
+        this.imageNodeDao = imageNodeDao;
     }
 
     @Bean
@@ -179,6 +180,34 @@ public class ServiceConfiguration {
     public DaoOnlyPresetLookupService<TextNode> textNodeDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
                 textNodeDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, ImageNode> imageNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                imageNodeCrudOperation,
+                new ExceptionKeyGenerator<>(),
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<ImageNode> imageNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                imageNodeDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<ImageNode> imageNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                imageNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN
         );

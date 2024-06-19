@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.ImageNode。
+
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
 

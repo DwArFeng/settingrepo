@@ -18,6 +18,11 @@ public final class Constraints {
      */
     public static final int LENGTH_TYPE = 50;
 
+    /**
+     * 名称的长度约束。
+     */
+    public static final int LENGTH_NAME = 100;
+
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
     }

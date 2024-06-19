@@ -57,6 +57,7 @@
         <spring-telqos.version>1.1.9.a</spring-telqos.version>
         <jackson.version>2.14.0</jackson.version>
         <groovy.version>4.0.6</groovy.version>
+        <dwarfeng-ftp.version>1.2.1.a</dwarfeng-ftp.version>
         <!-- Maven 插件版本声明 -->
         <maven-clean-plugin.version>2.5</maven-clean-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
@@ -463,6 +464,12 @@
                         <groupId>org.apache.groovy</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <!-- Dwarfeng-ftp 组件 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>dwarfeng-ftp</artifactId>
+                <version>${dwarfeng-ftp.version}</version>
             </dependency>
             <!-- 程序自身组件 -->
             <dependency>
