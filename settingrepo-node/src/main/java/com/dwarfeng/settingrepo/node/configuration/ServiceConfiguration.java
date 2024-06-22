@@ -1,5 +1,7 @@
 package com.dwarfeng.settingrepo.node.configuration;
 
+import com.dwarfeng.settingrepo.impl.service.operation.ImageListNodeCrudOperation;
+import com.dwarfeng.settingrepo.impl.service.operation.ImageListNodeItemCrudOperation;
 import com.dwarfeng.settingrepo.impl.service.operation.ImageNodeCrudOperation;
 import com.dwarfeng.settingrepo.impl.service.operation.SettingNodeCrudOperation;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
@@ -12,6 +14,7 @@ import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
+import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.log.LogLevel;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfiguration {
 
     private final ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration;
+    private final GenerateConfiguration generateConfiguration;
 
     private final FormatterSupportDao formatterSupportDao;
     private final FormatterSupportCache formatterSupportCache;
@@ -33,6 +37,10 @@ public class ServiceConfiguration {
     private final TextNodeCache textNodeCache;
     private final ImageNodeCrudOperation imageNodeCrudOperation;
     private final ImageNodeDao imageNodeDao;
+    private final ImageListNodeCrudOperation imageListNodeCrudOperation;
+    private final ImageListNodeDao imageListNodeDao;
+    private final ImageListNodeItemCrudOperation imageListNodeItemCrudOperation;
+    private final ImageListNodeItemDao imageListNodeItemDao;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -43,6 +51,7 @@ public class ServiceConfiguration {
 
     public ServiceConfiguration(
             ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration,
+            GenerateConfiguration generateConfiguration,
             FormatterSupportDao formatterSupportDao,
             FormatterSupportCache formatterSupportCache,
             SettingCategoryDao settingCategoryDao,
@@ -52,9 +61,14 @@ public class ServiceConfiguration {
             TextNodeDao textNodeDao,
             TextNodeCache textNodeCache,
             ImageNodeCrudOperation imageNodeCrudOperation,
-            ImageNodeDao imageNodeDao
+            ImageNodeDao imageNodeDao,
+            ImageListNodeCrudOperation imageListNodeCrudOperation,
+            ImageListNodeDao imageListNodeDao,
+            ImageListNodeItemCrudOperation imageListNodeItemCrudOperation,
+            ImageListNodeItemDao imageListNodeItemDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
+        this.generateConfiguration = generateConfiguration;
         this.formatterSupportDao = formatterSupportDao;
         this.formatterSupportCache = formatterSupportCache;
         this.settingCategoryDao = settingCategoryDao;
@@ -65,6 +79,10 @@ public class ServiceConfiguration {
         this.textNodeCache = textNodeCache;
         this.imageNodeCrudOperation = imageNodeCrudOperation;
         this.imageNodeDao = imageNodeDao;
+        this.imageListNodeCrudOperation = imageListNodeCrudOperation;
+        this.imageListNodeDao = imageListNodeDao;
+        this.imageListNodeItemCrudOperation = imageListNodeItemCrudOperation;
+        this.imageListNodeItemDao = imageListNodeItemDao;
     }
 
     @Bean
@@ -208,6 +226,62 @@ public class ServiceConfiguration {
     public DaoOnlyPresetLookupService<ImageNode> imageNodeDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
                 imageNodeDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, ImageListNode> imageListNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                imageListNodeCrudOperation,
+                new ExceptionKeyGenerator<>(),
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<ImageListNode> imageListNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                imageListNodeDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<ImageListNode> imageListNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                imageListNodeDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<LongIdKey, ImageListNodeItem> imageListNodeItemCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                imageListNodeItemCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator(),
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<ImageListNodeItem> imageListNodeItemDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                imageListNodeItemDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<ImageListNodeItem> imageListNodeItemDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                imageListNodeItemDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN
         );

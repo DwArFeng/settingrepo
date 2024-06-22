@@ -3,6 +3,7 @@ package com.dwarfeng.settingrepo.impl.service.operation;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.settingrepo.stack.cache.SettingNodeCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
+import com.dwarfeng.settingrepo.stack.dao.ImageListNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.ImageNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.SettingNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.TextNodeDao;
@@ -28,6 +29,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final ImageNodeDao imageNodeDao;
     private final ImageNodeCrudOperation imageNodeCrudOperation;
 
+    private final ImageListNodeDao imageListNodeDao;
+    private final ImageListNodeCrudOperation imageListNodeCrudOperation;
+
     @Value("${cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
@@ -37,7 +41,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             TextNodeDao textNodeDao,
             TextNodeCache textNodeCache,
             ImageNodeDao imageNodeDao,
-            ImageNodeCrudOperation imageNodeCrudOperation
+            ImageNodeCrudOperation imageNodeCrudOperation,
+            ImageListNodeDao imageListNodeDao,
+            ImageListNodeCrudOperation imageListNodeCrudOperation
     ) {
         this.settingNodeDao = settingNodeDao;
         this.settingNodeCache = settingNodeCache;
@@ -45,6 +51,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.textNodeCache = textNodeCache;
         this.imageNodeDao = imageNodeDao;
         this.imageNodeCrudOperation = imageNodeCrudOperation;
+        this.imageListNodeDao = imageListNodeDao;
+        this.imageListNodeCrudOperation = imageListNodeCrudOperation;
     }
 
     @Override
@@ -89,6 +97,11 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         // 删除与该设置节点相关的图片节点。
         if (imageNodeDao.exists(key)) {
             imageNodeCrudOperation.delete(key);
+        }
+
+        // 删除与该设置节点相关的图片列表节点。
+        if (imageListNodeDao.exists(key)) {
+            imageListNodeCrudOperation.delete(key);
         }
 
         settingNodeDao.delete(key);

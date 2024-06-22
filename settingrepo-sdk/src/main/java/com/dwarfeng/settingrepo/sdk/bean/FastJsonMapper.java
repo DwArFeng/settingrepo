@@ -2,7 +2,9 @@ package com.dwarfeng.settingrepo.sdk.bean;
 
 import com.dwarfeng.settingrepo.sdk.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
+import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
 import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
+import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -20,6 +22,11 @@ public interface FastJsonMapper {
 
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromFastJson(FastJsonStringIdKey fastJsonStringIdKey);
+
+    FastJsonLongIdKey longIdKeyToFastJson(LongIdKey longIdKey);
+
+    @InheritInverseConfiguration
+    LongIdKey longIdKeyFromFastJson(FastJsonLongIdKey fastJsonLongIdKey);
 
     FastJsonFormatterSupport formatterSupportToFastJson(FormatterSupport formatterSupport);
 
@@ -45,4 +52,14 @@ public interface FastJsonMapper {
 
     @InheritInverseConfiguration
     ImageNode imageNodeFromFastJson(FastJsonImageNode fastJsonImageNode);
+
+    FastJsonImageListNode imageListNodeToFastJson(ImageListNode imageListNode);
+
+    @InheritInverseConfiguration
+    ImageListNode imageListNodeFromFastJson(FastJsonImageListNode fastJsonImageListNode);
+
+    FastJsonImageListNodeItem imageListNodeItemToFastJson(ImageListNodeItem imageListNodeItem);
+
+    @InheritInverseConfiguration
+    ImageListNodeItem imageListNodeItemFromFastJson(FastJsonImageListNodeItem fastJsonImageListNodeItem);
 }

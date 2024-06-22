@@ -2,7 +2,9 @@ package com.dwarfeng.settingrepo.impl.bean;
 
 import com.dwarfeng.settingrepo.impl.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
+import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
+import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -21,6 +23,11 @@ public interface HibernateMapper {
 
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromHibernate(HibernateStringIdKey hibernateStringIdKey);
+
+    HibernateLongIdKey longIdKeyToHibernate(LongIdKey longIdKey);
+
+    @InheritInverseConfiguration
+    LongIdKey longIdKeyFromHibernate(HibernateLongIdKey hibernateLongIdKey);
 
     @Mapping(target = "stringId", ignore = true)
     HibernateFormatterSupport formatterSupportToHibernate(FormatterSupport formatterSupport);
@@ -51,4 +58,19 @@ public interface HibernateMapper {
 
     @InheritInverseConfiguration
     ImageNode imageNodeFromHibernate(HibernateImageNode hibernateImageNode);
+
+    @Mapping(target = "items", ignore = true)
+    @Mapping(target = "stringId", ignore = true)
+    HibernateImageListNode imageListNodeToHibernate(ImageListNode imageListNode);
+
+    @InheritInverseConfiguration
+    ImageListNode imageListNodeFromHibernate(HibernateImageListNode hibernateImageListNode);
+
+    @Mapping(target = "nodeStringId", ignore = true)
+    @Mapping(target = "node", ignore = true)
+    @Mapping(target = "longId", ignore = true)
+    HibernateImageListNodeItem imageListNodeItemToHibernate(ImageListNodeItem imageListNodeItem);
+
+    @InheritInverseConfiguration
+    ImageListNodeItem imageListNodeItemFromHibernate(HibernateImageListNodeItem hibernateImageListNodeItem);
 }
