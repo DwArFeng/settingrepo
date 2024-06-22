@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 新增依赖。
+  - 增加依赖 `snowflake` 以应用其功能，版本为 `1.5.1.a`。
+
 - 新增实体操作服务。
   - com.dwarfeng.settingrepo.stack.service.ImageNodeOperateService。
 
