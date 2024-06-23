@@ -26,6 +26,8 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(20), "setting node exists");
     public static final ServiceException.Code SETTING_NODE_NOT_EXISTS =
             new ServiceException.Code(offset(30), "setting node not exists");
+    public static final ServiceException.Code IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND =
+            new ServiceException.Code(offset(40), "image list node index out of bound");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -57,6 +59,7 @@ public final class ServiceExceptionCodes {
         SETTING_CATEGORY_NOT_EXISTS.setCode(offset(10));
         SETTING_NODE_EXISTS.setCode(offset(20));
         SETTING_NODE_NOT_EXISTS.setCode(offset(30));
+        IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND.setCode(offset(40));
     }
 
     private ServiceExceptionCodes() {

@@ -24,6 +24,7 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(SettingCategoryNotExistsException.class, ServiceExceptionCodes.SETTING_CATEGORY_NOT_EXISTS);
         destination.put(SettingNodeExistsException.class, ServiceExceptionCodes.SETTING_NODE_EXISTS);
         destination.put(SettingNodeNotExistsException.class, ServiceExceptionCodes.SETTING_NODE_NOT_EXISTS);
+        destination.put(ImageListNodeIndexOutOfBoundException.class, ServiceExceptionCodes.IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }

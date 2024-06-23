@@ -9,6 +9,7 @@
 
 - 新增实体操作服务。
   - com.dwarfeng.settingrepo.stack.service.ImageNodeOperateService。
+  - com.dwarfeng.settingrepo.stack.service.ImageListNodeOperateService。
 
 - 建立实体以及维护服务，并通过单元测试。
   - com.dwarfeng.settingrepo.stack.bean.entity.ImageNode。
