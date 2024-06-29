@@ -19,6 +19,7 @@
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
   - com.dwarfeng.settingrepo.impl.service.telqos.ImageNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
 
 - 增加预设的运维指令。
   - com.dwarfeng.springtelqos.api.integration.log4j2.Log4j2Command。
