@@ -21,7 +21,7 @@ public class HibernateImageListNodeItem implements Bean {
     private Long longId;
 
     // -----------------------------------------------------------外键-----------------------------------------------------------
-    @Column(name = "node_id")
+    @Column(name = "node_id", length = Constraints.LENGTH_SETTING_NODE_ID)
     private String nodeStringId;
 
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------

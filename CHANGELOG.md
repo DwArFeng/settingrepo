@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- 优化约束类中的常量值。
+  - 增加 `Constraints.LENGTH_SETTING_CATEGORY_ID`，以约束设置类型 ID 的长度。
+  - 增加 `Constraints.LENGTH_SETTING_NODE_ID`，以约束设置节点 ID 的长度。
+
 - 新增依赖。
   - 增加依赖 `snowflake` 以应用其功能，版本为 `1.5.1.a`。
 

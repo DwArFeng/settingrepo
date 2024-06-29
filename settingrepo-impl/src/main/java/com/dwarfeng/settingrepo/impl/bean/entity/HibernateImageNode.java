@@ -16,7 +16,7 @@ public class HibernateImageNode implements Bean {
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
-    @Column(name = "id", length = Constraints.LENGTH_TYPE, nullable = false, unique = true)
+    @Column(name = "id", length = Constraints.LENGTH_SETTING_NODE_ID, nullable = false, unique = true)
     private String stringId;
 
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------
