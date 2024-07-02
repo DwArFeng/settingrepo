@@ -106,7 +106,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
             handlerValidator.makeSureSettingNodeNotExists(settingNodeKey);
 
             // 构造设置节点。
-            SettingNode settingNode = new SettingNode(settingNodeKey, type, new Date(), remark);
+            SettingNode settingNode = new SettingNode(settingNodeKey, type, new Date(), remark, true, category, args);
 
             // 调用维护服务插入实体。
             settingNodeMaintainService.insert(settingNode);

@@ -2,9 +2,9 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.service.SettingCategoryMaintainService;
+import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
@@ -19,12 +19,12 @@ import java.util.List;
 @Service
 public class SettingCategoryMaintainServiceImpl implements SettingCategoryMaintainService {
 
-    private final GeneralBatchCrudService<StringIdKey, SettingCategory> crudService;
+    private final CustomBatchCrudService<StringIdKey, SettingCategory> crudService;
     private final DaoOnlyEntireLookupService<SettingCategory> entireLookupService;
     private final DaoOnlyPresetLookupService<SettingCategory> presetLookupService;
 
     public SettingCategoryMaintainServiceImpl(
-            GeneralBatchCrudService<StringIdKey, SettingCategory> crudService,
+            CustomBatchCrudService<StringIdKey, SettingCategory> crudService,
             DaoOnlyEntireLookupService<SettingCategory> entireLookupService,
             DaoOnlyPresetLookupService<SettingCategory> presetLookupService
     ) {

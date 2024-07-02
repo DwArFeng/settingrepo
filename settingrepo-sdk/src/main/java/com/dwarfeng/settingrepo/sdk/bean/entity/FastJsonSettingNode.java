@@ -5,6 +5,7 @@ import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,7 +17,7 @@ import java.util.Objects;
  */
 public class FastJsonSettingNode implements Bean {
 
-    private static final long serialVersionUID = -4546049175785067703L;
+    private static final long serialVersionUID = 8600379519907048459L;
 
     public static FastJsonSettingNode of(SettingNode settingNode) {
         if (Objects.isNull(settingNode)) {
@@ -26,7 +27,10 @@ public class FastJsonSettingNode implements Bean {
                     FastJsonStringIdKey.of(settingNode.getKey()),
                     settingNode.getType(),
                     settingNode.getLastModifiedDate(),
-                    settingNode.getRemark()
+                    settingNode.getRemark(),
+                    settingNode.isReachable(),
+                    settingNode.getCategory(),
+                    settingNode.getArgs()
             );
         }
     }
@@ -43,14 +47,29 @@ public class FastJsonSettingNode implements Bean {
     @JSONField(name = "remark", ordinal = 4)
     private String remark;
 
+    @JSONField(name = "reachable", ordinal = 5)
+    private boolean reachable;
+
+    @JSONField(name = "category", ordinal = 6)
+    private String category;
+
+    @JSONField(name = "args", ordinal = 7)
+    private String[] args;
+
     public FastJsonSettingNode() {
     }
 
-    public FastJsonSettingNode(FastJsonStringIdKey key, int type, Date lastModifiedDate, String remark) {
+    public FastJsonSettingNode(
+            FastJsonStringIdKey key, int type, Date lastModifiedDate, String remark, boolean reachable,
+            String category, String[] args
+    ) {
         this.key = key;
         this.type = type;
         this.lastModifiedDate = lastModifiedDate;
         this.remark = remark;
+        this.reachable = reachable;
+        this.category = category;
+        this.args = args;
     }
 
     public FastJsonStringIdKey getKey() {
@@ -85,6 +104,30 @@ public class FastJsonSettingNode implements Bean {
         this.remark = remark;
     }
 
+    public boolean isReachable() {
+        return reachable;
+    }
+
+    public void setReachable(boolean reachable) {
+        this.reachable = reachable;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(String[] args) {
+        this.args = args;
+    }
+
     @Override
     public String toString() {
         return "FastJsonSettingNode{" +
@@ -92,6 +135,9 @@ public class FastJsonSettingNode implements Bean {
                 ", type=" + type +
                 ", lastModifiedDate=" + lastModifiedDate +
                 ", remark='" + remark + '\'' +
+                ", reachable=" + reachable +
+                ", category='" + category + '\'' +
+                ", args=" + Arrays.toString(args) +
                 '}';
     }
 }

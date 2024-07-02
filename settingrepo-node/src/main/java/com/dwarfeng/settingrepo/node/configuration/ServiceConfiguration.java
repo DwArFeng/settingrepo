@@ -1,12 +1,8 @@
 package com.dwarfeng.settingrepo.node.configuration;
 
-import com.dwarfeng.settingrepo.impl.service.operation.ImageListNodeCrudOperation;
-import com.dwarfeng.settingrepo.impl.service.operation.ImageListNodeItemCrudOperation;
-import com.dwarfeng.settingrepo.impl.service.operation.ImageNodeCrudOperation;
-import com.dwarfeng.settingrepo.impl.service.operation.SettingNodeCrudOperation;
+import com.dwarfeng.settingrepo.impl.service.operation.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.cache.FormatterSupportCache;
-import com.dwarfeng.settingrepo.stack.cache.SettingCategoryCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.*;
 import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
@@ -29,8 +25,8 @@ public class ServiceConfiguration {
 
     private final FormatterSupportDao formatterSupportDao;
     private final FormatterSupportCache formatterSupportCache;
+    private final SettingCategoryCrudOperation settingCategoryCrudOperation;
     private final SettingCategoryDao settingCategoryDao;
-    private final SettingCategoryCache settingCategoryCache;
     private final SettingNodeCrudOperation settingNodeCrudOperation;
     private final SettingNodeDao settingNodeDao;
     private final TextNodeDao textNodeDao;
@@ -44,8 +40,6 @@ public class ServiceConfiguration {
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
-    @Value("${cache.timeout.entity.setting_category}")
-    private long settingCategoryTimeout;
     @Value("${cache.timeout.entity.text_node}")
     private long textNodeTimeout;
 
@@ -54,8 +48,8 @@ public class ServiceConfiguration {
             GenerateConfiguration generateConfiguration,
             FormatterSupportDao formatterSupportDao,
             FormatterSupportCache formatterSupportCache,
+            SettingCategoryCrudOperation settingCategoryCrudOperation,
             SettingCategoryDao settingCategoryDao,
-            SettingCategoryCache settingCategoryCache,
             SettingNodeCrudOperation settingNodeCrudOperation,
             SettingNodeDao settingNodeDao,
             TextNodeDao textNodeDao,
@@ -71,8 +65,8 @@ public class ServiceConfiguration {
         this.generateConfiguration = generateConfiguration;
         this.formatterSupportDao = formatterSupportDao;
         this.formatterSupportCache = formatterSupportCache;
+        this.settingCategoryCrudOperation = settingCategoryCrudOperation;
         this.settingCategoryDao = settingCategoryDao;
-        this.settingCategoryCache = settingCategoryCache;
         this.settingNodeCrudOperation = settingNodeCrudOperation;
         this.settingNodeDao = settingNodeDao;
         this.textNodeDao = textNodeDao;
@@ -116,14 +110,12 @@ public class ServiceConfiguration {
     }
 
     @Bean
-    public GeneralBatchCrudService<StringIdKey, SettingCategory> settingCategoryGeneralBatchCrudService() {
-        return new GeneralBatchCrudService<>(
-                settingCategoryDao,
-                settingCategoryCache,
+    public CustomBatchCrudService<StringIdKey, SettingCategory> settingCategoryCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                settingCategoryCrudOperation,
                 new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN,
-                settingCategoryTimeout
+                LogLevel.WARN
         );
     }
 

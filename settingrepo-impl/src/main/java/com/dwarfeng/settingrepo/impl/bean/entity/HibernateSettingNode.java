@@ -1,11 +1,14 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
+import com.alibaba.fastjson.JSONArray;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 @Entity
@@ -13,7 +16,7 @@ import java.util.Optional;
 @Table(name = "tbl_setting_node")
 public class HibernateSettingNode implements Bean {
 
-    private static final long serialVersionUID = -7851354031399610505L;
+    private static final long serialVersionUID = -7340610859830007022L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -30,6 +33,16 @@ public class HibernateSettingNode implements Bean {
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
+
+    @Column(name = "reachable")
+    private boolean reachable;
+
+    @Column(name = "category", length = Constraints.LENGTH_SETTING_CATEGORY_ID)
+    private String category;
+
+    @Column(name = "args", columnDefinition = "TEXT")
+    @Convert(converter = StringArrayStringConverter.class)
+    private String[] args;
 
     public HibernateSettingNode() {
     }
@@ -76,12 +89,65 @@ public class HibernateSettingNode implements Bean {
         this.remark = remark;
     }
 
+    public boolean isReachable() {
+        return reachable;
+    }
+
+    public void setReachable(boolean reachable) {
+        this.reachable = reachable;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(String[] args) {
+        this.args = args;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "stringId = " + stringId + ", " +
                 "type = " + type + ", " +
                 "lastModifiedDate = " + lastModifiedDate + ", " +
-                "remark = " + remark + ")";
+                "remark = " + remark + ", " +
+                "reachable = " + reachable + ", " +
+                "category = " + category + ", " +
+                "args = " + Arrays.toString(args) + ")";
+    }
+
+    /**
+     * 字符串数组与字符串的转换器。
+     *
+     * @author DwArFeng
+     * @since 2.0.0
+     */
+    @Converter
+    public static class StringArrayStringConverter implements AttributeConverter<String[], String> {
+
+        @Override
+        public String convertToDatabaseColumn(String[] attribute) {
+            if (Objects.isNull(attribute)) {
+                return null;
+            }
+            return JSONArray.toJSONString(attribute);
+        }
+
+        @Override
+        public String[] convertToEntityAttribute(String dbData) {
+            if (Objects.isNull(dbData)) {
+                return null;
+            }
+            return JSONArray.parseArray(dbData, String.class).toArray(new String[0]);
+        }
     }
 }

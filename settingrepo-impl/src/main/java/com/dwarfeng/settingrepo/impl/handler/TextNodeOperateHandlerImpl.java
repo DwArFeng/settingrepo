@@ -105,7 +105,10 @@ public class TextNodeOperateHandlerImpl implements TextNodeOperateHandler {
             // 如果节点设置不存在，则初始化节点设置实体。
             if (Objects.isNull(settingNode)) {
                 String remark = "由 settingrepo 自动生成的文本节点";
-                settingNode = new SettingNode(settingNodeKey, Constants.SETTING_NODE_TYPE_TEXT, new Date(), remark);
+                settingNode = new SettingNode(
+                        settingNodeKey, Constants.SETTING_NODE_TYPE_TEXT, new Date(), remark,
+                        true, category, args
+                );
             }
             // 否则更新属性。
             else {

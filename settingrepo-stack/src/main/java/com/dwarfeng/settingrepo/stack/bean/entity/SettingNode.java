@@ -3,6 +3,7 @@ package com.dwarfeng.settingrepo.stack.bean.entity;
 import com.dwarfeng.subgrade.stack.bean.entity.Entity;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 public class SettingNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -8109769646978028850L;
+    private static final long serialVersionUID = -7463247247008588989L;
 
     private StringIdKey key;
 
@@ -43,14 +44,41 @@ public class SettingNode implements Entity<StringIdKey> {
 
     private String remark;
 
+    /**
+     * 用于标识设置节点是否可以被访问。
+     *
+     * @since 2.0.0
+     */
+    private boolean reachable;
+
+    /**
+     * 用于记录设置节点的分类。
+     *
+     * @since 2.0.0
+     */
+    private String category;
+
+    /**
+     * 用于记录设置节点的参数。
+     *
+     * @since 2.0.0
+     */
+    private String[] args;
+
     public SettingNode() {
     }
 
-    public SettingNode(StringIdKey key, int type, Date lastModifiedDate, String remark) {
+    public SettingNode(
+            StringIdKey key, int type, Date lastModifiedDate, String remark, boolean reachable, String category,
+            String[] args
+    ) {
         this.key = key;
         this.type = type;
         this.lastModifiedDate = lastModifiedDate;
         this.remark = remark;
+        this.reachable = reachable;
+        this.category = category;
+        this.args = args;
     }
 
     @Override
@@ -87,6 +115,30 @@ public class SettingNode implements Entity<StringIdKey> {
         this.remark = remark;
     }
 
+    public boolean isReachable() {
+        return reachable;
+    }
+
+    public void setReachable(boolean reachable) {
+        this.reachable = reachable;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(String[] args) {
+        this.args = args;
+    }
+
     @Override
     public String toString() {
         return "SettingNode{" +
@@ -94,6 +146,9 @@ public class SettingNode implements Entity<StringIdKey> {
                 ", type=" + type +
                 ", lastModifiedDate=" + lastModifiedDate +
                 ", remark='" + remark + '\'' +
+                ", reachable=" + reachable +
+                ", category='" + category + '\'' +
+                ", args=" + Arrays.toString(args) +
                 '}';
     }
 }

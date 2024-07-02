@@ -16,4 +16,24 @@ public interface SettingNodeMaintainService extends BatchCrudService<StringIdKey
         EntireLookupService<SettingNode>, PresetLookupService<SettingNode> {
 
     String ID_LIKE = "id_like";
+
+    /**
+     * @since 2.0.0
+     */
+    String REACHABLE = "reachable";
+
+    /**
+     * @since 2.0.0
+     */
+    String ID_LIKE_REACHABLE = "id_like_reachable";
+
+    /**
+     * @since 2.0.0
+     */
+    String CATEGORY_EQUALS = "category_equals";
+
+    /**
+     * @since 2.0.0
+     */
+    String UNREACHABLE = "unreachable";
 }

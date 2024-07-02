@@ -4,6 +4,22 @@
 
 #### 功能构建
 
+- 增加设置节点相关逻辑。
+  - 增加可以被访问属性，以及设置节点对应的节点分类和参数。
+  - 通过可以被访问属性，可以判断设置节点是否可以被访问，并通过预设查询查询到可以被访问的设置节点。
+  - 通过对应的节点分类和参数，可以反查到设置节点的分类和参数，以便于其它调用方使用。
+
+- 增加预设查询。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.REACHABLE。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.ID_LIKE_REACHABLE。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.CATEGORY_EQUALS。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.UNREACHABLE。
+
+- 增加实体字段。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode.reachable。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode.category。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode.args。
+
 - 优化约束类中的常量值。
   - 增加 `Constraints.LENGTH_SETTING_CATEGORY_ID`，以约束设置类型 ID 的长度。
   - 增加 `Constraints.LENGTH_SETTING_NODE_ID`，以约束设置节点 ID 的长度。
@@ -19,6 +35,7 @@
   - com.dwarfeng.settingrepo.stack.bean.entity.ImageNode。
   - com.dwarfeng.settingrepo.stack.bean.entity.ImageListNode。
   - com.dwarfeng.settingrepo.stack.bean.entity.ImageListNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNodeMetadata。
 
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
