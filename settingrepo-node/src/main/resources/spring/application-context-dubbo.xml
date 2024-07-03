@@ -21,6 +21,11 @@
             name="dubbo" port="${dubbo.protocol.dubbo.port}" host="${dubbo.protocol.dubbo.host}"
             dispatcher="message" threadpool="fixed" threads="100"
     />
+    <!-- hessian协议 -->
+    <dubbo:protocol name="hessian" port="${dubbo.protocol.hessian.port}" server="jetty"/>
+
+    <!-- 默认使用dubbo协议 -->
+    <dubbo:provider protocol="dubbo"/>
 
     <!-- 向注册中心注册暴露服务地址,注册服务 -->
     <dubbo:service
@@ -61,6 +66,7 @@
     <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.ImageNodeOperateService"
             ref="imageNodeOperateServiceImpl"
+            protocol="hessian"
             group="${dubbo.provider.group}"
     />
     <dubbo:service
@@ -71,6 +77,7 @@
     <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.ImageListNodeOperateService"
             ref="imageListNodeOperateServiceImpl"
+            protocol="hessian"
             group="${dubbo.provider.group}"
     />
     <dubbo:service

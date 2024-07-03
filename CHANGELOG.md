@@ -26,6 +26,9 @@
 
 - 新增依赖。
   - 增加依赖 `snowflake` 以应用其功能，版本为 `1.5.1.a`。
+  - 增加依赖 `hessian` 以应用其功能，版本为 `4.0.38`。
+  - 增加依赖 `javax.servlet-api` 以应用其功能，版本为 `4.0.1`。
+  - 增加依赖 `jetty` 以应用其功能，版本为 `9.4.51.v20230217`。
 
 - 新增实体操作服务。
   - com.dwarfeng.settingrepo.stack.service.ImageNodeOperateService。
