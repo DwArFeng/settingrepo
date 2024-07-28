@@ -67,6 +67,8 @@
 
 #### Bug修复
 
+- 修正 `telqos/my-banner.txt` 中不正确的文本内容。
+
 - 补全 .gitignore 中缺失的配置项。
 
 - 修复 telqos 工具类中部分注解不正确的 bug。
