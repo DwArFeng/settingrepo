@@ -4,6 +4,8 @@
 
 #### 功能构建
 
+- 优化启停脚本的目录结构。
+
 - 优化部分维护服务实现中的部分方法的性能。
   - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
   - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
