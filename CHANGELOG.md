@@ -4,6 +4,15 @@
 
 #### 功能构建
 
+- 优化部分维护服务实现中的部分方法的性能。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImpl。
+
 - 更新 README.md。
 
 - Wiki 编写。
