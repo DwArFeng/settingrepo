@@ -46,6 +46,7 @@ public class TextNodeOperateHandlerImpl implements TextNodeOperateHandler {
         this.handlerValidator = handlerValidator;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public TextNodeInspectResult inspect(TextNodeInspectInfo info) throws HandlerException {
         try {

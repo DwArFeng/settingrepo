@@ -55,6 +55,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public SettingNodeInspectResult inspect(SettingNodeInspectInfo info) throws HandlerException {
         try {

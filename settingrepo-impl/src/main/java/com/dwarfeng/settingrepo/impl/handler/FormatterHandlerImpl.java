@@ -40,7 +40,7 @@ public class FormatterHandlerImpl implements FormatterHandler {
                 throw new FormatterMakeException(e);
             }
             LOGGER.debug("格式化器构建成功!");
-            LOGGER.debug("格式化器: " + formatter);
+            LOGGER.debug("格式化器: {}", formatter);
             return formatter;
         } catch (FormatterException e) {
             throw e;

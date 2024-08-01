@@ -64,6 +64,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
         this.handlerValidator = handlerValidator;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public ImageNodeInspectResult inspect(ImageNodeInspectInfo info) throws HandlerException {
         try {
@@ -366,6 +367,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
         return Objects.equals(settingNode.getType(), Constants.SETTING_NODE_TYPE_IMAGE);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void createThumbnail(String fileName) throws Exception {
         // 定义临时变量，缩短代码长度。
         @SuppressWarnings("SpellCheckingInspection")

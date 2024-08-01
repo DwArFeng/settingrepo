@@ -153,6 +153,7 @@ public class ImageNodeCommand extends CliCommand {
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleDownload(Context context, CommandLine cmd) throws Exception {
         DownloadInfo info;
 
