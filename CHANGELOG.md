@@ -4,6 +4,15 @@
 
 #### 功能构建
 
+- 更新 README.md。
+
+- Wiki 编写。
+  - 构建 wiki 目录结构。
+  - docs/wiki/en_US/Contents.md。
+  - docs/wiki/en_US/Introduction.md。
+  - docs/wiki/zh_CN/Contents.md。
+  - docs/wiki/zh_CN/Introduction.md。
+
 - 增加设置节点相关逻辑。
   - 增加可以被访问属性，以及设置节点对应的节点分类和参数。
   - 通过可以被访问属性，可以判断设置节点是否可以被访问，并通过预设查询查询到可以被访问的设置节点。
