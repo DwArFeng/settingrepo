@@ -82,11 +82,11 @@ public class ServiceConfiguration {
     @Bean
     public GeneralBatchCrudService<StringIdKey, FormatterSupport> formatterSupportGeneralBatchCrudService() {
         return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
                 formatterSupportDao,
                 formatterSupportCache,
                 new ExceptionKeyGenerator<>(),
-                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN,
                 formatterSupportTimeout
         );
     }
@@ -94,85 +94,85 @@ public class ServiceConfiguration {
     @Bean
     public DaoOnlyEntireLookupService<FormatterSupport> formatterSupportDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                formatterSupportDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                formatterSupportDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<FormatterSupport> formatterSupportDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                formatterSupportDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                formatterSupportDao
         );
     }
 
     @Bean
     public CustomBatchCrudService<StringIdKey, SettingCategory> settingCategoryCustomBatchCrudService() {
         return new CustomBatchCrudService<>(
-                settingCategoryCrudOperation,
-                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                settingCategoryCrudOperation,
+                new ExceptionKeyGenerator<>()
         );
     }
 
     @Bean
     public DaoOnlyEntireLookupService<SettingCategory> settingCategoryDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                settingCategoryDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                settingCategoryDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<SettingCategory> settingCategoryDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                settingCategoryDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                settingCategoryDao
         );
     }
 
     @Bean
     public CustomBatchCrudService<StringIdKey, SettingNode> settingNodeCustomBatchCrudService() {
         return new CustomBatchCrudService<>(
-                settingNodeCrudOperation,
-                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                settingNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
         );
     }
 
     @Bean
     public DaoOnlyEntireLookupService<SettingNode> settingNodeDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                settingNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                settingNodeDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<SettingNode> settingNodeDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                settingNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                settingNodeDao
         );
     }
 
     @Bean
     public GeneralBatchCrudService<StringIdKey, TextNode> textNodeGeneralBatchCrudService() {
         return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
                 textNodeDao,
                 textNodeCache,
                 new ExceptionKeyGenerator<>(),
-                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN,
                 textNodeTimeout
         );
     }
@@ -180,102 +180,102 @@ public class ServiceConfiguration {
     @Bean
     public DaoOnlyEntireLookupService<TextNode> textNodeDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                textNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                textNodeDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<TextNode> textNodeDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                textNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                textNodeDao
         );
     }
 
     @Bean
     public CustomBatchCrudService<StringIdKey, ImageNode> imageNodeCustomBatchCrudService() {
         return new CustomBatchCrudService<>(
-                imageNodeCrudOperation,
-                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
         );
     }
 
     @Bean
     public DaoOnlyEntireLookupService<ImageNode> imageNodeDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                imageNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageNodeDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<ImageNode> imageNodeDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                imageNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageNodeDao
         );
     }
 
     @Bean
     public CustomBatchCrudService<StringIdKey, ImageListNode> imageListNodeCustomBatchCrudService() {
         return new CustomBatchCrudService<>(
-                imageListNodeCrudOperation,
-                new ExceptionKeyGenerator<>(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageListNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
         );
     }
 
     @Bean
     public DaoOnlyEntireLookupService<ImageListNode> imageListNodeDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                imageListNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageListNodeDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<ImageListNode> imageListNodeDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                imageListNodeDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageListNodeDao
         );
     }
 
     @Bean
     public CustomBatchCrudService<LongIdKey, ImageListNodeItem> imageListNodeItemCustomBatchCrudService() {
         return new CustomBatchCrudService<>(
-                imageListNodeItemCrudOperation,
-                generateConfiguration.snowflakeLongIdKeyGenerator(),
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageListNodeItemCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator()
         );
     }
 
     @Bean
     public DaoOnlyEntireLookupService<ImageListNodeItem> imageListNodeItemDaoOnlyEntireLookupService() {
         return new DaoOnlyEntireLookupService<>(
-                imageListNodeItemDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageListNodeItemDao
         );
     }
 
     @Bean
     public DaoOnlyPresetLookupService<ImageListNodeItem> imageListNodeItemDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
-                imageListNodeItemDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
-                LogLevel.WARN
+                LogLevel.WARN,
+                imageListNodeItemDao
         );
     }
 }

@@ -155,12 +155,21 @@ public class SettingCategoryMaintainServiceImpl implements SettingCategoryMainta
         return crudService.batchGetIfExists(keys);
     }
 
+    @Deprecated
     @Override
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
     public List<StringIdKey> batchInsertIfExists(@SkipRecord List<SettingCategory> elements) throws ServiceException {
         return crudService.batchInsertIfExists(elements);
+    }
+
+    @Override
+    @BehaviorAnalyse
+    @SkipRecord
+    @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
+    public List<StringIdKey> batchInsertIfNotExists(List<SettingCategory> entities) throws ServiceException {
+        return crudService.batchInsertIfNotExists(entities);
     }
 
     @Override
