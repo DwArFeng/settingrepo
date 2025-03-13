@@ -37,6 +37,60 @@ public final class Constraints {
      */
     public static final int LENGTH_SETTING_NODE_ID = 250;
 
+    /**
+     * 国际化节点 MEK 的长度约束。
+     */
+    public static final int LENGTH_IAHN_NODE_MEK_ID = 100;
+
+    /**
+     * 国际化节点地区的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_LANGUAGE_MIN = 2;
+
+    /**
+     * 国际化节点地区的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_LANGUAGE_MAX = 3;
+
+    /**
+     * 国际化节点地区的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_COUNTRY_MIN = 2;
+
+    /**
+     * 国际化节点地区的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_COUNTRY_MAX = 3;
+
+    /**
+     * 国际化节点变体的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_VARIANT_MIN = 5;
+
+    /**
+     * 国际化节点变体的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_VARIANT_MAX = 8;
+
+    /**
+     * 国际化节点消息的长度约束。
+     *
+     * @since 2.1.0
+     */
+    public static final int LENGTH_IAHN_NODE_MESSAGE = 250;
+
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
     }

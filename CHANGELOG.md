@@ -4,7 +4,11 @@
 
 #### 功能构建
 
-- (无)
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeLocale。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMessage。
 
 #### Bug修复
 

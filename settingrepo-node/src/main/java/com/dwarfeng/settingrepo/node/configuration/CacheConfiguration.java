@@ -2,7 +2,13 @@ package com.dwarfeng.settingrepo.node.configuration;
 
 import com.dwarfeng.settingrepo.sdk.bean.FastJsonMapper;
 import com.dwarfeng.settingrepo.sdk.bean.entity.*;
+import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeLocaleStringKeyFormatter;
+import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeMekStringKeyFormatter;
+import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeMessageStringKeyFormatter;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
+import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
+import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
+import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.redis.formatter.LongIdStringKeyFormatter;
@@ -33,6 +39,14 @@ public class CacheConfiguration {
     private String imageListNodePrefix;
     @Value("${cache.prefix.entity.image_list_node_item}")
     private String imageListNodeItemPrefix;
+    @Value("${cache.prefix.entity.iahn_node}")
+    private String iahnNodePrefix;
+    @Value("${cache.prefix.entity.iahn_node_locale}")
+    private String iahnNodeLocalePrefix;
+    @Value("${cache.prefix.entity.iahn_node_mek}")
+    private String iahnNodeMekPrefix;
+    @Value("${cache.prefix.entity.iahn_node_message}")
+    private String iahnNodeMessagePrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -121,6 +135,57 @@ public class CacheConfiguration {
                 new LongIdStringKeyFormatter(imageListNodeItemPrefix),
                 new MapStructBeanTransformer<>(
                         ImageListNodeItem.class, FastJsonImageListNodeItem.class, FastJsonMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, IahnNode, FastJsonIahnNode> iahnNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonIahnNode>) template,
+                new StringIdStringKeyFormatter(iahnNodePrefix),
+                new MapStructBeanTransformer<>(
+                        IahnNode.class, FastJsonIahnNode.class, FastJsonMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<IahnNodeLocaleKey, IahnNodeLocale, FastJsonIahnNodeLocale>
+    iahnNodeLocaleRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonIahnNodeLocale>) template,
+                new IahnNodeLocaleStringKeyFormatter(iahnNodeLocalePrefix),
+                new MapStructBeanTransformer<>(
+                        IahnNodeLocale.class, FastJsonIahnNodeLocale.class, FastJsonMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<IahnNodeMekKey, IahnNodeMek, FastJsonIahnNodeMek>
+    iahnNodeMekRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonIahnNodeMek>) template,
+                new IahnNodeMekStringKeyFormatter(iahnNodeMekPrefix),
+                new MapStructBeanTransformer<>(
+                        IahnNodeMek.class, FastJsonIahnNodeMek.class, FastJsonMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<IahnNodeMessageKey, IahnNodeMessage, FastJsonIahnNodeMessage>
+    iahnNodeMessageRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonIahnNodeMessage>) template,
+                new IahnNodeMessageStringKeyFormatter(iahnNodeMessagePrefix),
+                new MapStructBeanTransformer<>(
+                        IahnNodeMessage.class, FastJsonIahnNodeMessage.class, FastJsonMapper.class
                 )
         );
     }

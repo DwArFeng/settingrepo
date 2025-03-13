@@ -2,7 +2,11 @@ package com.dwarfeng.settingrepo.impl.configuration;
 
 import com.dwarfeng.settingrepo.impl.service.operation.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
+import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
+import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
+import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
 import com.dwarfeng.settingrepo.stack.cache.FormatterSupportCache;
+import com.dwarfeng.settingrepo.stack.cache.IahnNodeMessageCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.*;
 import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
@@ -37,11 +41,21 @@ public class ServiceConfiguration {
     private final ImageListNodeDao imageListNodeDao;
     private final ImageListNodeItemCrudOperation imageListNodeItemCrudOperation;
     private final ImageListNodeItemDao imageListNodeItemDao;
+    private final IahnNodeCrudOperation iahnNodeCrudOperation;
+    private final IahnNodeDao iahnNodeDao;
+    private final IahnNodeLocaleCrudOperation iahnNodeLocaleCrudOperation;
+    private final IahnNodeLocaleDao iahnNodeLocaleDao;
+    private final IahnNodeMekCrudOperation iahnNodeMekCrudOperation;
+    private final IahnNodeMekDao iahnNodeMekDao;
+    private final IahnNodeMessageDao iahnNodeMessageDao;
+    private final IahnNodeMessageCache iahnNodeMessageCache;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
     @Value("${cache.timeout.entity.text_node}")
     private long textNodeTimeout;
+    @Value("${cache.timeout.entity.iahn_node_message}")
+    private long iahnNodeMessageTimeout;
 
     public ServiceConfiguration(
             ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration,
@@ -59,7 +73,15 @@ public class ServiceConfiguration {
             ImageListNodeCrudOperation imageListNodeCrudOperation,
             ImageListNodeDao imageListNodeDao,
             ImageListNodeItemCrudOperation imageListNodeItemCrudOperation,
-            ImageListNodeItemDao imageListNodeItemDao
+            ImageListNodeItemDao imageListNodeItemDao,
+            IahnNodeCrudOperation iahnNodeCrudOperation,
+            IahnNodeDao iahnNodeDao,
+            IahnNodeLocaleCrudOperation iahnNodeLocaleCrudOperation,
+            IahnNodeLocaleDao iahnNodeLocaleDao,
+            IahnNodeMekCrudOperation iahnNodeMekCrudOperation,
+            IahnNodeMekDao iahnNodeMekDao,
+            IahnNodeMessageDao iahnNodeMessageDao,
+            IahnNodeMessageCache iahnNodeMessageCache
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -77,6 +99,14 @@ public class ServiceConfiguration {
         this.imageListNodeDao = imageListNodeDao;
         this.imageListNodeItemCrudOperation = imageListNodeItemCrudOperation;
         this.imageListNodeItemDao = imageListNodeItemDao;
+        this.iahnNodeCrudOperation = iahnNodeCrudOperation;
+        this.iahnNodeDao = iahnNodeDao;
+        this.iahnNodeLocaleCrudOperation = iahnNodeLocaleCrudOperation;
+        this.iahnNodeLocaleDao = iahnNodeLocaleDao;
+        this.iahnNodeMekCrudOperation = iahnNodeMekCrudOperation;
+        this.iahnNodeMekDao = iahnNodeMekDao;
+        this.iahnNodeMessageDao = iahnNodeMessageDao;
+        this.iahnNodeMessageCache = iahnNodeMessageCache;
     }
 
     @Bean
@@ -276,6 +306,120 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 imageListNodeItemDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, IahnNode> iahnNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<IahnNode> iahnNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<IahnNode> iahnNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<IahnNodeLocaleKey, IahnNodeLocale> iahnNodeLocaleCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeLocaleCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<IahnNodeLocale> iahnNodeLocaleDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeLocaleDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<IahnNodeLocale> iahnNodeLocaleDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeLocaleDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<IahnNodeMekKey, IahnNodeMek> iahnNodeMekCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeMekCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<IahnNodeMek> iahnNodeMekDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeMekDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<IahnNodeMek> iahnNodeMekDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeMekDao
+        );
+    }
+
+    @Bean
+    public GeneralBatchCrudService<IahnNodeMessageKey, IahnNodeMessage> iahnNodeMessageGeneralBatchCrudService() {
+        return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeMessageDao,
+                iahnNodeMessageCache,
+                new ExceptionKeyGenerator<>(),
+                iahnNodeMessageTimeout
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<IahnNodeMessage> iahnNodeMessageDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeMessageDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<IahnNodeMessage> iahnNodeMessageDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                iahnNodeMessageDao
         );
     }
 }

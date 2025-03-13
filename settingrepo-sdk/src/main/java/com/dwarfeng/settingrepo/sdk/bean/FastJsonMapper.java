@@ -62,4 +62,24 @@ public interface FastJsonMapper {
 
     @InheritInverseConfiguration
     ImageListNodeItem imageListNodeItemFromFastJson(FastJsonImageListNodeItem fastJsonImageListNodeItem);
+
+    FastJsonIahnNode iahnNodeToFastJson(IahnNode iahnNode);
+
+    @InheritInverseConfiguration
+    IahnNode iahnNodeFromFastJson(FastJsonIahnNode fastJsonIahnNode);
+
+    FastJsonIahnNodeLocale iahnNodeLocaleToFastJson(IahnNodeLocale iahnNodeLocale);
+
+    @InheritInverseConfiguration
+    IahnNodeLocale iahnNodeLocaleFromFastJson(FastJsonIahnNodeLocale fastJsonIahnNodeLocale);
+
+    FastJsonIahnNodeMek iahnNodeMekToFastJson(IahnNodeMek iahnNodeMek);
+
+    @InheritInverseConfiguration
+    IahnNodeMek iahnNodeMekFromFastJson(FastJsonIahnNodeMek fastJsonIahnNodeMek);
+
+    FastJsonIahnNodeMessage iahnNodeMessageToFastJson(IahnNodeMessage iahnNodeMessage);
+
+    @InheritInverseConfiguration
+    IahnNodeMessage iahnNodeMessageFromFastJson(FastJsonIahnNodeMessage fastJsonIahnNodeMessage);
 }
