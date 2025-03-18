@@ -39,6 +39,7 @@ public class ImageListNodeItemPresetCriteriaMaker implements PresetCriteriaMaker
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void childForNode(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
