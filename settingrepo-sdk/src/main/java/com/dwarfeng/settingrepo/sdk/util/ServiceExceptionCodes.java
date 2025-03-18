@@ -28,6 +28,14 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(30), "setting node not exists");
     public static final ServiceException.Code IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND =
             new ServiceException.Code(offset(40), "image list node index out of bound");
+    public static final ServiceException.Code INVALID_IAHN_NODE_LOCALE =
+            new ServiceException.Code(offset(50), "invalid iahn node locale");
+    public static final ServiceException.Code INVALID_IAHN_NODE_MEK_ID =
+            new ServiceException.Code(offset(60), "invalid iahn node mek id");
+    public static final ServiceException.Code IAHN_NODE_LOCALE_NOT_EXISTS =
+            new ServiceException.Code(offset(70), "iahn node locale not exists");
+    public static final ServiceException.Code IAHN_NODE_MEK_NOT_EXISTS =
+            new ServiceException.Code(offset(80), "iahn node mek not exists");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -60,6 +68,10 @@ public final class ServiceExceptionCodes {
         SETTING_NODE_EXISTS.setCode(offset(20));
         SETTING_NODE_NOT_EXISTS.setCode(offset(30));
         IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND.setCode(offset(40));
+        INVALID_IAHN_NODE_LOCALE.setCode(offset(50));
+        INVALID_IAHN_NODE_MEK_ID.setCode(offset(60));
+        IAHN_NODE_LOCALE_NOT_EXISTS.setCode(offset(70));
+        IAHN_NODE_MEK_NOT_EXISTS.setCode(offset(80));
     }
 
     private ServiceExceptionCodes() {

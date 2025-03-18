@@ -91,6 +91,11 @@
             group="${dubbo.provider.group}"
     />
     <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService"
+            ref="iahnNodeOperateServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService"
             ref="iahnNodeLocaleMaintainServiceImpl"
             group="${dubbo.provider.group}"

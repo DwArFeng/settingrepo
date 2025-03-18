@@ -25,6 +25,10 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(SettingNodeExistsException.class, ServiceExceptionCodes.SETTING_NODE_EXISTS);
         destination.put(SettingNodeNotExistsException.class, ServiceExceptionCodes.SETTING_NODE_NOT_EXISTS);
         destination.put(ImageListNodeIndexOutOfBoundException.class, ServiceExceptionCodes.IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND);
+        destination.put(InvalidIahnNodeLocaleException.class, ServiceExceptionCodes.INVALID_IAHN_NODE_LOCALE);
+        destination.put(InvalidIahnNodeMekIdException.class, ServiceExceptionCodes.INVALID_IAHN_NODE_MEK_ID);
+        destination.put(IahnNodeLocaleNotExistsException.class, ServiceExceptionCodes.IAHN_NODE_LOCALE_NOT_EXISTS);
+        destination.put(IahnNodeMekNotExistsException.class, ServiceExceptionCodes.IAHN_NODE_MEK_NOT_EXISTS);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }

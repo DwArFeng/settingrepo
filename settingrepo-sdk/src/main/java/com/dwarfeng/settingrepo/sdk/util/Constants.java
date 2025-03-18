@@ -33,6 +33,9 @@ public final class Constants {
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_IMAGE_LIST = 3;
 
+    @SettingNodeTypeItem
+    public static final int SETTING_NODE_TYPE_IAHN = 4;
+
     private static final Lock LOCK = new ReentrantLock();
 
     private static List<Integer> settingNodeTypeSpace = null;
