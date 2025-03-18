@@ -168,7 +168,7 @@ public class ImageListNodeItemMaintainServiceImpl implements ImageListNodeItemMa
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<LongIdKey> batchInsertIfNotExists(List<ImageListNodeItem> entities) throws ServiceException {
+    public List<LongIdKey> batchInsertIfNotExists(@SkipRecord List<ImageListNodeItem> entities) throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 

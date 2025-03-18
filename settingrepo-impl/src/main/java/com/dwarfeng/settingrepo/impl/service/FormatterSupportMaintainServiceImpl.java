@@ -186,7 +186,7 @@ public class FormatterSupportMaintainServiceImpl implements FormatterSupportMain
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey> batchInsertIfNotExists(List<FormatterSupport> entities) throws ServiceException {
+    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<FormatterSupport> entities) throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 

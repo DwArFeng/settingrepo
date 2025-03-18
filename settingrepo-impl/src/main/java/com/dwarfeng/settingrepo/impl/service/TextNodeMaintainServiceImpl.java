@@ -168,7 +168,7 @@ public class TextNodeMaintainServiceImpl implements TextNodeMaintainService {
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey> batchInsertIfNotExists(List<TextNode> entities) throws ServiceException {
+    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<TextNode> entities) throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 

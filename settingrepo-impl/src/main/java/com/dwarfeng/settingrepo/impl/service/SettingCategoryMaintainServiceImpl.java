@@ -168,7 +168,7 @@ public class SettingCategoryMaintainServiceImpl implements SettingCategoryMainta
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey> batchInsertIfNotExists(List<SettingCategory> entities) throws ServiceException {
+    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<SettingCategory> entities) throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 

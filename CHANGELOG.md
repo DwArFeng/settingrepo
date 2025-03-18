@@ -4,6 +4,15 @@
 
 #### 功能构建
 
+- 优化部分类中部分方法的行为分析行为。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImpl。
+
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
 

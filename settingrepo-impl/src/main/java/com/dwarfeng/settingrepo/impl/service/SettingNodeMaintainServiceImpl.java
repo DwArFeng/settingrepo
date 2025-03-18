@@ -168,7 +168,7 @@ public class SettingNodeMaintainServiceImpl implements SettingNodeMaintainServic
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey> batchInsertIfNotExists(List<SettingNode> entities) throws ServiceException {
+    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<SettingNode> entities) throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 
