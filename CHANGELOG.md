@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 修复部分功能性实体集合类型的字段在映射时有可能产生空指针异常的问题。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonImageListNodeInspectResult。
+
 - 优化部分类中部分方法的行为分析行为。
   - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
   - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。

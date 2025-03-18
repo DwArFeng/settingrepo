@@ -7,6 +7,7 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +25,9 @@ public class FastJsonImageListNodeInspectResult implements Dto {
             return null;
         } else {
             return new FastJsonImageListNodeInspectResult(
-                    imageListNodeInspectResult.getItems().stream().map(FastJsonItem::of).collect(Collectors.toList())
+                    Optional.ofNullable(imageListNodeInspectResult.getItems()).map(
+                            f -> f.stream().map(FastJsonItem::of).collect(Collectors.toList())
+                    ).orElse(null)
             );
         }
     }
