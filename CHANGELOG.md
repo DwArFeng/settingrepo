@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 优化配置文件。
+  - 优化 `application-context-database.xml`，使得更多属性可以在配置文件中配置。
+
 - 修复部分功能性实体集合类型的字段在映射时有可能产生空指针异常的问题。
   - com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonImageListNodeInspectResult。
 
