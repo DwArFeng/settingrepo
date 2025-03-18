@@ -30,7 +30,8 @@
 
 #### Bug修复
 
-- (无)
+- 修正配置类中的错误。
+  - ExceptionCodeOffsetConfiguration。
 
 #### 功能移除
 
