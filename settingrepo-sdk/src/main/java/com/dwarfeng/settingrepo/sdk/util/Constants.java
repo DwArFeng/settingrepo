@@ -36,6 +36,8 @@ public final class Constants {
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_IAHN = 4;
 
+    public static final int LONG_TEXT_NODE_PREVIEW_LENGTH = 1000;
+
     private static final Lock LOCK = new ReentrantLock();
 
     private static List<Integer> settingNodeTypeSpace = null;

@@ -115,6 +115,12 @@
             ref="longTextNodeMaintainServiceImpl"
             group="${dubbo.provider.group}"
     />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.LongTextNodeOperateService"
+            ref="longTextNodeOperateServiceImpl"
+            protocol="hessian"
+            group="${dubbo.provider.group}"
+    />
 
     <!-- 向注册中心注册暴露服务地址,注册消费者服务 -->
     <dubbo:reference

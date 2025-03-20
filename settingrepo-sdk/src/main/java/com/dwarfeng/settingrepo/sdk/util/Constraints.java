@@ -96,7 +96,7 @@ public final class Constraints {
      *
      * @since 2.2.0
      */
-    public static final int LENGTH_LONG_TEXT_NODE_PREVIEW = 1000;
+    public static final int LENGTH_LONG_TEXT_NODE_PREVIEW = Constants.LONG_TEXT_NODE_PREVIEW_LENGTH;
 
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
