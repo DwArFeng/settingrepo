@@ -375,6 +375,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                 settingNode.setLastModifiedDate(new Date());
             }
 
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
+
             // 获取对应的图片节点列表实体。
             ImageListNode imageListNode = imageListNodeMaintainService.getIfExists(settingNodeKey);
 
@@ -449,9 +452,6 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 批量插入或更新图片节点列表实体条目。
             imageListNodeItemMaintainService.batchInsertOrUpdate(imageListNodeItemsToInsertOrUpdate);
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -491,6 +491,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                 settingNode.setType(Constants.SETTING_NODE_TYPE_IMAGE_LIST);
                 settingNode.setLastModifiedDate(new Date());
             }
+
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
 
             // 获取对应的图片节点列表实体。
             ImageListNode imageListNode = imageListNodeMaintainService.getIfExists(settingNodeKey);
@@ -568,9 +571,6 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 批量插入或更新图片节点列表实体条目。
             imageListNodeItemMaintainService.batchInsertOrUpdate(imageListNodeItemsToInsertOrUpdate);
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -610,6 +610,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                 settingNode.setType(Constants.SETTING_NODE_TYPE_IMAGE_LIST);
                 settingNode.setLastModifiedDate(new Date());
             }
+
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
 
             // 获取对应的图片节点列表实体。
             ImageListNode imageListNode = imageListNodeMaintainService.getIfExists(settingNodeKey);
@@ -680,9 +683,6 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 批量插入或更新图片节点列表实体条目。
             imageListNodeItemMaintainService.batchInsertOrUpdate(imageListNodeItemsToInsertOrUpdate);
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -722,6 +722,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                 settingNode.setType(Constants.SETTING_NODE_TYPE_IMAGE_LIST);
                 settingNode.setLastModifiedDate(new Date());
             }
+
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
 
             // 获取对应的图片节点列表实体。
             ImageListNode imageListNode = imageListNodeMaintainService.getIfExists(settingNodeKey);
@@ -795,9 +798,6 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 批量插入或更新图片节点列表实体条目。
             imageListNodeItemMaintainService.batchInsertOrUpdate(imageListNodeItemsToInsertOrUpdate);
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -837,6 +837,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                 settingNode.setType(Constants.SETTING_NODE_TYPE_IMAGE_LIST);
                 settingNode.setLastModifiedDate(new Date());
             }
+
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
 
             // 获取对应的图片节点列表实体。
             ImageListNode imageListNode = imageListNodeMaintainService.getIfExists(settingNodeKey);
@@ -926,9 +929,6 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 批量插入或更新图片节点列表实体条目。
             imageListNodeItemMaintainService.batchInsertOrUpdate(imageListNodeItemsToInsertOrUpdate);
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -966,6 +966,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                 settingNode.setType(Constants.SETTING_NODE_TYPE_IMAGE_LIST);
                 settingNode.setLastModifiedDate(new Date());
             }
+
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
 
             // 获取对应的图片节点列表实体。
             ImageListNode imageListNode = imageListNodeMaintainService.getIfExists(settingNodeKey);
@@ -1026,9 +1029,6 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 批量插入或更新图片节点列表实体条目。
             imageListNodeItemMaintainService.batchInsertOrUpdate(imageListNodeItemsToInsertOrUpdate);
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
