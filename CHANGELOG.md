@@ -5,6 +5,7 @@
 #### 功能构建
 
 - 节点操作服务优化。
+  - 优化 `ImageNodeOperateHandlerImpl` 中的文件存储逻辑，以避免潜在的磁盘资源浪费。
   - 优化 `ImageListNodeOperateHandlerImpl` 中的设置节点更新逻辑。
   - 优化 `ImageNodeOperateHandlerImpl` 中的设置节点更新逻辑。
 

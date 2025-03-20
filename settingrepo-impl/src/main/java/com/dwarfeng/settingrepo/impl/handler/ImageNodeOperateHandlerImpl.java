@@ -272,19 +272,29 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
             // 插入或更新设置节点。
             settingNodeMaintainService.insertOrUpdate(settingNode);
 
-            // 分配文件名。
-            String storeName = UUID.randomUUID().toString();
+            // 定义存储名。
+            String storeName;
+
+            // 获取图片节点实体。
+            ImageNode imageNode = imageNodeMaintainService.getIfExists(settingNodeKey);
+
+            // 如果图片节点实体存在，则获取文件名；否则更新图片节点实体，并分配存储名。
+            if (Objects.nonNull(imageNode)) {
+                storeName = imageNode.getStoreName();
+            } else {
+                storeName = UUID.randomUUID().toString();
+                imageNode = new ImageNode();
+                imageNode.setKey(settingNodeKey);
+                imageNode.setOriginName(originName);
+                imageNode.setStoreName(storeName);
+                imageNode.setLength((long) content.length);
+            }
 
             // 上传文件。
             ftpHandler.storeFile(FtpConstants.PATH_IMAGE_NODE_FILE, storeName, content);
 
             // 生成缩略图并存储（覆盖）。
             createThumbnail(storeName);
-
-            // 构造图片节点实体。
-            ImageNode imageNode = new ImageNode(
-                    settingNodeKey, originName, storeName, (long) content.length
-            );
 
             // 插入或更新图片节点实体。
             imageNodeMaintainService.insertOrUpdate(imageNode);
@@ -330,8 +340,23 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
             // 插入或更新设置节点。
             settingNodeMaintainService.insertOrUpdate(settingNode);
 
-            // 分配文件名。
-            String storeName = UUID.randomUUID().toString();
+            // 定义存储名。
+            String storeName;
+
+            // 获取图片节点实体。
+            ImageNode imageNode = imageNodeMaintainService.getIfExists(settingNodeKey);
+
+            // 如果图片节点实体存在，则获取文件名；否则更新图片节点实体，并分配存储名。
+            if (Objects.nonNull(imageNode)) {
+                storeName = imageNode.getStoreName();
+            } else {
+                storeName = UUID.randomUUID().toString();
+                imageNode = new ImageNode();
+                imageNode.setKey(settingNodeKey);
+                imageNode.setOriginName(originName);
+                imageNode.setStoreName(storeName);
+                imageNode.setLength(length);
+            }
 
             // 上传文件。
             InputStream cin = info.getContent();
@@ -341,9 +366,6 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 生成缩略图并存储（覆盖）。
             createThumbnail(storeName);
-
-            // 构造图片节点实体。
-            ImageNode imageNode = new ImageNode(settingNodeKey, originName, storeName, length);
 
             // 插入或更新图片节点实体。
             imageNodeMaintainService.insertOrUpdate(imageNode);
