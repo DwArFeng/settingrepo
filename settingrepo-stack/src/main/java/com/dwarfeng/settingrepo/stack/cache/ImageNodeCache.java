@@ -5,7 +5,7 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 
 /**
- * 本文节点缓存。
+ * 图片节点缓存。
  *
  * @author DwArFeng
  * @since 2.0.0
