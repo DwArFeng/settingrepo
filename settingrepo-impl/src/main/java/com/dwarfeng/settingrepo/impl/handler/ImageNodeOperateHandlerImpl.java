@@ -269,6 +269,9 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
                 settingNode.setLastModifiedDate(new Date());
             }
 
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
+
             // 分配文件名。
             String storeName = UUID.randomUUID().toString();
 
@@ -285,12 +288,6 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 插入或更新图片节点实体。
             imageNodeMaintainService.insertOrUpdate(imageNode);
-
-            // 更新设置节点属性。
-            settingNode.setLastModifiedDate(new Date());
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -330,6 +327,9 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
                 settingNode.setLastModifiedDate(new Date());
             }
 
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
+
             // 分配文件名。
             String storeName = UUID.randomUUID().toString();
 
@@ -347,12 +347,6 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 插入或更新图片节点实体。
             imageNodeMaintainService.insertOrUpdate(imageNode);
-
-            // 更新设置节点属性。
-            settingNode.setLastModifiedDate(new Date());
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
