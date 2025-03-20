@@ -24,6 +24,10 @@ public final class FtpConstants {
             "settingrepo", "image-list-node-thumbnail"
     };
 
+    public static final String[] PATH_LONG_TEXT_NODE_FILE = new String[]{
+            "settingrepo", "long-text-node-file"
+    };
+
     private FtpConstants() {
         throw new IllegalStateException("禁止实例化");
     }

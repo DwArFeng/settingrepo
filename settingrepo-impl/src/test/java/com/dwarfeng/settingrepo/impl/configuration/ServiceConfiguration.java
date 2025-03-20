@@ -49,6 +49,8 @@ public class ServiceConfiguration {
     private final IahnNodeMekDao iahnNodeMekDao;
     private final IahnNodeMessageDao iahnNodeMessageDao;
     private final IahnNodeMessageCache iahnNodeMessageCache;
+    private final LongTextNodeCrudOperation longTextNodeCrudOperation;
+    private final LongTextNodeDao longTextNodeDao;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -81,7 +83,9 @@ public class ServiceConfiguration {
             IahnNodeMekCrudOperation iahnNodeMekCrudOperation,
             IahnNodeMekDao iahnNodeMekDao,
             IahnNodeMessageDao iahnNodeMessageDao,
-            IahnNodeMessageCache iahnNodeMessageCache
+            IahnNodeMessageCache iahnNodeMessageCache,
+            LongTextNodeCrudOperation longTextNodeCrudOperation,
+            LongTextNodeDao longTextNodeDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -107,6 +111,8 @@ public class ServiceConfiguration {
         this.iahnNodeMekDao = iahnNodeMekDao;
         this.iahnNodeMessageDao = iahnNodeMessageDao;
         this.iahnNodeMessageCache = iahnNodeMessageCache;
+        this.longTextNodeCrudOperation = longTextNodeCrudOperation;
+        this.longTextNodeDao = longTextNodeDao;
     }
 
     @Bean
@@ -420,6 +426,34 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 iahnNodeMessageDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, LongTextNode> longTextNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                longTextNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<LongTextNode> longTextNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                longTextNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<LongTextNode> longTextNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                longTextNodeDao
         );
     }
 }

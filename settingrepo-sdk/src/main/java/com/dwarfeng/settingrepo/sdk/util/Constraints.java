@@ -91,6 +91,13 @@ public final class Constraints {
      */
     public static final int LENGTH_IAHN_NODE_MESSAGE = 250;
 
+    /**
+     * 长文本节点预览的长度约束。
+     *
+     * @since 2.2.0
+     */
+    public static final int LENGTH_LONG_TEXT_NODE_PREVIEW = 1000;
+
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
     }

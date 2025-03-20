@@ -82,4 +82,9 @@ public interface FastJsonMapper {
 
     @InheritInverseConfiguration
     IahnNodeMessage iahnNodeMessageFromFastJson(FastJsonIahnNodeMessage fastJsonIahnNodeMessage);
+
+    FastJsonLongTextNode longTextNodeToFastJson(LongTextNode longTextNode);
+
+    @InheritInverseConfiguration
+    LongTextNode longTextNodeFromFastJson(FastJsonLongTextNode fastJsonLongTextNode);
 }

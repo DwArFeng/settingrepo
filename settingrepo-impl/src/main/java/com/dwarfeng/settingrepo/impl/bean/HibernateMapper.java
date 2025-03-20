@@ -136,4 +136,10 @@ public interface HibernateMapper {
 
     @InheritInverseConfiguration
     IahnNodeMessage iahnNodeMessageFromHibernate(HibernateIahnNodeMessage hibernateIahnNodeMessage);
+
+    @Mapping(target = "stringId", ignore = true)
+    HibernateLongTextNode longTextNodeToHibernate(LongTextNode longTextNode);
+
+    @InheritInverseConfiguration
+    LongTextNode longTextNodeFromHibernate(HibernateLongTextNode hibernateLongTextNode);
 }
