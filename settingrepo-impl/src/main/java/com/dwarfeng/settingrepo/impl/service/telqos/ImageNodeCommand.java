@@ -93,6 +93,7 @@ public class ImageNodeCommand extends CliCommand {
         return list;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
         try {
@@ -207,6 +208,7 @@ public class ImageNodeCommand extends CliCommand {
         context.sendMessage("文件下载成功");
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleUpload(Context context, CommandLine commandLine) throws Exception {
         UploadInfo info;
 

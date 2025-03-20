@@ -93,6 +93,7 @@ public class LongTextNodeCommand extends CliCommand {
         return list;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
         try {
@@ -208,6 +209,7 @@ public class LongTextNodeCommand extends CliCommand {
         context.sendMessage("文本下载成功");
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleUpload(Context context, CommandLine commandLine) throws Exception {
         UploadInfo info;
 

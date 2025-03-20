@@ -104,7 +104,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     // 为了代码的可读性，此处不简化代码。
-    @SuppressWarnings({"ExtractMethodRecommender", "DuplicatedCode"})
+    @SuppressWarnings({"DuplicatedCode"})
     @Override
     public ImageListNodeInspectResult inspect(ImageListNodeInspectInfo info) throws HandlerException {
         try {
