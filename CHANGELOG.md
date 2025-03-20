@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.LongTextNodeCommand。
+
 - 新增实体操作服务。
   - com.dwarfeng.settingrepo.stack.service.LongTextNodeOperateService。
 
