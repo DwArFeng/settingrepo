@@ -32,6 +32,7 @@ public class IahnNodeLocale implements Entity<IahnNodeLocaleKey> {
         return key;
     }
 
+    @Override
     public void setKey(IahnNodeLocaleKey key) {
         this.key = key;
     }
