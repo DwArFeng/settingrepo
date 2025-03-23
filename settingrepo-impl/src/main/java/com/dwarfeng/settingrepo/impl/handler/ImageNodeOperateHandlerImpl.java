@@ -285,10 +285,10 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
                 storeName = UUID.randomUUID().toString();
                 imageNode = new ImageNode();
                 imageNode.setKey(settingNodeKey);
-                imageNode.setOriginName(originName);
                 imageNode.setStoreName(storeName);
-                imageNode.setLength((long) content.length);
             }
+            imageNode.setOriginName(originName);
+            imageNode.setLength((long) content.length);
 
             // 上传文件。
             ftpHandler.storeFile(FtpConstants.PATH_IMAGE_NODE_FILE, storeName, content);
@@ -353,10 +353,10 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
                 storeName = UUID.randomUUID().toString();
                 imageNode = new ImageNode();
                 imageNode.setKey(settingNodeKey);
-                imageNode.setOriginName(originName);
                 imageNode.setStoreName(storeName);
-                imageNode.setLength(length);
             }
+            imageNode.setOriginName(originName);
+            imageNode.setLength(length);
 
             // 上传文件。
             InputStream cin = info.getContent();
