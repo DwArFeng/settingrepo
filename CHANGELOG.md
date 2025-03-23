@@ -8,6 +8,9 @@
 
 #### Bug修复
 
+- 修复 `LongTextNodeOperateHandlerImpl` 中的业务逻辑问题。
+  - 修复 `LongTextNodeOperateHandlerImpl` 在更新存储文件时，没有正确的更新文件信息的问题。
+
 - 修复 `ImageNodeOperateHandlerImpl` 中的业务逻辑问题。
   - 修复 `ImageNodeOperateHandlerImpl` 在更新存储文件时，没有正确的更新文件信息的问题。
 

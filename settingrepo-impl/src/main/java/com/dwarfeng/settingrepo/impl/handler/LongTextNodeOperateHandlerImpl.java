@@ -256,9 +256,9 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
                 longTextNode = new LongTextNode();
                 longTextNode.setKey(settingNodeKey);
                 longTextNode.setStoreName(storeName);
-                longTextNode.setLength((long) content.length());
-                longTextNode.setNullFlag(nullFlag);
             }
+            longTextNode.setLength((long) content.length());
+            longTextNode.setNullFlag(nullFlag);
 
             // 上传文本。
             ftpHandler.storeFile(
@@ -346,9 +346,9 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
                 longTextNode = new LongTextNode();
                 longTextNode.setKey(settingNodeKey);
                 longTextNode.setStoreName(storeName);
-                longTextNode.setLength(length);
-                longTextNode.setNullFlag(nullFlag);
             }
+            longTextNode.setLength(length);
+            longTextNode.setNullFlag(nullFlag);
 
             // 上传文本并收集预览。
             String preview;
