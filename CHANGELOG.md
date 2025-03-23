@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 依赖升级。
+  - 升级 `jetty` 依赖版本为 `9.4.57.v20241219` 以规避漏洞。
+
 - Wiki 编写。
   - docs/wiki/zh_CN/VersionBlacklist.md。
 

@@ -42,7 +42,7 @@
         <dubbo.version>2.7.22</dubbo.version>
         <hessian.version>4.0.38</hessian.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <jetty.version>9.4.55.v20240627</jetty.version>
+        <jetty.version>9.4.57.v20241219</jetty.version>
         <netty.version>4.1.115.Final</netty.version>
         <zookeeper.version>3.9.3</zookeeper.version>
         <guava.version>32.0.1-jre</guava.version>
