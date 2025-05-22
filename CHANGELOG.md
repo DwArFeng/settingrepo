@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- 优化项目的启动脚本，增加 java awt headless 场景的处理。
+  - binres/settingrepo-start.bat。
+  - binres/settingrepo-start.sh。
+
 - 依赖升级。
   - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.2.a` 并解决兼容性问题，以应用其新功能。
   - 升级 `kafka` 依赖版本为 `3.9.0` 以规避漏洞。
