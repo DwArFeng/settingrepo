@@ -80,3 +80,8 @@ buildNumber.properties
 ## Confext Files
 #################
 /settingrepo-node/confext/
+
+#################
+## Temp Files
+#################
+/settingrepo-node/temp/
