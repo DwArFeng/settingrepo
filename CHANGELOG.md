@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh_CN/ShellScripts.md。
+  - docs/wiki/zh_CN/BatchScripts.md。
+
 - 为部分工具类中方法的入口参数增加 `@Nonnull` 注解。
   - com.dwarfeng.settingrepo.impl.service.telqos.CommandUtil。
 
