@@ -28,6 +28,10 @@ public class HibernateImageListNode implements Bean {
     @Column(name = "size", nullable = false)
     private int size;
 
+    // -----------------------------------------------------------一对多-----------------------------------------------------------
+    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateImageListNodeItem.class, mappedBy = "node")
+    private Set<HibernateImageListNodeItem> items = new HashSet<>();
+
     // -----------------------------------------------------------审计-----------------------------------------------------------
     @DatamarkField(handlerName = "settingNodeDatamarkHandler")
     @Column(
@@ -43,10 +47,6 @@ public class HibernateImageListNode implements Bean {
             length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
     )
     private String modifiedDatamark;
-
-    // -----------------------------------------------------------一对多-----------------------------------------------------------
-    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateImageListNodeItem.class, mappedBy = "node")
-    private Set<HibernateImageListNodeItem> items = new HashSet<>();
 
     public HibernateImageListNode() {
     }
@@ -77,6 +77,14 @@ public class HibernateImageListNode implements Bean {
         this.size = size;
     }
 
+    public Set<HibernateImageListNodeItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<HibernateImageListNodeItem> items) {
+        this.items = items;
+    }
+
     public String getCreatedDatamark() {
         return createdDatamark;
     }
@@ -91,14 +99,6 @@ public class HibernateImageListNode implements Bean {
 
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
-    }
-
-    public Set<HibernateImageListNodeItem> getItems() {
-        return items;
-    }
-
-    public void setItems(Set<HibernateImageListNodeItem> items) {
-        this.items = items;
     }
 
     @Override

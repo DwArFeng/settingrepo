@@ -24,6 +24,16 @@ public class HibernateIahnNode implements Bean {
     @Column(name = "id", length = Constraints.LENGTH_SETTING_NODE_ID, nullable = false, unique = true)
     private String stringId;
 
+    // -----------------------------------------------------------一对多-----------------------------------------------------------
+    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeLocale.class, mappedBy = "node")
+    private Set<HibernateIahnNodeLocale> locales = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeMek.class, mappedBy = "node")
+    private Set<HibernateIahnNodeMek> meks = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeMessage.class, mappedBy = "node")
+    private Set<HibernateIahnNodeMessage> messages = new HashSet<>();
+
     // -----------------------------------------------------------审计-----------------------------------------------------------
     @DatamarkField(handlerName = "settingNodeDatamarkHandler")
     @Column(
@@ -39,16 +49,6 @@ public class HibernateIahnNode implements Bean {
             length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
     )
     private String modifiedDatamark;
-
-    // -----------------------------------------------------------一对多-----------------------------------------------------------
-    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeLocale.class, mappedBy = "node")
-    private Set<HibernateIahnNodeLocale> locales = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeMek.class, mappedBy = "node")
-    private Set<HibernateIahnNodeMek> meks = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeMessage.class, mappedBy = "node")
-    private Set<HibernateIahnNodeMessage> messages = new HashSet<>();
 
     public HibernateIahnNode() {
     }
@@ -69,22 +69,6 @@ public class HibernateIahnNode implements Bean {
 
     public void setStringId(String stringId) {
         this.stringId = stringId;
-    }
-
-    public String getCreatedDatamark() {
-        return createdDatamark;
-    }
-
-    public void setCreatedDatamark(String createdDatamark) {
-        this.createdDatamark = createdDatamark;
-    }
-
-    public String getModifiedDatamark() {
-        return modifiedDatamark;
-    }
-
-    public void setModifiedDatamark(String modifiedDatamark) {
-        this.modifiedDatamark = modifiedDatamark;
     }
 
     public Set<HibernateIahnNodeLocale> getLocales() {
@@ -109,6 +93,22 @@ public class HibernateIahnNode implements Bean {
 
     public void setMessages(Set<HibernateIahnNodeMessage> messages) {
         this.messages = messages;
+    }
+
+    public String getCreatedDatamark() {
+        return createdDatamark;
+    }
+
+    public void setCreatedDatamark(String createdDatamark) {
+        this.createdDatamark = createdDatamark;
+    }
+
+    public String getModifiedDatamark() {
+        return modifiedDatamark;
+    }
+
+    public void setModifiedDatamark(String modifiedDatamark) {
+        this.modifiedDatamark = modifiedDatamark;
     }
 
     @Override

@@ -4,7 +4,9 @@
 
 #### 功能构建
 
-- (无)
+- 优化 Hibernate 实体审计字段位置。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
 
 #### Bug修复
 
