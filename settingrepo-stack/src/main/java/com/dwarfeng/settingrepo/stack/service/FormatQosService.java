@@ -6,7 +6,7 @@ import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.service.Service;
 
 /**
- * 判断QoS服务。
+ * 格式化 QOS 服务。
  *
  * @author DwArFeng
  * @since beta-1.0.0

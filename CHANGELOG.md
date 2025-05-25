@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 优化部分接口的文档注释。
+  - com.dwarfeng.settingrepo.stack.service.FormatQosService。
+
 - Wiki 编写。
   - docs/wiki/zh_CN/ShellScripts.md。
   - docs/wiki/zh_CN/BatchScripts.md。
