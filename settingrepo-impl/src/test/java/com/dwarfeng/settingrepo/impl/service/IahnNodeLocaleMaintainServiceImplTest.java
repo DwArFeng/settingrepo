@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Objects;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -62,9 +64,13 @@ public class IahnNodeLocaleMaintainServiceImplTest {
             testIahnNodeLocale = iahnNodeLocaleMaintainService.get(iahnNodeLocale.getKey());
             assertEquals(BeanUtils.describe(iahnNodeLocale), BeanUtils.describe(testIahnNodeLocale));
         } finally {
-            iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            if (Objects.nonNull(iahnNodeLocale.getKey())) {
+                iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            }
 
-            iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            if (Objects.nonNull(iahnNode.getKey())) {
+                iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            }
         }
     }
 
@@ -93,9 +99,13 @@ public class IahnNodeLocaleMaintainServiceImplTest {
 
             assertFalse(iahnNodeLocaleMaintainService.exists(iahnNodeLocale.getKey()));
         } finally {
-            iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            if (Objects.nonNull(iahnNodeLocale.getKey())) {
+                iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            }
 
-            iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            if (Objects.nonNull(iahnNode.getKey())) {
+                iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            }
         }
     }
 }

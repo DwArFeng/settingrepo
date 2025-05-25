@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -69,9 +70,14 @@ public class SettingNodeMaintainServiceImplTest {
             }
         } finally {
             for (SettingNode settingNode : settingNodes) {
+                if (Objects.isNull(settingNode.getKey())) {
+                    continue;
+                }
                 settingNodeMaintainService.deleteIfExists(settingNode.getKey());
             }
-            settingCategoryMaintainService.deleteIfExists(settingCategory.getKey());
+            if (Objects.nonNull(settingCategory.getKey())) {
+                settingCategoryMaintainService.deleteIfExists(settingCategory.getKey());
+            }
         }
     }
 
@@ -98,9 +104,14 @@ public class SettingNodeMaintainServiceImplTest {
             }
         } finally {
             for (SettingNode settingNode : settingNodes) {
+                if (Objects.isNull(settingNode.getKey())) {
+                    continue;
+                }
                 settingNodeMaintainService.deleteIfExists(settingNode.getKey());
             }
-            settingCategoryMaintainService.deleteIfExists(settingCategory.getKey());
+            if (Objects.nonNull(settingCategory.getKey())) {
+                settingCategoryMaintainService.deleteIfExists(settingCategory.getKey());
+            }
         }
     }
 }

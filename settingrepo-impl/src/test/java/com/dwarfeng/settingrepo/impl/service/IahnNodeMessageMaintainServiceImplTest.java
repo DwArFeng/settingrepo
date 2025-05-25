@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Objects;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -85,11 +87,19 @@ public class IahnNodeMessageMaintainServiceImplTest {
             testIahnNodeMessage = iahnNodeMessageMaintainService.get(iahnNodeMessage.getKey());
             assertEquals(BeanUtils.describe(iahnNodeMessage), BeanUtils.describe(testIahnNodeMessage));
         } finally {
-            iahnNodeMessageMaintainService.deleteIfExists(iahnNodeMessage.getKey());
+            if (Objects.nonNull(iahnNodeMessage.getKey())) {
+                iahnNodeMessageMaintainService.deleteIfExists(iahnNodeMessage.getKey());
+            }
 
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
-            iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
-            iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            if (Objects.nonNull(iahnNodeMek.getKey())) {
+                iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            }
+            if (Objects.nonNull(iahnNodeLocale.getKey())) {
+                iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            }
+            if (Objects.nonNull(iahnNode.getKey())) {
+                iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            }
         }
     }
 
@@ -120,11 +130,19 @@ public class IahnNodeMessageMaintainServiceImplTest {
 
             assertFalse(iahnNodeMessageMaintainService.exists(iahnNodeMessage.getKey()));
         } finally {
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            if (Objects.nonNull(iahnNodeMessage.getKey())) {
+                iahnNodeMessageMaintainService.deleteIfExists(iahnNodeMessage.getKey());
+            }
 
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
-            iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
-            iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            if (Objects.nonNull(iahnNodeMek.getKey())) {
+                iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            }
+            if (Objects.nonNull(iahnNodeLocale.getKey())) {
+                iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            }
+            if (Objects.nonNull(iahnNode.getKey())) {
+                iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            }
         }
     }
 
@@ -155,11 +173,19 @@ public class IahnNodeMessageMaintainServiceImplTest {
 
             assertFalse(iahnNodeMessageMaintainService.exists(iahnNodeMessage.getKey()));
         } finally {
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            if (Objects.nonNull(iahnNodeMessage.getKey())) {
+                iahnNodeMessageMaintainService.deleteIfExists(iahnNodeMessage.getKey());
+            }
 
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
-            iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
-            iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            if (Objects.nonNull(iahnNodeMek.getKey())) {
+                iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            }
+            if (Objects.nonNull(iahnNodeLocale.getKey())) {
+                iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            }
+            if (Objects.nonNull(iahnNode.getKey())) {
+                iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            }
         }
     }
 
@@ -190,11 +216,19 @@ public class IahnNodeMessageMaintainServiceImplTest {
 
             assertFalse(iahnNodeMessageMaintainService.exists(iahnNodeMessage.getKey()));
         } finally {
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            if (Objects.nonNull(iahnNodeMessage.getKey())) {
+                iahnNodeMessageMaintainService.deleteIfExists(iahnNodeMessage.getKey());
+            }
 
-            iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
-            iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
-            iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            if (Objects.nonNull(iahnNodeMek.getKey())) {
+                iahnNodeMekMaintainService.deleteIfExists(iahnNodeMek.getKey());
+            }
+            if (Objects.nonNull(iahnNodeLocale.getKey())) {
+                iahnNodeLocaleMaintainService.deleteIfExists(iahnNodeLocale.getKey());
+            }
+            if (Objects.nonNull(iahnNode.getKey())) {
+                iahnNodeMaintainService.deleteIfExists(iahnNode.getKey());
+            }
         }
     }
 }

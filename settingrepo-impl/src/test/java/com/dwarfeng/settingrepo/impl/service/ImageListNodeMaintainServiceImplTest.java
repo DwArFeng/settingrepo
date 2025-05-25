@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 
@@ -53,6 +54,9 @@ public class ImageListNodeMaintainServiceImplTest {
             }
         } finally {
             for (ImageListNode imageListNode : imageListNodes) {
+                if (Objects.isNull(imageListNode.getKey())) {
+                    continue;
+                }
                 imageListNodeMaintainService.deleteIfExists(imageListNode.getKey());
             }
         }

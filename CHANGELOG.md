@@ -4,6 +4,20 @@
 
 #### 功能构建
 
+- 优化部分单元测试代码，以规避潜在的 bug。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeLocaleMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMekMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMessageMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.LongTextNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImplTest。
+
 - SPI 目录结构优化。
   - 将驱动机制的 SPI 接口与抽象类提相关代码文件提升至 `sdk` 模块中。
   - 将执行机制的 SPI 接口与抽象类提相关代码文件提升至 `sdk` 模块中。

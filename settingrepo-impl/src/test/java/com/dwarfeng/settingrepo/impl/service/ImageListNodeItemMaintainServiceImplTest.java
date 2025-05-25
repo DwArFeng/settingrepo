@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -66,9 +67,14 @@ public class ImageListNodeItemMaintainServiceImplTest {
             }
         } finally {
             for (ImageListNodeItem imageListNodeItem : imageListNodeItems) {
+                if (Objects.isNull(imageListNodeItem.getKey())) {
+                    continue;
+                }
                 imageListNodeItemMaintainService.deleteIfExists(imageListNodeItem.getKey());
             }
-            imageListNodeMaintainService.deleteIfExists(imageListNode.getKey());
+            if (Objects.nonNull(imageListNode.getKey())) {
+                imageListNodeMaintainService.deleteIfExists(imageListNode.getKey());
+            }
         }
     }
 
@@ -102,9 +108,14 @@ public class ImageListNodeItemMaintainServiceImplTest {
             }
         } finally {
             for (ImageListNodeItem imageListNodeItem : imageListNodeItems) {
+                if (Objects.isNull(imageListNodeItem.getKey())) {
+                    continue;
+                }
                 imageListNodeItemMaintainService.deleteIfExists(imageListNodeItem.getKey());
             }
-            imageListNodeMaintainService.deleteIfExists(imageListNode.getKey());
+            if (Objects.nonNull(imageListNode.getKey())) {
+                imageListNodeMaintainService.deleteIfExists(imageListNode.getKey());
+            }
         }
     }
 }
