@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.alibaba.fastjson.JSONArray;
+import com.dwarfeng.datamark.bean.jpa.DatamarkEntityListener;
+import com.dwarfeng.datamark.bean.jpa.DatamarkField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
@@ -14,9 +16,10 @@ import java.util.Optional;
 @Entity
 @IdClass(HibernateStringIdKey.class)
 @Table(name = "tbl_setting_node")
+@EntityListeners(DatamarkEntityListener.class)
 public class HibernateSettingNode implements Bean {
 
-    private static final long serialVersionUID = -7340610859830007022L;
+    private static final long serialVersionUID = 4311995287621600928L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -43,6 +46,22 @@ public class HibernateSettingNode implements Bean {
     @Column(name = "args", columnDefinition = "TEXT")
     @Convert(converter = StringArrayStringConverter.class)
     private String[] args;
+
+    // -----------------------------------------------------------审计-----------------------------------------------------------
+    @DatamarkField(handlerName = "settingNodeDatamarkHandler")
+    @Column(
+            name = "created_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE,
+            updatable = false
+    )
+    private String createdDatamark;
+
+    @DatamarkField(handlerName = "settingNodeDatamarkHandler")
+    @Column(
+            name = "modified_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
+    )
+    private String modifiedDatamark;
 
     public HibernateSettingNode() {
     }
@@ -113,6 +132,22 @@ public class HibernateSettingNode implements Bean {
         this.args = args;
     }
 
+    public String getCreatedDatamark() {
+        return createdDatamark;
+    }
+
+    public void setCreatedDatamark(String createdDatamark) {
+        this.createdDatamark = createdDatamark;
+    }
+
+    public String getModifiedDatamark() {
+        return modifiedDatamark;
+    }
+
+    public void setModifiedDatamark(String modifiedDatamark) {
+        this.modifiedDatamark = modifiedDatamark;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
@@ -122,7 +157,9 @@ public class HibernateSettingNode implements Bean {
                 "remark = " + remark + ", " +
                 "reachable = " + reachable + ", " +
                 "category = " + category + ", " +
-                "args = " + Arrays.toString(args) + ")";
+                "args = " + Arrays.toString(args) + ", " +
+                "createdDatamark = " + createdDatamark + ", " +
+                "modifiedDatamark = " + modifiedDatamark + ")";
     }
 
     /**

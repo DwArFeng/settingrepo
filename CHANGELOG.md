@@ -4,6 +4,21 @@
 
 #### 功能构建
 
+- 导入运维指令。
+  - com.dwarfeng.datamark.service.telqos.*。
+
+- 增加 Hibernate 实体数据标记字段，并应用相关实体侦听器。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateLongTextNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateTextNode。
+
+- 增加依赖。
+  - 增加依赖 `dwarfeng-datamark` 以应用其新功能，版本为 `1.0.1.a`。
+
 - FTP 路径机制优化。
   - 新增 FtpPathResolver 代替 FtpConstants，使得 FTP 路径由静态定义变为动态解析。
   - 新增 `ftp/path.properties`，使得服务的 FTP 根路径支持动态配置。

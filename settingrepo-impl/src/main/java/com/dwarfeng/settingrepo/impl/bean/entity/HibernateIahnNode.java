@@ -1,5 +1,7 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
+import com.dwarfeng.datamark.bean.jpa.DatamarkEntityListener;
+import com.dwarfeng.datamark.bean.jpa.DatamarkField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
@@ -12,14 +14,31 @@ import java.util.Set;
 @Entity
 @IdClass(HibernateStringIdKey.class)
 @Table(name = "tbl_iahn_node")
+@EntityListeners(DatamarkEntityListener.class)
 public class HibernateIahnNode implements Bean {
 
-    private static final long serialVersionUID = 2942638746339182849L;
+    private static final long serialVersionUID = -5898276320949960235L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
     @Column(name = "id", length = Constraints.LENGTH_SETTING_NODE_ID, nullable = false, unique = true)
     private String stringId;
+
+    // -----------------------------------------------------------审计-----------------------------------------------------------
+    @DatamarkField(handlerName = "settingNodeDatamarkHandler")
+    @Column(
+            name = "created_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE,
+            updatable = false
+    )
+    private String createdDatamark;
+
+    @DatamarkField(handlerName = "settingNodeDatamarkHandler")
+    @Column(
+            name = "modified_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
+    )
+    private String modifiedDatamark;
 
     // -----------------------------------------------------------一对多-----------------------------------------------------------
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeLocale.class, mappedBy = "node")
@@ -52,6 +71,22 @@ public class HibernateIahnNode implements Bean {
         this.stringId = stringId;
     }
 
+    public String getCreatedDatamark() {
+        return createdDatamark;
+    }
+
+    public void setCreatedDatamark(String createdDatamark) {
+        this.createdDatamark = createdDatamark;
+    }
+
+    public String getModifiedDatamark() {
+        return modifiedDatamark;
+    }
+
+    public void setModifiedDatamark(String modifiedDatamark) {
+        this.modifiedDatamark = modifiedDatamark;
+    }
+
     public Set<HibernateIahnNodeLocale> getLocales() {
         return locales;
     }
@@ -79,6 +114,8 @@ public class HibernateIahnNode implements Bean {
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
-                "stringId = " + stringId + ")";
+                "stringId = " + stringId + ", " +
+                "createdDatamark = " + createdDatamark + ", " +
+                "modifiedDatamark = " + modifiedDatamark + ")";
     }
 }
