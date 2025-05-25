@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh_CN/UsingTelqos.md。
+
 - 优化 Hibernate 实体审计字段位置。
   - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
   - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
