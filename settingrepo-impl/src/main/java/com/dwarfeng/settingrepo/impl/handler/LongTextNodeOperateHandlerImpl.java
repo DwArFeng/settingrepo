@@ -3,7 +3,6 @@ package com.dwarfeng.settingrepo.impl.handler;
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.dutil.basic.io.StringInputStream;
 import com.dwarfeng.ftp.handler.FtpHandler;
-import com.dwarfeng.settingrepo.impl.util.FtpConstants;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.LongTextNode;
@@ -44,6 +43,8 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
     private final FormatLocalCacheHandler formatLocalCacheHandler;
     private final FtpHandler ftpHandler;
 
+    private final FtpPathResolver ftpPathResolver;
+
     private final HandlerValidator handlerValidator;
 
     public LongTextNodeOperateHandlerImpl(
@@ -51,12 +52,14 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
             LongTextNodeMaintainService longTextNodeMaintainService,
             FormatLocalCacheHandler formatLocalCacheHandler,
             FtpHandler ftpHandler,
+            FtpPathResolver ftpPathResolver,
             HandlerValidator handlerValidator
     ) {
         this.settingNodeMaintainService = settingNodeMaintainService;
         this.longTextNodeMaintainService = longTextNodeMaintainService;
         this.formatLocalCacheHandler = formatLocalCacheHandler;
         this.ftpHandler = ftpHandler;
+        this.ftpPathResolver = ftpPathResolver;
         this.handlerValidator = handlerValidator;
     }
 
@@ -138,7 +141,8 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
 
             // 下载长文本文本的原始文件。
             byte[] rawContent = ftpHandler.retrieveFile(
-                    FtpConstants.PATH_LONG_TEXT_NODE_FILE, longTextNode.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_LONG_TEXT_NODE_FILE),
+                    longTextNode.getStoreName()
             );
 
             // 原始文件转换为 String。
@@ -189,7 +193,8 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
 
             // 下载长文本文本流。
             InputStream content = ftpHandler.openInputStream(
-                    FtpConstants.PATH_LONG_TEXT_NODE_FILE, longTextNode.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_LONG_TEXT_NODE_FILE),
+                    longTextNode.getStoreName()
             );
 
             // 构造 LongTextNodeTextStream 并返回。
@@ -262,7 +267,9 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
 
             // 上传文本。
             ftpHandler.storeFile(
-                    FtpConstants.PATH_LONG_TEXT_NODE_FILE, storeName, content.getBytes(TEXT_CHARSET)
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_LONG_TEXT_NODE_FILE),
+                    storeName,
+                    content.getBytes(TEXT_CHARSET)
             );
 
             // 解析预览。
@@ -353,8 +360,11 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
             // 上传文本并收集预览。
             String preview;
             try (PreviewCollectOutputStream fout = new PreviewCollectOutputStream(
-                    ftpHandler.openOutputStream(FtpConstants.PATH_LONG_TEXT_NODE_FILE, storeName),
-                    TEXT_CHARSET, Constants.LONG_TEXT_NODE_PREVIEW_LENGTH
+                    ftpHandler.openOutputStream(
+                            ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_LONG_TEXT_NODE_FILE), storeName
+                    ),
+                    TEXT_CHARSET,
+                    Constants.LONG_TEXT_NODE_PREVIEW_LENGTH
             )) {
                 IOUtil.trans(content, fout, 4096);
                 preview = fout.getPreview();

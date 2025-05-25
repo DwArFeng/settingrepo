@@ -2,7 +2,6 @@ package com.dwarfeng.settingrepo.impl.handler;
 
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.ftp.handler.FtpHandler;
-import com.dwarfeng.settingrepo.impl.util.FtpConstants;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageNode;
@@ -39,6 +38,8 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     private final FormatLocalCacheHandler formatLocalCacheHandler;
     private final FtpHandler ftpHandler;
 
+    private final FtpPathResolver ftpPathResolver;
+
     private final HandlerValidator handlerValidator;
 
     @Value("${image_thumbnail.width}")
@@ -55,12 +56,14 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
             ImageNodeMaintainService imageNodeMaintainService,
             FormatLocalCacheHandler formatLocalCacheHandler,
             FtpHandler ftpHandler,
+            FtpPathResolver ftpPathResolver,
             HandlerValidator handlerValidator
     ) {
         this.settingNodeMaintainService = settingNodeMaintainService;
         this.imageNodeMaintainService = imageNodeMaintainService;
         this.formatLocalCacheHandler = formatLocalCacheHandler;
         this.ftpHandler = ftpHandler;
+        this.ftpPathResolver = ftpPathResolver;
         this.handlerValidator = handlerValidator;
     }
 
@@ -135,8 +138,9 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 下载图片文件。
             byte[] content = ftpHandler.retrieveFile(
-                    FtpConstants.PATH_IMAGE_NODE_FILE, imageNode.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE), imageNode.getStoreName()
             );
+            // ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE)
 
             // 构造 ImageNodeFile 并返回。
             return new ImageNodeFile(imageNode.getOriginName(), content);
@@ -178,7 +182,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 下载图片文件流。
             InputStream content = ftpHandler.openInputStream(
-                    FtpConstants.PATH_IMAGE_NODE_FILE, imageNode.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE), imageNode.getStoreName()
             );
 
             // 构造 ImageNodeFileStream 并返回。
@@ -216,7 +220,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 如果不存在证件的缩略图，则创建。
             boolean existsThumbnail = ftpHandler.existsFile(
-                    FtpConstants.PATH_IMAGE_NODE_THUMBNAIL, imageNode.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_THUMBNAIL), imageNode.getStoreName()
             );
             if (!existsThumbnail) {
                 LOGGER.info("图片节点 {} 的缩略图不存在, 将创建缩略图...", settingNodeKey);
@@ -225,7 +229,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 下载缩略图。
             byte[] content = ftpHandler.retrieveFile(
-                    FtpConstants.PATH_IMAGE_NODE_THUMBNAIL, imageNode.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_THUMBNAIL), imageNode.getStoreName()
             );
 
             // 构造 ImageNodeThumbnail 并返回。
@@ -291,7 +295,9 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
             imageNode.setLength((long) content.length);
 
             // 上传文件。
-            ftpHandler.storeFile(FtpConstants.PATH_IMAGE_NODE_FILE, storeName, content);
+            ftpHandler.storeFile(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE), storeName, content
+            );
 
             // 生成缩略图并存储（覆盖）。
             createThumbnail(storeName);
@@ -360,7 +366,9 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
 
             // 上传文件。
             InputStream cin = info.getContent();
-            try (OutputStream fout = ftpHandler.openOutputStream(FtpConstants.PATH_IMAGE_NODE_FILE, storeName)) {
+            try (OutputStream fout = ftpHandler.openOutputStream(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE), storeName
+            )) {
                 IOUtil.trans(cin, fout, 4096);
             }
 
@@ -386,9 +394,10 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     @SuppressWarnings("DuplicatedCode")
     private void createThumbnail(String fileName) throws Exception {
         // 定义临时变量，缩短代码长度。
-        @SuppressWarnings("SpellCheckingInspection")
-        String[] pinf = FtpConstants.PATH_IMAGE_NODE_FILE;
-        String[] pint = FtpConstants.PATH_IMAGE_NODE_THUMBNAIL;
+        @SuppressWarnings({"SpellCheckingInspection", "RedundantSuppression"})
+        String[] pinf = ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE);
+        @SuppressWarnings({"SpellCheckingInspection", "RedundantSuppression"})
+        String[] pint = ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_THUMBNAIL);
         // 定义缩略图。
         byte[] thumbnailContent;
         // 打开原图的输入流，并在 try-with-resources 中创建缩略图。

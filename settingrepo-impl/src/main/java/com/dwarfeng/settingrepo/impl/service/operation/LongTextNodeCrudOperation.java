@@ -1,7 +1,7 @@
 package com.dwarfeng.settingrepo.impl.service.operation;
 
 import com.dwarfeng.ftp.handler.FtpHandler;
-import com.dwarfeng.settingrepo.impl.util.FtpConstants;
+import com.dwarfeng.settingrepo.impl.handler.FtpPathResolver;
 import com.dwarfeng.settingrepo.stack.bean.entity.LongTextNode;
 import com.dwarfeng.settingrepo.stack.cache.LongTextNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.LongTextNodeDao;
@@ -22,17 +22,21 @@ public class LongTextNodeCrudOperation implements BatchCrudOperation<StringIdKey
 
     private final FtpHandler ftpHandler;
 
+    private final FtpPathResolver ftpPathResolver;
+
     @Value("${cache.timeout.entity.long_text_node}")
     private long longTextNodeTimeout;
 
     public LongTextNodeCrudOperation(
             LongTextNodeDao longTextNodeDao,
             LongTextNodeCache longTextNodeCache,
-            FtpHandler ftpHandler
+            FtpHandler ftpHandler,
+            FtpPathResolver ftpPathResolver
     ) {
         this.longTextNodeDao = longTextNodeDao;
         this.longTextNodeCache = longTextNodeCache;
         this.ftpHandler = ftpHandler;
+        this.ftpPathResolver = ftpPathResolver;
     }
 
     @Override
@@ -72,8 +76,10 @@ public class LongTextNodeCrudOperation implements BatchCrudOperation<StringIdKey
         String fileName = longTextNodeDao.get(key).getStoreName();
 
         // 如果存在工件长文本文件，则删除文件。
-        if (ftpHandler.existsFile(FtpConstants.PATH_LONG_TEXT_NODE_FILE, fileName)) {
-            ftpHandler.deleteFile(FtpConstants.PATH_LONG_TEXT_NODE_FILE, fileName);
+        if (ftpHandler.existsFile(
+                ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_LONG_TEXT_NODE_FILE), fileName
+        )) {
+            ftpHandler.deleteFile(ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_LONG_TEXT_NODE_FILE), fileName);
         }
 
         // 删除记录设置自身。

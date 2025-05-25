@@ -1,7 +1,7 @@
 package com.dwarfeng.settingrepo.impl.service.operation;
 
 import com.dwarfeng.ftp.handler.FtpHandler;
-import com.dwarfeng.settingrepo.impl.util.FtpConstants;
+import com.dwarfeng.settingrepo.impl.handler.FtpPathResolver;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageListNodeItem;
 import com.dwarfeng.settingrepo.stack.cache.ImageListNodeItemCache;
 import com.dwarfeng.settingrepo.stack.dao.ImageListNodeItemDao;
@@ -23,17 +23,21 @@ public class ImageListNodeItemCrudOperation implements BatchCrudOperation<LongId
 
     private final FtpHandler ftpHandler;
 
+    private final FtpPathResolver ftpPathResolver;
+
     @Value("${cache.timeout.entity.image_list_node_item}")
     private long imageListNodeItemTimeout;
 
     public ImageListNodeItemCrudOperation(
             ImageListNodeItemDao imageListNodeItemDao,
             ImageListNodeItemCache imageListNodeItemCache,
-            FtpHandler ftpHandler
+            FtpHandler ftpHandler,
+            FtpPathResolver ftpPathResolver
     ) {
         this.imageListNodeItemDao = imageListNodeItemDao;
         this.imageListNodeItemCache = imageListNodeItemCache;
         this.ftpHandler = ftpHandler;
+        this.ftpPathResolver = ftpPathResolver;
     }
 
     @Override
@@ -74,16 +78,22 @@ public class ImageListNodeItemCrudOperation implements BatchCrudOperation<LongId
 
         // 如果存在工件图片文件，则删除文件。
         boolean fileExistsFlag = Objects.nonNull(fileName) &&
-                ftpHandler.existsFile(FtpConstants.PATH_IMAGE_LIST_NODE_FILE, fileName);
+                ftpHandler.existsFile(
+                        ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE), fileName
+                );
         if (fileExistsFlag) {
-            ftpHandler.deleteFile(FtpConstants.PATH_IMAGE_LIST_NODE_FILE, fileName);
+            ftpHandler.deleteFile(ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE), fileName);
         }
 
         // 如果存在工件缩略图，则删除缩略图。
         boolean thumbnailExistsFlag = Objects.nonNull(fileName) &&
-                ftpHandler.existsFile(FtpConstants.PATH_IMAGE_LIST_NODE_THUMBNAIL, fileName);
+                ftpHandler.existsFile(
+                        ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_THUMBNAIL), fileName
+                );
         if (thumbnailExistsFlag) {
-            ftpHandler.deleteFile(FtpConstants.PATH_IMAGE_LIST_NODE_THUMBNAIL, fileName);
+            ftpHandler.deleteFile(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_THUMBNAIL), fileName
+            );
         }
 
         // 删除记录设置自身。

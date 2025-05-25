@@ -4,6 +4,11 @@
 
 #### 功能构建
 
+- FTP 路径机制优化。
+  - 新增 FtpPathResolver 代替 FtpConstants，使得 FTP 路径由静态定义变为动态解析。
+  - 新增 `ftp/path.properties`，使得服务的 FTP 根路径支持动态配置。
+  - 新的 FTP 路径机制使得不同组服务共享同一 FTP 服务器时，存储文件的路径隔离成为可能。
+
 - 优化部分单元测试代码，以规避潜在的 bug。
   - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImplTest。
   - com.dwarfeng.settingrepo.impl.service.IahnNodeLocaleMaintainServiceImplTest。

@@ -1,7 +1,7 @@
 package com.dwarfeng.settingrepo.impl.service.operation;
 
 import com.dwarfeng.ftp.handler.FtpHandler;
-import com.dwarfeng.settingrepo.impl.util.FtpConstants;
+import com.dwarfeng.settingrepo.impl.handler.FtpPathResolver;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageNode;
 import com.dwarfeng.settingrepo.stack.cache.ImageNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.ImageNodeDao;
@@ -22,17 +22,21 @@ public class ImageNodeCrudOperation implements BatchCrudOperation<StringIdKey, I
 
     private final FtpHandler ftpHandler;
 
+    private final FtpPathResolver ftpPathResolver;
+
     @Value("${cache.timeout.entity.image_node}")
     private long imageNodeTimeout;
 
     public ImageNodeCrudOperation(
             ImageNodeDao imageNodeDao,
             ImageNodeCache imageNodeCache,
-            FtpHandler ftpHandler
+            FtpHandler ftpHandler,
+            FtpPathResolver ftpPathResolver
     ) {
         this.imageNodeDao = imageNodeDao;
         this.imageNodeCache = imageNodeCache;
         this.ftpHandler = ftpHandler;
+        this.ftpPathResolver = ftpPathResolver;
     }
 
     @Override
@@ -72,13 +76,17 @@ public class ImageNodeCrudOperation implements BatchCrudOperation<StringIdKey, I
         String fileName = imageNodeDao.get(key).getStoreName();
 
         // 如果存在工件图片文件，则删除文件。
-        if (ftpHandler.existsFile(FtpConstants.PATH_IMAGE_NODE_FILE, fileName)) {
-            ftpHandler.deleteFile(FtpConstants.PATH_IMAGE_NODE_FILE, fileName);
+        if (ftpHandler.existsFile(
+                ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE), fileName
+        )) {
+            ftpHandler.deleteFile(ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_FILE), fileName);
         }
 
         // 如果存在工件缩略图，则删除缩略图。
-        if (ftpHandler.existsFile(FtpConstants.PATH_IMAGE_NODE_THUMBNAIL, fileName)) {
-            ftpHandler.deleteFile(FtpConstants.PATH_IMAGE_NODE_THUMBNAIL, fileName);
+        if (ftpHandler.existsFile(
+                ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_THUMBNAIL), fileName
+        )) {
+            ftpHandler.deleteFile(ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_THUMBNAIL), fileName);
         }
 
         // 删除记录设置自身。

@@ -2,7 +2,6 @@ package com.dwarfeng.settingrepo.impl.handler;
 
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.ftp.handler.FtpHandler;
-import com.dwarfeng.settingrepo.impl.util.FtpConstants;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageListNode;
@@ -37,6 +36,8 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     private final FormatLocalCacheHandler formatLocalCacheHandler;
     private final FtpHandler ftpHandler;
 
+    private final FtpPathResolver ftpPathResolver;
+
     private final HandlerValidator handlerValidator;
 
     @Value("${image_thumbnail.width}")
@@ -54,6 +55,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
             ImageListNodeItemMaintainService imageListNodeItemMaintainService,
             FormatLocalCacheHandler formatLocalCacheHandler,
             FtpHandler ftpHandler,
+            FtpPathResolver ftpPathResolver,
             HandlerValidator handlerValidator
     ) {
         this.settingNodeMaintainService = settingNodeMaintainService;
@@ -61,6 +63,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
         this.imageListNodeItemMaintainService = imageListNodeItemMaintainService;
         this.formatLocalCacheHandler = formatLocalCacheHandler;
         this.ftpHandler = ftpHandler;
+        this.ftpPathResolver = ftpPathResolver;
         this.handlerValidator = handlerValidator;
     }
 
@@ -207,7 +210,8 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 下载图片文件。
             byte[] content = ftpHandler.retrieveFile(
-                    FtpConstants.PATH_IMAGE_LIST_NODE_FILE, imageListNodeItem.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE),
+                    imageListNodeItem.getStoreName()
             );
 
             // 构造 ImageListNodeFile 并返回。
@@ -268,7 +272,8 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 下载图片文件流。
             InputStream content = ftpHandler.openInputStream(
-                    FtpConstants.PATH_IMAGE_LIST_NODE_FILE, imageListNodeItem.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE),
+                    imageListNodeItem.getStoreName()
             );
 
             // 构造 ImageListNodeFileStream 并返回。
@@ -330,7 +335,8 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 下载缩略图。
             byte[] content = ftpHandler.retrieveFile(
-                    FtpConstants.PATH_IMAGE_LIST_NODE_THUMBNAIL, imageListNodeItem.getStoreName()
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_THUMBNAIL),
+                    imageListNodeItem.getStoreName()
             );
 
             // 构造 ImageListNodeThumbnail 并返回。
@@ -442,7 +448,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
             }
 
             // 上传文件。
-            ftpHandler.storeFile(FtpConstants.PATH_IMAGE_LIST_NODE_FILE, storeName, content);
+            ftpHandler.storeFile(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE), storeName, content
+            );
 
             // 生成缩略图并存储（覆盖）。
             createThumbnail(storeName);
@@ -559,7 +567,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 上传文件。
             InputStream cin = info.getContent();
-            try (OutputStream fout = ftpHandler.openOutputStream(FtpConstants.PATH_IMAGE_LIST_NODE_FILE, storeName)) {
+            try (OutputStream fout = ftpHandler.openOutputStream(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE), storeName)
+            ) {
                 IOUtil.trans(cin, fout, 4096);
             }
 
@@ -673,7 +683,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
             }
 
             // 上传文件（覆盖）。
-            ftpHandler.storeFile(FtpConstants.PATH_IMAGE_LIST_NODE_FILE, storeName, content);
+            ftpHandler.storeFile(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE), storeName, content
+            );
 
             // 生成缩略图并存储（覆盖）。
             createThumbnail(storeName);
@@ -786,7 +798,9 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
             // 上传文件（覆盖）。
             InputStream cin = info.getContent();
-            try (OutputStream fout = ftpHandler.openOutputStream(FtpConstants.PATH_IMAGE_LIST_NODE_FILE, storeName)) {
+            try (OutputStream fout = ftpHandler.openOutputStream(
+                    ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE), storeName)
+            ) {
                 IOUtil.trans(cin, fout, 4096);
             }
 
@@ -995,10 +1009,12 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
                     Objects.nonNull(imageListNodeItemToDelete.getStoreName());
             if (deleteFileFlag) {
                 ftpHandler.deleteFile(
-                        FtpConstants.PATH_IMAGE_LIST_NODE_FILE, imageListNodeItemToDelete.getStoreName()
+                        ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE),
+                        imageListNodeItemToDelete.getStoreName()
                 );
                 ftpHandler.deleteFile(
-                        FtpConstants.PATH_IMAGE_LIST_NODE_THUMBNAIL, imageListNodeItemToDelete.getStoreName()
+                        ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_THUMBNAIL),
+                        imageListNodeItemToDelete.getStoreName()
                 );
             }
             // 如果待删除的图片节点列表实体条目存在，则删除对应的实体。
@@ -1046,9 +1062,10 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     @SuppressWarnings("DuplicatedCode")
     private void createThumbnail(String fileName) throws Exception {
         // 定义临时变量，缩短代码长度。
-        @SuppressWarnings("SpellCheckingInspection")
-        String[] pinf = FtpConstants.PATH_IMAGE_LIST_NODE_FILE;
-        String[] pint = FtpConstants.PATH_IMAGE_LIST_NODE_THUMBNAIL;
+        @SuppressWarnings({"SpellCheckingInspection", "RedundantSuppression"})
+        String[] pinf = ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_FILE);
+        @SuppressWarnings({"SpellCheckingInspection", "RedundantSuppression"})
+        String[] pint = ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_LIST_NODE_THUMBNAIL);
         // 定义缩略图。
         byte[] thumbnailContent;
         // 打开原图的输入流，并在 try-with-resources 中创建缩略图。
