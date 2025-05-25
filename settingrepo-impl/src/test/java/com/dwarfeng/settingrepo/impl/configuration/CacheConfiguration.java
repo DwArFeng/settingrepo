@@ -1,6 +1,6 @@
 package com.dwarfeng.settingrepo.impl.configuration;
 
-import com.dwarfeng.settingrepo.sdk.bean.FastJsonMapper;
+import com.dwarfeng.settingrepo.sdk.bean.BeanMapper;
 import com.dwarfeng.settingrepo.sdk.bean.entity.*;
 import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeLocaleStringKeyFormatter;
 import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeMekStringKeyFormatter;
@@ -62,7 +62,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonFormatterSupport>) template,
                 new StringIdStringKeyFormatter(formatterSupportPrefix),
                 new MapStructBeanTransformer<>(
-                        FormatterSupport.class, FastJsonFormatterSupport.class, FastJsonMapper.class
+                        FormatterSupport.class, FastJsonFormatterSupport.class, BeanMapper.class
                 )
         );
     }
@@ -75,7 +75,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonSettingCategory>) template,
                 new StringIdStringKeyFormatter(settingCategoryPrefix),
                 new MapStructBeanTransformer<>(
-                        SettingCategory.class, FastJsonSettingCategory.class, FastJsonMapper.class
+                        SettingCategory.class, FastJsonSettingCategory.class, BeanMapper.class
                 )
         );
     }
@@ -87,7 +87,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonSettingNode>) template,
                 new StringIdStringKeyFormatter(settingNodePrefix),
                 new MapStructBeanTransformer<>(
-                        SettingNode.class, FastJsonSettingNode.class, FastJsonMapper.class
+                        SettingNode.class, FastJsonSettingNode.class, BeanMapper.class
                 )
         );
     }
@@ -99,7 +99,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonTextNode>) template,
                 new StringIdStringKeyFormatter(textNodePrefix),
                 new MapStructBeanTransformer<>(
-                        TextNode.class, FastJsonTextNode.class, FastJsonMapper.class
+                        TextNode.class, FastJsonTextNode.class, BeanMapper.class
                 )
         );
     }
@@ -111,7 +111,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonImageNode>) template,
                 new StringIdStringKeyFormatter(imageNodePrefix),
                 new MapStructBeanTransformer<>(
-                        ImageNode.class, FastJsonImageNode.class, FastJsonMapper.class
+                        ImageNode.class, FastJsonImageNode.class, BeanMapper.class
                 )
         );
     }
@@ -123,7 +123,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonImageListNode>) template,
                 new StringIdStringKeyFormatter(imageListNodePrefix),
                 new MapStructBeanTransformer<>(
-                        ImageListNode.class, FastJsonImageListNode.class, FastJsonMapper.class
+                        ImageListNode.class, FastJsonImageListNode.class, BeanMapper.class
                 )
         );
     }
@@ -136,7 +136,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonImageListNodeItem>) template,
                 new LongIdStringKeyFormatter(imageListNodeItemPrefix),
                 new MapStructBeanTransformer<>(
-                        ImageListNodeItem.class, FastJsonImageListNodeItem.class, FastJsonMapper.class
+                        ImageListNodeItem.class, FastJsonImageListNodeItem.class, BeanMapper.class
                 )
         );
     }
@@ -148,7 +148,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonIahnNode>) template,
                 new StringIdStringKeyFormatter(iahnNodePrefix),
                 new MapStructBeanTransformer<>(
-                        IahnNode.class, FastJsonIahnNode.class, FastJsonMapper.class
+                        IahnNode.class, FastJsonIahnNode.class, BeanMapper.class
                 )
         );
     }
@@ -161,7 +161,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonIahnNodeLocale>) template,
                 new IahnNodeLocaleStringKeyFormatter(iahnNodeLocalePrefix),
                 new MapStructBeanTransformer<>(
-                        IahnNodeLocale.class, FastJsonIahnNodeLocale.class, FastJsonMapper.class
+                        IahnNodeLocale.class, FastJsonIahnNodeLocale.class, BeanMapper.class
                 )
         );
     }
@@ -174,7 +174,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonIahnNodeMek>) template,
                 new IahnNodeMekStringKeyFormatter(iahnNodeMekPrefix),
                 new MapStructBeanTransformer<>(
-                        IahnNodeMek.class, FastJsonIahnNodeMek.class, FastJsonMapper.class
+                        IahnNodeMek.class, FastJsonIahnNodeMek.class, BeanMapper.class
                 )
         );
     }
@@ -187,7 +187,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonIahnNodeMessage>) template,
                 new IahnNodeMessageStringKeyFormatter(iahnNodeMessagePrefix),
                 new MapStructBeanTransformer<>(
-                        IahnNodeMessage.class, FastJsonIahnNodeMessage.class, FastJsonMapper.class
+                        IahnNodeMessage.class, FastJsonIahnNodeMessage.class, BeanMapper.class
                 )
         );
     }
@@ -199,7 +199,7 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonLongTextNode>) template,
                 new StringIdStringKeyFormatter(longTextNodePrefix),
                 new MapStructBeanTransformer<>(
-                        LongTextNode.class, FastJsonLongTextNode.class, FastJsonMapper.class
+                        LongTextNode.class, FastJsonLongTextNode.class, BeanMapper.class
                 )
         );
     }
