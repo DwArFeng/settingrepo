@@ -1,5 +1,6 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.sdk.handler.FormatterMaker;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.exception.FormatterException;
 import com.dwarfeng.settingrepo.stack.exception.FormatterMakeException;

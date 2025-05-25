@@ -1,5 +1,6 @@
 package com.dwarfeng.settingrepo.impl.handler.resetter;
 
+import com.dwarfeng.settingrepo.sdk.handler.resetter.AbstractResetter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

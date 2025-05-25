@@ -1,5 +1,6 @@
 package com.dwarfeng.settingrepo.impl.handler.pusher;
 
+import com.dwarfeng.settingrepo.sdk.handler.pusher.AbstractPusher;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

@@ -1,5 +1,6 @@
 package com.dwarfeng.settingrepo.impl.handler.pusher;
 
+import com.dwarfeng.settingrepo.sdk.handler.pusher.AbstractPusher;
 import org.springframework.stereotype.Component;
 
 /**

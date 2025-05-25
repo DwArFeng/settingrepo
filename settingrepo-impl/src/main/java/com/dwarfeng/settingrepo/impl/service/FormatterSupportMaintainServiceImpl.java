@@ -1,6 +1,6 @@
 package com.dwarfeng.settingrepo.impl.service;
 
-import com.dwarfeng.settingrepo.impl.handler.FormatterSupporter;
+import com.dwarfeng.settingrepo.sdk.handler.FormatterSupporter;
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
