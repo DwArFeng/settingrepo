@@ -54,22 +54,22 @@ key: user_preferences.bar.banner_color, desc: 用户偏好- bar 用户 - 横幅�
 1. 下载源码
    
    使用 git 进行源码下载。
-   
-   ```
+
+   ```shell
    git clone git@github.com:DwArFeng/settingrepo.git
    ```
    
    对于中国用户，可以使用 gitee 进行高速下载。
-   
-   ```
+
+   ```shell
    git clone git@gitee.com:dwarfeng/settingrepo.git
    ```
 
 2. 项目打包
    
    进入项目根目录，执行 maven 命令。
-   
-   ```
+
+   ```shell
    mvn clean package
    ```
 
@@ -89,9 +89,6 @@ key: user_preferences.bar.banner_color, desc: 用户偏好- bar 用户 - 横幅�
 
 5. enjoy it
 
----
-
 ## 分布式说明
 
 该项目使用 `dubbo` 作为 RPC 框架，本身支持分布式，您可以在实际使用时，部署该项目任意数量，以进行分布式运算。
-
