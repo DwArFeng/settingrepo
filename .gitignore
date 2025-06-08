@@ -84,4 +84,5 @@ buildNumber.properties
 #################
 ## Temp Files
 #################
+/settingrepo-impl/temp/
 /settingrepo-node/temp/
