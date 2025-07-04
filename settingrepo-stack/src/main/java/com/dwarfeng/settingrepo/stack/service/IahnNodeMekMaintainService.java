@@ -17,4 +17,17 @@ public interface IahnNodeMekMaintainService extends BatchCrudService<IahnNodeMek
         EntireLookupService<IahnNodeMek>, PresetLookupService<IahnNodeMek> {
 
     String CHILD_FOR_NODE = "child_for_node";
+
+    /**
+     * 属于指定的国际化节点，并且按照顺序排序。
+     *
+     * <p>
+     * 排序的依据为：
+     * <ol>
+     *   <li>Mek ID，即 <code>mekId</code></li>
+     * </ol>
+     *
+     * @since 2.3.3
+     */
+    String CHILD_FOR_NODE_ORDERED = "child_for_node_ordered";
 }
