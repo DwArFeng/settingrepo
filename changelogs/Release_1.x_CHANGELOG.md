@@ -1,8 +1,8 @@
 # ChangeLog
 
-### Release_1.1.5_20240128_build_A
+## Release_1.1.5_20240128_build_A
 
-#### 功能构建
+### 功能构建
 
 - 将工程中的 `Spring Bean` 注册方式尽可能地由 `@Autowired` 变更为构造器注入。
 
@@ -30,19 +30,19 @@
   - 升级 `zookeeper` 依赖版本为 `3.7.2` 以规避漏洞。
   - 升级 `spring-telqos` 依赖版本为 `1.1.8.a` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.4_20230618_build_A
+## Release_1.1.4_20230618_build_A
 
-#### 功能构建
+### 功能构建
 
 - 优化了 AbstractResetter 的代码结构，同时对其实现进行了修改。
   - com.dwarfeng.settingrepo.impl.handler.resetter.CronResetter。
@@ -56,19 +56,19 @@
   - 升级 `dubbo` 依赖版本为 `2.7.22` 以规避漏洞。
   - 升级 `guava` 依赖版本为 `32.0.1-jre` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - 修复 `DubboResetter` 注册微服务时没有指定 `group` 的问题。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.3_20230421_build_A
+## Release_1.1.3_20230421_build_A
 
-#### 功能构建
+### 功能构建
 
 - 优化 Mapper 接口的文件路径。
 
@@ -88,38 +88,38 @@
   - 升级 `spring-terminator` 依赖版本为 `1.0.11.a` 以规避漏洞。
   - 升级 `spring-telqos` 依赖版本为 `1.1.6.a` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.2_20230103_build_A
+## Release_1.1.2_20230103_build_A
 
-#### 功能构建
+### 功能构建
 
 - 实现推送机制，并开发预设推送器。
   - com.dwarfeng.settingrepo.impl.handler.pusher.DrainPusher。
   - com.dwarfeng.settingrepo.impl.handler.pusher.LogPusher。
   - com.dwarfeng.settingrepo.impl.handler.pusher.MultiPusher。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.1_20230103_build_A
+## Release_1.1.1_20230103_build_A
 
-#### 功能构建
+### 功能构建
 
 - 使用 `subgrade` 预设的 `GeneralLocalCacheHandler` 重写本地缓存。
   - com.dwarfeng.settingrepo.impl.handler.FormatLocalCacheHandlerImpl。
@@ -132,19 +132,19 @@
   - com.dwarfeng.settingrepo.impl.handler.resetter.KafkaResetter。
   - com.dwarfeng.settingrepo.impl.handler.resetter.NeverResetter。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.0_20221201_build_A
+## Release_1.1.0_20221201_build_A
 
-#### 功能构建
+### 功能构建
 
 - Dubbo 微服务增加分组配置。
 
@@ -174,11 +174,11 @@
   - 升级 `spring-telqos` 依赖版本为 `1.1.5.a` 以规避漏洞。
   - 升级 `groovy` 依赖版本为 `4.0.6` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - 删除不需要的依赖。
   - 删除 `el` 依赖。
@@ -190,9 +190,9 @@
 
 ---
 
-### Release_1.0.3_20221009_build_A
+## Release_1.0.3_20221009_build_A
 
-#### 功能构建
+### 功能构建
 
 - 依赖升级。
   - 升级 `junit` 依赖版本为 `4.13.2` 以规避漏洞。
@@ -206,11 +206,11 @@
   - 升级 `log4j2` 依赖版本为 `2.17.2` 以规避漏洞。
   - 升级 `groovy` 依赖版本为 `3.0.7` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - 删除不需要的依赖。
   - 删除 `joda-time` 依赖。
@@ -220,9 +220,9 @@
 
 ---
 
-### Release_1.0.2_20220912_build_A
+## Release_1.0.2_20220912_build_A
 
-#### 功能构建
+### 功能构建
 
 - 插件升级。
   - 升级 `maven-deploy-plugin` 插件版本为 `2.8.2`。
@@ -233,35 +233,35 @@
   - 升级 `subgrade` 依赖版本为 `1.2.10.a` 以规避漏洞。
   - 升级 `spring-telqos` 依赖版本为 `1.1.4.a` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.0.1_20220412_build_A
+## Release_1.0.1_20220412_build_A
 
-#### 功能构建
+### 功能构建
 
 - (无)
 
-#### Bug修复
+### Bug 修复
 
 - 修正项目中不合理的配置项名称。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.0.0_20220323_build_A
+## Release_1.0.0_20220323_build_A
 
-#### 功能构建
+### 功能构建
 
 - 程序结构建立，清理测试通过。
 
@@ -277,10 +277,10 @@
 
 - 程序开发完成，运行测试通过，打包测试通过。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)

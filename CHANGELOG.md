@@ -1,24 +1,24 @@
 # ChangeLog
 
-### Release_2.3.3_20250704_build_A
+## Release_2.3.3_20250704_build_A
 
-#### 功能构建
-
-- (无)
-
-#### Bug修复
+### 功能构建
 
 - (无)
 
-#### 功能移除
+### Bug 修复
+
+- (无)
+
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.3.2_20250608_build_A
+## Release_2.3.2_20250608_build_A
 
-#### 功能构建
+### 功能构建
 
 - Wiki 编写。
   - docs/wiki/zh_CN/SystemRequirements.md。
@@ -35,19 +35,19 @@
   - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.3.a` 以规避漏洞。
   - 升级 `dwarfeng-datamark` 依赖版本为 `1.0.2.a` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - 补全 `.gitignore` 文件中缺失的配置项。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.3.1_20250525_build_A
+## Release_2.3.1_20250525_build_A
 
-#### 功能构建
+### 功能构建
 
 - Wiki 编写。
   - docs/wiki/zh_CN/UsingTelqos.md。
@@ -56,19 +56,19 @@
   - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
   - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.3.0_20250525_build_A
+## Release_2.3.0_20250525_build_A
 
-#### 功能构建
+### 功能构建
 
 - 优化部分接口的文档注释。
   - com.dwarfeng.settingrepo.stack.service.FormatQosService。
@@ -136,19 +136,19 @@
   - 升级 `jackson` 依赖版本为 `2.18.3` 以规避漏洞。
   - 升级 `groovy` 依赖版本为 `4.0.26` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - 修正 `impl` 模块中错误的 dubbo 应用名称。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.2.1_20250323_build_A
+## Release_2.2.1_20250323_build_A
 
-#### 功能构建
+### 功能构建
 
 - 依赖升级。
   - 升级 `jetty` 依赖版本为 `9.4.57.v20241219` 以规避漏洞。
@@ -156,7 +156,7 @@
 - Wiki 编写。
   - docs/wiki/zh_CN/VersionBlacklist.md。
 
-#### Bug修复
+### Bug 修复
 
 - 修复 `LongTextNodeOperateHandlerImpl` 中的业务逻辑问题。
   - 修复 `LongTextNodeOperateHandlerImpl` 在更新存储文件时，没有正确的更新文件信息的问题。
@@ -164,15 +164,15 @@
 - 修复 `ImageNodeOperateHandlerImpl` 中的业务逻辑问题。
   - 修复 `ImageNodeOperateHandlerImpl` 在更新存储文件时，没有正确的更新文件信息的问题。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.2.0_20250320_build_A
+## Release_2.2.0_20250320_build_A
 
-#### 功能构建
+### 功能构建
 
 - 优化项目的启停脚本，以规避潜在的路径问题。
   - binres/settingrepo-stop.sh。
@@ -195,19 +195,19 @@
 - 优化部分类中的文档注释。
   - com.dwarfeng.settingrepo.stack.cache.ImageNodeCache。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.1.0_20250318_build_A
+## Release_2.1.0_20250318_build_A
 
-#### 功能构建
+### 功能构建
 
 - 依赖升级。
   - 升级 `spring` 依赖版本为 `5.3.39` 以规避漏洞。
@@ -246,20 +246,20 @@
   - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek。
   - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMessage。
 
-#### Bug修复
+### Bug 修复
 
 - 修正配置类中的错误。
   - ExceptionCodeOffsetConfiguration。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.0.0_20240802_build_B
+## Release_2.0.0_20240802_build_B
 
-#### 功能构建
+### 功能构建
 
 - 依赖升级。
   - 升级 `subgrade` 依赖版本为 `1.5.5.a` 并解决兼容性问题，以规避漏洞。
@@ -272,19 +272,19 @@
   - 升级 `spring-telqos` 依赖版本为 `1.1.10.a` 以规避漏洞。
   - 升级 `dwarfeng-ftp` 依赖版本为 `1.2.2.a` 以规避漏洞。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_2.0.0_20240802_build_A
+## Release_2.0.0_20240802_build_A
 
-#### 功能构建
+### 功能构建
 
 - 启动器优化。
   - 将入口方法中完整独立的功能封装在子方法中，使入口方法代码结构更加清晰。
@@ -370,7 +370,7 @@
   - 增加设置节点的类型，使其除了能够存储文本外，还可以存储其它类型的数据。
   - 优化接口方法，使其更加易用。
 
-#### Bug修复
+### Bug 修复
 
 - 修正 `telqos/my-banner.txt` 中不正确的文本内容。
 
@@ -378,6 +378,6 @@
 
 - 修复 telqos 工具类中部分注解不正确的 bug。
 
-#### 功能移除
+### 功能移除
 
 - (无)
