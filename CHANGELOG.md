@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 为部分 QoS 服务添加新方法。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeQosService。
+
 - 为部分操作服务添加新方法。
   - com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService。
 

@@ -41,6 +41,35 @@ public class IahnNodeQosServiceImpl implements IahnNodeQosService {
     }
 
     @Override
+    public IahnNodeLocaleListInspectResult inspectLocaleList(IahnNodeLocaleListInspectInfo info)
+            throws ServiceException {
+        try {
+            return iahnNodeOperateHandler.inspectLocaleList(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("查询国际化地区列表时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
+
+    @Override
+    public IahnNodeMekListInspectResult inspectMekList(IahnNodeMekListInspectInfo info) throws ServiceException {
+        try {
+            return iahnNodeOperateHandler.inspectMekList(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("查询国际化 Mek 列表时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
+
+    @Override
+    public IahnNodeMessageTableInspectResult inspectMessageTable(IahnNodeMessageTableInspectInfo info)
+            throws ServiceException {
+        try {
+            return iahnNodeOperateHandler.inspectMessageTable(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("查询国际化消息表时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
+
+    @Override
     public void putLocale(IahnNodeLocalePutInfo info) throws ServiceException {
         try {
             iahnNodeOperateHandler.putLocale(info);

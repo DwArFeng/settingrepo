@@ -32,6 +32,36 @@ public interface IahnNodeQosService extends Service {
             throws ServiceException;
 
     /**
+     * 查询国际化地区列表。
+     *
+     * @param info 查询信息。
+     * @return 查询结果。
+     * @throws ServiceException 服务异常。
+     * @since 2.3.3
+     */
+    IahnNodeLocaleListInspectResult inspectLocaleList(IahnNodeLocaleListInspectInfo info) throws ServiceException;
+
+    /**
+     * 查询国际化 Mek 列表。
+     *
+     * @param info 查询信息。
+     * @return 查询结果。
+     * @throws ServiceException 服务异常。
+     * @since 2.3.3
+     */
+    IahnNodeMekListInspectResult inspectMekList(IahnNodeMekListInspectInfo info) throws ServiceException;
+
+    /**
+     * 查询国际化消息表。
+     *
+     * @param info 查询信息。
+     * @return 查询结果。
+     * @throws ServiceException 服务异常。
+     * @since 2.3.3
+     */
+    IahnNodeMessageTableInspectResult inspectMessageTable(IahnNodeMessageTableInspectInfo info) throws ServiceException;
+
+    /**
      * 推入国际化地区。
      *
      * @param info 创建信息。
