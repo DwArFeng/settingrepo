@@ -13,12 +13,14 @@ import java.util.Objects;
 @Component
 public class IahnNodeLocalePresetCriteriaMaker implements PresetCriteriaMaker {
 
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
     public void makeCriteria(DetachedCriteria detachedCriteria, String s, Object[] objects) {
         switch (s) {
             case IahnNodeLocaleMaintainService.CHILD_FOR_NODE:
                 childForNode(detachedCriteria, objects);
+                break;
+            case IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED:
+                childForNodeOrdered(detachedCriteria, objects);
                 break;
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + s);
@@ -34,6 +36,22 @@ public class IahnNodeLocalePresetCriteriaMaker implements PresetCriteriaMaker {
                 StringIdKey nodeKey = (StringIdKey) objects[0];
                 detachedCriteria.add(Restrictions.eqOrIsNull("nodeStringId", nodeKey.getStringId()));
             }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
+        }
+    }
+
+    private void childForNodeOrdered(DetachedCriteria detachedCriteria, Object[] objects) {
+        try {
+            if (Objects.isNull(objects[0])) {
+                detachedCriteria.add(Restrictions.isNull("nodeStringId"));
+            } else {
+                StringIdKey nodeKey = (StringIdKey) objects[0];
+                detachedCriteria.add(Restrictions.eqOrIsNull("nodeStringId", nodeKey.getStringId()));
+            }
+            detachedCriteria.addOrder(org.hibernate.criterion.Order.asc("language"));
+            detachedCriteria.addOrder(org.hibernate.criterion.Order.asc("country"));
+            detachedCriteria.addOrder(org.hibernate.criterion.Order.asc("variant"));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }

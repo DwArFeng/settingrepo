@@ -17,4 +17,19 @@ public interface IahnNodeLocaleMaintainService extends BatchCrudService<IahnNode
         EntireLookupService<IahnNodeLocale>, PresetLookupService<IahnNodeLocale> {
 
     String CHILD_FOR_NODE = "child_for_node";
+
+    /**
+     * 属于指定的国际化节点，并且按照顺序排序。
+     *
+     * <p>
+     * 排序的依据为：
+     * <ol>
+     *   <li>语言，即 <code>language</code></li>
+     *   <li>国家，即 <code>country</code></li>
+     *   <li>变体，即 <code>variant</code></li>
+     * </ol>
+     *
+     * @since 2.3.3
+     */
+    String CHILD_FOR_NODE_ORDERED = "child_for_node_ordered";
 }

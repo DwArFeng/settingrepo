@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 增加部分实体维护服务的预设查询。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED。
+
 - 为部分关键的操作处理器的实现方法补充行为分析注解。
   - com.dwarfeng.settingrepo.impl.handler.IahnNodeOperateHandlerImpl。
   - com.dwarfeng.settingrepo.impl.handler.ImageListNodeOperateHandlerImpl。
