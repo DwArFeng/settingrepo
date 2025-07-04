@@ -486,4 +486,58 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     TextNodePutInfo textNodePutInfoFromWebInput(WebInputTextNodePutInfo webInputTextNodePutInfo);
+
+    WebInputIahnNodeLocaleListInspectInfo iahnNodeLocaleListInspectInfoToWebInput(
+            IahnNodeLocaleListInspectInfo iahnNodeLocaleListInspectInfo
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeLocaleListInspectInfo iahnNodeLocaleListInspectInfoFromWebInput(
+            WebInputIahnNodeLocaleListInspectInfo webInputIahnNodeLocaleListInspectInfo
+    );
+
+    FastJsonIahnNodeLocaleListInspectResult iahnNodeLocaleListInspectResultToFastJson(
+            IahnNodeLocaleListInspectResult iahnNodeLocaleListInspectResult
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeLocaleListInspectResult iahnNodeLocaleListInspectResultFromFastJson(
+            FastJsonIahnNodeLocaleListInspectResult fastJsonIahnNodeLocaleListInspectResult
+    );
+
+    FastJsonIahnNodeMekListInspectResult iahnNodeMekListInspectResultToFastJson(
+            IahnNodeMekListInspectResult iahnNodeMekListInspectResult
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeMekListInspectResult iahnNodeMekListInspectResultFromFastJson(
+            FastJsonIahnNodeMekListInspectResult fastJsonIahnNodeMekListInspectResult
+    );
+
+    FastJsonIahnNodeMessageTableInspectResult iahnNodeMessageTableInspectResultToFastJson(
+            IahnNodeMessageTableInspectResult iahnNodeMessageTableInspectResult
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeMessageTableInspectResult iahnNodeMessageTableInspectResultFromFastJson(
+            FastJsonIahnNodeMessageTableInspectResult fastJsonIahnNodeMessageTableInspectResult
+    );
+
+    WebInputIahnNodeMekListInspectInfo iahnNodeMekListInspectInfoToWebInput(
+            IahnNodeMekListInspectInfo iahnNodeMekListInspectInfo
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeMekListInspectInfo iahnNodeMekListInspectInfoFromWebInput(
+            WebInputIahnNodeMekListInspectInfo webInputIahnNodeMekListInspectInfo
+    );
+
+    WebInputIahnNodeMessageTableInspectInfo iahnNodeMessageTableInspectInfoToWebInput(
+            IahnNodeMessageTableInspectInfo iahnNodeMessageTableInspectInfo
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeMessageTableInspectInfo iahnNodeMessageTableInspectInfoFromWebInput(
+            WebInputIahnNodeMessageTableInspectInfo webInputIahnNodeMessageTableInspectInfo
+    );
 }

@@ -22,6 +22,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -332,6 +333,217 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return iahnNodeMessages.stream().map(
                 iahnNodeMessage -> new MekMessagePair(iahnNodeMessage.getKey().getMekId(), iahnNodeMessage.getMessage())
         ).collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeLocaleListInspectResult inspectLocaleList(IahnNodeLocaleListInspectInfo info)
+            throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 获取设置节点实体。
+            SettingNode settingNode = settingNodeMaintainService.getIfExists(settingNodeKey);
+
+            // 如果节点不适配，则直接返回 null。
+            if (!settingNodeMatching(settingNode)) {
+                return null;
+            }
+
+            // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。
+            List<IahnNodeLocale> iahnNodeLocales = iahnNodeLocaleMaintainService.lookupAsList(
+                    IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
+            );
+
+            // 构造 IahnNodeLocaleListInspectResult 并返回。
+            List<IahnNodeLocaleListInspectResult.Item> items = iahnNodeLocales
+                    .stream()
+                    .map(
+                            iahnNodeLocale -> new IahnNodeLocaleListInspectResult.Item(
+                                    iahnNodeLocale.getKey().getLanguage(),
+                                    iahnNodeLocale.getKey().getCountry(),
+                                    iahnNodeLocale.getKey().getVariant(),
+                                    iahnNodeLocale.getLabel(),
+                                    iahnNodeLocale.getRemark()
+                            )
+                    )
+                    .collect(Collectors.toList());
+            return new IahnNodeLocaleListInspectResult(items);
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeMekListInspectResult inspectMekList(IahnNodeMekListInspectInfo info) throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 获取设置节点实体。
+            SettingNode settingNode = settingNodeMaintainService.getIfExists(settingNodeKey);
+
+            // 如果节点不适配，则直接返回 null。
+            if (!settingNodeMatching(settingNode)) {
+                return null;
+            }
+
+            // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeMek。
+            List<IahnNodeMek> iahnNodeMeks = iahnNodeMekMaintainService.lookupAsList(
+                    IahnNodeMekMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
+            );
+
+            // 构造 IahnNodeMekListInspectResult 并返回。
+            List<IahnNodeMekListInspectResult.Item> items = iahnNodeMeks
+                    .stream()
+                    .map(
+                            iahnNodeMek -> new IahnNodeMekListInspectResult.Item(
+                                    iahnNodeMek.getKey().getMekId(),
+                                    iahnNodeMek.getLabel(),
+                                    iahnNodeMek.getDefaultMessage(),
+                                    iahnNodeMek.getRemark()
+                            )
+                    )
+                    .collect(Collectors.toList());
+            return new IahnNodeMekListInspectResult(items);
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeMessageTableInspectResult inspectMessageTable(IahnNodeMessageTableInspectInfo info)
+            throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 获取设置节点实体。
+            SettingNode settingNode = settingNodeMaintainService.getIfExists(settingNodeKey);
+
+            // 如果节点不适配，则直接返回 null。
+            if (!settingNodeMatching(settingNode)) {
+                return null;
+            }
+
+            // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。
+            List<IahnNodeLocale> iahnNodeLocales = iahnNodeLocaleMaintainService.lookupAsList(
+                    IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
+            );
+
+            // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeMek。
+            List<IahnNodeMek> iahnNodeMeks = iahnNodeMekMaintainService.lookupAsList(
+                    IahnNodeMekMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
+            );
+
+            // 查询属于 settingNodeKey 的所有 IahnNodeMessage。
+            List<IahnNodeMessage> iahnNodeMessages = iahnNodeMessageMaintainService.lookupAsList(
+                    IahnNodeMessageMaintainService.CHILD_FOR_NODE, new Object[]{settingNodeKey}
+            );
+
+            // 通过 iahnNodeLocales 构造 columns 以及 IahnLocalKey 与 索引的映射。
+            List<IahnNodeMessageTableInspectResult.Column> columns = new ArrayList<>(iahnNodeLocales.size());
+            Map<IahnNodeLocaleKey, Integer> localeKeyIndexMap = new HashMap<>(iahnNodeLocales.size());
+            for (int i = 0; i < iahnNodeLocales.size(); i++) {
+                IahnNodeLocale iahnNodeLocale = iahnNodeLocales.get(i);
+                columns.add(new IahnNodeMessageTableInspectResult.Column(
+                        iahnNodeLocale.getKey().getLanguage(),
+                        iahnNodeLocale.getKey().getCountry(),
+                        iahnNodeLocale.getKey().getVariant(),
+                        iahnNodeLocale.getLabel(),
+                        iahnNodeLocale.getRemark()
+                ));
+                localeKeyIndexMap.put(iahnNodeLocale.getKey(), i);
+            }
+
+            // 通过 iahnNodeMeks 构造 rows 以及 IahnMekKey 与 索引的映射。
+            List<IahnNodeMessageTableInspectResult.Row> rows = new ArrayList<>(iahnNodeMeks.size());
+            Map<IahnNodeMekKey, Integer> mekKeyIndexMap = new HashMap<>(iahnNodeMeks.size());
+            for (int i = 0; i < iahnNodeMeks.size(); i++) {
+                IahnNodeMek iahnNodeMek = iahnNodeMeks.get(i);
+                // 根据 columns 的数量，初始化 rowDatas。
+                List<IahnNodeMessageTableInspectResult.RowData> rowDatas = new ArrayList<>(columns.size());
+                // 填充 rowDatas。
+                for (int j = 0; j < columns.size(); j++) {
+                    rowDatas.add(new IahnNodeMessageTableInspectResult.RowData(null));
+                }
+                rows.add(new IahnNodeMessageTableInspectResult.Row(
+                        iahnNodeMek.getKey().getMekId(),
+                        iahnNodeMek.getLabel(),
+                        iahnNodeMek.getDefaultMessage(),
+                        iahnNodeMek.getRemark(),
+                        rowDatas
+                ));
+                mekKeyIndexMap.put(iahnNodeMek.getKey(), i);
+            }
+
+            // 通过 iahnNodeMessages 填充 rows 的 rowDatas。
+            for (IahnNodeMessage iahnNodeMessage : iahnNodeMessages) {
+                IahnNodeLocaleKey localeKey = new IahnNodeLocaleKey(
+                        iahnNodeMessage.getKey().getNodeStringId(),
+                        iahnNodeMessage.getKey().getLanguage(),
+                        iahnNodeMessage.getKey().getCountry(),
+                        iahnNodeMessage.getKey().getVariant()
+                );
+                IahnNodeMekKey mekKey = new IahnNodeMekKey(
+                        iahnNodeMessage.getKey().getNodeStringId(),
+                        iahnNodeMessage.getKey().getMekId()
+                );
+
+                // 获取对应的行索引。
+                Integer rowIndex = mekKeyIndexMap.get(mekKey);
+                if (Objects.isNull(rowIndex)) {
+                    continue; // 如果没有找到对应的行索引，则跳过。
+                }
+
+                // 获取对应的列索引。
+                Integer columnIndex = localeKeyIndexMap.get(localeKey);
+                if (Objects.isNull(columnIndex)) {
+                    continue; // 如果没有找到对应的列索引，则跳过。
+                }
+
+                // 填充 rowDatas。
+                rows.get(rowIndex).getRowDatas().get(columnIndex).setMessage(iahnNodeMessage.getMessage());
+            }
+
+            // 构造 IahnNodeMessageTableInspectResult 并返回。
+            return new IahnNodeMessageTableInspectResult(columns, rows);
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
     }
 
     @SuppressWarnings("DuplicatedCode")

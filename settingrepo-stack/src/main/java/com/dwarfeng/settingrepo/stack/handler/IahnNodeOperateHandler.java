@@ -2,7 +2,7 @@ package com.dwarfeng.settingrepo.stack.handler;
 
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
-import com.dwarfeng.subgrade.stack.service.Service;
+import com.dwarfeng.subgrade.stack.handler.Handler;
 
 import javax.annotation.Nullable;
 
@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  * @author DwArFeng
  * @since 2.1.0
  */
-public interface IahnNodeOperateHandler extends Service {
+public interface IahnNodeOperateHandler extends Handler {
 
     /**
      * 查询国际化消息。
@@ -34,6 +34,39 @@ public interface IahnNodeOperateHandler extends Service {
     @Nullable
     IahnNodeMessageInspectByLocaleResult batchInspectMessageByLocale(IahnNodeMessageInspectByLocaleInfo info)
             throws HandlerException;
+
+    /**
+     * 查询国际化地区列表。
+     *
+     * @param info 查询信息。
+     * @return 查询结果。
+     * @throws HandlerException 处理器异常。
+     * @since 2.3.3
+     */
+    @Nullable
+    IahnNodeLocaleListInspectResult inspectLocaleList(IahnNodeLocaleListInspectInfo info) throws HandlerException;
+
+    /**
+     * 查询国际化 Mek 列表。
+     *
+     * @param info 查询信息。
+     * @return 查询结果。
+     * @throws HandlerException 处理器异常。
+     * @since 2.3.3
+     */
+    @Nullable
+    IahnNodeMekListInspectResult inspectMekList(IahnNodeMekListInspectInfo info) throws HandlerException;
+
+    /**
+     * 查询国际化消息表。
+     *
+     * @param info 查询信息。
+     * @return 查询结果。
+     * @throws HandlerException 处理器异常。
+     * @since 2.3.3
+     */
+    @Nullable
+    IahnNodeMessageTableInspectResult inspectMessageTable(IahnNodeMessageTableInspectInfo info) throws HandlerException;
 
     /**
      * 推入国际化地区。

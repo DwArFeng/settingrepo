@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 为部分操作服务添加新方法。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService。
+
 - 增加部分实体维护服务的预设查询。
   - com.dwarfeng.settingrepo.stack.service.IahnNodeMekMaintainService.CHILD_FOR_NODE_ORDERED。
   - com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED。
