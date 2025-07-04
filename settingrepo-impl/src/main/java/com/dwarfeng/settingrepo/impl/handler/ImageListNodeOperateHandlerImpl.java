@@ -14,6 +14,7 @@ import com.dwarfeng.settingrepo.stack.service.ImageListNodeItemMaintainService;
 import com.dwarfeng.settingrepo.stack.service.ImageListNodeMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import net.coobird.thumbnailator.Thumbnails;
@@ -68,6 +69,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageListNodeSizeResult size(ImageListNodeSizeInfo info) throws HandlerException {
         try {
@@ -108,6 +110,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
     // 为了代码的可读性，此处不简化代码。
     @SuppressWarnings({"DuplicatedCode"})
+    @BehaviorAnalyse
     @Override
     public ImageListNodeInspectResult inspect(ImageListNodeInspectInfo info) throws HandlerException {
         try {
@@ -161,6 +164,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageListNodeFile downloadFile(ImageListNodeFileDownloadInfo info) throws HandlerException {
         try {
@@ -222,6 +226,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageListNodeFileStream downloadFileStream(ImageListNodeFileStreamDownloadInfo info)
             throws HandlerException {
@@ -286,6 +291,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageListNodeThumbnail downloadThumbnail(ImageListNodeThumbnailDownloadInfo info) throws HandlerException {
         try {
@@ -347,6 +353,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void uploadFile(ImageListNodeFileUploadInfo info) throws HandlerException {
         try {
@@ -466,6 +473,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void uploadFileStream(ImageListNodeFileStreamUploadInfo info) throws HandlerException {
         try {
@@ -587,6 +595,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void updateFile(ImageListNodeFileUpdateInfo info) throws HandlerException {
         try {
@@ -701,6 +710,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void updateFileStream(ImageListNodeFileStreamUpdateInfo info) throws HandlerException {
         try {
@@ -819,6 +829,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
     // 为了代码的可读性，此处不简化代码。
     @SuppressWarnings({"StatementWithEmptyBody", "DuplicatedCode"})
+    @BehaviorAnalyse
     @Override
     public void changeOrder(ImageListNodeChangeOrderInfo info) throws HandlerException {
         try {
@@ -949,6 +960,7 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void remove(ImageListNodeRemoveInfo info) throws HandlerException {
         try {

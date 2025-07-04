@@ -4,6 +4,14 @@
 
 ### 功能构建
 
+- 为部分关键的操作处理器的实现方法补充行为分析注解。
+  - com.dwarfeng.settingrepo.impl.handler.IahnNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.ImageListNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.ImageNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.LongTextNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.SettingNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.TextNodeOperateHandlerImpl。
+
 - 依赖升级。
   - 升级 `snowflake` 依赖版本为 `1.7.1.a` 以规避漏洞。
   - 升级 `subgrade` 依赖版本为 `1.5.11.a` 以规避漏洞。

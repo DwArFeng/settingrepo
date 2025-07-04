@@ -6,6 +6,7 @@ import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
 import com.dwarfeng.settingrepo.stack.handler.SettingNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         this.handlerValidator = handlerValidator;
     }
 
+    @BehaviorAnalyse
     @Override
     public SettingNodeExistsResult exists(SettingNodeExistsInfo info) throws HandlerException {
         try {
@@ -56,6 +58,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public SettingNodeInspectResult inspect(SettingNodeInspectInfo info) throws HandlerException {
         try {
@@ -87,6 +90,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         }
     }
 
+    @BehaviorAnalyse
     @Override
     public void init(SettingNodeInitInfo info) throws HandlerException {
         try {
@@ -116,6 +120,7 @@ public class SettingNodeOperateHandlerImpl implements SettingNodeOperateHandler 
         }
     }
 
+    @BehaviorAnalyse
     @Override
     public void remove(SettingNodeRemoveInfo info) throws HandlerException {
         try {

@@ -11,6 +11,7 @@ import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
 import com.dwarfeng.settingrepo.stack.handler.IahnNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.*;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.apache.commons.lang3.StringUtils;
@@ -75,6 +76,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public IahnNodeMessageInspectResult inspectMessage(IahnNodeMessageInspectInfo info) throws HandlerException {
         try {
@@ -148,6 +150,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public IahnNodeMessageInspectByLocaleResult batchInspectMessageByLocale(IahnNodeMessageInspectByLocaleInfo info)
             throws HandlerException {
@@ -332,6 +335,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void putLocale(IahnNodeLocalePutInfo info) throws HandlerException {
         try {
@@ -425,6 +429,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void removeLocale(IahnNodeLocaleRemoveInfo info) throws HandlerException {
         try {
@@ -491,6 +496,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void putMek(IahnNodeMekPutInfo info) throws HandlerException {
         try {
@@ -581,6 +587,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void removeMek(IahnNodeMekRemoveInfo info) throws HandlerException {
         try {
@@ -643,6 +650,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void upsertMessage(IahnNodeMessageUpsertInfo info) throws HandlerException {
         try {
@@ -722,6 +730,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void batchUpsertMessageByLocale(IahnNodeMessageUpsertByLocaleInfo info) throws HandlerException {
         try {
@@ -815,6 +824,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void batchUpsertMessageByMek(IahnNodeMessageUpsertByMekInfo info) throws HandlerException {
         try {

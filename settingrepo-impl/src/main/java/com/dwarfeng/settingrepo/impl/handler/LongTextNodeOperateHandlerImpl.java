@@ -12,6 +12,7 @@ import com.dwarfeng.settingrepo.stack.handler.LongTextNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.LongTextNodeMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.apache.commons.lang3.StringUtils;
@@ -64,6 +65,7 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public LongTextNodeInspectResult inspect(LongTextNodeInspectInfo info) throws HandlerException {
         try {
@@ -104,6 +106,7 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public LongTextNodeText downloadText(LongTextNodeTextDownloadInfo info) throws HandlerException {
         try {
@@ -156,6 +159,7 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public LongTextNodeTextStream downloadTextStream(LongTextNodeTextStreamDownloadInfo info) throws HandlerException {
         try {
@@ -205,6 +209,7 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void uploadText(LongTextNodeTextUploadInfo info) throws HandlerException {
         try {
@@ -295,6 +300,7 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void uploadTextStream(LongTextNodeTextStreamUploadInfo info) throws HandlerException {
         try {

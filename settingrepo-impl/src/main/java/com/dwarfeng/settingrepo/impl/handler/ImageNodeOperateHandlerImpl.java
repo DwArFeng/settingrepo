@@ -11,6 +11,7 @@ import com.dwarfeng.settingrepo.stack.handler.ImageNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.ImageNodeMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import net.coobird.thumbnailator.Thumbnails;
@@ -68,6 +69,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageNodeInspectResult inspect(ImageNodeInspectInfo info) throws HandlerException {
         try {
@@ -106,6 +108,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageNodeFile downloadFile(ImageNodeFileDownloadInfo info) throws HandlerException {
         try {
@@ -150,6 +153,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageNodeFileStream downloadFileStream(ImageNodeFileStreamDownloadInfo info) throws HandlerException {
         try {
@@ -193,6 +197,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public ImageNodeThumbnail downloadThumbnail(ImageNodeThumbnailDownloadInfo info) throws HandlerException {
         try {
@@ -240,6 +245,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void uploadFile(ImageNodeFileUploadInfo info) throws HandlerException {
         try {
@@ -310,6 +316,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
     }
 
     @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
     @Override
     public void uploadFileStream(ImageNodeFileStreamUploadInfo info) throws HandlerException {
         try {
