@@ -10,6 +10,7 @@ import com.dwarfeng.springtelqos.stack.command.Context;
 import com.dwarfeng.springtelqos.stack.exception.TelqosException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
@@ -26,6 +27,12 @@ public class IahnNodeCommand extends CliCommand {
     private static final String COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE = "biml";
     private static final String COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE_LONG_OPT
             = "batch-inspect-message-by-locale";
+    private static final String COMMAND_OPTION_INSPECT_LOCALE_LIST = "ill";
+    private static final String COMMAND_OPTION_INSPECT_LOCALE_LIST_LONG_OPT = "inspect-locale-list";
+    private static final String COMMAND_OPTION_INSPECT_MEK_LIST = "iml";
+    private static final String COMMAND_OPTION_INSPECT_MEK_LIST_LONG_OPT = "inspect-mek-list";
+    private static final String COMMAND_OPTION_INSPECT_MESSAGE_TABLE = "imt";
+    private static final String COMMAND_OPTION_INSPECT_MESSAGE_TABLE_LONG_OPT = "inspect-message-table";
     private static final String COMMAND_OPTION_PUT_LOCALE = "pl";
     private static final String COMMAND_OPTION_PUT_LOCALE_LONG_OPT = "put-locale";
     private static final String COMMAND_OPTION_REMOVE_LOCALE = "rl";
@@ -47,6 +54,9 @@ public class IahnNodeCommand extends CliCommand {
     private static final String[] COMMAND_OPTION_ARRAY = {
             COMMAND_OPTION_INSPECT_MESSAGE,
             COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE,
+            COMMAND_OPTION_INSPECT_LOCALE_LIST,
+            COMMAND_OPTION_INSPECT_MEK_LIST,
+            COMMAND_OPTION_INSPECT_MESSAGE_TABLE,
             COMMAND_OPTION_PUT_LOCALE,
             COMMAND_OPTION_REMOVE_LOCALE,
             COMMAND_OPTION_PUT_MEK,
@@ -70,6 +80,18 @@ public class IahnNodeCommand extends CliCommand {
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
     private static final String CMD_LINE_SYNTAX_BATCH_INSPECT_MESSAGE_BY_LOCALE = IDENTITY + " " +
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE) + " [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
+    private static final String CMD_LINE_SYNTAX_INSPECT_LOCALE_LIST = IDENTITY + " " +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_LOCALE_LIST) + " [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
+    private static final String CMD_LINE_SYNTAX_INSPECT_MEK_LIST = IDENTITY + " " +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MEK_LIST) + " [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
+    private static final String CMD_LINE_SYNTAX_INSPECT_MESSAGE_TABLE = IDENTITY + " " +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MESSAGE_TABLE) + " [" +
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
     private static final String CMD_LINE_SYNTAX_PUT_LOCALE = IDENTITY + " " +
@@ -104,6 +126,9 @@ public class IahnNodeCommand extends CliCommand {
     private static final String[] CMD_LINE_ARRAY = {
             CMD_LINE_SYNTAX_INSPECT_MESSAGE,
             CMD_LINE_SYNTAX_BATCH_INSPECT_MESSAGE_BY_LOCALE,
+            CMD_LINE_SYNTAX_INSPECT_LOCALE_LIST,
+            CMD_LINE_SYNTAX_INSPECT_MEK_LIST,
+            CMD_LINE_SYNTAX_INSPECT_MESSAGE_TABLE,
             CMD_LINE_SYNTAX_PUT_LOCALE,
             CMD_LINE_SYNTAX_REMOVE_LOCALE,
             CMD_LINE_SYNTAX_PUT_MEK,
@@ -114,6 +139,8 @@ public class IahnNodeCommand extends CliCommand {
     };
 
     private static final String CMD_LINE_SYNTAX = CommandUtil.syntax(CMD_LINE_ARRAY);
+
+    private static final String FORMATTED_LOCALE_DEFAULT = "#default";
 
     private final IahnNodeQosService iahnNodeQosService;
 
@@ -133,6 +160,19 @@ public class IahnNodeCommand extends CliCommand {
                 Option.builder(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE)
                         .longOpt(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE_LONG_OPT)
                         .desc("基于国际化地区批量查询国际化消息").build()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT_LOCALE_LIST).longOpt(COMMAND_OPTION_INSPECT_LOCALE_LIST_LONG_OPT)
+                        .desc("查询国际化地区列表").build()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT_MEK_LIST).longOpt(COMMAND_OPTION_INSPECT_MEK_LIST_LONG_OPT)
+                        .desc("查询国际化 Mek 列表").build()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT_MESSAGE_TABLE)
+                        .longOpt(COMMAND_OPTION_INSPECT_MESSAGE_TABLE_LONG_OPT)
+                        .desc("查询国际化消息表").build()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_PUT_LOCALE).longOpt(COMMAND_OPTION_PUT_LOCALE_LONG_OPT)
@@ -189,6 +229,15 @@ public class IahnNodeCommand extends CliCommand {
                     break;
                 case COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE:
                     handleBatchInspectMessageByLocale(context, cmd);
+                    break;
+                case COMMAND_OPTION_INSPECT_LOCALE_LIST:
+                    handleInspectLocaleList(context, cmd);
+                    break;
+                case COMMAND_OPTION_INSPECT_MEK_LIST:
+                    handleInspectMekList(context, cmd);
+                    break;
+                case COMMAND_OPTION_INSPECT_MESSAGE_TABLE:
+                    handleInspectMessageTable(context, cmd);
                     break;
                 case COMMAND_OPTION_PUT_LOCALE:
                     handlePutLocale(context, cmd);
@@ -292,6 +341,239 @@ public class IahnNodeCommand extends CliCommand {
                 ));
             }
         }
+    }
+
+    private void handleInspectLocaleList(Context context, CommandLine cmd) throws Exception {
+        IahnNodeLocaleListInspectInfo info;
+
+        // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocaleListInspectInfo。
+        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+            info = WebInputIahnNodeLocaleListInspectInfo.toStackBean(
+                    JSON.parseObject(json, WebInputIahnNodeLocaleListInspectInfo.class)
+            );
+        }
+        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocaleListInspectInfo。
+        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+            try (FileInputStream in = new FileInputStream(jsonFile)) {
+                info = WebInputIahnNodeLocaleListInspectInfo.toStackBean(
+                        JSON.parseObject(in, WebInputIahnNodeLocaleListInspectInfo.class)
+                );
+            }
+        } else {
+            // 暂时未实现。
+            throw new UnsupportedOperationException("not supported yet");
+        }
+
+        // 查询国际化地区列表。
+        IahnNodeLocaleListInspectResult result = iahnNodeQosService.inspectLocaleList(info);
+
+        // 输出结果。
+        if (Objects.isNull(result)) {
+            context.sendMessage("查询结果: null");
+        } else {
+            processLocaleListInspectResultItems(context, result.getItems());
+        }
+    }
+
+    private void processLocaleListInspectResultItems(
+            Context context, List<IahnNodeLocaleListInspectResult.Item> items
+    ) throws Exception {
+        while (true) {
+            CommandUtil.CropResult cropResult = CommandUtil.cropData(
+                    context, items, "数据总数: " + items.size(), "输入 q 退出"
+            );
+            if (cropResult.isExitFlag()) {
+                break;
+            }
+            context.sendMessage("");
+            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+                IahnNodeLocaleListInspectResult.Item item = items.get(i);
+                printIahnNodeLocaleListInspectResultItem(context, i, cropResult.getEndIndex(), item);
+            }
+        }
+    }
+
+    private void printIahnNodeLocaleListInspectResultItem(
+            Context context, int i, int endIndex, IahnNodeLocaleListInspectResult.Item item
+    ) throws Exception {
+        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        if (Objects.isNull(item)) {
+            context.sendMessage("null");
+        } else {
+            context.sendMessage(String.format("  language: %s", item.getLanguage()));
+            context.sendMessage(String.format("  country: %s", item.getCountry()));
+            context.sendMessage(String.format("  variant: %s", item.getVariant()));
+            context.sendMessage(String.format("  label: %s", item.getLabel()));
+            context.sendMessage(String.format("  remark: %s", item.getRemark()));
+        }
+        context.sendMessage("");
+    }
+
+    private void handleInspectMekList(Context context, CommandLine cmd) throws Exception {
+        IahnNodeMekListInspectInfo info;
+
+        // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekListInspectInfo。
+        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+            info = WebInputIahnNodeMekListInspectInfo.toStackBean(
+                    JSON.parseObject(json, WebInputIahnNodeMekListInspectInfo.class)
+            );
+        }
+        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekListInspectInfo。
+        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+            try (FileInputStream in = new FileInputStream(jsonFile)) {
+                info = WebInputIahnNodeMekListInspectInfo.toStackBean(
+                        JSON.parseObject(in, WebInputIahnNodeMekListInspectInfo.class)
+                );
+            }
+        } else {
+            // 暂时未实现。
+            throw new UnsupportedOperationException("not supported yet");
+        }
+
+        // 查询国际化 Mek 列表。
+        IahnNodeMekListInspectResult result = iahnNodeQosService.inspectMekList(info);
+
+        // 输出结果。
+        if (Objects.isNull(result)) {
+            context.sendMessage("查询结果: null");
+        } else {
+            processMekListInspectResultItems(context, result.getItems());
+        }
+    }
+
+    private void processMekListInspectResultItems(Context context, List<IahnNodeMekListInspectResult.Item> items)
+            throws Exception {
+        while (true) {
+            CommandUtil.CropResult cropResult = CommandUtil.cropData(
+                    context, items, "数据总数: " + items.size(), "输入 q 退出"
+            );
+            if (cropResult.isExitFlag()) {
+                break;
+            }
+            context.sendMessage("");
+            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+                IahnNodeMekListInspectResult.Item item = items.get(i);
+                printIahnNodeMekListInspectResultItem(context, i, cropResult.getEndIndex(), item);
+            }
+        }
+    }
+
+    private void printIahnNodeMekListInspectResultItem(
+            Context context, int i, int endIndex, IahnNodeMekListInspectResult.Item item
+    ) throws Exception {
+        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        if (Objects.isNull(item)) {
+            context.sendMessage("null");
+        } else {
+            context.sendMessage(String.format("  mekId: %s", item.getMekId()));
+            context.sendMessage(String.format("  label: %s", item.getLabel()));
+            context.sendMessage(String.format("  defaultMessage: %s", item.getDefaultMessage()));
+            context.sendMessage(String.format("  remark: %s", item.getRemark()));
+        }
+        context.sendMessage("");
+    }
+
+    private void handleInspectMessageTable(Context context, CommandLine cmd) throws Exception {
+        IahnNodeMessageTableInspectInfo info;
+
+        // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageTableInspectInfo。
+        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+            info = WebInputIahnNodeMessageTableInspectInfo.toStackBean(
+                    JSON.parseObject(json, WebInputIahnNodeMessageTableInspectInfo.class)
+            );
+        }
+        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageTableInspectInfo。
+        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+            try (FileInputStream in = new FileInputStream(jsonFile)) {
+                info = WebInputIahnNodeMessageTableInspectInfo.toStackBean(
+                        JSON.parseObject(in, WebInputIahnNodeMessageTableInspectInfo.class)
+                );
+            }
+        } else {
+            // 暂时未实现。
+            throw new UnsupportedOperationException("not supported yet");
+        }
+
+        // 查询国际化消息表。
+        IahnNodeMessageTableInspectResult result = iahnNodeQosService.inspectMessageTable(info);
+
+        // 输出结果。
+        if (Objects.isNull(result)) {
+            context.sendMessage("查询结果: null");
+        } else {
+            processMessageTableInspectResultItems(context, result.getColumns(), result.getRows());
+        }
+    }
+
+    private void processMessageTableInspectResultItems(
+            Context context, List<IahnNodeMessageTableInspectResult.Column> columns,
+            List<IahnNodeMessageTableInspectResult.Row> rows
+    ) throws Exception {
+        while (true) {
+            CommandUtil.CropResult cropResult = CommandUtil.cropData(
+                    context, rows, "数据总数: " + rows.size(), "输入 q 退出"
+            );
+            if (cropResult.isExitFlag()) {
+                break;
+            }
+            context.sendMessage("");
+            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+                IahnNodeMessageTableInspectResult.Row row = rows.get(i);
+                printIahnNodeMessageTableInspectResultRow(context, i, cropResult.getEndIndex(), columns, row);
+            }
+        }
+    }
+
+    private void printIahnNodeMessageTableInspectResultRow(
+            Context context, int i, int endIndex, List<IahnNodeMessageTableInspectResult.Column> columns,
+            IahnNodeMessageTableInspectResult.Row row
+    ) throws Exception {
+        // 在打印行之前，先打印列信息。
+        context.sendMessage("列总数: " + columns.size());
+        for (int ci = 0; ci < columns.size(); ci++) {
+            IahnNodeMessageTableInspectResult.Column column = columns.get(ci);
+            String language = column.getLanguage();
+            String country = column.getCountry();
+            String variant = column.getVariant();
+            context.sendMessage(String.format("  %3d: %s", ci, formatLocale(language, country, variant)));
+        }
+        // 打印行信息。
+        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        if (Objects.isNull(row)) {
+            context.sendMessage("null");
+        } else {
+            context.sendMessage(String.format("  mekId: %s", row.getMekId()));
+            context.sendMessage(String.format("  label: %s", row.getLabel()));
+            context.sendMessage(String.format("  defaultMessage: %s", row.getDefaultMessage()));
+            context.sendMessage(String.format("  remark: %s", row.getRemark()));
+            context.sendMessage("  rowDatas: ");
+            for (int ri = 0; ri < row.getRowDatas().size(); ri++) {
+                IahnNodeMessageTableInspectResult.RowData rowData = row.getRowDatas().get(ri);
+                context.sendMessage(String.format("    %3d: ", ri));
+                context.sendMessage(String.format("      message: %s", rowData.getMessage()));
+            }
+        }
+    }
+
+    private String formatLocale(String language, String country, String variant) {
+        if (StringUtils.isEmpty(language)) {
+            return FORMATTED_LOCALE_DEFAULT;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(language);
+        if (StringUtils.isNotEmpty(country)) {
+            sb.append("-").append(country);
+        }
+        if (StringUtils.isNotEmpty(variant)) {
+            sb.append("-").append(variant);
+        }
+        return sb.toString();
     }
 
     private void handlePutLocale(Context context, CommandLine cmd) throws Exception {

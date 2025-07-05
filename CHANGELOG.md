@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 为部分运维指令添加新选项。
+  - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
+
 - 为部分 QoS 服务添加新方法。
   - com.dwarfeng.settingrepo.stack.service.IahnNodeQosService。
 
