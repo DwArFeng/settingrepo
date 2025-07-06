@@ -34,7 +34,16 @@
 
 ### Bug 修复
 
-- (无)
+- 修复国际化节点部分 WebInput 实体的校验问题。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeLocalePutInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeLocaleRemoveInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageInspectByLocaleInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageInspectInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageUpsertByLocaleInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageUpsertByMekInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageUpsertInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.key.WebInputIahnNodeLocaleKey。
+  - com.dwarfeng.settingrepo.sdk.bean.key.WebInputIahnNodeMessageKey。
 
 ### 功能移除
 

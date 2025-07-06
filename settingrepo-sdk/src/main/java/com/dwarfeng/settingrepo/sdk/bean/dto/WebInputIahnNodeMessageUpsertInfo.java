@@ -2,6 +2,9 @@ package com.dwarfeng.settingrepo.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
+import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
+import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
+import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageUpsertInfo;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 import org.hibernate.validator.constraints.Length;
@@ -47,19 +50,15 @@ public class WebInputIahnNodeMessageUpsertInfo implements Dto {
     private String[] args;
 
     @JSONField(name = "language")
-    @NotNull
-    @NotEmpty
-    @Length(min = Constraints.LENGTH_IAHN_NODE_LANGUAGE_MIN, max = Constraints.LENGTH_IAHN_NODE_LANGUAGE_MAX)
+    @ValidIahnNodeLanguage
     private String language;
 
     @JSONField(name = "country")
-    @NotNull
-    @Length(min = Constraints.LENGTH_IAHN_NODE_COUNTRY_MIN, max = Constraints.LENGTH_IAHN_NODE_COUNTRY_MAX)
+    @ValidIahnNodeCountry
     private String country;
 
     @JSONField(name = "variant")
-    @NotNull
-    @Length(min = Constraints.LENGTH_IAHN_NODE_VARIANT_MIN, max = Constraints.LENGTH_IAHN_NODE_VARIANT_MAX)
+    @ValidIahnNodeVariant
     private String variant;
 
     @JSONField(name = "mek_id")

@@ -2,6 +2,9 @@ package com.dwarfeng.settingrepo.sdk.bean.key;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
+import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
+import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
+import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.subgrade.stack.bean.key.Key;
 import org.hibernate.validator.constraints.Length;
@@ -41,19 +44,15 @@ public class WebInputIahnNodeLocaleKey implements Key {
     private String nodeStringId;
 
     @JSONField(name = "language")
-    @NotNull
-    @NotEmpty
-    @Length(min = Constraints.LENGTH_IAHN_NODE_LANGUAGE_MIN, max = Constraints.LENGTH_IAHN_NODE_LANGUAGE_MAX)
+    @ValidIahnNodeLanguage
     private String language;
 
     @JSONField(name = "country")
-    @NotEmpty
-    @Length(min = Constraints.LENGTH_IAHN_NODE_COUNTRY_MIN, max = Constraints.LENGTH_IAHN_NODE_COUNTRY_MAX)
+    @ValidIahnNodeCountry
     private String country;
 
     @JSONField(name = "variant")
-    @NotEmpty
-    @Length(min = Constraints.LENGTH_IAHN_NODE_VARIANT_MIN, max = Constraints.LENGTH_IAHN_NODE_VARIANT_MAX)
+    @ValidIahnNodeVariant
     private String variant;
 
     public WebInputIahnNodeLocaleKey() {
