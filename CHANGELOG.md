@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh_CN/Contents.md。
+
 - 优化部分 `properties` 文件的注释。
   - ftp/connection.properties。
 

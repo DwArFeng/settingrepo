@@ -25,4 +25,4 @@
 
 ## 维护与调试
 
-- [Using Telqos](./UsingTelqos.md) - 使用 Telqos。Telqos 是本项目的 telnet 运维平台，该文档详细说明了如何使用Telqos。
+- [Using Telqos](./UsingTelqos.md) - 使用 Telqos。Telqos 是本项目的 telnet 运维平台，该文档详细说明了如何使用 Telqos。
