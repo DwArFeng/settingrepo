@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化部分 `properties` 文件的注释。
+  - ftp/connection.properties。
+
 - 依赖优化。
   - 优化部分依赖的排除项，以避免潜在的 `netty` 版本冲突问题。
 
