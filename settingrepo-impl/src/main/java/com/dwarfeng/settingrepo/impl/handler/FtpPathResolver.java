@@ -1,6 +1,7 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -112,12 +113,12 @@ public class FtpPathResolver {
             return;
         }
         // 值校验：如果以分隔符开头或结尾，则进行警告，并置位空路径。
-        if (StringUtils.startsWith(rootPathString, ROOT_PATH_STRING_SEPARATOR_STRING)) {
+        if (Strings.CS.startsWith(rootPathString, ROOT_PATH_STRING_SEPARATOR_STRING)) {
             LOGGER.warn("根路径 {} 非法, 将使用默认的根路径代替", rootPathString);
             rootPath = new String[0];
             return;
         }
-        if (StringUtils.endsWith(rootPathString, ROOT_PATH_STRING_SEPARATOR_STRING)) {
+        if (Strings.CS.endsWith(rootPathString, ROOT_PATH_STRING_SEPARATOR_STRING)) {
             LOGGER.warn("根路径 {} 非法, 将使用默认的根路径代替", rootPathString);
             rootPath = new String[0];
             return;

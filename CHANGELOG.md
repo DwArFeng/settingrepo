@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 依赖优化。
+  - 优化部分依赖的排除项，以避免潜在的 `netty` 版本冲突问题。
+
 - 为部分运维指令添加新选项。
   - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
 
