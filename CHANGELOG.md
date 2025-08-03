@@ -34,6 +34,8 @@
 
 ### Bug 修复
 
+- 修复 ftp 目录没用正确打包的 bug。
+
 - 修复国际化节点部分 WebInput 实体的校验问题。
   - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeLocalePutInfo。
   - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeLocaleRemoveInfo。

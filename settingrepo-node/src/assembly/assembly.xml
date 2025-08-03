@@ -86,6 +86,14 @@
             <fileMode>0644</fileMode>
         </fileSet>
         <fileSet>
+            <outputDirectory>conf/ftp</outputDirectory>
+            <directory>src/main/resources/ftp</directory>
+            <includes>
+                <include>*.properties</include>
+            </includes>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
             <outputDirectory>conf/telqos</outputDirectory>
             <directory>src/main/resources/telqos</directory>
             <includes>
