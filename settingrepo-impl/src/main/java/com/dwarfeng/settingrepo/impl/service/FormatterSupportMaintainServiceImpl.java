@@ -1,26 +1,20 @@
 package com.dwarfeng.settingrepo.impl.service;
 
-import com.dwarfeng.settingrepo.sdk.handler.FormatterSupporter;
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
-import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
-import com.dwarfeng.subgrade.stack.log.LogLevel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class FormatterSupportMaintainServiceImpl implements FormatterSupportMaintainService {
@@ -29,26 +23,14 @@ public class FormatterSupportMaintainServiceImpl implements FormatterSupportMain
     private final DaoOnlyEntireLookupService<FormatterSupport> entireLookupService;
     private final DaoOnlyPresetLookupService<FormatterSupport> presetLookupService;
 
-    private final List<FormatterSupporter> formatterSupporters;
-
-    private final ServiceExceptionMapper sem;
-
     public FormatterSupportMaintainServiceImpl(
             GeneralBatchCrudService<StringIdKey, FormatterSupport> crudService,
             DaoOnlyEntireLookupService<FormatterSupport> entireLookupService,
-            DaoOnlyPresetLookupService<FormatterSupport> presetLookupService,
-            List<FormatterSupporter> formatterSupporters,
-            ServiceExceptionMapper sem
+            DaoOnlyPresetLookupService<FormatterSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
         this.presetLookupService = presetLookupService;
-        if (Objects.isNull(formatterSupporters)) {
-            this.formatterSupporters = new ArrayList<>();
-        } else {
-            this.formatterSupporters = formatterSupporters;
-        }
-        this.sem = sem;
     }
 
     @Override
@@ -242,26 +224,6 @@ public class FormatterSupportMaintainServiceImpl implements FormatterSupportMain
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public PagedData<FormatterSupport> lookup(String preset, Object[] objs, PagingInfo pagingInfo) throws ServiceException {
         return presetLookupService.lookup(preset, objs, pagingInfo);
-    }
-
-    @Override
-    @BehaviorAnalyse
-    @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void reset() throws ServiceException {
-        for (FormatterSupporter formatterSupporter : formatterSupporters) {
-            try {
-                crudService.insertIfNotExists(
-                        new FormatterSupport(
-                                new StringIdKey(formatterSupporter.provideType()),
-                                formatterSupporter.provideLabel(),
-                                formatterSupporter.provideDescription(),
-                                formatterSupporter.provideExampleContent()
-                        )
-                );
-            } catch (Exception e) {
-                throw ServiceExceptionHelper.logParse("重置格式化器支持时发生异常", LogLevel.WARN, e, sem);
-            }
-        }
     }
 
     /**
