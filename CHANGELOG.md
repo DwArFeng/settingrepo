@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 优化支持实体机制。
+  - 新建支持 QoS 服务 com.dwarfeng.settingrepo.stack.service.SupportQosService。
+  - 将支持实体维护服务的重置功能迁移至 QoS 服务。
+
 - 优化 impl 模块下的 `logging` 目录结构。
   - 将 `logging/settings-windows.xml` 重命名为 `settings-ref-windows.xml`，以消除文件名的歧义。
   - 更新 `logging/README.md` 中的相关说明。
