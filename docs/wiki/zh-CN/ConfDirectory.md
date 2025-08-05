@@ -45,7 +45,8 @@ conf
         connection.properties
 ```
 
-鉴于大部分配置文件的配置项中都有详细地注释，此处将展示默认的配置，并重点说明一些必须要修改的配置项。
+鉴于大部分配置文件的配置项中都有详细地注释，此处将展示默认的配置，并重点说明一些必须要修改的配置项，
+省略的部分将会使用 `etc...` 进行标注。
 
 ## database 目录
 
@@ -108,14 +109,10 @@ data_source.min_idle=0
 # datamark.xxx.update_allowed=true
 #
 #---------------------------------SettingCategory----------------------------------------
-datamark.setting_category.resource_url=classpath:datamark/default.storage
-datamark.setting_category.resource_charset=UTF-8
-datamark.setting_category.update_allowed=true
+# etc...
 #
 #---------------------------------SettingNode----------------------------------------
-datamark.setting_node.resource_url=classpath:datamark/default.storage
-datamark.setting_node.resource_charset=UTF-8
-datamark.setting_node.update_allowed=true
+# etc...
 ```
 
 ## dubbo 目录
@@ -165,26 +162,7 @@ ftp.port=21
 ftp.username=your-username-here
 # FTP 的登录密码。
 ftp.password=your-password-here
-# FTP 的服务点字符集。
-ftp.server_charset=UTF-8
-# FTP 的连接超时时长（毫秒）。
-ftp.connect_timeout=5000
-# FTP 的 noop 指令周期。
-# 该值需要小于 ftp.connect_timeout。
-ftp.noop_interval=4000
-# FTP 的缓冲区大小。
-ftp.buffer_size=4096
-# FTP 的临时文件目录。
-# 如果希望使用系统默认的临时文件目录，请注释下方配置项。
-ftp.temporary_file_directory_path=temp
-# FTP 临时文件的前缀。
-# 用于区分不同实例产生的文件。
-ftp.temporary_file_prefix=ftp-
-# FTP 临时文件的后缀。
-# 用于规范文件的扩展名。
-ftp.temporary_file_suffix=.tmp
-# FTP 文件拷贝功能的内存缓冲区大小，文件大小超过此值，剩余部分将会通过临时文件进行缓冲。
-ftp.file_copy_memory_buffer_size=4096
+# etc...
 # FTP 的数据连接模式。
 #  0: 本地主动模式（传统主动模式 / PORT 模式）。
 #  1: 远程主动模式（反向主动模式）。
@@ -195,12 +173,8 @@ ftp.data_connection_mode=0
 # ftp.data_connection_mode=0 时，数据连接时调用 ServerSocket.accept() 时也会应用此超时设置。
 # 建议将此值设置为大于 0，以避免服务端故障或网络丢包导致程序阻塞。
 ftp.data_timeout=-1
-# FTP 远程主动数据连接模式下的服务主机地址。
-# ftp.data_connection_mode=1 时，此设置生效。
-ftp.active_remote_data_connection_mode_server_host=your-host-here
-# FTP 远程主动数据连接模式下的服务端口。
-# ftp.data_connection_mode=1 时，此设置生效。
-ftp.active_remote_data_connection_mode_server_port=20
+# etc...
+
 ```
 
 该配置文件中的注释较为完善，使用者可以根据注释对大部分参数进行妥善配置，以下对重要参数进行进一步说明。
@@ -213,16 +187,16 @@ ftp.active_remote_data_connection_mode_server_port=20
 
 ## logging 目录
 
-| 文件名                  | 说明                       |
-|----------------------|--------------------------|
-| README.md            | 说明文件                     |
-| settings.xml         | 日志记录策略的配置文件              |
-| settings-linux.xml   | Linux 系统中日志记录策略的配置参考文件   |
-| settings-windows.xml | Windows 系统中日志记录策略的配置参考文件 |
+| 文件名                      | 说明                     |
+|--------------------------|------------------------|
+| README.md                | 说明文件                   |
+| settings.xml             | 日志配置的配置文件              |
+| settings-ref-linux.xml   | Linux 系统中日志配置的配置参考文件   |
+| settings-ref-windows.xml | Windows 系统中日志配置的配置参考文件 |
 
 ### settings.xml
 
-日志记录策略的配置文件。
+日志配置及其参考文件。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -249,120 +223,22 @@ ftp.active_remote_data_connection_mode_server_port=20
     </properties>
 
     <Appenders>
-        <!--############################################### Console ###############################################-->
-        <Console name="std.console" target="SYSTEM_OUT" follow="true">
-            <ThresholdFilter level="${console.level}" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{DEFAULT}] [%p] [%t] [%c{1.}]: %m%n" charset="${console.encoding}"/>
-        </Console>
-        <Async name="sync.console">
-            <AppenderRef ref="std.console"/>
-        </Async>
-        <!--############################################# Rolling file ############################################-->
-        <RollingFile
-                name="std.debug.rolling_file" fileName="${rolling_file.dir}/debug.log"
-                filePattern="${rolling_file.dir}/%d{yyyy-MM}/debug-%d{MM-dd-yyyy}-%i.log.gz"
-        >
-            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{DEFAULT}] [%p] [%t] [%c{1.}]: %m%n" charset="${rolling_file.encoding}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="${rolling_file.triggering.interval}" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="${rolling_file.triggering.size}"/>
-            </Policies>
-            <DefaultRolloverStrategy max="${rolling_file.rollover.max}">
-                <Delete basePath="${rolling_file.dir}" maxDepth="2">
-                    <IfFileName glob="*/*debug*.log.gz"/>
-                    <IfLastModified age="${rolling_file.rollover.delete_age}"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <RollingFile
-                name="std.info.rolling_file" fileName="${rolling_file.dir}/info.log"
-                filePattern="${rolling_file.dir}/%d{yyyy-MM}/info-%d{MM-dd-yyyy}-%i.log.gz"
-        >
-            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{DEFAULT}] [%p] [%t] [%c{1.}]: %m%n" charset="${rolling_file.encoding}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="${rolling_file.triggering.interval}" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="${rolling_file.triggering.size}"/>
-            </Policies>
-            <DefaultRolloverStrategy max="${rolling_file.rollover.max}">
-                <Delete basePath="${rolling_file.dir}" maxDepth="2">
-                    <IfFileName glob="*/*info*.log.gz"/>
-                    <IfLastModified age="${rolling_file.rollover.delete_age}"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <RollingFile
-                name="std.warn.rolling_file" fileName="${rolling_file.dir}/warn.log"
-                filePattern="${rolling_file.dir}/%d{yyyy-MM}/warn-%d{MM-dd-yyyy}-%i.log.gz"
-        >
-            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{DEFAULT}] [%p] [%t] [%c{1.}]: %m%n" charset="${rolling_file.encoding}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="${rolling_file.triggering.interval}" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="${rolling_file.triggering.size}"/>
-            </Policies>
-            <DefaultRolloverStrategy max="${rolling_file.rollover.max}">
-                <Delete basePath="${rolling_file.dir}" maxDepth="2">
-                    <IfFileName glob="*/*warn*.log.gz"/>
-                    <IfLastModified age="${rolling_file.rollover.delete_age}"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <RollingFile
-                name="std.error.rolling_file" fileName="${rolling_file.dir}/error.log"
-                filePattern="${rolling_file.dir}/%d{yyyy-MM}/error-%d{MM-dd-yyyy}-%i.log.gz"
-        >
-            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{DEFAULT}] [%p] [%t] [%c{1.}]: %m%n" charset="${rolling_file.encoding}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="${rolling_file.triggering.interval}" modulate="true"/>
-                <SizeBasedTriggeringPolicy size="${rolling_file.triggering.size}"/>
-            </Policies>
-            <DefaultRolloverStrategy max="${rolling_file.rollover.max}">
-                <Delete basePath="${rolling_file.dir}" maxDepth="2">
-                    <IfFileName glob="*/*error*.log.gz"/>
-                    <IfLastModified age="${rolling_file.rollover.delete_age}"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-        <Async name="sync.console">
-            <AppenderRef ref="std.console"/>
-        </Async>
-        <Async name="sync.debug.rolling_file">
-            <AppenderRef ref="std.debug.rolling_file"/>
-        </Async>
-        <Async name="sync.info.rolling_file">
-            <AppenderRef ref="std.info.rolling_file"/>
-        </Async>
-        <Async name="sync.warn.rolling_file">
-            <AppenderRef ref="std.warn.rolling_file"/>
-        </Async>
-        <Async name="sync.error.rolling_file">
-            <AppenderRef ref="std.error.rolling_file"/>
-        </Async>
+        <!-- etc... -->
     </Appenders>
 
     <Loggers>
-        <!--############################################# Root logger #############################################-->
-        <Root level="ALL">
-            <appender-ref ref="sync.console"/>
-            <appender-ref ref="sync.debug.rolling_file"/>
-            <appender-ref ref="sync.info.rolling_file"/>
-            <appender-ref ref="sync.warn.rolling_file"/>
-            <appender-ref ref="sync.error.rolling_file"/>
-        </Root>
+        <!-- etc... -->
     </Loggers>
 </Configuration>
 ```
 
-需要注意的是，日志记录策略 **必须** 定义在 `settings.xml` 中才能生效，所有的 `settings-xx.xml` 都是参考文件，
-在这些文件中进行任何配置 **均不会生效**。
+需要注意的是，日志配置 **必须** 定义在 `settings.xml` 中才能生效，所有的 `settings-ref-xxx.xml` 都是参考文件，
+在这些文件中进行任何配置的修改 **均不会生效**。
 
-常用的做法是，针对不同的操作系统，将参考文件中的内容直接复制到 `settings.xml` 中，随后对属性进行调整。
+常用的做法是，针对不同的操作系统，将参考文件中的内容直接复制到 `settings.xml` 中，随后对 `settings.xml` 中的内容进行修改。
 
-- 如果 debug 级别的日志量太大，当前的配置无法记录一天内的全部日志，可上调 `rolling_file.rollover.max` 参数。
-- 如果有等保需求，日志至少需要保留 6 个月，需要调整 `rolling_file.rollover.delete_age` 参数至 `200D`。
+- 如果服务运行一天产生的日志超过了配置上限，可上调 `rolling_file.rollover.max` 参数。
+- 如果存在等保需求，日志至少需要保留 6 个月，需要调整 `rolling_file.rollover.delete_age` 参数至 `200D`。
 
 ## redis 目录
 
@@ -383,30 +259,7 @@ redis.hostName=your-host-here
 redis.port=6379
 # 如果有密码
 redis.password=your-password-here
-# 客户端超时时间单位是毫秒 默认是2000
-redis.timeout=10000
-# 最大空闲数
-redis.maxIdle=300
-# 控制一个 pool可分配多少个 jedis 实例, 设为0表示无限制。
-redis.maxTotal=1000
-# 最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
-redis.maxWaitMillis=1000
-# 连接的最小空闲时间 默认1800000毫秒(30分钟)
-redis.minEvictableIdleTimeMillis=300000
-# 每次释放连接的最大数目,默认3
-redis.numTestsPerEvictionRun=1024
-# 逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
-redis.timeBetweenEvictionRunsMillis=30000
-# 是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
-redis.testOnBorrow=true
-# 在空闲时检查有效性, 默认false
-redis.testWhileIdle=true
-# redis.sentinel.host1=172.20.1.230
-# redis.sentinel.port1=26379
-# redis.sentinel.host2=172.20.1.231
-# redis.sentinel.port2=26379
-# redis.sentinel.host3=172.20.1.232
-# redis.sentinel.port3=26379
+...
 ```
 
 ### prefix.properties
@@ -419,28 +272,7 @@ Redis 前缀配置文件。
 #------------------------------------------------------------------------------------
 # 格式化器支持对象的主键格式。
 cache.prefix.entity.formatter_support=entity.formatter_support.
-# 设置类别对象的主键格式。
-cache.prefix.entity.setting_category=entity.setting_category.
-# 设置节点对象的主键格式。
-cache.prefix.entity.setting_node=entity.setting_node.
-# 文本节点对象的主键格式。
-cache.prefix.entity.text_node=entity.text_node.
-# 图片节点对象的主键格式。
-cache.prefix.entity.image_node=entity.image_node.
-# 图片列表节点对象的主键格式。
-cache.prefix.entity.image_list_node=entity.image_list_node.
-# 图片列表节点条目对象的主键格式。
-cache.prefix.entity.image_list_node_item=entity.image_list_node_item.
-# 国际化节点对象的主键格式。
-cache.prefix.entity.iahn_node=entity.iahn_node.
-# 国际化节点条目地区对象的主键格式。
-cache.prefix.entity.iahn_node_locale=entity.iahn_node_locale.
-# 国际化节点条目 Mek 对象的主键格式。
-cache.prefix.entity.iahn_node_mek=entity.iahn_node_mek.
-# 国际化节点条目 Message 对象的主键格式。
-cache.prefix.entity.iahn_node_message=entity.iahn_node_message.
-# 长文本节点对象的主键格式。
-cache.prefix.entity.long_text_node=entity.long_text_node.
+# etc...
 ```
 
 Redis 利用该配置文件，为缓存的主键添加前缀，以示区分。
@@ -450,7 +282,7 @@ Redis 利用该配置文件，为缓存的主键添加前缀，以示区分。
 一个典型的前缀更改方式是在前缀的头部添加项目的名称，如：
 
 ```properties
-# 数据点对象的主键格式。
+# 格式化器支持对象的主键格式。
 cache.prefix.entity.formatter_support=entity.settingrepo.formatter_support.
 # etc...
 ```
@@ -465,28 +297,7 @@ Redis 缓存的超时配置文件。
 #------------------------------------------------------------------------------------
 # 格式化器支持对象缓存的超时时间。
 cache.timeout.entity.formatter_support=3600000
-# 设置类别对象缓存的超时时间。
-cache.timeout.entity.setting_category=3600000
-# 设置节点对象缓存的超时时间。
-cache.timeout.entity.setting_node=3600000
-# 文本节点对象缓存的超时时间。
-cache.timeout.entity.text_node=3600000
-# 图片节点对象缓存的超时时间。
-cache.timeout.entity.image_node=3600000
-# 图片列表节点对象缓存的超时时间。
-cache.timeout.entity.image_list_node=3600000
-# 图片列表节点条目对象缓存的超时时间。
-cache.timeout.entity.image_list_node_item=3600000
-# 国际化节点对象缓存的超时时间。
-cache.timeout.entity.iahn_node=3600000
-# 国际化节点条目地区对象缓存的超时时间。
-cache.timeout.entity.iahn_node_locale=3600000
-# 国际化节点条目 Mek 对象缓存的超时时间。
-cache.timeout.entity.iahn_node_mek=3600000
-# 国际化节点条目 Message 对象缓存的超时时间。
-cache.timeout.entity.iahn_node_message=3600000
-# 长文本节点对象缓存的超时时间。
-cache.timeout.entity.long_text_node=3600000
+# etc...
 ```
 
 如果您希望缓存更快或更慢地过期，您可以修改该配置文件。
@@ -679,27 +490,7 @@ resetter.cron.cron=0 0 1 * * *
 ###################################################
 # 引导服务器集群。
 resetter.kafka.bootstrap_servers=your-host-here:9092
-# 会话的超时限制: 如果consumer在这段时间内没有发送心跳信息，一次 rebalance 将会产生。
-# 该值必须在[group.min.session.timeout.ms, group.max.session.timeout.ms]范围内，默认: 10000。
-resetter.kafka.session_timeout_ms=10000
-# 监听器的 id，每一个节点的监听器 id 都应与该节点的其它 kafka 监听器的 id 不同。
-# 该设置会覆盖 kafka 的 group.id 设置，因此无需设置 group.id。
-# 不同实例的监听器的 id 必须不同。
-resetter.kafka.listener_id=settingrepo.01
-# 新的 group 加入 topic 时，从什么位置开始消费。
-resetter.kafka.auto_offset_reset=latest
-# 监听器启用的消费者的线程数。
-# 每一个线程都会启动一个 KafkaConsumer，每个 KafkaConsumer 都会占用一个 partition。
-# 程序分布式部署时，所有节点的线程数之和应该小于等于 topic 的 partition 数。
-resetter.kafka.concurrency=1
-# 监听器调用 KafkaConsumer.poll(Duration) 方法的超时时间，如果超过这个时间还没有拉取到数据，则返回空列表。
-resetter.kafka.poll_timeout=3000
-# 监听器的最大拉取数据量。当拉取到的数据量达到这个值时，会立即返回，不会等待 poll_timeout。
-resetter.kafka.max_poll_records=100
-# 监听器的最大拉取间隔。如果当前时间距离监听器上一次拉取数据的时间超过了这个值，一次 rebalance 将会产生。
-resetter.kafka.max_poll_interval_ms=1000
-# 监听器的目标 topic。
-resetter.kafka.topic=settingrepo.reset
+# etc...
 #
 ###################################################
 #                      dubbo                      #

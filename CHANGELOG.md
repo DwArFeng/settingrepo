@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+
 - 补全部分运维指令不完备的语法描述。
   - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
 
