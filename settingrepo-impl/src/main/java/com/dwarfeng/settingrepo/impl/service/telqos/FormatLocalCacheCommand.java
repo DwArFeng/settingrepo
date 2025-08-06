@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 @TelqosCommand
-public class FlcCommand extends CliCommand {
+public class FormatLocalCacheCommand extends CliCommand {
 
     private static final String COMMAND_OPTION_LOOKUP = "l";
     private static final String COMMAND_OPTION_CLEAR = "c";
@@ -43,7 +43,7 @@ public class FlcCommand extends CliCommand {
 
     private final FormatQosService formatQosService;
 
-    public FlcCommand(FormatQosService formatQosService) {
+    public FormatLocalCacheCommand(FormatQosService formatQosService) {
         super(IDENTITY, DESCRIPTION, CMD_LINE_SYNTAX);
         this.formatQosService = formatQosService;
     }
