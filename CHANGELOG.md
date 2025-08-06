@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 补全部分运维指令不完备的语法描述。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+
 - 优化部分运维指令的类名。
   - com.dwarfeng.settingrepo.impl.service.telqos.FormatLocalCacheCommand。
 

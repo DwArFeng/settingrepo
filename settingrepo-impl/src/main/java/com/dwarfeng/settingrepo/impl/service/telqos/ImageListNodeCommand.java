@@ -80,13 +80,23 @@ public class ImageListNodeCommand extends CliCommand {
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_UPDATE) + " [" +
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
             CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
+    private static final String CMD_LINE_SYNTAX_CHANGE_ORDER = IDENTITY + " " +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_CHANGE_ORDER) + " [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
+    private static final String CMD_LINE_SYNTAX_REMOVE = IDENTITY + " " +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_REMOVE) + " [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
+            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
 
     private static final String[] CMD_LINE_ARRAY = {
             CMD_LINE_SYNTAX_SIZE,
             CMD_LINE_SYNTAX_INSPECT,
             CMD_LINE_SYNTAX_DOWNLOAD,
             CMD_LINE_SYNTAX_UPLOAD,
-            CMD_LINE_SYNTAX_UPDATE
+            CMD_LINE_SYNTAX_UPDATE,
+            CMD_LINE_SYNTAX_CHANGE_ORDER,
+            CMD_LINE_SYNTAX_REMOVE
     };
 
     private static final String CMD_LINE_SYNTAX = CommandUtil.syntax(CMD_LINE_ARRAY);
