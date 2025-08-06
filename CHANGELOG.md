@@ -36,6 +36,9 @@
 
 ### Bug 修复
 
+- 修正部分运维指令中的对特定选项处理存在问题的 bug。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+
 - 修复 `IahnNodeOperateHandlerImpl` 中的业务逻辑问题。
   - 修复 `IahnNodeOperateHandlerImpl` 在基于国际化地区批量查询国际化消息时，没有正确处理国际化地区的问题。
 

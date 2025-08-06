@@ -3,7 +3,9 @@ package com.dwarfeng.settingrepo.impl.service.telqos;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.dwarfeng.dutil.basic.io.IOUtil;
+import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputImageListNodeChangeOrderInfo;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputImageListNodeInspectInfo;
+import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputImageListNodeRemoveInfo;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputImageListNodeSizeInfo;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.ImageListNodeQosService;
@@ -379,13 +381,17 @@ public class ImageListNodeCommand extends CliCommand {
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 ImageListNodeChangeOrderInfo。
         if (cmd.hasOption(COMMAND_OPTION_JSON)) {
             String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
-            info = JSON.parseObject(json, ImageListNodeChangeOrderInfo.class);
+            info = WebInputImageListNodeChangeOrderInfo.toStackBean(
+                    JSON.parseObject(json, WebInputImageListNodeChangeOrderInfo.class)
+            );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 ImageListNodeChangeOrderInfo。
         else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
             File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
-                info = JSON.parseObject(in, ImageListNodeChangeOrderInfo.class);
+                info = WebInputImageListNodeChangeOrderInfo.toStackBean(
+                        JSON.parseObject(in, WebInputImageListNodeChangeOrderInfo.class)
+                );
             }
         } else {
             throw new IllegalArgumentException("未指定必要的参数");
@@ -404,13 +410,17 @@ public class ImageListNodeCommand extends CliCommand {
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 ImageListNodeRemoveInfo。
         if (cmd.hasOption(COMMAND_OPTION_JSON)) {
             String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
-            info = JSON.parseObject(json, ImageListNodeRemoveInfo.class);
+            info = WebInputImageListNodeRemoveInfo.toStackBean(
+                    JSON.parseObject(json, WebInputImageListNodeRemoveInfo.class)
+            );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 ImageListNodeRemoveInfo。
         else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
             File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
-                info = JSON.parseObject(in, ImageListNodeRemoveInfo.class);
+                info = WebInputImageListNodeRemoveInfo.toStackBean(
+                        JSON.parseObject(in, WebInputImageListNodeRemoveInfo.class)
+                );
             }
         } else {
             throw new IllegalArgumentException("未指定必要的参数");
