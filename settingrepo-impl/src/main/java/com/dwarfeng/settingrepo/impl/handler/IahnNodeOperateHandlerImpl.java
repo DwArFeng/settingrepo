@@ -33,6 +33,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(IahnNodeOperateHandlerImpl.class);
 
     private static final String FORMATTED_LOCALE_DEFAULT = "#default";
+    private static final String FORMATTED_LOCALE_DELIMITER = "-";
 
     private final SettingNodeMaintainService settingNodeMaintainService;
     private final IahnNodeMaintainService iahnNodeMaintainService;
@@ -297,7 +298,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         // 否则，解析地区，并查询特定地区对应的 MekMessagePair 列表。
         else {
             // 解析变量。
-            String[] localeArgs = matchedFormattedLocale.split("_");
+            String[] localeArgs = matchedFormattedLocale.split(FORMATTED_LOCALE_DELIMITER);
             String language = localeArgs[0];
             String country = localeArgs.length > 1 ? localeArgs[1] : StringUtils.EMPTY;
             String variant = localeArgs.length > 2 ? localeArgs[2] : StringUtils.EMPTY;
@@ -1148,10 +1149,10 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         StringBuilder sb = new StringBuilder();
         sb.append(language);
         if (StringUtils.isNotEmpty(country)) {
-            sb.append("-").append(country);
+            sb.append(FORMATTED_LOCALE_DELIMITER).append(country);
         }
         if (StringUtils.isNotEmpty(variant)) {
-            sb.append("-").append(variant);
+            sb.append(FORMATTED_LOCALE_DELIMITER).append(variant);
         }
         return sb.toString();
     }

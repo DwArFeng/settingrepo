@@ -33,7 +33,8 @@
 
 ### Bug 修复
 
-- (无)
+- 修复 `IahnNodeOperateHandlerImpl` 中的业务逻辑问题。
+  - 修复 `IahnNodeOperateHandlerImpl` 在基于国际化地区批量查询国际化消息时，没有正确处理国际化地区的问题。
 
 ### 功能移除
 
