@@ -1141,7 +1141,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return Objects.equals(settingNode.getType(), Constants.SETTING_NODE_TYPE_IAHN);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private String formatLocale(String language, String country, String variant) {
         if (StringUtils.isEmpty(language)) {
             return FORMATTED_LOCALE_DEFAULT;

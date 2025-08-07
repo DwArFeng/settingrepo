@@ -561,7 +561,6 @@ public class IahnNodeCommand extends CliCommand {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private String formatLocale(String language, String country, String variant) {
         if (StringUtils.isEmpty(language)) {
             return FORMATTED_LOCALE_DEFAULT;
