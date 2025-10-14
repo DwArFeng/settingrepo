@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+
 - 优化启停脚本注释，以规避潜在的字符集问题。
   - binres/settingrepo-start.bat。
   - binres/settingrepo-start.sh。

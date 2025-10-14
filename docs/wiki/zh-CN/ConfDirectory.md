@@ -24,8 +24,8 @@ conf
 ├─logging
 │      README.md
 │      settings.xml
-│      settings-linux.xml
-│      settings-windows.xml
+│      settings-ref-linux.xml
+│      settings-ref-windows.xml
 │
 ├─redis
 │      connection.properties
@@ -259,7 +259,7 @@ redis.hostName=your-host-here
 redis.port=6379
 # 如果有密码
 redis.password=your-password-here
-...
+# etc...
 ```
 
 ### prefix.properties
