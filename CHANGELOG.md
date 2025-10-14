@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 优化开发环境支持。
+  - 在 .gitignore 中添加 VSCode 相关文件的忽略规则。
+  - 在 .gitignore 中添加 Cursor IDE 相关文件的忽略规则。
+
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.SupportCommand。
 
