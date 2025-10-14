@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.SupportCommand。
+
 - 依赖升级。
   - 升级 `zookeeper` 依赖版本为 `3.9.4` 以规避漏洞。
   - 升级 `snowflake` 依赖版本为 `1.7.2.a` 以规避漏洞。
