@@ -19,9 +19,9 @@
 
 ### 2.2.0.a
 
-详细版本号:  Release_2.2.0_20250320_build_A。
+详细版本号: Release_2.2.0_20250320_build_A。
 
-原因： 存在严重 bug，导致部分核心业务无法正常使用。
+原因：存在严重 bug，导致部分核心业务无法正常使用。
 
 - `LongTextNodeOperateHandlerImpl` 中的业务逻辑问题。
   - `LongTextNodeOperateHandlerImpl` 在更新存储文件时，文件信息不能及时更新。
