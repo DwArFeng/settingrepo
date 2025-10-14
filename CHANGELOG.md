@@ -20,7 +20,8 @@
 
 ### 功能移除
 
-- (无)
+- 删除残留的包及其包含的文件。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.webinput。
 
 ---
 
