@@ -2,6 +2,18 @@
 
 ## settingrepo-start.sh
 
+### 简介
+
+settingrepo-start.sh 是本项目的启动脚本，用于启动本项目。 您可以调整脚本中的参数，以适应您的需求。
+
+可调整的脚步参数包括：
+
+- JVM 内存选项。
+- JMX 远程选项。
+- AWT Headless 选项。
+
+脚本执行后，将会以 nohup 方式启动本项目，并将 PID 写入 settingrepo.pid 文件中。
+
 ### 可配置变量
 
 #### jvm_memory_opts
@@ -44,6 +56,24 @@ java_jmxremote_opts="\
 -Dcom.sun.management.jmxremote.ssl=false"
 ```
 
+#### java_awt_headless_opts
+
+java_awt_headless_opts 是本项目的 AWT Headless 选项，默认值为：
+
+```bash
+java_awt_headless_opts="-Djava.awt.headless=true"
+```
+
+该脚本默认本服务将会运行在服务器中，即处于 Headless 模式下。如果您需要关闭 Headless 模式，可以修改此选项。
+
+您可以通过该选项注释中的提示，修改该选项的值，以关闭 Headless 模式。
+
+关闭 Headless 模式的示例：
+
+```bash
+java_awt_headless_opts=""
+```
+
 ### 固定变量
 
 #### basedir
@@ -57,7 +87,7 @@ basedir="$(cd "$(dirname "$0")/.." && pwd)"
 当启动脚本运行时，basedir 被动态地指定为当前脚本所在目录的上一级。无论在哪个目录中部署本项目，basedir 总会指向正确的路径。
 基于以上原因，您无需更改该变量的值。
 
-### java_logging_opts
+#### java_logging_opts
 
 java_logging_opts 是本项目的日志配置选项，其值为：
 
@@ -90,6 +120,7 @@ eval \
 nohup /bin/java -classpath "lib/*:libext/*" \
 "$jvm_memory_opts" \
 "$java_jmxremote_opts" \
+"$java_awt_headless_opts" \
 "$java_logging_opts" \
 "${mainClass}" \
 >/dev/null 2>&1 "&"
@@ -103,6 +134,7 @@ eval \
 nohup /bin/java -classpath "lib/*:libext/*" \
 "$jvm_memory_opts" \
 "$java_jmxremote_opts" \
+"$java_awt_headless_opts" \
 "$java_logging_opts" \
 "${mainClass}" \
 >out.log 2>&1 "&"
@@ -113,7 +145,20 @@ echo $! >"$basedir/settingrepo.pid"
 
 **排查完问题后，务必将脚本还原，因为 `out.log` 没有滚动机制，如不还原，该文件会越来越大，直至占满全部磁盘空间。**
 
-## fdr-stop.sh
+## settingrepo-stop.sh
+
+### 简介
+
+settingrepo-stop.sh 是本项目的停止脚本，用于停止本项目。
+
+脚本执行后，将会读取 settingrepo.pid 文件中的 PID，并使用 kill 命令停止本项目。
+
+需要注意的是，本项目停止时，会尝试将消费者中的所有元素消费完毕，因此停止可能会耗费一定时间，请监控日志，并耐心等待。
+使用 kill -9 命令可以强制停止本项目，但是这样做会导致未消费完毕的元素丢失。
+
+### 可配置变量
+
+该脚本没有可配置变量。
 
 ### 固定变量
 
