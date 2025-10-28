@@ -162,4 +162,12 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     TextNode textNodeFromHibernate(HibernateTextNode hibernateTextNode);
+
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateFileNode fileNodeToHibernate(FileNode fileNode);
+
+    @InheritInverseConfiguration
+    FileNode fileNodeFromHibernate(HibernateFileNode hibernateFileNode);
 }

@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.FileNode。
+
 - 优化部分实体类中的文档注释。
   - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode。
 

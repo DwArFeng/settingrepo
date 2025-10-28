@@ -32,6 +32,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final IahnNodeDao iahnNodeDao;
     private final IahnNodeCrudOperation iahnNodeCrudOperation;
 
+    private final FileNodeDao fileNodeDao;
+    private final FileNodeCrudOperation fileNodeCrudOperation;
+
     @Value("${cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
@@ -45,7 +48,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             ImageListNodeDao imageListNodeDao,
             ImageListNodeCrudOperation imageListNodeCrudOperation,
             IahnNodeDao iahnNodeDao,
-            IahnNodeCrudOperation iahnNodeCrudOperation
+            IahnNodeCrudOperation iahnNodeCrudOperation,
+            FileNodeDao fileNodeDao,
+            FileNodeCrudOperation fileNodeCrudOperation
     ) {
         this.settingNodeDao = settingNodeDao;
         this.settingNodeCache = settingNodeCache;
@@ -57,6 +62,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.imageListNodeCrudOperation = imageListNodeCrudOperation;
         this.iahnNodeDao = iahnNodeDao;
         this.iahnNodeCrudOperation = iahnNodeCrudOperation;
+        this.fileNodeDao = fileNodeDao;
+        this.fileNodeCrudOperation = fileNodeCrudOperation;
     }
 
     @Override
@@ -111,6 +118,11 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         // 删除与该设置节点相关的国际化节点。
         if (iahnNodeDao.exists(key)) {
             iahnNodeCrudOperation.delete(key);
+        }
+
+        // 删除与该设置节点相关的文件节点。
+        if (fileNodeDao.exists(key)) {
+            fileNodeCrudOperation.delete(key);
         }
 
         settingNodeDao.delete(key);

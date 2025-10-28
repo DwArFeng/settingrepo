@@ -49,6 +49,8 @@ public class CacheConfiguration {
     private String iahnNodeMessagePrefix;
     @Value("${cache.prefix.entity.long_text_node}")
     private String longTextNodePrefix;
+    @Value("${cache.prefix.entity.file_node}")
+    private String fileNodePrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -200,6 +202,18 @@ public class CacheConfiguration {
                 new StringIdStringKeyFormatter(longTextNodePrefix),
                 new MapStructBeanTransformer<>(
                         LongTextNode.class, FastJsonLongTextNode.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, FileNode, FastJsonFileNode> fileNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonFileNode>) template,
+                new StringIdStringKeyFormatter(fileNodePrefix),
+                new MapStructBeanTransformer<>(
+                        FileNode.class, FastJsonFileNode.class, BeanMapper.class
                 )
         );
     }

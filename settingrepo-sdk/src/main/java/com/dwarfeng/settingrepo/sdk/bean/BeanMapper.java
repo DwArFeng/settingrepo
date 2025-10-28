@@ -152,6 +152,11 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     SettingCategory settingCategoryFromWebInput(WebInputSettingCategory webInputSettingCategory);
 
+    FastJsonFileNode fileNodeToFastJson(FileNode fileNode);
+
+    @InheritInverseConfiguration
+    FileNode fileNodeFromFastJson(FastJsonFileNode fastJsonFileNode);
+
     // -----------------------------------------------------------Settingrepo DTO-----------------------------------------------------------
     FastJsonIahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResultToFastJson(
             IahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResult

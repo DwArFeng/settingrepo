@@ -41,6 +41,7 @@ public class DaoConfiguration {
     private final IahnNodeMekPresetCriteriaMaker iahnNodeMekPresetCriteriaMaker;
     private final IahnNodeMessagePresetCriteriaMaker iahnNodeMessagePresetCriteriaMaker;
     private final LongTextNodePresetCriteriaMaker longTextNodePresetCriteriaMaker;
+    private final FileNodePresetCriteriaMaker fileNodePresetCriteriaMaker;
 
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -58,7 +59,8 @@ public class DaoConfiguration {
             IahnNodeLocalePresetCriteriaMaker iahnNodeLocalePresetCriteriaMaker,
             IahnNodeMekPresetCriteriaMaker iahnNodeMekPresetCriteriaMaker,
             IahnNodeMessagePresetCriteriaMaker iahnNodeMessagePresetCriteriaMaker,
-            LongTextNodePresetCriteriaMaker longTextNodePresetCriteriaMaker
+            LongTextNodePresetCriteriaMaker longTextNodePresetCriteriaMaker,
+            FileNodePresetCriteriaMaker fileNodePresetCriteriaMaker
     ) {
         this.template = template;
         this.formatterSupportPresetCriteriaMaker = formatterSupportPresetCriteriaMaker;
@@ -73,6 +75,7 @@ public class DaoConfiguration {
         this.iahnNodeMekPresetCriteriaMaker = iahnNodeMekPresetCriteriaMaker;
         this.iahnNodeMessagePresetCriteriaMaker = iahnNodeMessagePresetCriteriaMaker;
         this.longTextNodePresetCriteriaMaker = longTextNodePresetCriteriaMaker;
+        this.fileNodePresetCriteriaMaker = fileNodePresetCriteriaMaker;
     }
 
     @Bean
@@ -516,6 +519,38 @@ public class DaoConfiguration {
                 new MapStructBeanTransformer<>(LongTextNode.class, HibernateLongTextNode.class, BeanMapper.class),
                 HibernateLongTextNode.class,
                 longTextNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, FileNode, HibernateFileNode>
+    fileNodeHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(FileNode.class, HibernateFileNode.class, BeanMapper.class),
+                HibernateFileNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<FileNode, HibernateFileNode> fileNodeHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(FileNode.class, HibernateFileNode.class, BeanMapper.class),
+                HibernateFileNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<FileNode, HibernateFileNode> fileNodeHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(FileNode.class, HibernateFileNode.class, BeanMapper.class),
+                HibernateFileNode.class,
+                fileNodePresetCriteriaMaker
         );
     }
 }
