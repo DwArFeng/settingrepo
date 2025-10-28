@@ -170,4 +170,21 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     FileNode fileNodeFromHibernate(HibernateFileNode hibernateFileNode);
+
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "items", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateFileListNode fileListNodeToHibernate(FileListNode fileListNode);
+
+    @InheritInverseConfiguration
+    FileListNode fileListNodeFromHibernate(HibernateFileListNode hibernateFileListNode);
+
+    @Mapping(target = "longId", ignore = true)
+    @Mapping(target = "nodeStringId", ignore = true)
+    @Mapping(target = "node", ignore = true)
+    HibernateFileListNodeItem fileListNodeItemToHibernate(FileListNodeItem fileListNodeItem);
+
+    @InheritInverseConfiguration
+    FileListNodeItem fileListNodeItemFromHibernate(HibernateFileListNodeItem hibernateFileListNodeItem);
 }

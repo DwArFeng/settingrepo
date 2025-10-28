@@ -49,6 +49,20 @@ public class FtpPathResolver {
      */
     public static final String[] RELATIVE_LONG_TEXT_NODE_FILE = new String[]{"long-text-node-file"};
 
+    /**
+     * 文件节点文件的相对路径。
+     *
+     * @since 2.4.2
+     */
+    public static final String[] RELATIVE_FILE_NODE_FILE = new String[]{"file-node-file"};
+
+    /**
+     * 文件列表节点文件的相对路径。
+     *
+     * @since 2.4.2
+     */
+    public static final String[] RELATIVE_FILE_LIST_NODE_FILE = new String[]{"file-list-node-file"};
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FtpPathResolver.class);
 
     @Value("${ftp.root_path}")
@@ -72,6 +86,8 @@ public class FtpPathResolver {
      *     <li>{@link #RELATIVE_IMAGE_LIST_NODE_FILE}</li>
      *     <li>{@link #RELATIVE_IMAGE_LIST_NODE_THUMBNAIL}</li>
      *     <li>{@link #RELATIVE_LONG_TEXT_NODE_FILE}</li>
+     *     <li>{@link #RELATIVE_FILE_NODE_FILE}</li>
+     *     <li>{@link #RELATIVE_FILE_LIST_NODE_FILE}</li>
      * </ul>
      *
      * @param relativePath 相对路径。

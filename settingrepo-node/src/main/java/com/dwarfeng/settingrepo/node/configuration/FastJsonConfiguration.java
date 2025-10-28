@@ -26,6 +26,8 @@ public class FastJsonConfiguration {
         ParserConfig.getGlobalInstance().addAccept(FastJsonIahnNodeMessage.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonLongTextNode.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonFileNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonFileListNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonFileListNodeItem.class.getCanonicalName());
         LOGGER.debug("FastJson autotype 白名单配置完毕");
     }
 }

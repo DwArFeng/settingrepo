@@ -42,6 +42,8 @@ public class DaoConfiguration {
     private final IahnNodeMessagePresetCriteriaMaker iahnNodeMessagePresetCriteriaMaker;
     private final LongTextNodePresetCriteriaMaker longTextNodePresetCriteriaMaker;
     private final FileNodePresetCriteriaMaker fileNodePresetCriteriaMaker;
+    private final FileListNodePresetCriteriaMaker fileListNodePresetCriteriaMaker;
+    private final FileListNodeItemPresetCriteriaMaker fileListNodeItemPresetCriteriaMaker;
 
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -60,7 +62,10 @@ public class DaoConfiguration {
             IahnNodeMekPresetCriteriaMaker iahnNodeMekPresetCriteriaMaker,
             IahnNodeMessagePresetCriteriaMaker iahnNodeMessagePresetCriteriaMaker,
             LongTextNodePresetCriteriaMaker longTextNodePresetCriteriaMaker,
-            FileNodePresetCriteriaMaker fileNodePresetCriteriaMaker
+            FileNodePresetCriteriaMaker fileNodePresetCriteriaMaker,
+            FileListNodePresetCriteriaMaker fileListNodePresetCriteriaMaker,
+            FileListNodeItemPresetCriteriaMaker fileListNodeItemPresetCriteriaMaker
+
     ) {
         this.template = template;
         this.formatterSupportPresetCriteriaMaker = formatterSupportPresetCriteriaMaker;
@@ -76,6 +81,8 @@ public class DaoConfiguration {
         this.iahnNodeMessagePresetCriteriaMaker = iahnNodeMessagePresetCriteriaMaker;
         this.longTextNodePresetCriteriaMaker = longTextNodePresetCriteriaMaker;
         this.fileNodePresetCriteriaMaker = fileNodePresetCriteriaMaker;
+        this.fileListNodePresetCriteriaMaker = fileListNodePresetCriteriaMaker;
+        this.fileListNodeItemPresetCriteriaMaker= fileListNodeItemPresetCriteriaMaker;
     }
 
     @Bean
@@ -551,6 +558,69 @@ public class DaoConfiguration {
                 new MapStructBeanTransformer<>(FileNode.class, HibernateFileNode.class, BeanMapper.class),
                 HibernateFileNode.class,
                 fileNodePresetCriteriaMaker
+        );
+    }
+
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey , HibernateStringIdKey , FileListNode, HibernateFileListNode> fileListNodeHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey .class, HibernateStringIdKey .class, BeanMapper.class),
+                new MapStructBeanTransformer<>(FileListNode.class, HibernateFileListNode.class, BeanMapper.class),
+                HibernateFileListNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<FileListNode, HibernateFileListNode> fileListNodeHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(FileListNode.class, HibernateFileListNode.class, BeanMapper.class),
+                HibernateFileListNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<FileListNode, HibernateFileListNode> fileListNodeHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(FileListNode.class, HibernateFileListNode.class, BeanMapper.class),
+                HibernateFileListNode.class,
+                fileListNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, FileListNodeItem, HibernateFileListNodeItem> fileListNodeItemHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(LongIdKey.class, HibernateLongIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class),
+                HibernateFileListNodeItem.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<FileListNodeItem, HibernateFileListNodeItem> fileListNodeItemHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class),
+                HibernateFileListNodeItem.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<FileListNodeItem, HibernateFileListNodeItem> fileListNodeItemHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class),
+                HibernateFileListNodeItem.class,
+                fileListNodeItemPresetCriteriaMaker
         );
     }
 }

@@ -72,6 +72,15 @@ public class FileNodeCrudOperation implements BatchCrudOperation<StringIdKey, Fi
 
     @Override
     public void delete(StringIdKey key) throws Exception {
+        // 获取文件名。
+        String fileName = fileNodeDao.get(key).getStoreName();
+
+        // 如果存在文件，则删除。
+        if (ftpHandler.existsFile(
+                ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_FILE_NODE_FILE), fileName
+        )) {
+            ftpHandler.deleteFile(ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_FILE_NODE_FILE), fileName);
+        }
 
         // 删除记录设置自身。
         fileNodeDao.delete(key);

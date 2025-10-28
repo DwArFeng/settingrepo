@@ -51,6 +51,10 @@ public class CacheConfiguration {
     private String longTextNodePrefix;
     @Value("${cache.prefix.entity.file_node}")
     private String fileNodePrefix;
+    @Value("${cache.prefix.entity.file_list_node}")
+    private String fileListNodePrefix;
+    @Value("${cache.prefix.entity.file_list_node_item}")
+    private String fileListNodeItemPrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -215,6 +219,26 @@ public class CacheConfiguration {
                 new MapStructBeanTransformer<>(
                         FileNode.class, FastJsonFileNode.class, BeanMapper.class
                 )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey , FileListNode, FastJsonFileListNode> fileListNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonFileListNode>) template,
+                new StringIdStringKeyFormatter(fileListNodePrefix),
+                new MapStructBeanTransformer<>(FileListNode.class, FastJsonFileListNode.class, BeanMapper.class)
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<LongIdKey, FileListNodeItem, FastJsonFileListNodeItem> fileListNodeItemRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonFileListNodeItem>) template,
+                new LongIdStringKeyFormatter(fileListNodeItemPrefix),
+                new MapStructBeanTransformer<>(FileListNodeItem.class, FastJsonFileListNodeItem.class, BeanMapper.class)
         );
     }
 }

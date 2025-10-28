@@ -53,6 +53,10 @@ public class ServiceConfiguration {
     private final LongTextNodeDao longTextNodeDao;
     private final FileNodeCrudOperation fileNodeCrudOperation;
     private final FileNodeDao fileNodeDao;
+    private final FileListNodeCrudOperation fileListNodeCrudOperation;
+    private final FileListNodeDao fileListNodeDao;
+    private final FileListNodeItemCrudOperation fileListNodeItemCrudOperation;
+    private final FileListNodeItemDao fileListNodeItemDao;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -89,7 +93,11 @@ public class ServiceConfiguration {
             LongTextNodeCrudOperation longTextNodeCrudOperation,
             LongTextNodeDao longTextNodeDao,
             FileNodeCrudOperation fileNodeCrudOperation,
-            FileNodeDao fileNodeDao
+            FileNodeDao fileNodeDao,
+            FileListNodeCrudOperation fileListNodeCrudOperation,
+            FileListNodeDao fileListNodeDao,
+            FileListNodeItemCrudOperation fileListNodeItemCrudOperation,
+            FileListNodeItemDao fileListNodeItemDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -119,6 +127,10 @@ public class ServiceConfiguration {
         this.longTextNodeDao = longTextNodeDao;
         this.fileNodeCrudOperation = fileNodeCrudOperation;
         this.fileNodeDao = fileNodeDao;
+        this.fileListNodeCrudOperation = fileListNodeCrudOperation;
+        this.fileListNodeDao = fileListNodeDao;
+        this.fileListNodeItemCrudOperation = fileListNodeItemCrudOperation;
+        this.fileListNodeItemDao = fileListNodeItemDao;
     }
 
     @Bean
@@ -488,6 +500,62 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 fileNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, FileListNode> fileListNodeBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                fileListNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<FileListNode> fileListNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                fileListNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<FileListNode> fileListNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                fileListNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<LongIdKey, FileListNodeItem> fileListNodeItemCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                fileListNodeItemCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<FileListNodeItem> fileListNodeItemDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                fileListNodeItemDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<FileListNodeItem> fileListNodeItemDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                fileListNodeItemDao
         );
     }
 }

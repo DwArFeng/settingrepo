@@ -42,6 +42,12 @@ public final class Constants {
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_FILE = 5;
 
+    /**
+     * @since 2.4.2
+     */
+    @SettingNodeTypeItem
+    public static final int SETTING_NODE_TYPE_FILE_LIST = 6;
+
     public static final int LONG_TEXT_NODE_PREVIEW_LENGTH = 1000;
 
     private static final Lock LOCK = new ReentrantLock();
