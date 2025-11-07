@@ -187,4 +187,23 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     FileListNodeItem fileListNodeItemFromHibernate(HibernateFileListNodeItem hibernateFileListNodeItem);
+
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "items", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateNavigationNode navigationNodeToHibernate(NavigationNode navigationNode);
+
+    @InheritInverseConfiguration
+    NavigationNode navigationNodeFromHibernate(HibernateNavigationNode hibernateNavigationNode);
+
+    @Mapping(target = "longId", ignore = true)
+    @Mapping(target = "nodeStringId", ignore = true)
+    @Mapping(target = "parentLongId", ignore = true)
+    @Mapping(target = "parent", ignore = true)
+    @Mapping(target = "node", ignore = true)
+    HibernateNavigationNodeItem navigationNodeItemToHibernate(NavigationNodeItem navigationNodeItem);
+
+    @InheritInverseConfiguration
+    NavigationNodeItem navigationNodeItemFromHibernate(HibernateNavigationNodeItem hibernateNavigationNodeItem);
 }

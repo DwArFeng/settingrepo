@@ -172,6 +172,23 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     FileListNodeItem fileListNodeItemFromJSFixedFastJson(JSFixedFastJsonFileListNodeItem fastJsonFileListNodeItem);
 
+    FastJsonNavigationNode navigationNodeToFastJson(NavigationNode navigationNode);
+
+    @InheritInverseConfiguration
+    NavigationNode navigationNodeFromFastJson(FastJsonNavigationNode fastJsonNavigationNode);
+
+    FastJsonNavigationNodeItem navigationNodeItemToFastJson(NavigationNodeItem navigationNodeItem);
+
+    @InheritInverseConfiguration
+    NavigationNodeItem navigationNodeItemFromFastJson(FastJsonNavigationNodeItem fastJsonNavigationNodeItem);
+
+    JSFixedFastJsonNavigationNodeItem navigationNodeItemToJSFixedFastJson(NavigationNodeItem navigationNodeItem);
+
+    @InheritInverseConfiguration
+    NavigationNodeItem navigationNodeItemFromJSFixedFastJson(
+            JSFixedFastJsonNavigationNodeItem jSFixedFastJsonNavigationNodeItem
+    );
+
     // -----------------------------------------------------------Settingrepo DTO-----------------------------------------------------------
     FastJsonIahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResultToFastJson(
             IahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResult

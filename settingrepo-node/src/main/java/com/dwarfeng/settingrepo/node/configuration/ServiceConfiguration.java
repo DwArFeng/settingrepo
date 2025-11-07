@@ -57,6 +57,10 @@ public class ServiceConfiguration {
     private final FileListNodeDao fileListNodeDao;
     private final FileListNodeItemCrudOperation fileListNodeItemCrudOperation;
     private final FileListNodeItemDao fileListNodeItemDao;
+    private final NavigationNodeCrudOperation navigationNodeCrudOperation;
+    private final NavigationNodeDao navigationNodeDao;
+    private final NavigationNodeItemCrudOperation navigationNodeItemCrudOperation;
+    private final NavigationNodeItemDao navigationNodeItemDao;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -97,7 +101,11 @@ public class ServiceConfiguration {
             FileListNodeCrudOperation fileListNodeCrudOperation,
             FileListNodeDao fileListNodeDao,
             FileListNodeItemCrudOperation fileListNodeItemCrudOperation,
-            FileListNodeItemDao fileListNodeItemDao
+            FileListNodeItemDao fileListNodeItemDao,
+            NavigationNodeCrudOperation navigationNodeCrudOperation,
+            NavigationNodeDao navigationNodeDao,
+            NavigationNodeItemCrudOperation navigationNodeItemCrudOperation,
+            NavigationNodeItemDao navigationNodeItemDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -131,6 +139,10 @@ public class ServiceConfiguration {
         this.fileListNodeDao = fileListNodeDao;
         this.fileListNodeItemCrudOperation = fileListNodeItemCrudOperation;
         this.fileListNodeItemDao = fileListNodeItemDao;
+        this.navigationNodeCrudOperation = navigationNodeCrudOperation;
+        this.navigationNodeDao = navigationNodeDao;
+        this.navigationNodeItemCrudOperation = navigationNodeItemCrudOperation;
+        this.navigationNodeItemDao = navigationNodeItemDao;
     }
 
     @Bean
@@ -556,6 +568,62 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 fileListNodeItemDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, NavigationNode> navigationNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                navigationNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<NavigationNode> navigationNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                navigationNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<NavigationNode> navigationNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                navigationNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<LongIdKey, NavigationNodeItem> navigationNodeItemCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                navigationNodeItemCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<NavigationNodeItem> navigationNodeItemDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                navigationNodeItemDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<NavigationNodeItem> navigationNodeItemDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                navigationNodeItemDao
         );
     }
 }

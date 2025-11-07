@@ -98,6 +98,13 @@ public final class Constraints {
      */
     public static final int LENGTH_LONG_TEXT_NODE_PREVIEW = Constants.LONG_TEXT_NODE_PREVIEW_LENGTH;
 
+    /**
+     * 导航节点名称的长度约束。
+     *
+     * @since 2.4.2
+     */
+    public static final int LENGTH_NAVIGATION_NODE_NAME = 50;
+
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
     }

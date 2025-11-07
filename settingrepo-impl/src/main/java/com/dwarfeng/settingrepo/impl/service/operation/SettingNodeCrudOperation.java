@@ -38,6 +38,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final FileListNodeDao fileListNodeDao;
     private final FileListNodeCrudOperation fileListNodeCrudOperation;
 
+    private final NavigationNodeDao navigationNodeDao;
+    private final NavigationNodeCrudOperation navigationNodeCrudOperation;
+
     @Value("${cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
@@ -55,7 +58,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             FileNodeDao fileNodeDao,
             FileNodeCrudOperation fileNodeCrudOperation,
             FileListNodeDao fileListNodeDao,
-            FileListNodeCrudOperation fileListNodeCrudOperation
+            FileListNodeCrudOperation fileListNodeCrudOperation,
+            NavigationNodeDao navigationNodeDao,
+            NavigationNodeCrudOperation navigationNodeCrudOperation
     ) {
         this.settingNodeDao = settingNodeDao;
         this.settingNodeCache = settingNodeCache;
@@ -71,6 +76,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.fileNodeCrudOperation = fileNodeCrudOperation;
         this.fileListNodeDao = fileListNodeDao;
         this.fileListNodeCrudOperation = fileListNodeCrudOperation;
+        this.navigationNodeDao = navigationNodeDao;
+        this.navigationNodeCrudOperation = navigationNodeCrudOperation;
     }
 
     @Override
@@ -135,6 +142,11 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         // 删除与该设置节点相关的文件列表节点。
         if (fileListNodeDao.exists(key)) {
             fileListNodeCrudOperation.delete(key);
+        }
+
+        // 删除与该设置节点相关的导航节点。
+        if (navigationNodeDao.exists(key)) {
+            navigationNodeCrudOperation.delete(key);
         }
 
         settingNodeDao.delete(key);

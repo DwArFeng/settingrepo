@@ -55,6 +55,10 @@ public class CacheConfiguration {
     private String fileListNodePrefix;
     @Value("${cache.prefix.entity.file_list_node_item}")
     private String fileListNodeItemPrefix;
+    @Value("${cache.prefix.entity.navigation_node}")
+    private String navigationNodePrefix;
+    @Value("${cache.prefix.entity.navigation_node_item}")
+    private String navigationNodeItemPrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -239,6 +243,32 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonFileListNodeItem>) template,
                 new LongIdStringKeyFormatter(fileListNodeItemPrefix),
                 new MapStructBeanTransformer<>(FileListNodeItem.class, FastJsonFileListNodeItem.class, BeanMapper.class)
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, NavigationNode, FastJsonNavigationNode>
+    navigationNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonNavigationNode>) template,
+                new StringIdStringKeyFormatter(navigationNodePrefix),
+                new MapStructBeanTransformer<>(
+                        NavigationNode.class, FastJsonNavigationNode.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<LongIdKey, NavigationNodeItem, FastJsonNavigationNodeItem>
+    navigationNodeItemRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonNavigationNodeItem>) template,
+                new LongIdStringKeyFormatter(navigationNodeItemPrefix),
+                new MapStructBeanTransformer<>(
+                        NavigationNodeItem.class, FastJsonNavigationNodeItem.class, BeanMapper.class
+                )
         );
     }
 }
