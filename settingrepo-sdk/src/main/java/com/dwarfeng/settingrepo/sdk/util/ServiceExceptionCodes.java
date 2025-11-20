@@ -36,6 +36,8 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(70), "iahn node locale not exists");
     public static final ServiceException.Code IAHN_NODE_MEK_NOT_EXISTS =
             new ServiceException.Code(offset(80), "iahn node mek not exists");
+    public static final ServiceException.Code FILE_LIST_NODE_INDEX_OUT_OF_BOUND =
+            new ServiceException.Code(offset(90), "file list node index out of bound");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -72,6 +74,7 @@ public final class ServiceExceptionCodes {
         INVALID_IAHN_NODE_MEK_ID.setCode(offset(60));
         IAHN_NODE_LOCALE_NOT_EXISTS.setCode(offset(70));
         IAHN_NODE_MEK_NOT_EXISTS.setCode(offset(80));
+        FILE_LIST_NODE_INDEX_OUT_OF_BOUND.setCode(offset(90));
     }
 
     private ServiceExceptionCodes() {

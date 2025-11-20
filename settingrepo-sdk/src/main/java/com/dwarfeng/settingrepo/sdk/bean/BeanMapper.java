@@ -614,4 +614,84 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     FileNodeInspectInfo fileNodeInspectInfoFromWebInput(WebInputFileNodeInspectInfo webInputFileNodeInspectInfo);
+
+    FastJsonFileListNodeInspectResult fileListNodeInspectResultToFastJson(
+            FileListNodeInspectResult fileListNodeInspectResult
+    );
+
+    @InheritInverseConfiguration
+    FileListNodeInspectResult fileListNodeInspectResultFromFastJson(
+            FastJsonFileListNodeInspectResult fastJsonFileListNodeInspectResult
+    );
+
+    FastJsonFileListNodeSizeResult fileListNodeSizeResultToFastJson(FileListNodeSizeResult fileListNodeSizeResult);
+
+    @InheritInverseConfiguration
+    FileListNodeSizeResult fileListNodeSizeResultFromFastJson(
+            FastJsonFileListNodeSizeResult fastJsonFileListNodeSizeResult
+    );
+
+    WebInputFileListNodeChangeOrderInfo fileListNodeChangeOrderInfoToWebInput(
+            FileListNodeChangeOrderInfo fileListNodeChangeOrderInfo
+    );
+
+    @InheritInverseConfiguration
+    FileListNodeChangeOrderInfo fileListNodeChangeOrderInfoFromWebInput(
+            WebInputFileListNodeChangeOrderInfo webInputFileListNodeChangeOrderInfo
+    );
+
+    WebInputFileListNodeFileDownloadInfo fileListNodeFileDownloadInfoToWebInput(
+            FileListNodeFileDownloadInfo fileListNodeFileDownloadInfo
+    );
+
+    @InheritInverseConfiguration
+    FileListNodeFileDownloadInfo fileListNodeFileDownloadInfoFromWebInput(
+            WebInputFileListNodeFileDownloadInfo webInputFileListNodeFileDownloadInfo
+    );
+
+    WebInputFileListNodeFileStreamDownloadInfo fileListNodeFileStreamDownloadInfoToWebInput(
+            FileListNodeFileStreamDownloadInfo fileListNodeFileStreamDownloadInfo
+    );
+
+    @InheritInverseConfiguration
+    FileListNodeFileStreamDownloadInfo fileListNodeFileStreamDownloadInfoFromWebInput(
+            WebInputFileListNodeFileStreamDownloadInfo webInputFileListNodeFileStreamDownloadInfo
+    );
+
+    WebInputFileListNodeFileUpdateInfo fileListNodeFileUpdateInfoToWebInput(
+            FileListNodeFileUpdateInfo fileListNodeFileUpdateInfo
+    );
+
+    @InheritInverseConfiguration
+    FileListNodeFileUpdateInfo fileListNodeFileUpdateInfoFromWebInput(
+            WebInputFileListNodeFileUpdateInfo webInputFileListNodeFileUpdateInfo
+    );
+
+    WebInputFileListNodeFileUploadInfo fileListNodeFileUploadInfoToWebInput(
+            FileListNodeFileUploadInfo fileListNodeFileUploadInfo
+    );
+
+    @InheritInverseConfiguration
+    FileListNodeFileUploadInfo fileListNodeFileUploadInfoFromWebInput(
+            WebInputFileListNodeFileUploadInfo webInputFileListNodeFileUploadInfo
+    );
+
+    WebInputFileListNodeInspectInfo fileListNodeInspectInfoToWebInput(FileListNodeInspectInfo fileListNodeInspectInfo);
+
+    @InheritInverseConfiguration
+    FileListNodeInspectInfo fileListNodeInspectInfoFromWebInput(
+            WebInputFileListNodeInspectInfo webInputFileListNodeInspectInfo
+    );
+
+    WebInputFileListNodeRemoveInfo fileListNodeRemoveInfoToWebInput(FileListNodeRemoveInfo fileListNodeRemoveInfo);
+
+    @InheritInverseConfiguration
+    FileListNodeRemoveInfo fileListNodeRemoveInfoFromWebInput(
+            WebInputFileListNodeRemoveInfo webInputFileListNodeRemoveInfo
+    );
+
+    WebInputFileListNodeSizeInfo fileListNodeSizeInfoToWebInput(FileListNodeSizeInfo fileListNodeSizeInfo);
+
+    @InheritInverseConfiguration
+    FileListNodeSizeInfo fileListNodeSizeInfoFromWebInput(WebInputFileListNodeSizeInfo webInputFileListNodeSizeInfo);
 }

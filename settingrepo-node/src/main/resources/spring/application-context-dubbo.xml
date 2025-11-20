@@ -138,6 +138,12 @@
             group="${dubbo.provider.group}"
     />
     <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.FileListNodeOperateService"
+            ref="fileListNodeOperateServiceImpl"
+            protocol="hessian"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.FileListNodeItemMaintainService"
             ref="fileListNodeItemMaintainServiceImpl"
             group="${dubbo.provider.group}"
