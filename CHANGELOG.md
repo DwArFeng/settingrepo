@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.service.FileNodeOperateService。
+
 - 建立实体以及维护服务，并通过单元测试。
   - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNode。
   - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem。

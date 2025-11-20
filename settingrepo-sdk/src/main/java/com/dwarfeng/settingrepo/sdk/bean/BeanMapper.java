@@ -577,4 +577,41 @@ public interface BeanMapper {
     IahnNodeMessageTableInspectInfo iahnNodeMessageTableInspectInfoFromWebInput(
             WebInputIahnNodeMessageTableInspectInfo webInputIahnNodeMessageTableInspectInfo
     );
+
+    FastJsonFileNodeInspectResult fileNodeInspectResultToFastJson(FileNodeInspectResult fileNodeInspectResult);
+
+    @InheritInverseConfiguration
+    FileNodeInspectResult fileNodeInspectResultFromFastJson(
+            FastJsonFileNodeInspectResult fastJsonFileNodeInspectResult
+    );
+
+    WebInputFileNodeFileDownloadInfo fileNodeFileDownloadInfoToWebInput(
+            FileNodeFileDownloadInfo fileNodeFileDownloadInfo
+    );
+
+    @InheritInverseConfiguration
+    FileNodeFileDownloadInfo fileNodeFileDownloadInfoFromWebInput(
+            WebInputFileNodeFileDownloadInfo webInputFileNodeFileDownloadInfo
+    );
+
+    WebInputFileNodeFileStreamDownloadInfo fileNodeFileStreamDownloadInfoToWebInput(
+            FileNodeFileStreamDownloadInfo fileNodeFileStreamDownloadInfo
+    );
+
+    @InheritInverseConfiguration
+    FileNodeFileStreamDownloadInfo fileNodeFileStreamDownloadInfoFromWebInput(
+            WebInputFileNodeFileStreamDownloadInfo webInputFileNodeFileStreamDownloadInfo
+    );
+
+    WebInputFileNodeFileUploadInfo fileNodeFileUploadInfoToWebInput(FileNodeFileUploadInfo fileNodeFileUploadInfo);
+
+    @InheritInverseConfiguration
+    FileNodeFileUploadInfo fileNodeFileUploadInfoFromWebInput(
+            WebInputFileNodeFileUploadInfo webInputFileNodeFileUploadInfo
+    );
+
+    WebInputFileNodeInspectInfo fileNodeInspectInfoToWebInput(FileNodeInspectInfo fileNodeInspectInfo);
+
+    @InheritInverseConfiguration
+    FileNodeInspectInfo fileNodeInspectInfoFromWebInput(WebInputFileNodeInspectInfo webInputFileNodeInspectInfo);
 }
