@@ -4,7 +4,8 @@
 
 ### 功能构建
 
-- (无)
+- 优化部分实体类中的文档注释。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode。
 
 ### Bug 修复
 

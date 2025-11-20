@@ -27,7 +27,8 @@ public class SettingNode implements Entity<StringIdKey> {
      *     <li>文本</li>
      *     <li>长文本</li>
      *     <li>图片</li>
-     *     <li>图片集</li>
+     *     <li>图片列表</li>
+     *     <li>国际化</li>
      * </ul>
      * 详细值参考 sdk 模块的常量工具类。
      *
