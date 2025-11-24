@@ -5,6 +5,7 @@
 ### 功能构建
 
 - 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.NavigationNodeCommand。
   - com.dwarfeng.settingrepo.impl.service.telqos.FileListNodeCommand。
   - com.dwarfeng.settingrepo.impl.service.telqos.FileNodeCommand。
 
