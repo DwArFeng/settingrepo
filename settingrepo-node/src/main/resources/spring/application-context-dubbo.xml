@@ -154,6 +154,11 @@
             group="${dubbo.provider.group}"
     />
     <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.NavigationNodeOperateService"
+            ref="navigationNodeOperateServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+    <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService"
             ref="navigationNodeItemMaintainServiceImpl"
             group="${dubbo.provider.group}"

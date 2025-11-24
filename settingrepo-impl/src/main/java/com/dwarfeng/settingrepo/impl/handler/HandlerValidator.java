@@ -1,13 +1,12 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
 import com.dwarfeng.settingrepo.sdk.util.IahnUtils;
+import com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.exception.*;
-import com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService;
-import com.dwarfeng.settingrepo.stack.service.IahnNodeMekMaintainService;
-import com.dwarfeng.settingrepo.stack.service.SettingCategoryMaintainService;
-import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
+import com.dwarfeng.settingrepo.stack.service.*;
+import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
@@ -32,17 +31,20 @@ public class HandlerValidator {
     private final SettingNodeMaintainService settingNodeMaintainService;
     private final IahnNodeLocaleMaintainService iahnNodeLocaleMaintainService;
     private final IahnNodeMekMaintainService iahnNodeMekMaintainService;
+    private final NavigationNodeItemMaintainService navigationNodeItemMaintainService;
 
     public HandlerValidator(
             SettingCategoryMaintainService settingCategoryMaintainService,
             SettingNodeMaintainService settingNodeMaintainService,
             IahnNodeLocaleMaintainService iahnNodeLocaleMaintainService,
-            IahnNodeMekMaintainService iahnNodeMekMaintainService
+            IahnNodeMekMaintainService iahnNodeMekMaintainService,
+            NavigationNodeItemMaintainService navigationNodeItemMaintainService
     ) {
         this.settingCategoryMaintainService = settingCategoryMaintainService;
         this.settingNodeMaintainService = settingNodeMaintainService;
         this.iahnNodeLocaleMaintainService = iahnNodeLocaleMaintainService;
         this.iahnNodeMekMaintainService = iahnNodeMekMaintainService;
+        this.navigationNodeItemMaintainService = navigationNodeItemMaintainService;
     }
 
     public void makeSureSettingCategoryExists(StringIdKey settingCategoryKey) throws HandlerException {
@@ -142,6 +144,50 @@ public class HandlerValidator {
         try {
             if (Objects.isNull(iahnNodeMekKey) || !iahnNodeMekMaintainService.exists(iahnNodeMekKey)) {
                 throw new IahnNodeMekNotExistsException(iahnNodeMekKey);
+            }
+        } catch (ServiceException e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    public void makeSureNavigationNodeItemExists(LongIdKey navigationNodeItemKey) throws HandlerException {
+        try {
+            if (Objects.isNull(navigationNodeItemKey) ||
+                    !navigationNodeItemMaintainService.exists(navigationNodeItemKey)) {
+                throw new NavigationNodeItemNotExistsException(navigationNodeItemKey);
+            }
+        } catch (ServiceException e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    public void makeSureNavigationNodeItemIndexNotConflict(
+            StringIdKey settingNodeKey, LongIdKey parentNavigationNodeItemKey, int index
+    ) throws HandlerException {
+        try {
+            int count = navigationNodeItemMaintainService.lookupCount(
+                    NavigationNodeItemMaintainService.CHILD_FOR_NODE_CHILD_FOR_PARENT_INDEX_EQ,
+                    new Object[]{settingNodeKey, parentNavigationNodeItemKey, index}
+            );
+            if (count > 0) {
+                throw new NavigationNodeItemIndexConflictException(settingNodeKey, parentNavigationNodeItemKey, index);
+            }
+        } catch (ServiceException e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    public void makeSureNavigationNodeItemMatched(LongIdKey navigationNodeItemKey, StringIdKey settingNodeKey)
+            throws HandlerException {
+        try {
+            NavigationNodeItem navigationNodeItem = navigationNodeItemMaintainService.getIfExists(
+                    navigationNodeItemKey
+            );
+            if (Objects.isNull(navigationNodeItem)) {
+                throw new NavigationNodeItemNotExistsException(navigationNodeItemKey);
+            }
+            if (!Objects.equals(navigationNodeItem.getNodeKey(), settingNodeKey)) {
+                throw new NavigationNodeItemMismatchedException(navigationNodeItemKey, settingNodeKey);
             }
         } catch (ServiceException e) {
             throw new HandlerException(e);

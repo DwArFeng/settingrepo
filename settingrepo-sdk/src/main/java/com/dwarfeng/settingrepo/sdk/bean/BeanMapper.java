@@ -694,4 +694,101 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     FileListNodeSizeInfo fileListNodeSizeInfoFromWebInput(WebInputFileListNodeSizeInfo webInputFileListNodeSizeInfo);
+
+    FastJsonNavigationNodeInspectResult navigationNodeInspectResultToFastJson(
+            NavigationNodeInspectResult navigationNodeInspectResult
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeInspectResult navigationNodeInspectResultFromFastJson(
+            FastJsonNavigationNodeInspectResult fastJsonNavigationNodeInspectResult
+    );
+
+    FastJsonNavigationNodeItemInsertResult navigationNodeItemInsertResultToFastJson(
+            NavigationNodeItemInsertResult navigationNodeItemInsertResult
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeItemInsertResult navigationNodeItemInsertResultFromFastJson(
+            FastJsonNavigationNodeItemInsertResult fastJsonNavigationNodeItemInsertResult
+    );
+
+    FastJsonNavigationNodeSizeResult navigationNodeSizeResultToFastJson(
+            NavigationNodeSizeResult navigationNodeSizeResult
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeSizeResult navigationNodeSizeResultFromFastJson(
+            FastJsonNavigationNodeSizeResult fastJsonNavigationNodeSizeResult
+    );
+
+    JSFixedFastJsonNavigationNodeInspectResult navigationNodeInspectResultToJSFixedFastJson(
+            NavigationNodeInspectResult navigationNodeInspectResult
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeInspectResult navigationNodeInspectResultFromJSFixedFastJson(
+            JSFixedFastJsonNavigationNodeInspectResult jSFixedFastJsonNavigationNodeInspectResult
+    );
+
+    JSFixedFastJsonNavigationNodeItemInsertResult navigationNodeItemInsertResultToJSFixedFastJson(
+            NavigationNodeItemInsertResult navigationNodeItemInsertResult
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeItemInsertResult navigationNodeItemInsertResultFromJSFixedFastJson(
+            JSFixedFastJsonNavigationNodeItemInsertResult jSFixedFastJsonNavigationNodeItemInsertResult
+    );
+
+    WebInputNavigationNodeFormatIndexInfo navigationNodeFormatIndexInfoToWebInput(
+            NavigationNodeFormatIndexInfo navigationNodeFormatIndexInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeFormatIndexInfo navigationNodeFormatIndexInfoFromWebInput(
+            WebInputNavigationNodeFormatIndexInfo webInputNavigationNodeFormatIndexInfo
+    );
+
+    WebInputNavigationNodeInspectInfo navigationNodeInspectInfoToWebInput(
+            NavigationNodeInspectInfo navigationNodeInspectInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeInspectInfo navigationNodeInspectInfoFromWebInput(
+            WebInputNavigationNodeInspectInfo webInputNavigationNodeInspectInfo
+    );
+
+    WebInputNavigationNodeItemInsertInfo navigationNodeItemInsertInfoToWebInput(
+            NavigationNodeItemInsertInfo navigationNodeItemInsertInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeItemInsertInfo navigationNodeItemInsertInfoFromWebInput(
+            WebInputNavigationNodeItemInsertInfo webInputNavigationNodeItemInsertInfo
+    );
+
+    WebInputNavigationNodeItemRemoveInfo navigationNodeItemRemoveInfoToWebInput(
+            NavigationNodeItemRemoveInfo navigationNodeItemRemoveInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeItemRemoveInfo navigationNodeItemRemoveInfoFromWebInput(
+            WebInputNavigationNodeItemRemoveInfo webInputNavigationNodeItemRemoveInfo
+    );
+
+    WebInputNavigationNodeItemUpdateInfo navigationNodeItemUpdateInfoToWebInput(
+            NavigationNodeItemUpdateInfo navigationNodeItemUpdateInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeItemUpdateInfo navigationNodeItemUpdateInfoFromWebInput(
+            WebInputNavigationNodeItemUpdateInfo webInputNavigationNodeItemUpdateInfo
+    );
+
+    WebInputNavigationNodeSizeInfo navigationNodeSizeInfoToWebInput(NavigationNodeSizeInfo navigationNodeSizeInfo);
+
+    @InheritInverseConfiguration
+    NavigationNodeSizeInfo navigationNodeSizeInfoFromWebInput(
+            WebInputNavigationNodeSizeInfo webInputNavigationNodeSizeInfo
+    );
 }

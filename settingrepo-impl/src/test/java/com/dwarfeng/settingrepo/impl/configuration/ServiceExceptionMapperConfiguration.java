@@ -31,6 +31,9 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(IahnNodeLocaleNotExistsException.class, ServiceExceptionCodes.IAHN_NODE_LOCALE_NOT_EXISTS);
         destination.put(IahnNodeMekNotExistsException.class, ServiceExceptionCodes.IAHN_NODE_MEK_NOT_EXISTS);
         destination.put(FileListNodeIndexOutOfBoundException.class, ServiceExceptionCodes.FILE_LIST_NODE_INDEX_OUT_OF_BOUND);
+        destination.put(NavigationNodeItemIndexConflictException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_INDEX_CONFLICT);
+        destination.put(NavigationNodeItemMismatchedException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_MISMATCHED);
+        destination.put(NavigationNodeItemNotExistsException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_NOT_EXISTS);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }

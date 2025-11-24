@@ -9,6 +9,7 @@
   - com.dwarfeng.settingrepo.impl.service.telqos.FileNodeCommand。
 
 - 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.handler.NavigationNodeOperateHandler。
   - com.dwarfeng.settingrepo.stack.service.FileListNodeOperateService。
   - com.dwarfeng.settingrepo.stack.service.FileNodeOperateService。
 

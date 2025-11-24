@@ -38,6 +38,12 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(80), "iahn node mek not exists");
     public static final ServiceException.Code FILE_LIST_NODE_INDEX_OUT_OF_BOUND =
             new ServiceException.Code(offset(90), "file list node index out of bound");
+    public static final ServiceException.Code NAVIGATION_NODE_ITEM_INDEX_CONFLICT =
+            new ServiceException.Code(offset(100), "navigation node item index conflict");
+    public static final ServiceException.Code NAVIGATION_NODE_ITEM_MISMATCHED =
+            new ServiceException.Code(offset(110), "navigation node item mismatched");
+    public static final ServiceException.Code NAVIGATION_NODE_ITEM_NOT_EXISTS =
+            new ServiceException.Code(offset(120), "navigation node item not exists");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -75,6 +81,9 @@ public final class ServiceExceptionCodes {
         IAHN_NODE_LOCALE_NOT_EXISTS.setCode(offset(70));
         IAHN_NODE_MEK_NOT_EXISTS.setCode(offset(80));
         FILE_LIST_NODE_INDEX_OUT_OF_BOUND.setCode(offset(90));
+        NAVIGATION_NODE_ITEM_INDEX_CONFLICT.setCode(offset(100));
+        NAVIGATION_NODE_ITEM_MISMATCHED.setCode(offset(110));
+        NAVIGATION_NODE_ITEM_NOT_EXISTS.setCode(offset(120));
     }
 
     private ServiceExceptionCodes() {
