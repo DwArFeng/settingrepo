@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 依赖升级。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.15.a` 以应用其新功能。
+
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.NavigationNodeCommand。
   - com.dwarfeng.settingrepo.impl.service.telqos.FileListNodeCommand。
