@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化部分代码的格式。
+  - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
+
 - 增加预设的运维指令。
   - com.dwarfeng.springtelqos.api.integration.system.UptimeCommand。
   - com.dwarfeng.springtelqos.api.integration.system.JmxRemoteCommand。

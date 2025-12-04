@@ -145,7 +145,9 @@ public interface BeanMapper {
     JSFixedFastJsonImageListNodeItem imageListNodeItemToJSFixedFastJson(ImageListNodeItem imageListNodeItem);
 
     @InheritInverseConfiguration
-    ImageListNodeItem imageListNodeItemFromJSFixedFastJson(JSFixedFastJsonImageListNodeItem jSFixedFastJsonImageListNodeItem);
+    ImageListNodeItem imageListNodeItemFromJSFixedFastJson(
+            JSFixedFastJsonImageListNodeItem jSFixedFastJsonImageListNodeItem
+    );
 
     WebInputSettingCategory settingCategoryToWebInput(SettingCategory settingCategory);
 
