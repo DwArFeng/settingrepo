@@ -38,6 +38,7 @@ conf
 │      iahn.properties
 │      image-thumbnail.properties
 │      launcher.properties
+│      navigation.properties
 │      push.properties
 │      reset.properties
 │
@@ -61,7 +62,7 @@ conf
 
 ```properties
 jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://your-host-here:3306/fdr?serverTimezone=Asia/Shanghai&autoReconnect=true
+jdbc.url=jdbc:mysql://your-host-here:3306/settingrepo?serverTimezone=Asia/Shanghai&autoReconnect=true
 jdbc.username=root
 jdbc.password=your-password-here
 hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
@@ -137,9 +138,9 @@ dubbo.consumer.snowflake.group=
 其中，`dubbo.registry.zookeeper.address` 需要配置为 ZooKeeper 的地址，
 `dubbo.protocol.dubbo.host` 需要配置为本机的 IP 地址。
 
-如果您需要在本机启动多个 FDR 实例，那么需要为每个实例配置不同的 `dubbo.protocol.dubbo.port`。
+如果您需要在本机启动多个 settingrepo 实例，那么需要为每个实例配置不同的 `dubbo.protocol.dubbo.port`。
 
-如果您在本机上部署了多个项目，每个项目中都使用了 FDR，那么需要为每个项目配置不同的 `dubbo.provider.group`，
+如果您在本机上部署了多个项目，每个项目中都使用了 settingrepo，那么需要为每个项目配置不同的 `dubbo.provider.group`，
 以避免微服务错误的调用。
 
 ## ftp 目录
@@ -465,7 +466,7 @@ pusher.log.log_level=INFO
 ###################################################
 #                      never                      #
 ###################################################
-# Never 推送器没有任何配置。
+# Never 重置器没有任何配置。
 #
 ###################################################
 #                   fixed_delay                   #
@@ -495,7 +496,7 @@ resetter.kafka.bootstrap_servers=your-host-here:9092
 ###################################################
 #                      dubbo                      #
 ###################################################
-# Dubbo 推送器没有任何配置。
+# Dubbo 重置器没有任何配置。
 ```
 
 您不必对所有的配置项进行配置。
