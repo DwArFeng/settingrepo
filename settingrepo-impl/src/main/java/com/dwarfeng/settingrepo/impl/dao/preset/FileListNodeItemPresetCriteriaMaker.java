@@ -55,6 +55,7 @@ public class FileListNodeItemPresetCriteriaMaker implements PresetCriteriaMaker 
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void childForNodeIndexAsc(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
@@ -71,6 +72,7 @@ public class FileListNodeItemPresetCriteriaMaker implements PresetCriteriaMaker 
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void childForNodeIndexEq(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
@@ -104,6 +106,7 @@ public class FileListNodeItemPresetCriteriaMaker implements PresetCriteriaMaker 
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void childForNodeIndexGtIndexLe(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
