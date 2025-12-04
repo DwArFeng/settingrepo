@@ -27,38 +27,37 @@ wiki 为项目的开发人员为本项目编写的详细文档，包含不同语
 1. [简介](docs/wiki/zh-CN/Introduction.md) - 镜像的 `README.md`，与本文件内容基本相同。
 2. [目录](docs/wiki/zh-CN/Contents.md) - 文档目录。
 
+## 运行截图
+
+Telnet 运维平台 banner：
+
+![Telnet 运维平台 banner](./docs/wiki/zh-CN/images/TelqosBanner.png "Telnet 运维平台 banner")
+
+Telnet 运维平台指令合集：
+
+![Telnet 运维平台指令合集](./docs/wiki/zh-CN/images/TelqosCommands.png "Telnet 运维平台指令合集")
+
 ## 支持的值类型
 
-- 字符串。
+- 文本。
+- 长文本。
 - 图片。
 - 图片列表。
-
-## 机制
-
-### 格式化器
-
-格式化器是 Settingrepo 的键处理器，它可以将配置类型和对应的参数数组转换为字符串键值。
-
-使用配置类型和参数数组可以方便的结构化管理存储配置，以下是一个示例：
-
-```text
-SettingCategory: user_preferences
----
-key: user_preferences.root.banner_color, desc: 用户偏好- root 用户 - 横幅颜色。
-key: user_preferences.foo.banner_color, desc: 用户偏好- foo 用户 - 横幅颜色。
-key: user_preferences.bar.banner_color, desc: 用户偏好- bar 用户 - 横幅颜色。
-```
+- 国际化。
+- 文件。
+- 文件列表。
+- 导航。
 
 ## 安装说明
 
 1. 下载源码
-   
+
    使用 git 进行源码下载。
 
    ```shell
    git clone git@github.com:DwArFeng/settingrepo.git
    ```
-   
+
    对于中国用户，可以使用 gitee 进行高速下载。
 
    ```shell
@@ -66,7 +65,7 @@ key: user_preferences.bar.banner_color, desc: 用户偏好- bar 用户 - 横幅�
    ```
 
 2. 项目打包
-   
+
    进入项目根目录，执行 maven 命令。
 
    ```shell
@@ -74,17 +73,17 @@ key: user_preferences.bar.banner_color, desc: 用户偏好- bar 用户 - 横幅�
    ```
 
 3. 解压
-   
+
    找到打包后的目标文件。
-   
+
    ```
    settingrepo-node/target/settingrepo-node-[version]-release.tar.gz
    ```
-   
+
    将其解压至 windows 系统或者 linux 系统。
 
 4. 配置
-   
+
    1. 修改 `conf` 文件夹下的配置文件，着重修改各连接的 url 与密码。
 
 5. enjoy it
