@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化部分配置文件的注释。
+  - settingrepo/reset.properties。
+
 - 优化部分代码的格式。
   - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
 
