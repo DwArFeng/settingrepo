@@ -37,6 +37,8 @@
 
 ### Bug 修复
 
+- 修复 JSFixedFastJsonNavigationNodeItem 中错误的数据类型。
+
 - 修复导航条目更新逻辑。
   - 增加根节点的判断与 index 未修改时的判断。
 
