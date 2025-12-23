@@ -339,7 +339,9 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             // 确认条目存在。
             handlerValidator.makeSureNavigationNodeItemExists(itemKey);
             // 确认父条目存在。
-            handlerValidator.makeSureNavigationNodeItemExists(parentItemKey);
+            if(Objects.nonNull(parentItemKey)){
+                handlerValidator.makeSureNavigationNodeItemExists(parentItemKey);
+            }
 
             // 根据 category 以及 args 获取对应的设置节点主键。
             StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
@@ -347,9 +349,13 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             // 确认条目属于对应的设置节点。
             handlerValidator.makeSureNavigationNodeItemMatched(itemKey, settingNodeKey);
             // 确认父条目属于对应的设置节点。
-            handlerValidator.makeSureNavigationNodeItemMatched(parentItemKey, settingNodeKey);
+            if(Objects.nonNull(parentItemKey)){
+                handlerValidator.makeSureNavigationNodeItemMatched(parentItemKey, settingNodeKey);
+            }
             // 确认索引合法。
-            handlerValidator.makeSureNavigationNodeItemIndexNotConflict(settingNodeKey, parentItemKey, index);
+            if(navigationNodeItemMaintainService.get(itemKey).getIndex() != index){
+                handlerValidator.makeSureNavigationNodeItemIndexNotConflict(settingNodeKey, parentItemKey, index);
+            }
 
             // 获取设置节点实体。
             SettingNode settingNode = settingNodeMaintainService.getIfExists(settingNodeKey);
