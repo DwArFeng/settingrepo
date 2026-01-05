@@ -84,10 +84,10 @@ public class ImageNodeCommand extends CliCommand {
         list.add(Option.builder(COMMAND_OPTION_DOWNLOAD).desc("下载图片节点图片").build());
         list.add(Option.builder(COMMAND_OPTION_UPLOAD).desc("上传图片节点图片").build());
         list.add(
-                Option.builder(COMMAND_OPTION_JSON).desc("JSON字符串").hasArg().type(String.class).build()
+                Option.builder(COMMAND_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
         );
         list.add(
-                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON文件")
+                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON 文件")
                         .hasArg().type(File.class).build()
         );
         return list;

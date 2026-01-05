@@ -4,6 +4,19 @@
 
 ### 功能构建
 
+- `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.impl.handler.formatter.GroovyFormatterRegistry。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.KafkaResetter。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FileListNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FileNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.LongTextNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.NavigationNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.TextNodeCommand。
+
 - 依赖升级。
   - 升级 `kafka` 依赖版本为 `3.9.1` 以规避漏洞。
   - 升级 `spring-kafka` 依赖版本为 `2.9.13` 以规避漏洞。

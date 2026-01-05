@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Groovy格式化器注册。
+ * Groovy 格式化器注册。
  *
  * @author DwArFeng
  * @since 1.0.0
@@ -43,12 +43,12 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
 
     @Override
     public String provideLabel() {
-        return "Groovy格式化器";
+        return "Groovy 格式化器";
     }
 
     @Override
     public String provideDescription() {
-        return "通过自定义的Groovy脚本对数据进行判断。";
+        return "通过自定义的 Groovy 脚本对数据进行判断。";
     }
 
     @Override
@@ -74,7 +74,7 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
     @Override
     public Formatter makeFormatter(SettingCategory settingCategory) throws FormatterException {
         try (GroovyClassLoader classLoader = new GroovyClassLoader()) {
-            // 通过Groovy脚本生成处理器。
+            // 通过 Groovy 脚本生成处理器。
             Class<?> aClass = classLoader.parseClass(settingCategory.getFormatterParam());
             Processor processor = (Processor) aClass.newInstance();
             ctx.getAutowireCapableBeanFactory().autowireBean(processor);
@@ -124,7 +124,7 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
     }
 
     /**
-     * Groovy处理器。
+     * Groovy 处理器。
      *
      * @author DwArFeng
      * @since 1.0.0

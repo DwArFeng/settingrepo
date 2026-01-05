@@ -84,10 +84,10 @@ public class LongTextNodeCommand extends CliCommand {
         list.add(Option.builder(COMMAND_OPTION_DOWNLOAD).desc("下载长文本节点长文本").build());
         list.add(Option.builder(COMMAND_OPTION_UPLOAD).desc("上传长文本节点长文本").build());
         list.add(
-                Option.builder(COMMAND_OPTION_JSON).desc("JSON字符串").hasArg().type(String.class).build()
+                Option.builder(COMMAND_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
         );
         list.add(
-                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON文本")
+                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON 文本")
                         .hasArg().type(File.class).build()
         );
         return list;

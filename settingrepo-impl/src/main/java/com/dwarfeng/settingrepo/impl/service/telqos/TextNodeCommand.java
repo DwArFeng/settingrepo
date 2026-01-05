@@ -69,10 +69,10 @@ public class TextNodeCommand extends CliCommand {
         list.add(Option.builder(COMMAND_OPTION_INSPECT).desc("查看指定的文本节点").build());
         list.add(Option.builder(COMMAND_OPTION_PUT).desc("向指定的文本节点中放入指定的信息").build());
         list.add(
-                Option.builder(COMMAND_OPTION_JSON).desc("JSON字符串").hasArg().type(String.class).build()
+                Option.builder(COMMAND_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
         );
         list.add(
-                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON文件")
+                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON 文件")
                         .hasArg().type(File.class).build()
         );
         return list;
