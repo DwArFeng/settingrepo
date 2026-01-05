@@ -355,4 +355,3 @@ public class NavigationNodeCommand extends CliCommand {
         context.sendMessage("格式化成功");
     }
 }
-

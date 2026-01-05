@@ -566,9 +566,9 @@ public class DaoConfiguration {
         );
     }
 
-
     @Bean
-    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, FileListNode, HibernateFileListNode> fileListNodeHibernateBatchBaseDao() {
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, FileListNode, HibernateFileListNode>
+    fileListNodeHibernateBatchBaseDao() {
         return new HibernateBatchBaseDao<>(
                 template,
                 new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),
@@ -599,11 +599,14 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, FileListNodeItem, HibernateFileListNodeItem> fileListNodeItemHibernateBatchBaseDao() {
+    public HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, FileListNodeItem, HibernateFileListNodeItem>
+    fileListNodeItemHibernateBatchBaseDao() {
         return new HibernateBatchBaseDao<>(
                 template,
                 new MapStructBeanTransformer<>(LongIdKey.class, HibernateLongIdKey.class, BeanMapper.class),
-                new MapStructBeanTransformer<>(FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class
+                ),
                 HibernateFileListNodeItem.class,
                 new DefaultDeletionMod<>(),
                 batchSize
@@ -611,19 +614,25 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public HibernateEntireLookupDao<FileListNodeItem, HibernateFileListNodeItem> fileListNodeItemHibernateEntireLookupDao() {
+    public HibernateEntireLookupDao<FileListNodeItem, HibernateFileListNodeItem>
+    fileListNodeItemHibernateEntireLookupDao() {
         return new HibernateEntireLookupDao<>(
                 template,
-                new MapStructBeanTransformer<>(FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class
+                ),
                 HibernateFileListNodeItem.class
         );
     }
 
     @Bean
-    public HibernatePresetLookupDao<FileListNodeItem, HibernateFileListNodeItem> fileListNodeItemHibernatePresetLookupDao() {
+    public HibernatePresetLookupDao<FileListNodeItem, HibernateFileListNodeItem>
+    fileListNodeItemHibernatePresetLookupDao() {
         return new HibernatePresetLookupDao<>(
                 template,
-                new MapStructBeanTransformer<>(FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        FileListNodeItem.class, HibernateFileListNodeItem.class, BeanMapper.class
+                ),
                 HibernateFileListNodeItem.class,
                 fileListNodeItemPresetCriteriaMaker
         );
@@ -667,7 +676,9 @@ public class DaoConfiguration {
         return new HibernateBatchBaseDao<>(
                 template,
                 new MapStructBeanTransformer<>(LongIdKey.class, HibernateLongIdKey.class, BeanMapper.class),
-                new MapStructBeanTransformer<>(NavigationNodeItem.class, HibernateNavigationNodeItem.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        NavigationNodeItem.class, HibernateNavigationNodeItem.class, BeanMapper.class
+                ),
                 HibernateNavigationNodeItem.class,
                 new DefaultDeletionMod<>(),
                 batchSize
@@ -675,19 +686,25 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public HibernateEntireLookupDao<NavigationNodeItem, HibernateNavigationNodeItem> navigationNodeItemHibernateEntireLookupDao() {
+    public HibernateEntireLookupDao<NavigationNodeItem, HibernateNavigationNodeItem>
+    navigationNodeItemHibernateEntireLookupDao() {
         return new HibernateEntireLookupDao<>(
                 template,
-                new MapStructBeanTransformer<>(NavigationNodeItem.class, HibernateNavigationNodeItem.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        NavigationNodeItem.class, HibernateNavigationNodeItem.class, BeanMapper.class
+                ),
                 HibernateNavigationNodeItem.class
         );
     }
 
     @Bean
-    public HibernatePresetLookupDao<NavigationNodeItem, HibernateNavigationNodeItem> navigationNodeItemHibernatePresetLookupDao() {
+    public HibernatePresetLookupDao<NavigationNodeItem, HibernateNavigationNodeItem>
+    navigationNodeItemHibernatePresetLookupDao() {
         return new HibernatePresetLookupDao<>(
                 template,
-                new MapStructBeanTransformer<>(NavigationNodeItem.class, HibernateNavigationNodeItem.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        NavigationNodeItem.class, HibernateNavigationNodeItem.class, BeanMapper.class
+                ),
                 HibernateNavigationNodeItem.class,
                 navigationNodeItemPresetCriteriaMaker
         );

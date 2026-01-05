@@ -82,4 +82,3 @@ public interface NavigationNodeOperateService extends Service {
      */
     void formatIndex(NavigationNodeFormatIndexInfo info) throws ServiceException;
 }
-
