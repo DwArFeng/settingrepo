@@ -4,6 +4,12 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/SystemRequirements.md。
+  - docs/wiki/zh-CN/TelqosCommands.md。
+  - docs/wiki/zh-CN/UsingTelqos.md。
+
 - 优化部分说明文件中的格式。
   - libext/README.md。
   - optext/README.md。

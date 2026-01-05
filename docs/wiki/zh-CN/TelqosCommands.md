@@ -451,8 +451,8 @@ iahnnode -bumm [-json json-string] [-jf json-file]
  -im,--inspect-message                     查询国际化消息
  -iml,--inspect-mek-list                   查询国际化 Mek 列表
  -imt,--inspect-message-table              查询国际化消息表
- -jf,--json-file <arg>                     JSON文件
- -json <arg>                               JSON字符串
+ -jf,--json-file <arg>                     JSON 文件
+ -json <arg>                               JSON 字符串
  -pl,--put-locale                          推入国际化地区
  -pm,--put-mek                             推入国际化 Mek
  -rl,--remove-locale                       移除国际化地区
@@ -519,8 +519,8 @@ imglnode -remove [-json json-string] [-jf json-file]
  -co,--change-order      更改图片列表节点的顺序
  -download               下载图片列表节点文件
  -inspect                查看图片列表节点
- -jf,--json-file <arg>   JSON文件
- -json <arg>             JSON字符串
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
  -remove                 移除图片列表节点
  -size                   获取图片列表节点的大小
  -update                 更新图片列表节点文件
@@ -591,8 +591,8 @@ imgnode -upload [-json json-string] [-jf json-file]
 图片节点操作服务
  -download               下载图片节点图片
  -inspect                查看图片节点图片
- -jf,--json-file <arg>   JSON文件
- -json <arg>             JSON字符串
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
  -upload                 上传图片节点图片
 ```
 
@@ -639,8 +639,8 @@ ltxtnode -upload [-json json-string] [-jf json-file]
 长文本节点操作服务
  -download               下载长文本节点长文本
  -inspect                查看长文本节点长文本
- -jf,--json-file <arg>   JSON文本
- -json <arg>             JSON字符串
+ -jf,--json-file <arg>   JSON 文本
+ -json <arg>             JSON 字符串
  -upload                 上传长文本节点长文本
 ```
 
@@ -741,8 +741,8 @@ settingnode -remove [-json json-string] [-jf json-file]
  -exists                 判断指定的设置节点是否存在
  -init                   初始化指定的设置节点
  -inspect                查看指定的设置节点
- -jf,--json-file <arg>   JSON文件
- -json <arg>             JSON字符串
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
  -remove                 移除指定的设置节点
 ```
 
@@ -789,8 +789,8 @@ usage: txtnode -inspect [-json json-string] [-jf json-file]
 txtnode -put [-json json-string] [-jf json-file]
 文本节点操作服务
  -inspect                查看指定的文本节点
- -jf,--json-file <arg>   JSON文件
- -json <arg>             JSON字符串
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
  -put                    向指定的文本节点中放入指定的信息
 ```
 

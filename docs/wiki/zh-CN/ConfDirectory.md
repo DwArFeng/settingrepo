@@ -148,7 +148,7 @@ dubbo.consumer.snowflake.group=
 | 文件名                   | 说明         |
 |-----------------------|------------|
 | connection.properties | FTP 连接配置文件 |
-| path.properties       | FTP路径配置文件  |
+| path.properties       | FTP 路径配置文件 |
 
 ### connection.properties
 
@@ -254,7 +254,7 @@ ftp.data_timeout=-1
 Redis 连接配置文件。
 
 ```properties
-# ip地址
+# ip 地址
 redis.hostName=your-host-here
 # 端口号
 redis.port=6379
@@ -405,8 +405,8 @@ image_thumbnail.output_format=jpg
 launcher.reset_formatter_support=true
 # 程序启动完成后，启动重置的延时时间。
 # 有些数据仓库以及重置器在启动后可能会需要一些时间进行自身的初始化，调整该参数以妥善的处理这些数据源和推送器。
-# 该参数等于0，意味着启动后立即启动重置服务。
-# 该参数小于0，意味着程序不主动启动重置服务，需要手动启动。
+# 该参数等于 0，意味着启动后立即启动重置服务。
+# 该参数小于 0，意味着程序不主动启动重置服务，需要手动启动。
 launcher.start_reset_delay=30000
 ```
 
@@ -439,7 +439,7 @@ pusher.type=drain
 ###################################################
 #                      drain                      #
 ###################################################
-# drain推送器没有任何配置。
+# drain 推送器没有任何配置。
 #
 ###################################################
 #                      multi                      #
