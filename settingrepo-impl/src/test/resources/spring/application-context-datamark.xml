@@ -9,7 +9,7 @@
         http://dwarfeng.com/schema/dwarfeng-datamark/dwarfeng-datamark.xsd"
 >
 
-    <!-- SettingCategory 数据标识 -->
+    <!-- SettingCategory 数据标识。 -->
     <datamark:handler
             handler-name="settingCategoryDatamarkHandler"
             resource-url="${datamark.setting_category.resource_url}"
@@ -17,7 +17,7 @@
             update-allowed="${datamark.setting_category.update_allowed}"
     />
 
-    <!-- SettingNode 数据标识 -->
+    <!-- SettingNode 数据标识。 -->
     <datamark:handler
             handler-name="settingNodeDatamarkHandler"
             resource-url="${datamark.setting_node.resource_url}"
