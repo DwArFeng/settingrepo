@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 依赖升级。
+  - 升级 `dwarfeng-datamark` 依赖版本为 `1.0.5.a` 以规避漏洞。
+
 - 优化文件格式。
   - 优化 `application-context-*.xml` 文件的格式。
 
