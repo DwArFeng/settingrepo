@@ -4,7 +4,11 @@
 
 ### 功能构建
 
-- (无)
+- 增加部分实体维护服务的预设查询。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_ASC。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_DESC。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_EQ。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_NODE_NAME_LIKE。
 
 ### Bug 修复
 
