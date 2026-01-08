@@ -14,6 +14,7 @@
 
     <!-- 定义 hibernate 事务管理器。 -->
     <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <!--suppress SpringXmlModelInspection -->
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>
