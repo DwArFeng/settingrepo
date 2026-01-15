@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public class FastJsonNavigationNodeInspectResult implements Bean {
 
-    private static final long serialVersionUID = 2048019053006496430L;
+    private static final long serialVersionUID = 854740068613813372L;
 
     public static FastJsonNavigationNodeInspectResult of(NavigationNodeInspectResult navigationNodeInspectResult) {
         if (Objects.isNull(navigationNodeInspectResult)) {
@@ -27,6 +27,7 @@ public class FastJsonNavigationNodeInspectResult implements Bean {
         } else {
             return new FastJsonNavigationNodeInspectResult(
                     navigationNodeInspectResult.getCount(),
+                    navigationNodeInspectResult.getContent(),
                     Optional.ofNullable(navigationNodeInspectResult.getChildren()).map(
                             f -> f.stream().map(FastJsonItem::of).collect(Collectors.toList())
                     ).orElse(null)
@@ -40,6 +41,7 @@ public class FastJsonNavigationNodeInspectResult implements Bean {
         } else {
             return new NavigationNodeInspectResult(
                     fastJson.getCount(),
+                    fastJson.getContent(),
                     Optional.ofNullable(fastJson.getChildren()).map(
                             f -> f.stream().map(FastJsonItem::toStackBean).collect(Collectors.toList())
                     ).orElse(null)
@@ -50,14 +52,18 @@ public class FastJsonNavigationNodeInspectResult implements Bean {
     @JSONField(name = "count", ordinal = 1)
     private int count;
 
-    @JSONField(name = "children", ordinal = 2)
+    @JSONField(name = "content", ordinal = 2)
+    private String content;
+
+    @JSONField(name = "children", ordinal = 3)
     private List<FastJsonItem> children;
 
     public FastJsonNavigationNodeInspectResult() {
     }
 
-    public FastJsonNavigationNodeInspectResult(int count, List<FastJsonItem> children) {
+    public FastJsonNavigationNodeInspectResult(int count, String content, List<FastJsonItem> children) {
         this.count = count;
+        this.content = content;
         this.children = children;
     }
 
@@ -67,6 +73,14 @@ public class FastJsonNavigationNodeInspectResult implements Bean {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public List<FastJsonItem> getChildren() {
@@ -81,6 +95,7 @@ public class FastJsonNavigationNodeInspectResult implements Bean {
     public String toString() {
         return "FastJsonNavigationNodeInspectResult{" +
                 "count=" + count +
+                ", content='" + content + '\'' +
                 ", children=" + children +
                 '}';
     }

@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 为部分操作服务添加新方法。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeOperateService。
+
 - 增加实体字段。
   - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNode.content。
 

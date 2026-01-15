@@ -43,6 +43,15 @@ public class NavigationNodeOperateServiceImpl implements NavigationNodeOperateSe
     }
 
     @Override
+    public void updateNode(NavigationNodeUpdateInfo info) throws ServiceException {
+        try {
+            navigationNodeOperateHandler.updateNode(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("更新导航节点时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
+
+    @Override
     public NavigationNodeItemInsertResult insertItem(NavigationNodeItemInsertInfo info) throws ServiceException {
         try {
             return navigationNodeOperateHandler.insertItem(info);

@@ -34,6 +34,15 @@ public interface NavigationNodeOperateHandler extends Handler {
     NavigationNodeInspectResult inspect(NavigationNodeInspectInfo info) throws HandlerException;
 
     /**
+     * 更新导航节点。
+     *
+     * @param info 导航节点更新信息。
+     * @throws HandlerException 处理器异常。
+     * @since 2.4.5
+     */
+    void updateNode(NavigationNodeUpdateInfo info) throws HandlerException;
+
+    /**
      * 插入导航节点条目。
      *
      * <p>

@@ -34,6 +34,15 @@ public interface NavigationNodeOperateService extends Service {
     NavigationNodeInspectResult inspect(NavigationNodeInspectInfo info) throws ServiceException;
 
     /**
+     * 更新导航节点。
+     *
+     * @param info 导航节点更新信息。
+     * @throws ServiceException 服务异常。
+     * @since 2.4.5
+     */
+    void updateNode(NavigationNodeUpdateInfo info) throws ServiceException;
+
+    /**
      * 插入导航节点条目。
      *
      * <p>

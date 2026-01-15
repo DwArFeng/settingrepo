@@ -13,12 +13,19 @@ import java.util.List;
  */
 public class NavigationNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = -7731743565787053033L;
+    private static final long serialVersionUID = -6919073643971809314L;
 
     /**
      * 导航节点的数量。
      */
     private int count;
+
+    /**
+     * 导航节点的内容。
+     *
+     * @since 2.4.5
+     */
+    private String content;
 
     /**
      * 导航节点条目列表（树形嵌套结构，同级节点按 index 升序）。
@@ -28,9 +35,10 @@ public class NavigationNodeInspectResult implements Dto {
     public NavigationNodeInspectResult() {
     }
 
-    public NavigationNodeInspectResult(int count, List<Item> children) {
+    public NavigationNodeInspectResult(int count, String content, List<Item> children) {
         this.count = count;
         this.children = children;
+        this.content = content;
     }
 
     public int getCount() {
@@ -39,6 +47,14 @@ public class NavigationNodeInspectResult implements Dto {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public List<Item> getChildren() {
@@ -53,6 +69,7 @@ public class NavigationNodeInspectResult implements Dto {
     public String toString() {
         return "NavigationNodeInspectResult{" +
                 "count=" + count +
+                ", content='" + content + '\'' +
                 ", children=" + children +
                 '}';
     }

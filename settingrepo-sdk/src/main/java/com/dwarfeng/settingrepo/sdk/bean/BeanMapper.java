@@ -793,4 +793,13 @@ public interface BeanMapper {
     NavigationNodeSizeInfo navigationNodeSizeInfoFromWebInput(
             WebInputNavigationNodeSizeInfo webInputNavigationNodeSizeInfo
     );
+
+    WebInputNavigationNodeUpdateInfo navigationNodeUpdateInfoToWebInput(
+            NavigationNodeUpdateInfo navigationNodeUpdateInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeUpdateInfo navigationNodeUpdateInfoFromWebInput(
+            WebInputNavigationNodeUpdateInfo webInputNavigationNodeUpdateInfo
+    );
 }

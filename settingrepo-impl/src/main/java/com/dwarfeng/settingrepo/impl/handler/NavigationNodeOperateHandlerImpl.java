@@ -154,7 +154,11 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
                 );
             } else {
                 List<NavigationNodeInspectResult.Item> children = findNavigationNodeItemDescendant(settingNodeKey);
-                result = new NavigationNodeInspectResult(navigationNode.getSize(), children);
+                result = new NavigationNodeInspectResult(
+                        navigationNode.getSize(),
+                        navigationNode.getContent(),
+                        children
+                );
                 String resultString = JSON.toJSONString(FastJsonNavigationNodeInspectResult.of(result));
                 redisTemplate.opsForValue().set(inspectResultCacheKey, resultString, inspectResultCacheTimeout);
             }
@@ -232,6 +236,51 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
         // 返回结果。
         return result;
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Override
+    public void updateNode(NavigationNodeUpdateInfo info) throws HandlerException {
+        try {
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+            String content = info.getContent();
+
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            SettingNode settingNode = settingNodeMaintainService.getIfExists(settingNodeKey);
+            if (Objects.isNull(settingNode)) {
+                String settingNodeRemark = "由 settingrepo 自动生成的导航节点";
+                settingNode = new SettingNode(
+                        settingNodeKey, Constants.SETTING_NODE_TYPE_NAVIGATION, new Date(), settingNodeRemark,
+                        true, category, args
+                );
+            } else {
+                settingNode.setType(Constants.SETTING_NODE_TYPE_NAVIGATION);
+                settingNode.setLastModifiedDate(new Date());
+            }
+            settingNodeMaintainService.insertOrUpdate(settingNode);
+
+            NavigationNode navigationNode = navigationNodeMaintainService.getIfExists(settingNodeKey);
+
+            if (Objects.isNull(navigationNode)) {
+                navigationNode = new NavigationNode(settingNodeKey, 0, content);
+            } else {
+                navigationNode.setContent(content);
+            }
+
+            navigationNodeMaintainService.insertOrUpdate(navigationNode);
+
+            String inspectResultCacheKey = parseCacheKey(inspectResultCachePrefix, settingNodeKey);
+            redisTemplate.delete(inspectResultCacheKey);
+
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
     }
 
     @SuppressWarnings("DuplicatedCode")
