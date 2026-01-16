@@ -43,7 +43,7 @@ public class NavigationNodeItemMaintainServiceImplTest {
             );
             navigationNodeItems.add(navigationNodeItem);
         }
-        navigationNode = new NavigationNode(new StringIdKey("test.navigation_id"), 0);
+        navigationNode = new NavigationNode(new StringIdKey("test.navigation_id"), 0, "content");
         parent = new NavigationNodeItem(null, navigationNode.getKey(), null, 0, "content", "name", "remark");
     }
 

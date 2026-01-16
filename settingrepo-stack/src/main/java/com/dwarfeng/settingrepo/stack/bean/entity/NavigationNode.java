@@ -11,17 +11,25 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class NavigationNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -4513840571719040829L;
+    private static final long serialVersionUID = -90938819676616476L;
 
     private StringIdKey key;
     private int size;
 
+    /**
+     * 内容。
+     *
+     * @since 2.4.5
+     */
+    private String content;
+
     public NavigationNode() {
     }
 
-    public NavigationNode(StringIdKey key, int size) {
+    public NavigationNode(StringIdKey key, int size, String content) {
         this.key = key;
         this.size = size;
+        this.content = content;
     }
 
     @Override
@@ -29,6 +37,7 @@ public class NavigationNode implements Entity<StringIdKey> {
         return key;
     }
 
+    @Override
     public void setKey(StringIdKey key) {
         this.key = key;
     }
@@ -41,11 +50,20 @@ public class NavigationNode implements Entity<StringIdKey> {
         this.size = size;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "NavigationNode{" +
                 "key=" + key +
                 ", size=" + size +
+                ", content='" + content + '\'' +
                 '}';
     }
 }

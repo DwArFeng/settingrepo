@@ -17,7 +17,7 @@ import java.util.Set;
 @EntityListeners(DatamarkEntityListener.class)
 public class HibernateNavigationNode implements Bean {
 
-    private static final long serialVersionUID = 2416591594857587727L;
+    private static final long serialVersionUID = -4841205395900902383L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -27,6 +27,9 @@ public class HibernateNavigationNode implements Bean {
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------
     @Column(name = "size")
     private int size;
+
+    @Column(name = "content", columnDefinition = "TEXT")
+    private String content;
 
     // -----------------------------------------------------------一对多-----------------------------------------------------------
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateNavigationNodeItem.class, mappedBy = "node")
@@ -77,6 +80,14 @@ public class HibernateNavigationNode implements Bean {
         this.size = size;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public Set<HibernateNavigationNodeItem> getItems() {
         return items;
     }
@@ -106,6 +117,7 @@ public class HibernateNavigationNode implements Bean {
         return getClass().getSimpleName() + "(" +
                 "stringId = " + stringId + ", " +
                 "size = " + size + ", " +
+                "content = " + content + ", " +
                 "createdDatamark = " + createdDatamark + ", " +
                 "modifiedDatamark = " + modifiedDatamark + ")";
     }

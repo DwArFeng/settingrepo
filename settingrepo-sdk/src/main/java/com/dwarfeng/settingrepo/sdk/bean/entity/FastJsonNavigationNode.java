@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class FastJsonNavigationNode implements Bean {
 
-    private static final long serialVersionUID = 1571126023278952370L;
+    private static final long serialVersionUID = 5417761722171934037L;
 
     public static FastJsonNavigationNode of(NavigationNode navigationNode) {
         if (Objects.isNull(navigationNode)) {
@@ -23,7 +23,8 @@ public class FastJsonNavigationNode implements Bean {
         } else {
             return new FastJsonNavigationNode(
                     FastJsonStringIdKey.of(navigationNode.getKey()),
-                    navigationNode.getSize()
+                    navigationNode.getSize(),
+                    navigationNode.getContent()
             );
         }
     }
@@ -34,12 +35,16 @@ public class FastJsonNavigationNode implements Bean {
     @JSONField(name = "size", ordinal = 2)
     private int size;
 
+    @JSONField(name = "content", ordinal = 3)
+    private String content;
+
     public FastJsonNavigationNode() {
     }
 
-    public FastJsonNavigationNode(FastJsonStringIdKey key, int size) {
+    public FastJsonNavigationNode(FastJsonStringIdKey key, int size, String content) {
         this.key = key;
         this.size = size;
+        this.content = content;
     }
 
     public FastJsonStringIdKey getKey() {
@@ -58,11 +63,20 @@ public class FastJsonNavigationNode implements Bean {
         this.size = size;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "FastJsonNavigationNode{" +
                 "key=" + key +
                 ", size=" + size +
+                ", content='" + content + '\'' +
                 '}';
     }
 }

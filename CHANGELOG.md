@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 增加实体字段。
+  - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNode.content。
+
 - 增加部分实体维护服务的预设查询。
   - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_ASC。
   - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_DESC。

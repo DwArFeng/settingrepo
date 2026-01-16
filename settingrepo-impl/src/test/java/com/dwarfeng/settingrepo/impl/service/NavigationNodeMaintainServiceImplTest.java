@@ -31,7 +31,9 @@ public class NavigationNodeMaintainServiceImplTest {
     public void setUp() {
         navigationNodes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            NavigationNode navigationNode = new NavigationNode(new StringIdKey("test.navigation_node." + i), 12450);
+            NavigationNode navigationNode = new NavigationNode(
+                    new StringIdKey("test.navigation_node." + i), 12450, "content"
+            );
             navigationNodes.add(navigationNode);
         }
     }

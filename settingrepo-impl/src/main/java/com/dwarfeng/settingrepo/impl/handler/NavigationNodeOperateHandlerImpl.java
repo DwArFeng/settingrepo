@@ -100,7 +100,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化，并插入或更新实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0);
+                navigationNode = new NavigationNode(settingNodeKey, 0, null);
                 navigationNodeMaintainService.insertOrUpdate(navigationNode);
             }
 
@@ -140,7 +140,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化，并插入或更新实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0);
+                navigationNode = new NavigationNode(settingNodeKey, 0, null);
                 navigationNodeMaintainService.insertOrUpdate(navigationNode);
             }
 
@@ -291,7 +291,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0);
+                navigationNode = new NavigationNode(settingNodeKey, 0, null);
             }
 
             // 构造 NavigationNodeItem 实体，插入。
@@ -339,7 +339,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             // 确认条目存在。
             handlerValidator.makeSureNavigationNodeItemExists(itemKey);
             // 确认父条目存在。
-            if(Objects.nonNull(parentItemKey)){
+            if (Objects.nonNull(parentItemKey)) {
                 handlerValidator.makeSureNavigationNodeItemExists(parentItemKey);
             }
 
@@ -349,11 +349,11 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             // 确认条目属于对应的设置节点。
             handlerValidator.makeSureNavigationNodeItemMatched(itemKey, settingNodeKey);
             // 确认父条目属于对应的设置节点。
-            if(Objects.nonNull(parentItemKey)){
+            if (Objects.nonNull(parentItemKey)) {
                 handlerValidator.makeSureNavigationNodeItemMatched(parentItemKey, settingNodeKey);
             }
             // 确认索引合法。
-            if(navigationNodeItemMaintainService.get(itemKey).getIndex() != index){
+            if (navigationNodeItemMaintainService.get(itemKey).getIndex() != index) {
                 handlerValidator.makeSureNavigationNodeItemIndexNotConflict(settingNodeKey, parentItemKey, index);
             }
 
@@ -382,7 +382,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0);
+                navigationNode = new NavigationNode(settingNodeKey, 0, null);
             }
 
             // 获取 NavigationNodeItem 实体，更新。
@@ -452,7 +452,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0);
+                navigationNode = new NavigationNode(settingNodeKey, 0, null);
             }
 
             // 删除 NavigationNodeItem 实体。
@@ -483,7 +483,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
         );
         for (NavigationNodeItem navigationNodeItem : navigationNodeItems) {
             stack.push(navigationNodeItem.getKey());
-            result ++;
+            result++;
         }
 
         // 在栈清空之前，一直执行循环。
@@ -497,7 +497,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             );
             for (NavigationNodeItem childNavigationNodeItem : childNavigationNodeItems) {
                 stack.push(childNavigationNodeItem.getKey());
-                result ++;
+                result++;
             }
         }
 
