@@ -41,6 +41,7 @@ public class WebInputNavigationNodeUpdateInfo implements Dto {
     private String[] args;
 
     @JSONField(name = "content")
+    @NotNull
     private String content;
 
     public WebInputNavigationNodeUpdateInfo() {

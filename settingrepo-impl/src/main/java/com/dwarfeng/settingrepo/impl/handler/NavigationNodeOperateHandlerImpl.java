@@ -18,6 +18,7 @@ import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.dwarfeng.subgrade.stack.generation.KeyGenerator;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -100,7 +101,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化，并插入或更新实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0, null);
+                navigationNode = new NavigationNode(settingNodeKey, 0, StringUtils.EMPTY);
                 navigationNodeMaintainService.insertOrUpdate(navigationNode);
             }
 
@@ -140,7 +141,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化，并插入或更新实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0, null);
+                navigationNode = new NavigationNode(settingNodeKey, 0, StringUtils.EMPTY);
                 navigationNodeMaintainService.insertOrUpdate(navigationNode);
             }
 
@@ -340,7 +341,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0, null);
+                navigationNode = new NavigationNode(settingNodeKey, 0, StringUtils.EMPTY);
             }
 
             // 构造 NavigationNodeItem 实体，插入。
@@ -431,7 +432,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0, null);
+                navigationNode = new NavigationNode(settingNodeKey, 0, StringUtils.EMPTY);
             }
 
             // 获取 NavigationNodeItem 实体，更新。
@@ -501,7 +502,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
             // 如果导航节点实体不存在，则初始化实体。
             if (Objects.isNull(navigationNode)) {
-                navigationNode = new NavigationNode(settingNodeKey, 0, null);
+                navigationNode = new NavigationNode(settingNodeKey, 0, StringUtils.EMPTY);
             }
 
             // 删除 NavigationNodeItem 实体。
