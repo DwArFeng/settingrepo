@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
 
-    private static final long serialVersionUID = 3743764836692663726L;
+    private static final long serialVersionUID = 717591849167078619L;
 
     public static JSFixedFastJsonNavigationNodeInspectResult of(
             NavigationNodeInspectResult navigationNodeInspectResult
@@ -29,6 +29,7 @@ public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
         } else {
             return new JSFixedFastJsonNavigationNodeInspectResult(
                     navigationNodeInspectResult.getCount(),
+                    navigationNodeInspectResult.getContent(),
                     Optional.ofNullable(navigationNodeInspectResult.getChildren()).map(
                             f -> f.stream().map(JSFixedFastJsonItem::of).collect(Collectors.toList())
                     ).orElse(null)
@@ -39,14 +40,18 @@ public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
     @JSONField(name = "count", ordinal = 1)
     private int count;
 
-    @JSONField(name = "children", ordinal = 2)
+    @JSONField(name = "content", ordinal = 2)
+    private String content;
+
+    @JSONField(name = "children", ordinal = 3)
     private List<JSFixedFastJsonItem> children;
 
     public JSFixedFastJsonNavigationNodeInspectResult() {
     }
 
-    public JSFixedFastJsonNavigationNodeInspectResult(int count, List<JSFixedFastJsonItem> children) {
+    public JSFixedFastJsonNavigationNodeInspectResult(int count, String content, List<JSFixedFastJsonItem> children) {
         this.count = count;
+        this.content = content;
         this.children = children;
     }
 
@@ -56,6 +61,14 @@ public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public List<JSFixedFastJsonItem> getChildren() {
@@ -70,6 +83,7 @@ public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
     public String toString() {
         return "JSFixedFastJsonNavigationNodeInspectResult{" +
                 "count=" + count +
+                ", content='" + content + '\'' +
                 ", children=" + children +
                 '}';
     }

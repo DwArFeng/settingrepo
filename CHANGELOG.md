@@ -8,7 +8,8 @@
 
 ### Bug 修复
 
-- (无)
+- 修复部分 JSFixed FastJson 实体的字段缺失问题。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.JSFixedFastJsonNavigationNodeInspectResult。
 
 ### 功能移除
 
