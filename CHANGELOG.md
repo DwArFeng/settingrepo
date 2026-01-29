@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+
 - 优化导航节点的更新逻辑。
   - 更新导航节点时，`content` 字段禁止为 `null`。
   - 导航节点初始化时，`content` 字段默认为空字符串。

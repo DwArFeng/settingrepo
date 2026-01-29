@@ -30,12 +30,36 @@
 
 ## 版本黑名单
 
-| 编号                                                 | 大版本   | 起始版本    | 结束版本    | 原因           |
-|----------------------------------------------------|-------|---------|---------|--------------|
-| [BLACKLIST-20260105.1](#BLACKLIST-202601051)       | 2.4.x | 2.4.2.a | 2.4.2.a | 导航条目更新逻辑存在缺陷 |
-| [BLACKLIST-LEGACY-2.2.0.a](#BLACKLIST-LEGACY-220a) | 2.2.x | 2.2.0.a | 2.2.0.a | 核心功能无法正常使用   |
+| 编号                                                 | 大版本   | 起始版本    | 结束版本    | 原因                      |
+|----------------------------------------------------|-------|---------|---------|-------------------------|
+| [BLACKLIST-20260128.1](#BLACKLIST-202601281)       | 2.4.x | 2.4.2.a | 2.4.5.a | JSFixed FastJson 实体字段缺失 |
+| [BLACKLIST-20260105.1](#BLACKLIST-202601051)       | 2.4.x | 2.4.2.a | 2.4.2.a | 导航条目更新逻辑存在缺陷            |
+| [BLACKLIST-LEGACY-2.2.0.a](#BLACKLIST-LEGACY-220a) | 2.2.x | 2.2.0.a | 2.2.0.a | 核心功能无法正常使用              |
 
 ## 详细原因
+
+### BLACKLIST-20260128.1
+
+原因：`JSFixedFastJsonNavigationNodeInspectResult` 实体类缺少 `content` 字段，导致在转换 `NavigationNodeInspectResult`
+对象时丢失 `content` 字段数据。
+
+- 受影响模块/类：
+  - `com.dwarfeng.settingrepo.sdk.bean.dto.JSFixedFastJsonNavigationNodeInspectResult`。
+- 典型触发条件：
+  - 使用 `JSFixedFastJsonNavigationNodeInspectResult.of()` 方法将 `NavigationNodeInspectResult` 对象转换为 JSFixed
+    FastJson 实体时。
+  - 当源对象包含 `content` 字段（在 2.4.5 版本中 `NavigationNodeInspectResult` 增加了 `content` 字段）时，
+    转换后的对象会丢失该字段。
+- 典型症状：
+  - JSON 序列化后的结果中缺少 `content` 字段。
+  - 前端或其他调用方无法获取导航节点的内容信息。
+  - 可能导致数据不完整，影响业务功能正常使用。
+- 影响范围：
+  - 直接或间接使用 `JSFixedFastJsonNavigationNodeInspectResult` 进行 JSON 序列化的功能与接口。
+  - 依赖导航节点查看结果中 `content` 字段的业务功能。
+  - 在 2.4.5 版本中，当 `NavigationNodeInspectResult` 包含 `content` 字段时，转换过程会丢失该字段数据。
+
+迁移建议：升级至 2.4.6.a 及以上版本。
 
 ### BLACKLIST-20260105.1
 
