@@ -5,8 +5,10 @@ import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
+import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.settingrepo.stack.cache.FormatterSupportCache;
 import com.dwarfeng.settingrepo.stack.cache.IahnNodeMessageCache;
+import com.dwarfeng.settingrepo.stack.cache.KvNodeItemCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.*;
 import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
@@ -61,6 +63,10 @@ public class ServiceConfiguration {
     private final NavigationNodeDao navigationNodeDao;
     private final NavigationNodeItemCrudOperation navigationNodeItemCrudOperation;
     private final NavigationNodeItemDao navigationNodeItemDao;
+    private final KvNodeCrudOperation kvNodeCrudOperation;
+    private final KvNodeDao kvNodeDao;
+    private final KvNodeItemDao kvNodeItemDao;
+    private final KvNodeItemCache kvNodeItemCache;
 
     @Value("${cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -68,6 +74,8 @@ public class ServiceConfiguration {
     private long textNodeTimeout;
     @Value("${cache.timeout.entity.iahn_node_message}")
     private long iahnNodeMessageTimeout;
+    @Value("${cache.timeout.entity.kv_node_item}")
+    private long kvNodeItemTimeout;
 
     public ServiceConfiguration(
             ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration,
@@ -105,7 +113,11 @@ public class ServiceConfiguration {
             NavigationNodeCrudOperation navigationNodeCrudOperation,
             NavigationNodeDao navigationNodeDao,
             NavigationNodeItemCrudOperation navigationNodeItemCrudOperation,
-            NavigationNodeItemDao navigationNodeItemDao
+            NavigationNodeItemDao navigationNodeItemDao,
+            KvNodeCrudOperation kvNodeCrudOperation,
+            KvNodeDao kvNodeDao,
+            KvNodeItemDao kvNodeItemDao,
+            KvNodeItemCache kvNodeItemCache
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -143,6 +155,10 @@ public class ServiceConfiguration {
         this.navigationNodeDao = navigationNodeDao;
         this.navigationNodeItemCrudOperation = navigationNodeItemCrudOperation;
         this.navigationNodeItemDao = navigationNodeItemDao;
+        this.kvNodeCrudOperation = kvNodeCrudOperation;
+        this.kvNodeDao = kvNodeDao;
+        this.kvNodeItemDao = kvNodeItemDao;
+        this.kvNodeItemCache = kvNodeItemCache;
     }
 
     @Bean
@@ -624,6 +640,64 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 navigationNodeItemDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, KvNode> kvNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                kvNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<KvNode> kvNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                kvNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<KvNode> kvNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                kvNodeDao
+        );
+    }
+
+    @Bean
+    public GeneralBatchCrudService<KvNodeItemKey, KvNodeItem> kvNodeItemGeneralBatchCrudService() {
+        return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                kvNodeItemDao,
+                kvNodeItemCache,
+                new ExceptionKeyGenerator<>(),
+                kvNodeItemTimeout
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<KvNodeItem> kvNodeItemDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                kvNodeItemDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<KvNodeItem> kvNodeItemDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                kvNodeItemDao
         );
     }
 }

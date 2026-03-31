@@ -5,11 +5,13 @@ import com.dwarfeng.settingrepo.impl.bean.entity.*;
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMekKey;
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMessageKey;
+import com.dwarfeng.settingrepo.impl.bean.key.HibernateKvNodeItemKey;
 import com.dwarfeng.settingrepo.impl.dao.preset.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
+import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
 import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
@@ -46,6 +48,8 @@ public class DaoConfiguration {
     private final FileListNodeItemPresetCriteriaMaker fileListNodeItemPresetCriteriaMaker;
     private final NavigationNodePresetCriteriaMaker navigationNodePresetCriteriaMaker;
     private final NavigationNodeItemPresetCriteriaMaker navigationNodeItemPresetCriteriaMaker;
+    private final KvNodePresetCriteriaMaker kvNodePresetCriteriaMaker;
+    private final KvNodeItemPresetCriteriaMaker kvNodeItemPresetCriteriaMaker;
 
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -68,7 +72,9 @@ public class DaoConfiguration {
             FileListNodePresetCriteriaMaker fileListNodePresetCriteriaMaker,
             FileListNodeItemPresetCriteriaMaker fileListNodeItemPresetCriteriaMaker,
             NavigationNodePresetCriteriaMaker navigationNodePresetCriteriaMaker,
-            NavigationNodeItemPresetCriteriaMaker navigationNodeItemPresetCriteriaMaker
+            NavigationNodeItemPresetCriteriaMaker navigationNodeItemPresetCriteriaMaker,
+            KvNodePresetCriteriaMaker kvNodePresetCriteriaMaker,
+            KvNodeItemPresetCriteriaMaker kvNodeItemPresetCriteriaMaker
     ) {
         this.template = template;
         this.formatterSupportPresetCriteriaMaker = formatterSupportPresetCriteriaMaker;
@@ -88,6 +94,8 @@ public class DaoConfiguration {
         this.fileListNodeItemPresetCriteriaMaker = fileListNodeItemPresetCriteriaMaker;
         this.navigationNodePresetCriteriaMaker = navigationNodePresetCriteriaMaker;
         this.navigationNodeItemPresetCriteriaMaker = navigationNodeItemPresetCriteriaMaker;
+        this.kvNodePresetCriteriaMaker = kvNodePresetCriteriaMaker;
+        this.kvNodeItemPresetCriteriaMaker = kvNodeItemPresetCriteriaMaker;
     }
 
     @Bean
@@ -707,6 +715,70 @@ public class DaoConfiguration {
                 ),
                 HibernateNavigationNodeItem.class,
                 navigationNodeItemPresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, KvNode, HibernateKvNode>
+    kvNodeSupportHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(KvNode.class, HibernateKvNode.class, BeanMapper.class),
+                HibernateKvNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<KvNode, HibernateKvNode> kvNodeSupportHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(KvNode.class, HibernateKvNode.class, BeanMapper.class),
+                HibernateKvNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<KvNode, HibernateKvNode> kvNodeSupportHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(KvNode.class, HibernateKvNode.class, BeanMapper.class),
+                HibernateKvNode.class,
+                kvNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<KvNodeItemKey, HibernateKvNodeItemKey, KvNodeItem, HibernateKvNodeItem>
+    kvNodeItemSupportHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(KvNodeItemKey.class, HibernateKvNodeItemKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(KvNodeItem.class, HibernateKvNodeItem.class, BeanMapper.class),
+                HibernateKvNodeItem.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<KvNodeItem, HibernateKvNodeItem> kvNodeItemSupportHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(KvNodeItem.class, HibernateKvNodeItem.class, BeanMapper.class),
+                HibernateKvNodeItem.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<KvNodeItem, HibernateKvNodeItem> kvNodeItemSupportHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(KvNodeItem.class, HibernateKvNodeItem.class, BeanMapper.class),
+                HibernateKvNodeItem.class,
+                kvNodeItemPresetCriteriaMaker
         );
     }
 }

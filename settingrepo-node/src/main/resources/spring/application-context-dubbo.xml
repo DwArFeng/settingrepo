@@ -172,6 +172,18 @@
             group="${dubbo.provider.group}"
     />
 
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.KvNodeMaintainService"
+            ref="kvNodeMaintainServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.KvNodeItemMaintainService"
+            ref="kvNodeItemMaintainServiceImpl"
+            group="${dubbo.provider.group}"
+    />
+
     <!-- endregion -->
 
     <!-- endregion -->

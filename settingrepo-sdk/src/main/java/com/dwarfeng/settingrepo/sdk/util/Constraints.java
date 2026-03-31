@@ -105,6 +105,13 @@ public final class Constraints {
      */
     public static final int LENGTH_NAVIGATION_NODE_NAME = 50;
 
+    /**
+     * 键值对节点条目 ID 的长度约束。
+     *
+     * @since 2.5.0
+     */
+    public static final int LENGTH_KV_NODE_ITEM_ID = 100;
+
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
     }

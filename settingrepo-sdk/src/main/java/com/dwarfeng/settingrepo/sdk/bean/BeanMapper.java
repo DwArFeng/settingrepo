@@ -8,6 +8,7 @@ import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
+import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
 import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
 import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
@@ -84,6 +85,11 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     IahnNodeMessageKey iahnNodeMessageKeyFromWebInput(WebInputIahnNodeMessageKey webInputIahnNodeMessageKey);
+
+    FastJsonKvNodeItemKey kvNodeItemKeyToFastJson(KvNodeItemKey kvNodeItemKey);
+
+    @InheritInverseConfiguration
+    KvNodeItemKey kvNodeItemKeyFromFastJson(FastJsonKvNodeItemKey fastJsonKvNodeItemKey);
 
     // endregion
 
@@ -197,6 +203,16 @@ public interface BeanMapper {
     NavigationNodeItem navigationNodeItemFromJSFixedFastJson(
             JSFixedFastJsonNavigationNodeItem jSFixedFastJsonNavigationNodeItem
     );
+
+    FastJsonKvNode kvNodeToFastJson(KvNode kvNode);
+
+    @InheritInverseConfiguration
+    KvNode kvNodeFromFastJson(FastJsonKvNode fastJsonKvNode);
+
+    FastJsonKvNodeItem kvNodeItemToFastJson(KvNodeItem kvNodeItem);
+
+    @InheritInverseConfiguration
+    KvNodeItem kvNodeItemFromFastJson(FastJsonKvNodeItem fastJsonKvNodeItem);
 
     // endregion
 

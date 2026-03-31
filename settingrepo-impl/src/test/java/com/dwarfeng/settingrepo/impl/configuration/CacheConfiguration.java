@@ -5,10 +5,12 @@ import com.dwarfeng.settingrepo.sdk.bean.entity.*;
 import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeLocaleStringKeyFormatter;
 import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeMekStringKeyFormatter;
 import com.dwarfeng.settingrepo.sdk.bean.key.formatter.IahnNodeMessageStringKeyFormatter;
+import com.dwarfeng.settingrepo.sdk.bean.key.formatter.KvNodeItemStringKeyFormatter;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
+import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.redis.formatter.LongIdStringKeyFormatter;
@@ -59,6 +61,10 @@ public class CacheConfiguration {
     private String navigationNodePrefix;
     @Value("${cache.prefix.entity.navigation_node_item}")
     private String navigationNodeItemPrefix;
+    @Value("${cache.prefix.entity.kv_node}")
+    private String kvNodePrefix;
+    @Value("${cache.prefix.entity.kv_node_item}")
+    private String kvNodeItemPrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -228,7 +234,7 @@ public class CacheConfiguration {
 
     @Bean
     @SuppressWarnings("unchecked")
-    public RedisBatchBaseCache<StringIdKey , FileListNode, FastJsonFileListNode> fileListNodeRedisBatchBaseCache() {
+    public RedisBatchBaseCache<StringIdKey, FileListNode, FastJsonFileListNode> fileListNodeRedisBatchBaseCache() {
         return new RedisBatchBaseCache<>(
                 (RedisTemplate<String, FastJsonFileListNode>) template,
                 new StringIdStringKeyFormatter(fileListNodePrefix),
@@ -269,6 +275,26 @@ public class CacheConfiguration {
                 new MapStructBeanTransformer<>(
                         NavigationNodeItem.class, FastJsonNavigationNodeItem.class, BeanMapper.class
                 )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, KvNode, FastJsonKvNode> kvNodeCacheDelegate() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonKvNode>) template,
+                new StringIdStringKeyFormatter(kvNodePrefix),
+                new MapStructBeanTransformer<>(KvNode.class, FastJsonKvNode.class, BeanMapper.class)
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<KvNodeItemKey, KvNodeItem, FastJsonKvNodeItem> kvNodeItemCacheDelegate() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonKvNodeItem>) template,
+                new KvNodeItemStringKeyFormatter(kvNodeItemPrefix),
+                new MapStructBeanTransformer<>(KvNodeItem.class, FastJsonKvNodeItem.class, BeanMapper.class)
         );
     }
 }

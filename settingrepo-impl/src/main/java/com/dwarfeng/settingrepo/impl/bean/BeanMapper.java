@@ -4,10 +4,12 @@ import com.dwarfeng.settingrepo.impl.bean.entity.*;
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMekKey;
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMessageKey;
+import com.dwarfeng.settingrepo.impl.bean.key.HibernateKvNodeItemKey;
 import com.dwarfeng.settingrepo.stack.bean.entity.*;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
+import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
@@ -58,6 +60,11 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     IahnNodeMessageKey iahnNodeMessageKeyFromHibernate(HibernateIahnNodeMessageKey hibernateIahnNodeMessageKey);
+
+    HibernateKvNodeItemKey kvNodeItemKeyToHibernate(KvNodeItemKey kvNodeItemKey);
+
+    @InheritInverseConfiguration
+    KvNodeItemKey kvNodeItemKeyFromHibernate(HibernateKvNodeItemKey hibernateKvNodeItemKey);
 
     // endregion
 
@@ -213,6 +220,23 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     NavigationNodeItem navigationNodeItemFromHibernate(HibernateNavigationNodeItem hibernateNavigationNodeItem);
+
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "items", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateKvNode kvNodeToHibernate(KvNode kvNode);
+
+    @InheritInverseConfiguration
+    KvNode kvNodeFromHibernate(HibernateKvNode hibernateKvNode);
+
+    @Mapping(target = "nodeStringId", ignore = true)
+    @Mapping(target = "node", ignore = true)
+    @Mapping(target = "itemStringId", ignore = true)
+    HibernateKvNodeItem kvNodeItemToHibernate(KvNodeItem kvNodeItem);
+
+    @InheritInverseConfiguration
+    KvNodeItem kvNodeItemFromHibernate(HibernateKvNodeItem hibernateKvNodeItem);
 
     // endregion
 }

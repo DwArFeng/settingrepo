@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.KvNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.KvNode。
+
 - 依赖升级。
   - 升级 `dutil` 依赖版本为 `0.4.1.a-beta` 以规避漏洞。
   - 升级 `snowflake` 依赖版本为 `1.8.3.a` 以规避漏洞。
