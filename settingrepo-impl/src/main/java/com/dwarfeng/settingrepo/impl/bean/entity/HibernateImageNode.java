@@ -17,12 +17,16 @@ public class HibernateImageNode implements Bean {
 
     private static final long serialVersionUID = 3579611746938249633L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", length = Constraints.LENGTH_SETTING_NODE_ID, nullable = false, unique = true)
     private String stringId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "origin_name", length = Constraints.LENGTH_NAME, nullable = false)
     private String originName;
 
@@ -32,7 +36,10 @@ public class HibernateImageNode implements Bean {
     @Column(name = "length")
     private Long length;
 
-    // -----------------------------------------------------------审计-----------------------------------------------------------
+    // endregion
+
+    // region 审计
+
     @DatamarkField(handlerName = "settingNodeDatamarkHandler")
     @Column(
             name = "created_datamark",
@@ -48,10 +55,13 @@ public class HibernateImageNode implements Bean {
     )
     private String modifiedDatamark;
 
+    // endregion
+
     public HibernateImageNode() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateStringIdKey getKey() {
         return Optional.ofNullable(stringId).map(HibernateStringIdKey::new).orElse(null);
     }
@@ -60,7 +70,10 @@ public class HibernateImageNode implements Bean {
         this.stringId = Optional.ofNullable(idKey).map(HibernateStringIdKey::getStringId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getStringId() {
         return stringId;
     }
@@ -108,6 +121,8 @@ public class HibernateImageNode implements Bean {
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
     }
+
+    // endregion
 
     @Override
     public String toString() {

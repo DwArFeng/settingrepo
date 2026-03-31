@@ -15,19 +15,26 @@ public class HibernateNavigationNodeItem implements Bean {
 
     private static final long serialVersionUID = -5797505043800131488L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private Long longId;
 
-    // -----------------------------------------------------------外键-----------------------------------------------------------
+    // endregion
+
+    // region 外键
+
     @Column(name = "node_id", length = Constraints.LENGTH_SETTING_NODE_ID)
     private String nodeStringId;
 
     @Column(name = "parent_id")
     private Long parentLongId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "column_index")
     private int index;
 
@@ -40,7 +47,10 @@ public class HibernateNavigationNodeItem implements Bean {
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateNavigationNodeItem.class)
     @JoinColumns({ //
             @JoinColumn(name = "parent_id", referencedColumnName = "id", insertable = false, updatable = false), //
@@ -53,10 +63,13 @@ public class HibernateNavigationNodeItem implements Bean {
     })
     private HibernateNavigationNode node;
 
+    // endregion
+
     public HibernateNavigationNodeItem() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateLongIdKey getKey() {
         return Optional.ofNullable(longId).map(HibernateLongIdKey::new).orElse(null);
     }
@@ -81,7 +94,10 @@ public class HibernateNavigationNodeItem implements Bean {
         this.parentLongId = Optional.ofNullable(parentKey).map(HibernateLongIdKey::getLongId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getLongId() {
         return longId;
     }
@@ -153,6 +169,8 @@ public class HibernateNavigationNodeItem implements Bean {
     public void setNode(HibernateNavigationNode node) {
         this.node = node;
     }
+
+    // endregion
 
     @Override
     public String toString() {

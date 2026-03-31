@@ -21,12 +21,16 @@ public class HibernateSettingNode implements Bean {
 
     private static final long serialVersionUID = 4311995287621600928L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", length = Constraints.LENGTH_SETTING_NODE_ID, nullable = false, unique = true)
     private String stringId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "type")
     private int type;
 
@@ -47,7 +51,10 @@ public class HibernateSettingNode implements Bean {
     @Convert(converter = StringArrayStringConverter.class)
     private String[] args;
 
-    // -----------------------------------------------------------审计-----------------------------------------------------------
+    // endregion
+
+    // region 审计
+
     @DatamarkField(handlerName = "settingNodeDatamarkHandler")
     @Column(
             name = "created_datamark",
@@ -63,10 +70,13 @@ public class HibernateSettingNode implements Bean {
     )
     private String modifiedDatamark;
 
+    // endregion
+
     public HibernateSettingNode() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateStringIdKey getKey() {
         return Optional.ofNullable(stringId).map(HibernateStringIdKey::new).orElse(null);
     }
@@ -75,7 +85,10 @@ public class HibernateSettingNode implements Bean {
         this.stringId = Optional.ofNullable(idKey).map(HibernateStringIdKey::getStringId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getStringId() {
         return stringId;
     }
@@ -147,6 +160,8 @@ public class HibernateSettingNode implements Bean {
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
     }
+
+    // endregion
 
     @Override
     public String toString() {

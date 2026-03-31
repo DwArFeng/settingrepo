@@ -17,12 +17,16 @@ public class HibernateSettingCategory implements Bean {
 
     private static final long serialVersionUID = 24549402700508964L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", length = Constraints.LENGTH_SETTING_CATEGORY_ID, nullable = false, unique = true)
     private String stringId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "formatter_type", length = Constraints.LENGTH_TYPE)
     private String formatterType;
 
@@ -32,7 +36,10 @@ public class HibernateSettingCategory implements Bean {
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
 
-    // -----------------------------------------------------------审计-----------------------------------------------------------
+    // endregion
+
+    // region 审计
+
     @DatamarkField(handlerName = "settingCategoryDatamarkHandler")
     @Column(
             name = "created_datamark",
@@ -48,10 +55,13 @@ public class HibernateSettingCategory implements Bean {
     )
     private String modifiedDatamark;
 
+    // endregion
+
     public HibernateSettingCategory() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateStringIdKey getKey() {
         return Optional.ofNullable(stringId).map(HibernateStringIdKey::new).orElse(null);
     }
@@ -60,7 +70,10 @@ public class HibernateSettingCategory implements Bean {
         this.stringId = Optional.ofNullable(idKey).map(HibernateStringIdKey::getStringId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getStringId() {
         return stringId;
     }
@@ -108,6 +121,8 @@ public class HibernateSettingCategory implements Bean {
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
     }
+
+    // endregion
 
     @Override
     public String toString() {

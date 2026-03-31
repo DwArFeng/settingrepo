@@ -16,7 +16,8 @@ public class HibernateIahnNodeLocale implements Bean {
 
     private static final long serialVersionUID = -1640948406902130315L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "node_string_id", nullable = false, length = Constraints.LENGTH_SETTING_NODE_ID)
     private String nodeStringId;
@@ -33,28 +34,40 @@ public class HibernateIahnNodeLocale implements Bean {
     @Column(name = "variant", nullable = false, length = Constraints.LENGTH_IAHN_NODE_VARIANT_MAX)
     private String variant;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "label", length = Constraints.LENGTH_NAME)
     private String label;
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateIahnNode.class)
     @JoinColumns({
             @JoinColumn(name = "node_string_id", referencedColumnName = "id", insertable = false, updatable = false),
     })
     private HibernateIahnNode node;
 
-    // -----------------------------------------------------------一对多-----------------------------------------------------------
+    // endregion
+
+    // region 一对多
+
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateIahnNodeMessage.class, mappedBy = "locale")
     private Set<HibernateIahnNodeMessage> messages = new HashSet<>();
+
+    // endregion
 
     public HibernateIahnNodeLocale() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateIahnNodeLocaleKey getKey() {
         return new HibernateIahnNodeLocaleKey(nodeStringId, language, country, variant);
     }
@@ -73,7 +86,10 @@ public class HibernateIahnNodeLocale implements Bean {
         }
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getNodeStringId() {
         return nodeStringId;
     }
@@ -137,6 +153,8 @@ public class HibernateIahnNodeLocale implements Bean {
     public void setMessages(Set<HibernateIahnNodeMessage> messages) {
         this.messages = messages;
     }
+
+    // endregion
 
     @Override
     public String toString() {

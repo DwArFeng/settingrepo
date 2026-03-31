@@ -14,7 +14,8 @@ public class HibernateIahnNodeMessage implements Bean {
 
     private static final long serialVersionUID = -8313653148934662532L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "node_string_id", nullable = false, length = Constraints.LENGTH_SETTING_NODE_ID)
     private String nodeStringId;
@@ -35,11 +36,17 @@ public class HibernateIahnNodeMessage implements Bean {
     @Column(name = "mek_id", nullable = false, length = Constraints.LENGTH_IAHN_NODE_MEK_ID)
     private String mekId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "message", nullable = false, length = Constraints.LENGTH_IAHN_NODE_MESSAGE)
     private String message;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateIahnNode.class)
     @JoinColumns({
             @JoinColumn(name = "node_string_id", referencedColumnName = "id", insertable = false, updatable = false),
@@ -62,11 +69,13 @@ public class HibernateIahnNodeMessage implements Bean {
     })
     private HibernateIahnNodeMek mek;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
     public HibernateIahnNodeMessage() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateIahnNodeMessageKey getKey() {
         return new HibernateIahnNodeMessageKey(nodeStringId, language, country, variant, mekId);
     }
@@ -87,7 +96,10 @@ public class HibernateIahnNodeMessage implements Bean {
         }
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getNodeStringId() {
         return nodeStringId;
     }
@@ -159,6 +171,8 @@ public class HibernateIahnNodeMessage implements Bean {
     public void setMek(HibernateIahnNodeMek mek) {
         this.mek = mek;
     }
+
+    // endregion
 
     @Override
     public String toString() {

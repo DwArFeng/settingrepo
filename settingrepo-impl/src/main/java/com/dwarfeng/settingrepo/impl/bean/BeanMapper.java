@@ -28,7 +28,8 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface BeanMapper {
 
-    // -----------------------------------------------------------Subgrade Key-----------------------------------------------------------
+    // region Subgrade Key
+
     HibernateLongIdKey longIdKeyToHibernate(LongIdKey longIdKey);
 
     @InheritInverseConfiguration
@@ -39,7 +40,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromHibernate(HibernateStringIdKey hibernateStringIdKey);
 
-    // -----------------------------------------------------------Settingrepo Key-----------------------------------------------------------
+    // endregion
+
+    // region Settingrepo Key
+
     HibernateIahnNodeLocaleKey iahnNodeLocaleKeyToHibernate(IahnNodeLocaleKey iahnNodeLocaleKey);
 
     @InheritInverseConfiguration
@@ -55,7 +59,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     IahnNodeMessageKey iahnNodeMessageKeyFromHibernate(HibernateIahnNodeMessageKey hibernateIahnNodeMessageKey);
 
-    // -----------------------------------------------------------Settingrepo Entity-----------------------------------------------------------
+    // endregion
+
+    // region Settingrepo Entity
+
     @Mapping(target = "stringId", ignore = true)
     HibernateFormatterSupport formatterSupportToHibernate(FormatterSupport formatterSupport);
 
@@ -206,4 +213,6 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     NavigationNodeItem navigationNodeItemFromHibernate(HibernateNavigationNodeItem hibernateNavigationNodeItem);
+
+    // endregion
 }

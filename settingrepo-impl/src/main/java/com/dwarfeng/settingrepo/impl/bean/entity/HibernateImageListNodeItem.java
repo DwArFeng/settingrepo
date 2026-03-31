@@ -15,16 +15,23 @@ public class HibernateImageListNodeItem implements Bean {
 
     private static final long serialVersionUID = 1003333315045930066L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private Long longId;
 
-    // -----------------------------------------------------------外键-----------------------------------------------------------
+    // endregion
+
+    // region 外键
+
     @Column(name = "node_id", length = Constraints.LENGTH_SETTING_NODE_ID)
     private String nodeStringId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "column_index", nullable = false)
     private int index;
 
@@ -40,17 +47,23 @@ public class HibernateImageListNodeItem implements Bean {
     @Column(name = "length")
     private Long length;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateImageListNode.class)
     @JoinColumns({ //
             @JoinColumn(name = "node_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateImageListNode node;
 
+    // endregion
+
     public HibernateImageListNodeItem() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateLongIdKey getKey() {
         return Optional.ofNullable(longId).map(HibernateLongIdKey::new).orElse(null);
     }
@@ -67,7 +80,10 @@ public class HibernateImageListNodeItem implements Bean {
         this.nodeStringId = Optional.ofNullable(idKey).map(HibernateStringIdKey::getStringId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getLongId() {
         return longId;
     }
@@ -131,6 +147,8 @@ public class HibernateImageListNodeItem implements Bean {
     public void setNode(HibernateImageListNode node) {
         this.node = node;
     }
+
+    // endregion
 
     @Override
     public String toString() {

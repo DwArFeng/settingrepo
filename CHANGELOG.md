@@ -4,6 +4,26 @@
 
 ### 功能构建
 
+- `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.impl.bean.BeanMapper。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFileListNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFileListNodeItem。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFileNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeLocale。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeMek。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeMessage。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNodeItem。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateLongTextNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateNavigationNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateNavigationNodeItem。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateTextNode。
+
 - `settingrepo-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
 

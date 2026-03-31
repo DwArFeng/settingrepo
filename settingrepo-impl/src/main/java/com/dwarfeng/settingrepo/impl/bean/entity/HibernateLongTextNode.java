@@ -17,12 +17,16 @@ public class HibernateLongTextNode implements Bean {
 
     private static final long serialVersionUID = 8396407553888916202L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", length = Constraints.LENGTH_SETTING_NODE_ID, nullable = false, unique = true)
     private String stringId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "preview", length = Constraints.LENGTH_LONG_TEXT_NODE_PREVIEW)
     private String preview;
 
@@ -35,7 +39,10 @@ public class HibernateLongTextNode implements Bean {
     @Column(name = "null_flag")
     private boolean nullFlag;
 
-    // -----------------------------------------------------------审计-----------------------------------------------------------
+    // endregion
+
+    // region 审计
+
     @DatamarkField(handlerName = "settingNodeDatamarkHandler")
     @Column(
             name = "created_datamark",
@@ -51,10 +58,13 @@ public class HibernateLongTextNode implements Bean {
     )
     private String modifiedDatamark;
 
+    // endregion
+
     public HibernateLongTextNode() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateStringIdKey getKey() {
         return Optional.ofNullable(stringId).map(HibernateStringIdKey::new).orElse(null);
     }
@@ -63,7 +73,10 @@ public class HibernateLongTextNode implements Bean {
         this.stringId = Optional.ofNullable(idKey).map(HibernateStringIdKey::getStringId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getStringId() {
         return stringId;
     }
@@ -119,6 +132,8 @@ public class HibernateLongTextNode implements Bean {
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
     }
+
+    // endregion
 
     @Override
     public String toString() {
