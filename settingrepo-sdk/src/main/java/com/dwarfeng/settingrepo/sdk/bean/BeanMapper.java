@@ -29,7 +29,8 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface BeanMapper {
 
-    // -----------------------------------------------------------Subgrade Key-----------------------------------------------------------
+    // region Subgrade Key
+
     FastJsonLongIdKey longIdKeyToFastJson(LongIdKey longIdKey);
 
     @InheritInverseConfiguration
@@ -50,7 +51,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromWebInput(WebInputStringIdKey webInputStringIdKey);
 
-    // -----------------------------------------------------------Settingrepo Key-----------------------------------------------------------
+    // endregion
+
+    // region Settingrepo Key
+
     FastJsonIahnNodeLocaleKey iahnNodeLocaleKeyToFastJson(IahnNodeLocaleKey iahnNodeLocaleKey);
 
     @InheritInverseConfiguration
@@ -81,7 +85,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     IahnNodeMessageKey iahnNodeMessageKeyFromWebInput(WebInputIahnNodeMessageKey webInputIahnNodeMessageKey);
 
-    // -----------------------------------------------------------Settingrepo Entity-----------------------------------------------------------
+    // endregion
+
+    // region Settingrepo Entity
+
     FastJsonFormatterSupport formatterSupportToFastJson(FormatterSupport formatterSupport);
 
     @InheritInverseConfiguration
@@ -191,7 +198,10 @@ public interface BeanMapper {
             JSFixedFastJsonNavigationNodeItem jSFixedFastJsonNavigationNodeItem
     );
 
-    // -----------------------------------------------------------Settingrepo DTO-----------------------------------------------------------
+    // endregion
+
+    // region Settingrepo DTO
+
     FastJsonIahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResultToFastJson(
             IahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResult
     );
@@ -802,4 +812,6 @@ public interface BeanMapper {
     NavigationNodeUpdateInfo navigationNodeUpdateInfoFromWebInput(
             WebInputNavigationNodeUpdateInfo webInputNavigationNodeUpdateInfo
     );
+
+    // endregion
 }
