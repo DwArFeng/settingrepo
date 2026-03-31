@@ -214,7 +214,7 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     KvNodeItem kvNodeItemFromFastJson(FastJsonKvNodeItem fastJsonKvNodeItem);
 
-    // endregion
+    // endregiona
 
     // region Settingrepo DTO
 
@@ -828,6 +828,55 @@ public interface BeanMapper {
     NavigationNodeUpdateInfo navigationNodeUpdateInfoFromWebInput(
             WebInputNavigationNodeUpdateInfo webInputNavigationNodeUpdateInfo
     );
+
+    FastJsonKvNodeCountResult kvNodeCountResultToFastJson(KvNodeCountResult kvNodeCountResult);
+
+    @InheritInverseConfiguration
+    KvNodeCountResult kvNodeCountResultFromFastJson(FastJsonKvNodeCountResult fastJsonKvNodeCountResult);
+
+    FastJsonKvNodeInspectResult kvNodeInspectResultToFastJson(KvNodeInspectResult kvNodeInspectResult);
+
+    @InheritInverseConfiguration
+    KvNodeInspectResult kvNodeInspectResultFromFastJson(FastJsonKvNodeInspectResult fastJsonKvNodeInspectResult);
+
+    FastJsonKvNodeItemInspectResult kvNodeItemInspectResultToFastJson(KvNodeItemInspectResult kvNodeItemInspectResult);
+
+    @InheritInverseConfiguration
+    KvNodeItemInspectResult kvNodeItemInspectResultFromFastJson(
+            FastJsonKvNodeItemInspectResult fastJsonKvNodeItemInspectResult
+    );
+
+    WebInputKvNodeClearInfo kvNodeClearInfoToWebInput(KvNodeClearInfo kvNodeClearInfo);
+
+    @InheritInverseConfiguration
+    KvNodeClearInfo kvNodeClearInfoFromWebInput(WebInputKvNodeClearInfo webInputKvNodeClearInfo);
+
+    WebInputKvNodeCountInfo kvNodeCountInfoToWebInput(KvNodeCountInfo kvNodeCountInfo);
+
+    @InheritInverseConfiguration
+    KvNodeCountInfo kvNodeCountInfoFromWebInput(WebInputKvNodeCountInfo webInputKvNodeCountInfo);
+
+    WebInputKvNodeInspectInfo kvNodeInspectInfoToWebInput(KvNodeInspectInfo kvNodeInspectInfo);
+
+    @InheritInverseConfiguration
+    KvNodeInspectInfo kvNodeInspectInfoFromWebInput(WebInputKvNodeInspectInfo webInputKvNodeInspectInfo);
+
+    WebInputKvNodeItemInspectInfo kvNodeItemInspectInfoToWebInput(KvNodeItemInspectInfo kvNodeItemInspectInfo);
+
+    @InheritInverseConfiguration
+    KvNodeItemInspectInfo kvNodeItemInspectInfoFromWebInput(
+            WebInputKvNodeItemInspectInfo webInputKvNodeItemInspectInfo
+    );
+
+    WebInputKvNodeItemPutInfo kvNodeItemPutInfoToWebInput(KvNodeItemPutInfo kvNodeItemPutInfo);
+
+    @InheritInverseConfiguration
+    KvNodeItemPutInfo kvNodeItemPutInfoFromWebInput(WebInputKvNodeItemPutInfo webInputKvNodeItemPutInfo);
+
+    WebInputKvNodeItemRemoveInfo kvNodeItemRemoveInfoToWebInput(KvNodeItemRemoveInfo kvNodeItemRemoveInfo);
+
+    @InheritInverseConfiguration
+    KvNodeItemRemoveInfo kvNodeItemRemoveInfoFromWebInput(WebInputKvNodeItemRemoveInfo webInputKvNodeItemRemoveInfo);
 
     // endregion
 }

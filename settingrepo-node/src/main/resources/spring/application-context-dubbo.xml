@@ -183,6 +183,11 @@
             ref="kvNodeItemMaintainServiceImpl"
             group="${dubbo.provider.group}"
     />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.KvNodeOperateService"
+            ref="kvNodeOperateServiceImpl"
+            group="${dubbo.provider.group}"
+    />
 
     <!-- endregion -->
 

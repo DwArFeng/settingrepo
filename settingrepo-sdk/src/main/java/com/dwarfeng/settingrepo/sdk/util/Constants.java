@@ -54,6 +54,12 @@ public final class Constants {
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_NAVIGATION = 7;
 
+    /**
+     * @since 2.5.0
+     */
+    @SettingNodeTypeItem
+    public static final int SETTING_NODE_TYPE_KV = 8;
+
     public static final int LONG_TEXT_NODE_PREVIEW_LENGTH = 1000;
 
     private static final Lock LOCK = new ReentrantLock();
