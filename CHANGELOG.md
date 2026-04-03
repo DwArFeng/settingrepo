@@ -49,6 +49,9 @@
 
 ### Bug 修复
 
+- 修复部分 CrudOperation 删除操作中的逻辑问题。
+  - com.dwarfeng.settingrepo.impl.service.operation.NavigationNodeCrudOperation。
+
 - 修复 `assembly.xml` 中的配置错误。
 
 ### 功能移除

@@ -76,9 +76,13 @@ public class NavigationNodeCrudOperation implements BatchCrudOperation<StringIdK
 
     @Override
     public void delete(StringIdKey key) throws Exception {
-        List<LongIdKey> navigationNodeItemKeys = navigationNodeItemDao.lookup(
+        List<NavigationNodeItem> navigationNodeItems = navigationNodeItemDao.lookup(
                 NavigationNodeItemMaintainService.CHILD_FOR_NODE, new Object[]{key}
-        ).stream().map(NavigationNodeItem::getKey).collect(Collectors.toList());
+        );
+        navigationNodeItems.forEach(n -> n.setParentKey(null));
+        navigationNodeItemDao.batchUpdate(navigationNodeItems);
+        List<LongIdKey> navigationNodeItemKeys = navigationNodeItems.stream()
+                .map(NavigationNodeItem::getKey).collect(Collectors.toList());
         navigationNodeItemCache.batchDelete(navigationNodeItemKeys);
         navigationNodeItemDao.batchDelete(navigationNodeItemKeys);
 
