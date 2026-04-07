@@ -32,11 +32,31 @@
 
 | 编号                                                 | 大版本   | 起始版本    | 结束版本    | 原因                      |
 |----------------------------------------------------|-------|---------|---------|-------------------------|
+| [BLACKLIST-20260407.1](#BLACKLIST-202604071)       | 2.4.x | 2.4.2.a | 2.4.6.a | 删除导航节点删除逻辑存在缺陷          |
 | [BLACKLIST-20260128.1](#BLACKLIST-202601281)       | 2.4.x | 2.4.2.a | 2.4.5.a | JSFixed FastJson 实体字段缺失 |
 | [BLACKLIST-20260105.1](#BLACKLIST-202601051)       | 2.4.x | 2.4.2.a | 2.4.2.a | 导航条目更新逻辑存在缺陷            |
 | [BLACKLIST-LEGACY-2.2.0.a](#BLACKLIST-LEGACY-220a) | 2.2.x | 2.2.0.a | 2.2.0.a | 核心功能无法正常使用              |
 
 ## 详细原因
+
+### BLACKLIST-20260407.1
+
+原因：删除导航节点时，对下属 `NavigationNodeItem` 直接批量删除；条目之间存在 `parentKey`（`parent_id`）自引用关系，
+未先清空子条目的父引用即删除，可能导致外键约束失败、删除不完整或相关异常。
+
+- 受影响模块/类：
+   - `com.dwarfeng.settingrepo.impl.service.operation.NavigationNodeCrudOperation`（`delete` 方法）。
+- 典型触发条件：
+   - 删除存在多级或父子结构的导航节点（子条目的 `parentKey` 指向同节点下的其它条目）。
+   - 通过维护服务或 Crud 路径执行导航节点删除，且节点下条目形成非空的父子链或树形结构。
+- 典型症状：
+   - 删除操作在持久化层触发外键或约束相关失败。
+   - 节点或条目删除不完整，与预期不一致。
+- 影响范围：
+   - 直接或间接调用上述 `delete` 逻辑删除导航节点的功能与接口。
+   - 依赖树形导航条目数据且会删除整节点的业务场景；条目均为扁平结构（无父子引用）时通常不命中。
+
+迁移建议：升级至 2.5.0.a 及以上版本。
 
 ### BLACKLIST-20260128.1
 
@@ -44,20 +64,20 @@
 对象时丢失 `content` 字段数据。
 
 - 受影响模块/类：
-  - `com.dwarfeng.settingrepo.sdk.bean.dto.JSFixedFastJsonNavigationNodeInspectResult`。
+   - `com.dwarfeng.settingrepo.sdk.bean.dto.JSFixedFastJsonNavigationNodeInspectResult`。
 - 典型触发条件：
-  - 使用 `JSFixedFastJsonNavigationNodeInspectResult.of()` 方法将 `NavigationNodeInspectResult` 对象转换为 JSFixed
-    FastJson 实体时。
-  - 当源对象包含 `content` 字段（在 2.4.5 版本中 `NavigationNodeInspectResult` 增加了 `content` 字段）时，
-    转换后的对象会丢失该字段。
+   - 使用 `JSFixedFastJsonNavigationNodeInspectResult.of()` 方法将 `NavigationNodeInspectResult` 对象转换为 JSFixed
+     FastJson 实体时。
+   - 当源对象包含 `content` 字段（在 2.4.5 版本中 `NavigationNodeInspectResult` 增加了 `content` 字段）时，
+     转换后的对象会丢失该字段。
 - 典型症状：
-  - JSON 序列化后的结果中缺少 `content` 字段。
-  - 前端或其他调用方无法获取导航节点的内容信息。
-  - 可能导致数据不完整，影响业务功能正常使用。
+   - JSON 序列化后的结果中缺少 `content` 字段。
+   - 前端或其他调用方无法获取导航节点的内容信息。
+   - 可能导致数据不完整，影响业务功能正常使用。
 - 影响范围：
-  - 直接或间接使用 `JSFixedFastJsonNavigationNodeInspectResult` 进行 JSON 序列化的功能与接口。
-  - 依赖导航节点查看结果中 `content` 字段的业务功能。
-  - 在 2.4.5 版本中，当 `NavigationNodeInspectResult` 包含 `content` 字段时，转换过程会丢失该字段数据。
+   - 直接或间接使用 `JSFixedFastJsonNavigationNodeInspectResult` 进行 JSON 序列化的功能与接口。
+   - 依赖导航节点查看结果中 `content` 字段的业务功能。
+   - 在 2.4.5 版本中，当 `NavigationNodeInspectResult` 包含 `content` 字段时，转换过程会丢失该字段数据。
 
 迁移建议：升级至 2.4.6.a 及以上版本。
 

@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.KvNodeCommand。
 
