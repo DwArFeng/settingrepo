@@ -1,0 +1,781 @@
+# ChangeLog
+
+## Release_2.5.0_20260407_build_A
+
+### 功能构建
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.KvNodeCommand。
+
+- 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.service.KvNodeOperateService。
+
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.KvNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.KvNode。
+
+- 依赖升级。
+  - 升级 `dutil` 依赖版本为 `0.4.1.a-beta` 以规避漏洞。
+  - 升级 `snowflake` 依赖版本为 `1.8.3.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.7.3.a` 以规避漏洞。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.4.2.a` 以规避漏洞。
+  - 升级 `dwarfeng-datamark` 依赖版本为 `1.1.3.a` 以规避漏洞。
+
+- `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.impl.bean.BeanMapper。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFileListNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFileListNodeItem。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFileNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateFormatterSupport。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeLocale。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeMek。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeMessage。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNodeItem。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateLongTextNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateNavigationNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateNavigationNodeItem。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateTextNode。
+
+- `settingrepo-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
+
+- 优化文件格式。
+  - 优化 `application-context-*.xml` 文件的格式。
+
+### Bug 修复
+
+- 修复部分 CrudOperation 删除操作中的逻辑问题。
+  - com.dwarfeng.settingrepo.impl.service.operation.NavigationNodeCrudOperation。
+
+- 修复 `assembly.xml` 中的配置错误。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.4.6_20260129_build_A
+
+### 功能构建
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+
+- 优化导航节点的更新逻辑。
+  - 更新导航节点时，`content` 字段禁止为 `null`。
+  - 导航节点初始化时，`content` 字段默认为空字符串。
+
+### Bug 修复
+
+- 修复部分 JSFixed FastJson 实体的字段缺失问题。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.JSFixedFastJsonNavigationNodeInspectResult。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.4.5_20260116_build_A
+
+### 功能构建
+
+- 为部分操作服务添加新方法。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeOperateService。
+
+- 增加实体字段。
+  - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNode.content。
+
+- 增加部分实体维护服务的预设查询。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_ASC。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_DESC。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_PARENT_INDEX_EQ。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService.CHILD_FOR_NODE_NAME_LIKE。
+
+### Bug 修复
+
+- (无)
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.4.4_20260108_build_A
+
+### 功能构建
+
+- Wiki 编写。
+  - docs/wiki/zh-CN/CompileBySource.md。
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/Introduction.md。
+
+- 依赖升级。
+  - 升级 `dwarfeng-datamark` 依赖版本为 `1.0.5.a` 以规避漏洞。
+
+- 优化文件格式。
+  - 优化 `application-context-*.xml` 文件的格式。
+
+### Bug 修复
+
+- (无)
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.4.3_20260105_build_A
+
+### 功能构建
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/ShellScripts.md。
+  - docs/wiki/zh-CN/BatchScripts.md。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/SystemRequirements.md。
+  - docs/wiki/zh-CN/TelqosCommands.md。
+  - docs/wiki/zh-CN/UsingTelqos.md。
+
+- 优化部分说明文件中的格式。
+  - libext/README.md。
+  - optext/README.md。
+
+- `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.impl.handler.formatter.GroovyFormatterRegistry。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.KafkaResetter。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FileListNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FileNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.LongTextNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.NavigationNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.TextNodeCommand。
+
+- 依赖升级。
+  - 升级 `kafka` 依赖版本为 `3.9.1` 以规避漏洞。
+  - 升级 `spring-kafka` 依赖版本为 `2.9.13` 以规避漏洞。
+  - 升级 `netty` 依赖版本为 `4.2.9.Final` 以规避漏洞。
+  - 升级 `log4j2` 依赖版本为 `2.25.3` 以规避漏洞。
+  - 升级 `dutil` 依赖版本为 `0.4.0.a-beta` 以规避漏洞。
+  - 升级 `snowflake` 依赖版本为 `1.7.3.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.6.2.a` 以规避漏洞。
+  - 升级 `spring-terminator` 依赖版本为 `1.0.15.a` 以规避漏洞。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.16.a` 以规避漏洞。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.6.a` 以规避漏洞。
+
+- 优化文件格式。
+  - 优化 `opt-*.xml` 文件的格式。
+  - 优化 `*.properties` 文件的格式。
+  - 优化 `application-context-*.xml` 文件的格式。
+  - 优化 `pom.xml` 文件的格式。
+
+### Bug 修复
+
+- 修复 JSFixedFastJsonNavigationNodeItem 中错误的数据类型。
+
+- 修复导航条目更新逻辑。
+  - 增加根节点的判断与 index 未修改时的判断。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.4.2_20251204_build_A
+
+### 功能构建
+
+- 更新 README.md。
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/Introduction.md。
+  - docs/wiki/en-US/README.md。
+  - docs/wiki/zh-CN/README.md。
+
+- 优化部分配置文件的注释。
+  - settingrepo/reset.properties。
+
+- 优化部分代码的格式。
+  - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
+
+- 增加预设的运维指令。
+  - com.dwarfeng.springtelqos.api.integration.system.UptimeCommand。
+  - com.dwarfeng.springtelqos.api.integration.system.JmxRemoteCommand。
+
+- 依赖升级。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.15.a` 以应用其新功能。
+
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.NavigationNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FileListNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FileNodeCommand。
+
+- 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.handler.NavigationNodeOperateHandler。
+  - com.dwarfeng.settingrepo.stack.service.FileListNodeOperateService。
+  - com.dwarfeng.settingrepo.stack.service.FileNodeOperateService。
+
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.FileListNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.FileListNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.FileNode。
+
+- 优化部分实体类中的文档注释。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode。
+
+### Bug 修复
+
+- 部分配置文件修正。
+  - 修正 `spring/application-context-scan.xml` 中缺失的配置内容。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.4.1_20251018_build_A
+
+### 功能构建
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/BatchScripts.md。
+  - docs/wiki/zh-CN/ShellScripts.md。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+
+- 优化启停脚本注释，以规避潜在的字符集问题。
+  - binres/settingrepo-start.bat。
+  - binres/settingrepo-start.sh。
+  - binres/settingrepo-stop.sh。
+
+- 优化开发环境支持。
+  - 在 .gitignore 中添加 VSCode 相关文件的忽略规则。
+  - 在 .gitignore 中添加 Cursor IDE 相关文件的忽略规则。
+
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.SupportCommand。
+
+- 依赖升级。
+  - 升级 `zookeeper` 依赖版本为 `3.9.4` 以规避漏洞。
+  - 升级 `snowflake` 依赖版本为 `1.7.2.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.6.0.a` 以规避漏洞。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.5.a` 以规避漏洞。
+  - 升级 `dwarfeng-datamark` 依赖版本为 `1.0.4.a` 以规避漏洞。
+
+### Bug 修复
+
+- (无)
+
+### 功能移除
+
+- 删除残留的包及其包含的文件。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.webinput。
+
+---
+
+## Release_2.4.0_20250807_build_A
+
+### 功能构建
+
+- Wiki 编写。
+  - docs/wiki/zh-CN/TelqosCommands.md。
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+
+- 补全部分运维指令不完备的语法描述。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+
+- 优化部分运维指令的类名。
+  - com.dwarfeng.settingrepo.impl.service.telqos.FormatLocalCacheCommand。
+
+- 优化支持实体机制。
+  - 新建支持 QoS 服务 com.dwarfeng.settingrepo.stack.service.SupportQosService。
+  - 将支持实体维护服务的重置功能迁移至 QoS 服务。
+
+- 优化 impl 模块下的 `logging` 目录结构。
+  - 将 `logging/settings-windows.xml` 重命名为 `settings-ref-windows.xml`，以消除文件名的歧义。
+  - 更新 `logging/README.md` 中的相关说明。
+
+- 优化 node 模块下的 `logging` 目录结构。
+  - 将 `logging/settings-linux.xml` 重命名为 `settings-ref-linux.xml`，以消除文件名的歧义。
+  - 将 `logging/settings-windows.xml` 重命名为 `settings-ref-windows.xml`，以消除文件名的歧义。
+  - 更新 `logging/README.md` 中的相关说明。
+
+- 优化 `docs/wiki` 目录结构。
+  - 将 `docs/wiki/en_US` 目录重命名为 `en-US`，以符合 rfc5646 规范。
+  - 将 `docs/wiki/zh_CN` 目录重命名为 `zh-CN`，以符合 rfc5646 规范。
+  - 更新 `docs/wiki/README.md` 中的链接指向。
+  - 更新 `README.md` 中的链接指向。
+
+- 可执行制品目录结构优化。
+  - 增加 `docs` 目录，以提供项目的文档和指南。
+
+- 优化 `changelogs` 目录结构，以适配新的版本规范。
+
+### Bug 修复
+
+- 修正部分运维指令中的对特定选项处理存在问题的 bug。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+
+- 修复 `IahnNodeOperateHandlerImpl` 中的业务逻辑问题。
+  - 修复 `IahnNodeOperateHandlerImpl` 在基于国际化地区批量查询国际化消息时，没有正确处理国际化地区的问题。
+
+### 功能移除
+
+- 去除支持实体维护服务的重置功能。
+  - com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService。
+
+---
+
+## Release_2.3.3_20250803_build_A
+
+### 功能构建
+
+- Wiki 编写。
+  - docs/wiki/zh_CN/ConfDirectory.md。
+
+- Wiki 更新。
+  - docs/wiki/zh_CN/Contents.md。
+
+- 优化部分 `properties` 文件的注释。
+  - ftp/connection.properties。
+
+- 依赖优化。
+  - 优化部分依赖的排除项，以避免潜在的 `netty` 版本冲突问题。
+
+- 为部分运维指令添加新选项。
+  - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
+
+- 为部分 QoS 服务添加新方法。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeQosService。
+
+- 为部分操作服务添加新方法。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService。
+
+- 增加部分实体维护服务的预设查询。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeMekMaintainService.CHILD_FOR_NODE_ORDERED。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED。
+
+- 为部分关键的操作处理器的实现方法补充行为分析注解。
+  - com.dwarfeng.settingrepo.impl.handler.IahnNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.ImageListNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.ImageNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.LongTextNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.SettingNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.TextNodeOperateHandlerImpl。
+
+- 依赖升级。
+  - 升级 `snowflake` 依赖版本为 `1.7.1.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.5.11.a` 以规避漏洞。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.14.a` 以规避漏洞。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.4.a` 以规避漏洞。
+  - 升级 `dwarfeng-datamark` 依赖版本为 `1.0.3.a` 以规避漏洞。
+
+### Bug 修复
+
+- 修复 ftp 目录没用正确打包的 bug。
+
+- 修复国际化节点部分 WebInput 实体的校验问题。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeLocalePutInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeLocaleRemoveInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageInspectByLocaleInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageInspectInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageUpsertByLocaleInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageUpsertByMekInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.WebInputIahnNodeMessageUpsertInfo。
+  - com.dwarfeng.settingrepo.sdk.bean.key.WebInputIahnNodeLocaleKey。
+  - com.dwarfeng.settingrepo.sdk.bean.key.WebInputIahnNodeMessageKey。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.3.2_20250608_build_A
+
+### 功能构建
+
+- Wiki 编写。
+  - docs/wiki/zh_CN/SystemRequirements.md。
+
+- Wiki 更新。
+  - docs/wiki/zh_CN/Contents.md。
+  - docs/wiki/zh_CN/Introduction.md。
+
+- 更新 README.md。
+
+- 依赖升级。
+  - 升级 `snowflake` 依赖版本为 `1.6.4.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.5.10.a` 以规避漏洞。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.3.a` 以规避漏洞。
+  - 升级 `dwarfeng-datamark` 依赖版本为 `1.0.2.a` 以规避漏洞。
+
+### Bug 修复
+
+- 补全 `.gitignore` 文件中缺失的配置项。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.3.1_20250525_build_A
+
+### 功能构建
+
+- Wiki 编写。
+  - docs/wiki/zh_CN/UsingTelqos.md。
+
+- 优化 Hibernate 实体审计字段位置。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
+
+### Bug 修复
+
+- (无)
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.3.0_20250525_build_A
+
+### 功能构建
+
+- 优化部分接口的文档注释。
+  - com.dwarfeng.settingrepo.stack.service.FormatQosService。
+
+- Wiki 编写。
+  - docs/wiki/zh_CN/ShellScripts.md。
+  - docs/wiki/zh_CN/BatchScripts.md。
+
+- 为部分工具类中方法的入口参数增加 `@Nonnull` 注解。
+  - com.dwarfeng.settingrepo.impl.service.telqos.CommandUtil。
+
+- 优化实体映射器机制。
+
+- 导入运维指令。
+  - com.dwarfeng.datamark.service.telqos.*。
+
+- 增加 Hibernate 实体数据标记字段，并应用相关实体侦听器。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateLongTextNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingCategory。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode。
+  - com.dwarfeng.settingrepo.impl.bean.entity.HibernateTextNode。
+
+- 增加依赖。
+  - 增加依赖 `dwarfeng-datamark` 以应用其新功能，版本为 `1.0.1.a`。
+
+- FTP 路径机制优化。
+  - 新增 FtpPathResolver 代替 FtpConstants，使得 FTP 路径由静态定义变为动态解析。
+  - 新增 `ftp/path.properties`，使得服务的 FTP 根路径支持动态配置。
+  - 新的 FTP 路径机制使得不同组服务共享同一 FTP 服务器时，存储文件的路径隔离成为可能。
+
+- 优化部分单元测试代码，以规避潜在的 bug。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeLocaleMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMekMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMessageMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.LongTextNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImplTest。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImplTest。
+
+- SPI 目录结构优化。
+  - 将驱动机制的 SPI 接口与抽象类提相关代码文件提升至 `sdk` 模块中。
+  - 将执行机制的 SPI 接口与抽象类提相关代码文件提升至 `sdk` 模块中。
+  - 将推送机制的 SPI 接口与抽象类提相关代码文件提升至 `sdk` 模块中。
+  - 将重置机制的 SPI 抽象类提相关代码文件提升至 `sdk` 模块中。
+
+- 优化项目的启动脚本，增加 java awt headless 场景的处理。
+  - binres/settingrepo-start.bat。
+  - binres/settingrepo-start.sh。
+
+- 依赖升级。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.3.2.a` 并解决兼容性问题，以应用其新功能。
+  - 升级 `kafka` 依赖版本为 `3.9.0` 以规避漏洞。
+  - 升级 `netty` 依赖版本为 `4.1.119.Final` 以规避漏洞。
+  - 升级 `snowflake` 依赖版本为 `1.6.3.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.5.9.a` 以规避漏洞。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.13.a` 以规避漏洞。
+  - 升级 `jackson` 依赖版本为 `2.18.3` 以规避漏洞。
+  - 升级 `groovy` 依赖版本为 `4.0.26` 以规避漏洞。
+
+### Bug 修复
+
+- 修正 `impl` 模块中错误的 dubbo 应用名称。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.2.1_20250323_build_A
+
+### 功能构建
+
+- 依赖升级。
+  - 升级 `jetty` 依赖版本为 `9.4.57.v20241219` 以规避漏洞。
+
+- Wiki 编写。
+  - docs/wiki/zh_CN/VersionBlacklist.md。
+
+### Bug 修复
+
+- 修复 `LongTextNodeOperateHandlerImpl` 中的业务逻辑问题。
+  - 修复 `LongTextNodeOperateHandlerImpl` 在更新存储文件时，没有正确的更新文件信息的问题。
+
+- 修复 `ImageNodeOperateHandlerImpl` 中的业务逻辑问题。
+  - 修复 `ImageNodeOperateHandlerImpl` 在更新存储文件时，没有正确的更新文件信息的问题。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.2.0_20250320_build_A
+
+### 功能构建
+
+- 优化项目的启停脚本，以规避潜在的路径问题。
+  - binres/settingrepo-stop.sh。
+  - binres/settingrepo-start.sh。
+
+- 节点操作服务优化。
+  - 优化 `ImageNodeOperateHandlerImpl` 中的文件存储逻辑，以避免潜在的磁盘资源浪费。
+  - 优化 `ImageListNodeOperateHandlerImpl` 中的设置节点更新逻辑。
+  - 优化 `ImageNodeOperateHandlerImpl` 中的设置节点更新逻辑。
+
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.LongTextNodeCommand。
+
+- 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.service.LongTextNodeOperateService。
+
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.LongTextNode。
+
+- 优化部分类中的文档注释。
+  - com.dwarfeng.settingrepo.stack.cache.ImageNodeCache。
+
+### Bug 修复
+
+- (无)
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.1.0_20250318_build_A
+
+### 功能构建
+
+- 依赖升级。
+  - 升级 `spring` 依赖版本为 `5.3.39` 以规避漏洞。
+  - 升级 `protobuf` 依赖版本为 `3.25.5` 以规避漏洞。
+  - 升级 `netty` 依赖版本为 `4.1.115.Final` 以规避漏洞。
+  - 升级 `zookeeper` 依赖版本为 `3.9.3` 以规避漏洞。
+  - 升级 `snowflake` 依赖版本为 `1.5.3.a` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.5.7.a` 以规避漏洞。
+  - 升级 `spring-terminator` 依赖版本为 `1.0.14.a` 以规避漏洞。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.11.b` 以规避漏洞。
+
+- 优化配置文件。
+  - 优化 `application-context-database.xml`，使得更多属性可以在配置文件中配置。
+
+- 修复部分功能性实体集合类型的字段在映射时有可能产生空指针异常的问题。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonImageListNodeInspectResult。
+
+- 优化部分类中部分方法的行为分析行为。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImpl。
+
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.IahnNodeCommand。
+
+- 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService。
+
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeLocale。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek。
+  - com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMessage。
+
+### Bug 修复
+
+- 修正配置类中的错误。
+  - ExceptionCodeOffsetConfiguration。
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.0.0_20240802_build_B
+
+### 功能构建
+
+- 依赖升级。
+  - 升级 `subgrade` 依赖版本为 `1.5.5.a` 并解决兼容性问题，以规避漏洞。
+  - 升级 `spring` 依赖版本为 `5.3.37` 以规避漏洞。
+  - 升级 `spring-kafka` 依赖版本为 `2.9.11` 以规避漏洞。
+  - 升级 `jetty` 依赖版本为 `9.4.55.v20240627` 以规避漏洞。
+  - 升级 `netty` 依赖版本为 `4.1.108.Final` 以规避漏洞。
+  - 升级 `snowflake` 依赖版本为 `1.5.2.a` 以规避漏洞。
+  - 升级 `spring-terminator` 依赖版本为 `1.0.13.a` 以规避漏洞。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.10.a` 以规避漏洞。
+  - 升级 `dwarfeng-ftp` 依赖版本为 `1.2.2.a` 以规避漏洞。
+
+### Bug 修复
+
+- (无)
+
+### 功能移除
+
+- (无)
+
+---
+
+## Release_2.0.0_20240802_build_A
+
+### 功能构建
+
+- 启动器优化。
+  - 将入口方法中完整独立的功能封装在子方法中，使入口方法代码结构更加清晰。
+
+- 优化启停脚本的目录结构。
+
+- 优化部分维护服务实现中的部分方法的性能。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImpl。
+
+- 更新 README.md。
+
+- Wiki 编写。
+  - 构建 wiki 目录结构。
+  - docs/wiki/en_US/Contents.md。
+  - docs/wiki/en_US/Introduction.md。
+  - docs/wiki/zh_CN/Contents.md。
+  - docs/wiki/zh_CN/Introduction.md。
+
+- 增加设置节点相关逻辑。
+  - 增加可以被访问属性，以及设置节点对应的节点分类和参数。
+  - 通过可以被访问属性，可以判断设置节点是否可以被访问，并通过预设查询查询到可以被访问的设置节点。
+  - 通过对应的节点分类和参数，可以反查到设置节点的分类和参数，以便于其它调用方使用。
+
+- 增加预设查询。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.REACHABLE。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.ID_LIKE_REACHABLE。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.CATEGORY_EQUALS。
+  - com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService.UNREACHABLE。
+
+- 增加实体字段。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode.reachable。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode.category。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNode.args。
+
+- 优化约束类中的常量值。
+  - 增加 `Constraints.LENGTH_SETTING_CATEGORY_ID`，以约束设置类型 ID 的长度。
+  - 增加 `Constraints.LENGTH_SETTING_NODE_ID`，以约束设置节点 ID 的长度。
+
+- 新增依赖。
+  - 增加依赖 `snowflake` 以应用其功能，版本为 `1.5.1.a`。
+  - 增加依赖 `hessian` 以应用其功能，版本为 `4.0.38`。
+  - 增加依赖 `javax.servlet-api` 以应用其功能，版本为 `4.0.1`。
+  - 增加依赖 `jetty` 以应用其功能，版本为 `9.4.51.v20230217`。
+
+- 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.service.ImageNodeOperateService。
+  - com.dwarfeng.settingrepo.stack.service.ImageListNodeOperateService。
+
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.ImageNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.ImageListNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.ImageListNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.SettingNodeMetadata。
+
+- 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.ImageListNodeCommand。
+
+- 增加预设的运维指令。
+  - com.dwarfeng.springtelqos.api.integration.log4j2.Log4j2Command。
+
+- 日志功能优化。
+  - 优化默认日志配置，默认配置仅向控制台输出 `INFO` 级别的日志。
+  - 优化日志配置结构，提供 `conf/logging/settings.xml` 配置文件及其不同平台的参考配置文件，以供用户自定义日志配置。
+  - 优化日志配置结构，提供 `confext/logging-settings.xml` 配置文件，以供外部功能自定义日志配置。
+  - 优化启动脚本，使服务支持新的日志配置结构。
+  - 优化 `assembly.xml`，使项目打包时输出新的日志配置结构。
+  - 优化 `confext/README.md`，添加新的日志配置结构的相关说明。
+
+- 依赖升级。
+  - 升级 `slf4j` 依赖版本为 `1.7.36` 以规避漏洞。
+  - 升级 `subgrade` 依赖版本为 `1.5.3.a` 以规避漏洞。
+  - 升级 `spring-telqos` 依赖版本为 `1.1.9.a` 以规避漏洞。
+
+- 重构设置节点机制。
+  - 增加设置节点的类型，使其除了能够存储文本外，还可以存储其它类型的数据。
+  - 优化接口方法，使其更加易用。
+
+### Bug 修复
+
+- 修正 `telqos/my-banner.txt` 中不正确的文本内容。
+
+- 补全 .gitignore 中缺失的配置项。
+
+- 修复 telqos 工具类中部分注解不正确的 bug。
+
+### 功能移除
+
+- (无)
