@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.FileNode;
 import com.dwarfeng.settingrepo.stack.service.FileNodeMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class FileNodeMaintainServiceImpl implements FileNodeMaintainService {
 
-    private final CustomBatchCrudService<StringIdKey, FileNode> crudService;
-    private final DaoOnlyEntireLookupService<FileNode> entireLookupService;
-    private final DaoOnlyPresetLookupService<FileNode> presetLookupService;
+    private final BatchCrudService<StringIdKey, FileNode> crudService;
+    private final EntireLookupService<FileNode> entireLookupService;
+    private final PresetLookupService<FileNode> presetLookupService;
 
     public FileNodeMaintainServiceImpl(
-            CustomBatchCrudService<StringIdKey, FileNode> crudService,
-            DaoOnlyEntireLookupService<FileNode> entireLookupService,
-            DaoOnlyPresetLookupService<FileNode> presetLookupService
+            BatchCrudService<StringIdKey, FileNode> crudService,
+            EntireLookupService<FileNode> entireLookupService,
+            PresetLookupService<FileNode> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

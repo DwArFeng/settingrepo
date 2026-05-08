@@ -3,14 +3,14 @@ package com.dwarfeng.settingrepo.impl.service;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMessage;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMessageMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class IahnNodeMessageMaintainServiceImpl implements IahnNodeMessageMaintainService {
 
-    private final GeneralBatchCrudService<IahnNodeMessageKey, IahnNodeMessage> crudService;
-    private final DaoOnlyEntireLookupService<IahnNodeMessage> entireLookupService;
-    private final DaoOnlyPresetLookupService<IahnNodeMessage> presetLookupService;
+    private final BatchCrudService<IahnNodeMessageKey, IahnNodeMessage> crudService;
+    private final EntireLookupService<IahnNodeMessage> entireLookupService;
+    private final PresetLookupService<IahnNodeMessage> presetLookupService;
 
     public IahnNodeMessageMaintainServiceImpl(
-            GeneralBatchCrudService<IahnNodeMessageKey, IahnNodeMessage> crudService,
-            DaoOnlyEntireLookupService<IahnNodeMessage> entireLookupService,
-            DaoOnlyPresetLookupService<IahnNodeMessage> presetLookupService
+            BatchCrudService<IahnNodeMessageKey, IahnNodeMessage> crudService,
+            EntireLookupService<IahnNodeMessage> entireLookupService,
+            PresetLookupService<IahnNodeMessage> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

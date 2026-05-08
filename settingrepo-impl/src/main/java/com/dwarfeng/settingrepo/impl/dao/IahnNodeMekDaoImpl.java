@@ -1,16 +1,14 @@
 package com.dwarfeng.settingrepo.impl.dao;
 
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeMek;
-import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.dao.IahnNodeMekDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +18,14 @@ import java.util.List;
 @Repository
 public class IahnNodeMekDaoImpl implements IahnNodeMekDao {
 
-    private final HibernateBatchBaseDao<IahnNodeMekKey, HibernateIahnNodeMekKey, IahnNodeMek, HibernateIahnNodeMek>
-            batchBaseDao;
-    private final HibernateEntireLookupDao<IahnNodeMek, HibernateIahnNodeMek> entireLookupDao;
-    private final HibernatePresetLookupDao<IahnNodeMek, HibernateIahnNodeMek> presetLookupDao;
+    private final BatchBaseDao<IahnNodeMekKey, IahnNodeMek> batchBaseDao;
+    private final EntireLookupDao<IahnNodeMek> entireLookupDao;
+    private final PresetLookupDao<IahnNodeMek> presetLookupDao;
 
     public IahnNodeMekDaoImpl(
-            HibernateBatchBaseDao<IahnNodeMekKey, HibernateIahnNodeMekKey, IahnNodeMek, HibernateIahnNodeMek>
-                    batchBaseDao,
-            HibernateEntireLookupDao<IahnNodeMek, HibernateIahnNodeMek> entireLookupDao,
-            HibernatePresetLookupDao<IahnNodeMek, HibernateIahnNodeMek> presetLookupDao
+            BatchBaseDao<IahnNodeMekKey, IahnNodeMek> batchBaseDao,
+            EntireLookupDao<IahnNodeMek> entireLookupDao,
+            PresetLookupDao<IahnNodeMek> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

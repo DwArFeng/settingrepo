@@ -4,6 +4,65 @@
 
 ### 功能构建
 
+- 部分代理类实现中的字段类型提升为对应的接口，与具体实现解耦。
+  - com.dwarfeng.settingrepo.impl.cache.FileListNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.FileListNodeItemCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.FileNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.FormatterSupportCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.IahnNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.IahnNodeLocaleCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.IahnNodeMekCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.IahnNodeMessageCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.ImageListNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.ImageListNodeItemCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.ImageNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.KvNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.KvNodeItemCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.LongTextNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.NavigationNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.NavigationNodeItemCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.SettingCategoryCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.SettingNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.TextNodeCacheImpl。
+  - com.dwarfeng.settingrepo.impl.dao.FileListNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.FileListNodeItemDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.FileNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.FormatterSupportDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.IahnNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.IahnNodeLocaleDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.IahnNodeMekDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.IahnNodeMessageDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.ImageListNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.ImageListNodeItemDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.ImageNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.KvNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.KvNodeItemDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.LongTextNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.NavigationNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.NavigationNodeItemDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.SettingCategoryDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.SettingNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.dao.TextNodeDaoImpl。
+  - com.dwarfeng.settingrepo.impl.service.FileListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.FileListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.FileNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeLocaleMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMekMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMessageMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.KvNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.KvNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.LongTextNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.NavigationNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.NavigationNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.TextNodeMaintainServiceImpl。
+
 - 优化项目的异常处理机制。
   - `settingrepo-sdk` 子模块新增 `ServiceExceptionHelper` 工具类，统一维护项目自身的异常映射关系。
   - `settingrepo-impl` 子模块 `ServiceExceptionMapperConfiguration` 配置类的异常映射处理逻辑优化。

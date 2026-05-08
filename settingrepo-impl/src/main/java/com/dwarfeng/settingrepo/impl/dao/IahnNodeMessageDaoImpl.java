@@ -1,16 +1,14 @@
 package com.dwarfeng.settingrepo.impl.dao;
 
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNodeMessage;
-import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMessageKey;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMessage;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
 import com.dwarfeng.settingrepo.stack.dao.IahnNodeMessageDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +18,14 @@ import java.util.List;
 @Repository
 public class IahnNodeMessageDaoImpl implements IahnNodeMessageDao {
 
-    private final HibernateBatchBaseDao<IahnNodeMessageKey, HibernateIahnNodeMessageKey, IahnNodeMessage,
-            HibernateIahnNodeMessage> batchBaseDao;
-    private final HibernateEntireLookupDao<IahnNodeMessage, HibernateIahnNodeMessage> entireLookupDao;
-    private final HibernatePresetLookupDao<IahnNodeMessage, HibernateIahnNodeMessage> presetLookupDao;
+    private final BatchBaseDao<IahnNodeMessageKey, IahnNodeMessage> batchBaseDao;
+    private final EntireLookupDao<IahnNodeMessage> entireLookupDao;
+    private final PresetLookupDao<IahnNodeMessage> presetLookupDao;
 
     public IahnNodeMessageDaoImpl(
-            HibernateBatchBaseDao<IahnNodeMessageKey, HibernateIahnNodeMessageKey, IahnNodeMessage,
-                    HibernateIahnNodeMessage> batchBaseDao,
-            HibernateEntireLookupDao<IahnNodeMessage, HibernateIahnNodeMessage> entireLookupDao,
-            HibernatePresetLookupDao<IahnNodeMessage, HibernateIahnNodeMessage> presetLookupDao
+            BatchBaseDao<IahnNodeMessageKey, IahnNodeMessage> batchBaseDao,
+            EntireLookupDao<IahnNodeMessage> entireLookupDao,
+            PresetLookupDao<IahnNodeMessage> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

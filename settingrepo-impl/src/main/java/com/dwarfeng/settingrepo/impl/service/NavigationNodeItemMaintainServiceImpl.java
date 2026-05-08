@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem;
 import com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class NavigationNodeItemMaintainServiceImpl implements NavigationNodeItemMaintainService {
 
-    private final CustomBatchCrudService<LongIdKey, NavigationNodeItem> crudService;
-    private final DaoOnlyEntireLookupService<NavigationNodeItem> entireLookupService;
-    private final DaoOnlyPresetLookupService<NavigationNodeItem> presetLookupService;
+    private final BatchCrudService<LongIdKey, NavigationNodeItem> crudService;
+    private final EntireLookupService<NavigationNodeItem> entireLookupService;
+    private final PresetLookupService<NavigationNodeItem> presetLookupService;
 
     public NavigationNodeItemMaintainServiceImpl(
-            CustomBatchCrudService<LongIdKey, NavigationNodeItem> crudService,
-            DaoOnlyEntireLookupService<NavigationNodeItem> entireLookupService,
-            DaoOnlyPresetLookupService<NavigationNodeItem> presetLookupService
+            BatchCrudService<LongIdKey, NavigationNodeItem> crudService,
+            EntireLookupService<NavigationNodeItem> entireLookupService,
+            PresetLookupService<NavigationNodeItem> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class SettingNodeMaintainServiceImpl implements SettingNodeMaintainService {
 
-    private final CustomBatchCrudService<StringIdKey, SettingNode> crudService;
-    private final DaoOnlyEntireLookupService<SettingNode> entireLookupService;
-    private final DaoOnlyPresetLookupService<SettingNode> presetLookupService;
+    private final BatchCrudService<StringIdKey, SettingNode> crudService;
+    private final EntireLookupService<SettingNode> entireLookupService;
+    private final PresetLookupService<SettingNode> presetLookupService;
 
     public SettingNodeMaintainServiceImpl(
-            CustomBatchCrudService<StringIdKey, SettingNode> crudService,
-            DaoOnlyEntireLookupService<SettingNode> entireLookupService,
-            DaoOnlyPresetLookupService<SettingNode> presetLookupService
+            BatchCrudService<StringIdKey, SettingNode> crudService,
+            EntireLookupService<SettingNode> entireLookupService,
+            PresetLookupService<SettingNode> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

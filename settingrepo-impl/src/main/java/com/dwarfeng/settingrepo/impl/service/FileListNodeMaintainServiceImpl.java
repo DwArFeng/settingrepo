@@ -1,33 +1,34 @@
 package com.dwarfeng.settingrepo.impl.service;
 
+import com.dwarfeng.settingrepo.stack.bean.entity.FileListNode;
 import com.dwarfeng.settingrepo.stack.service.FileListNodeMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
-import com.dwarfeng.subgrade.stack.bean.key.*;
+import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import com.dwarfeng.settingrepo.stack.bean.entity.*;
-// import com.jiermt.generator.stack.bean.key.*;
 
 import java.util.List;
+
+// import com.jiermt.generator.stack.bean.key.*;
 
 @Component
 public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainService {
 
-    private final CustomBatchCrudService<StringIdKey , FileListNode> crudService;
-    private final DaoOnlyEntireLookupService<FileListNode> entireLookupService;
-    private final DaoOnlyPresetLookupService<FileListNode> presetLookupService;
+    private final BatchCrudService<StringIdKey, FileListNode> crudService;
+    private final EntireLookupService<FileListNode> entireLookupService;
+    private final PresetLookupService<FileListNode> presetLookupService;
 
     public FileListNodeMaintainServiceImpl(
-            CustomBatchCrudService<StringIdKey , FileListNode> crudService,
-            DaoOnlyEntireLookupService<FileListNode> entireLookupService,
-            DaoOnlyPresetLookupService<FileListNode> presetLookupService
+            BatchCrudService<StringIdKey, FileListNode> crudService,
+            EntireLookupService<FileListNode> entireLookupService,
+            PresetLookupService<FileListNode> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
@@ -37,21 +38,21 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public boolean exists(StringIdKey  key) throws ServiceException {
+    public boolean exists(StringIdKey key) throws ServiceException {
         return crudService.exists(key);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public FileListNode get(StringIdKey  key) throws ServiceException {
+    public FileListNode get(StringIdKey key) throws ServiceException {
         return crudService.get(key);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public StringIdKey  insert(FileListNode element) throws ServiceException {
+    public StringIdKey insert(FileListNode element) throws ServiceException {
         return crudService.insert(element);
     }
 
@@ -65,21 +66,21 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void delete(StringIdKey  key) throws ServiceException {
+    public void delete(StringIdKey key) throws ServiceException {
         crudService.delete(key);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public FileListNode getIfExists(StringIdKey  key) throws ServiceException {
+    public FileListNode getIfExists(StringIdKey key) throws ServiceException {
         return crudService.getIfExists(key);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public StringIdKey  insertIfNotExists(FileListNode element) throws ServiceException {
+    public StringIdKey insertIfNotExists(FileListNode element) throws ServiceException {
         return crudService.insertIfNotExists(element);
     }
 
@@ -93,28 +94,28 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void deleteIfExists(StringIdKey  key) throws ServiceException {
+    public void deleteIfExists(StringIdKey key) throws ServiceException {
         crudService.deleteIfExists(key);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public StringIdKey  insertOrUpdate(FileListNode element) throws ServiceException {
+    public StringIdKey insertOrUpdate(FileListNode element) throws ServiceException {
         return crudService.insertOrUpdate(element);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public boolean allExists(@SkipRecord List<StringIdKey > keys) throws ServiceException {
+    public boolean allExists(@SkipRecord List<StringIdKey> keys) throws ServiceException {
         return crudService.allExists(keys);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public boolean nonExists(@SkipRecord List<StringIdKey > keys) throws ServiceException {
+    public boolean nonExists(@SkipRecord List<StringIdKey> keys) throws ServiceException {
         return crudService.nonExists(keys);
     }
 
@@ -122,7 +123,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public List<FileListNode> batchGet(@SkipRecord List<StringIdKey > keys) throws ServiceException {
+    public List<FileListNode> batchGet(@SkipRecord List<StringIdKey> keys) throws ServiceException {
         return crudService.batchGet(keys);
     }
 
@@ -130,7 +131,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey > batchInsert(@SkipRecord List<FileListNode> elements) throws ServiceException {
+    public List<StringIdKey> batchInsert(@SkipRecord List<FileListNode> elements) throws ServiceException {
         return crudService.batchInsert(elements);
     }
 
@@ -144,7 +145,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void batchDelete(@SkipRecord List<StringIdKey > keys) throws ServiceException {
+    public void batchDelete(@SkipRecord List<StringIdKey> keys) throws ServiceException {
         crudService.batchDelete(keys);
     }
 
@@ -152,7 +153,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public List<FileListNode> batchGetIfExists(@SkipRecord List<StringIdKey > keys) throws ServiceException {
+    public List<FileListNode> batchGetIfExists(@SkipRecord List<StringIdKey> keys) throws ServiceException {
         return crudService.batchGetIfExists(keys);
     }
 
@@ -161,7 +162,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey > batchInsertIfExists(@SkipRecord List<FileListNode> elements) throws ServiceException {
+    public List<StringIdKey> batchInsertIfExists(@SkipRecord List<FileListNode> elements) throws ServiceException {
         return crudService.batchInsertIfExists(elements);
     }
 
@@ -169,7 +170,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey > batchInsertIfNotExists(@SkipRecord List<FileListNode> elements) throws ServiceException {
+    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<FileListNode> elements) throws ServiceException {
         return crudService.batchInsertIfNotExists(elements);
     }
 
@@ -183,7 +184,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void batchDeleteIfExists(@SkipRecord List<StringIdKey > keys) throws ServiceException {
+    public void batchDeleteIfExists(@SkipRecord List<StringIdKey> keys) throws ServiceException {
         crudService.batchDeleteIfExists(keys);
     }
 
@@ -191,7 +192,7 @@ public class FileListNodeMaintainServiceImpl implements FileListNodeMaintainServ
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey > batchInsertOrUpdate(@SkipRecord List<FileListNode> elements) throws ServiceException {
+    public List<StringIdKey> batchInsertOrUpdate(@SkipRecord List<FileListNode> elements) throws ServiceException {
         return crudService.batchInsertOrUpdate(elements);
     }
 

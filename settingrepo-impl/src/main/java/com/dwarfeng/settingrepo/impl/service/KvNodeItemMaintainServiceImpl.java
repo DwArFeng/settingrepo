@@ -3,14 +3,14 @@ package com.dwarfeng.settingrepo.impl.service;
 import com.dwarfeng.settingrepo.stack.bean.entity.KvNodeItem;
 import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.settingrepo.stack.service.KvNodeItemMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class KvNodeItemMaintainServiceImpl implements KvNodeItemMaintainService {
 
-    private final GeneralBatchCrudService<KvNodeItemKey, KvNodeItem> crudService;
-    private final DaoOnlyEntireLookupService<KvNodeItem> entireLookupService;
-    private final DaoOnlyPresetLookupService<KvNodeItem> presetLookupService;
+    private final BatchCrudService<KvNodeItemKey, KvNodeItem> crudService;
+    private final EntireLookupService<KvNodeItem> entireLookupService;
+    private final PresetLookupService<KvNodeItem> presetLookupService;
 
     public KvNodeItemMaintainServiceImpl(
-            GeneralBatchCrudService<KvNodeItemKey, KvNodeItem> crudService,
-            DaoOnlyEntireLookupService<KvNodeItem> entireLookupService,
-            DaoOnlyPresetLookupService<KvNodeItem> presetLookupService
+            BatchCrudService<KvNodeItemKey, KvNodeItem> crudService,
+            EntireLookupService<KvNodeItem> entireLookupService,
+            PresetLookupService<KvNodeItem> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

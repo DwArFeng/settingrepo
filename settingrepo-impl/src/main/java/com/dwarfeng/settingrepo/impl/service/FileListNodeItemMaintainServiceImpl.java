@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.FileListNodeItem;
 import com.dwarfeng.settingrepo.stack.service.FileListNodeItemMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Component
 public class FileListNodeItemMaintainServiceImpl implements FileListNodeItemMaintainService {
 
-    private final CustomBatchCrudService<LongIdKey, FileListNodeItem> crudService;
-    private final DaoOnlyEntireLookupService<FileListNodeItem> entireLookupService;
-    private final DaoOnlyPresetLookupService<FileListNodeItem> presetLookupService;
+    private final BatchCrudService<LongIdKey, FileListNodeItem> crudService;
+    private final EntireLookupService<FileListNodeItem> entireLookupService;
+    private final PresetLookupService<FileListNodeItem> presetLookupService;
 
     public FileListNodeItemMaintainServiceImpl(
-            CustomBatchCrudService<LongIdKey, FileListNodeItem> crudService,
-            DaoOnlyEntireLookupService<FileListNodeItem> entireLookupService,
-            DaoOnlyPresetLookupService<FileListNodeItem> presetLookupService
+            BatchCrudService<LongIdKey, FileListNodeItem> crudService,
+            EntireLookupService<FileListNodeItem> entireLookupService,
+            PresetLookupService<FileListNodeItem> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

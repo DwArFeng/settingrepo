@@ -1,16 +1,14 @@
 package com.dwarfeng.settingrepo.impl.dao;
 
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateLongTextNode;
 import com.dwarfeng.settingrepo.stack.bean.entity.LongTextNode;
 import com.dwarfeng.settingrepo.stack.dao.LongTextNodeDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +18,14 @@ import java.util.List;
 @Repository
 public class LongTextNodeDaoImpl implements LongTextNodeDao {
 
-    private final HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, LongTextNode, HibernateLongTextNode>
-            batchBaseDao;
-    private final HibernateEntireLookupDao<LongTextNode, HibernateLongTextNode> entireLookupDao;
-    private final HibernatePresetLookupDao<LongTextNode, HibernateLongTextNode> presetLookupDao;
+    private final BatchBaseDao<StringIdKey, LongTextNode> batchBaseDao;
+    private final EntireLookupDao<LongTextNode> entireLookupDao;
+    private final PresetLookupDao<LongTextNode> presetLookupDao;
 
     public LongTextNodeDaoImpl(
-            HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, LongTextNode, HibernateLongTextNode> batchBaseDao,
-            HibernateEntireLookupDao<LongTextNode, HibernateLongTextNode> entireLookupDao,
-            HibernatePresetLookupDao<LongTextNode, HibernateLongTextNode> presetLookupDao
+            BatchBaseDao<StringIdKey, LongTextNode> batchBaseDao,
+            EntireLookupDao<LongTextNode> entireLookupDao,
+            PresetLookupDao<LongTextNode> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

@@ -1,16 +1,14 @@
 package com.dwarfeng.settingrepo.impl.dao;
 
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNode;
 import com.dwarfeng.settingrepo.stack.dao.IahnNodeDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class IahnNodeDaoImpl implements IahnNodeDao {
 
-    private final HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, IahnNode, HibernateIahnNode> batchBaseDao;
-    private final HibernateEntireLookupDao<IahnNode, HibernateIahnNode> entireLookupDao;
-    private final HibernatePresetLookupDao<IahnNode, HibernateIahnNode> presetLookupDao;
+    private final BatchBaseDao<StringIdKey, IahnNode> batchBaseDao;
+    private final EntireLookupDao<IahnNode> entireLookupDao;
+    private final PresetLookupDao<IahnNode> presetLookupDao;
 
     public IahnNodeDaoImpl(
-            HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, IahnNode, HibernateIahnNode> batchBaseDao,
-            HibernateEntireLookupDao<IahnNode, HibernateIahnNode> entireLookupDao,
-            HibernatePresetLookupDao<IahnNode, HibernateIahnNode> presetLookupDao
+            BatchBaseDao<StringIdKey, IahnNode> batchBaseDao,
+            EntireLookupDao<IahnNode> entireLookupDao,
+            PresetLookupDao<IahnNode> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
 import com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class FormatterSupportMaintainServiceImpl implements FormatterSupportMaintainService {
 
-    private final GeneralBatchCrudService<StringIdKey, FormatterSupport> crudService;
-    private final DaoOnlyEntireLookupService<FormatterSupport> entireLookupService;
-    private final DaoOnlyPresetLookupService<FormatterSupport> presetLookupService;
+    private final BatchCrudService<StringIdKey, FormatterSupport> crudService;
+    private final EntireLookupService<FormatterSupport> entireLookupService;
+    private final PresetLookupService<FormatterSupport> presetLookupService;
 
     public FormatterSupportMaintainServiceImpl(
-            GeneralBatchCrudService<StringIdKey, FormatterSupport> crudService,
-            DaoOnlyEntireLookupService<FormatterSupport> entireLookupService,
-            DaoOnlyPresetLookupService<FormatterSupport> presetLookupService
+            BatchCrudService<StringIdKey, FormatterSupport> crudService,
+            EntireLookupService<FormatterSupport> entireLookupService,
+            PresetLookupService<FormatterSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

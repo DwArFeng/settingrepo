@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.LongTextNode;
 import com.dwarfeng.settingrepo.stack.service.LongTextNodeMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class LongTextNodeMaintainServiceImpl implements LongTextNodeMaintainService {
 
-    private final CustomBatchCrudService<StringIdKey, LongTextNode> crudService;
-    private final DaoOnlyEntireLookupService<LongTextNode> entireLookupService;
-    private final DaoOnlyPresetLookupService<LongTextNode> presetLookupService;
+    private final BatchCrudService<StringIdKey, LongTextNode> crudService;
+    private final EntireLookupService<LongTextNode> entireLookupService;
+    private final PresetLookupService<LongTextNode> presetLookupService;
 
     public LongTextNodeMaintainServiceImpl(
-            CustomBatchCrudService<StringIdKey, LongTextNode> crudService,
-            DaoOnlyEntireLookupService<LongTextNode> entireLookupService,
-            DaoOnlyPresetLookupService<LongTextNode> presetLookupService
+            BatchCrudService<StringIdKey, LongTextNode> crudService,
+            EntireLookupService<LongTextNode> entireLookupService,
+            PresetLookupService<LongTextNode> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

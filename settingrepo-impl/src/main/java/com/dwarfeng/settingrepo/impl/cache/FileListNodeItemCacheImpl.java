@@ -1,25 +1,27 @@
 package com.dwarfeng.settingrepo.impl.cache;
 
-import com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonFileListNodeItem;
+import com.dwarfeng.settingrepo.stack.bean.entity.FileListNodeItem;
 import com.dwarfeng.settingrepo.stack.cache.FileListNodeItemCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
-import com.dwarfeng.subgrade.stack.bean.key.*;
+import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
-import com.dwarfeng.settingrepo.stack.bean.entity.*;
-// import com.jiermt.generator.stack.bean.key.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+// import com.jiermt.generator.stack.bean.key.*;
+
 @Repository
 public class FileListNodeItemCacheImpl implements FileListNodeItemCache {
 
-    private final RedisBatchBaseCache<LongIdKey, FileListNodeItem, FastJsonFileListNodeItem> batchBaseCache;
+    private final BatchBaseCache<LongIdKey, FileListNodeItem> batchBaseCache;
 
-    public FileListNodeItemCacheImpl(RedisBatchBaseCache<LongIdKey, FileListNodeItem, FastJsonFileListNodeItem> batchBaseCache) {
+    public FileListNodeItemCacheImpl(
+            BatchBaseCache<LongIdKey, FileListNodeItem> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

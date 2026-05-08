@@ -2,15 +2,15 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNode;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class IahnNodeMaintainServiceImpl implements IahnNodeMaintainService {
 
-    private final CustomBatchCrudService<StringIdKey, IahnNode> crudService;
-    private final DaoOnlyEntireLookupService<IahnNode> entireLookupService;
-    private final DaoOnlyPresetLookupService<IahnNode> presetLookupService;
+    private final BatchCrudService<StringIdKey, IahnNode> crudService;
+    private final EntireLookupService<IahnNode> entireLookupService;
+    private final PresetLookupService<IahnNode> presetLookupService;
 
     public IahnNodeMaintainServiceImpl(
-            CustomBatchCrudService<StringIdKey, IahnNode> crudService,
-            DaoOnlyEntireLookupService<IahnNode> entireLookupService,
-            DaoOnlyPresetLookupService<IahnNode> presetLookupService
+            BatchCrudService<StringIdKey, IahnNode> crudService,
+            EntireLookupService<IahnNode> entireLookupService,
+            PresetLookupService<IahnNode> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

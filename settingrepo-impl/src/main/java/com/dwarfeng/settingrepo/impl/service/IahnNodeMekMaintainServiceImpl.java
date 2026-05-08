@@ -3,14 +3,14 @@ package com.dwarfeng.settingrepo.impl.service;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMekMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class IahnNodeMekMaintainServiceImpl implements IahnNodeMekMaintainService {
 
-    private final CustomBatchCrudService<IahnNodeMekKey, IahnNodeMek> crudService;
-    private final DaoOnlyEntireLookupService<IahnNodeMek> entireLookupService;
-    private final DaoOnlyPresetLookupService<IahnNodeMek> presetLookupService;
+    private final BatchCrudService<IahnNodeMekKey, IahnNodeMek> crudService;
+    private final EntireLookupService<IahnNodeMek> entireLookupService;
+    private final PresetLookupService<IahnNodeMek> presetLookupService;
 
     public IahnNodeMekMaintainServiceImpl(
-            CustomBatchCrudService<IahnNodeMekKey, IahnNodeMek> crudService,
-            DaoOnlyEntireLookupService<IahnNodeMek> entireLookupService,
-            DaoOnlyPresetLookupService<IahnNodeMek> presetLookupService
+            BatchCrudService<IahnNodeMekKey, IahnNodeMek> crudService,
+            EntireLookupService<IahnNodeMek> entireLookupService,
+            PresetLookupService<IahnNodeMek> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

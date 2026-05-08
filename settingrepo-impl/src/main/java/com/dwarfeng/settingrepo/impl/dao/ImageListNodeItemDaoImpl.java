@@ -1,16 +1,14 @@
 package com.dwarfeng.settingrepo.impl.dao;
 
-import com.dwarfeng.settingrepo.impl.bean.entity.HibernateImageListNodeItem;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageListNodeItem;
 import com.dwarfeng.settingrepo.stack.dao.ImageListNodeItemDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +18,14 @@ import java.util.List;
 @Repository
 public class ImageListNodeItemDaoImpl implements ImageListNodeItemDao {
 
-    private final HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, ImageListNodeItem, HibernateImageListNodeItem>
-            batchBaseDao;
-    private final HibernateEntireLookupDao<ImageListNodeItem, HibernateImageListNodeItem> entireLookupDao;
-    private final HibernatePresetLookupDao<ImageListNodeItem, HibernateImageListNodeItem> presetLookupDao;
+    private final BatchBaseDao<LongIdKey, ImageListNodeItem> batchBaseDao;
+    private final EntireLookupDao<ImageListNodeItem> entireLookupDao;
+    private final PresetLookupDao<ImageListNodeItem> presetLookupDao;
 
     public ImageListNodeItemDaoImpl(
-            HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, ImageListNodeItem, HibernateImageListNodeItem>
-                    batchBaseDao,
-            HibernateEntireLookupDao<ImageListNodeItem, HibernateImageListNodeItem> entireLookupDao,
-            HibernatePresetLookupDao<ImageListNodeItem, HibernateImageListNodeItem> presetLookupDao
+            BatchBaseDao<LongIdKey, ImageListNodeItem> batchBaseDao,
+            EntireLookupDao<ImageListNodeItem> entireLookupDao,
+            PresetLookupDao<ImageListNodeItem> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

@@ -3,14 +3,14 @@ package com.dwarfeng.settingrepo.impl.service;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeLocale;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Service
 public class IahnNodeLocaleMaintainServiceImpl implements IahnNodeLocaleMaintainService {
 
-    private final CustomBatchCrudService<IahnNodeLocaleKey, IahnNodeLocale> crudService;
-    private final DaoOnlyEntireLookupService<IahnNodeLocale> entireLookupService;
-    private final DaoOnlyPresetLookupService<IahnNodeLocale> presetLookupService;
+    private final BatchCrudService<IahnNodeLocaleKey, IahnNodeLocale> crudService;
+    private final EntireLookupService<IahnNodeLocale> entireLookupService;
+    private final PresetLookupService<IahnNodeLocale> presetLookupService;
 
     public IahnNodeLocaleMaintainServiceImpl(
-            CustomBatchCrudService<IahnNodeLocaleKey, IahnNodeLocale> crudService,
-            DaoOnlyEntireLookupService<IahnNodeLocale> entireLookupService,
-            DaoOnlyPresetLookupService<IahnNodeLocale> presetLookupService
+            BatchCrudService<IahnNodeLocaleKey, IahnNodeLocale> crudService,
+            EntireLookupService<IahnNodeLocale> entireLookupService,
+            PresetLookupService<IahnNodeLocale> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
