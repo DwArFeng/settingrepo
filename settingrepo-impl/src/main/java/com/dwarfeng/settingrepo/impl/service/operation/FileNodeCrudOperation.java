@@ -1,6 +1,6 @@
 package com.dwarfeng.settingrepo.impl.service.operation;
 
-import com.dwarfeng.ftp.handler.FtpHandler;
+import com.dwarfeng.ftp.stack.handler.FtpHandler;
 import com.dwarfeng.settingrepo.impl.handler.FtpPathResolver;
 import com.dwarfeng.settingrepo.stack.bean.entity.FileNode;
 import com.dwarfeng.settingrepo.stack.cache.FileNodeCache;

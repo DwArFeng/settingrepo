@@ -1,7 +1,7 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
 import com.dwarfeng.dutil.basic.io.IOUtil;
-import com.dwarfeng.ftp.handler.FtpHandler;
+import com.dwarfeng.ftp.stack.handler.FtpHandler;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageNode;

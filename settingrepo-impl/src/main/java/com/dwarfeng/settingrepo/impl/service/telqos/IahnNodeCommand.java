@@ -4,10 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.dwarfeng.settingrepo.sdk.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeQosService;
-import com.dwarfeng.springtelqos.node.config.TelqosCommand;
 import com.dwarfeng.springtelqos.sdk.command.CliCommand;
-import com.dwarfeng.springtelqos.stack.command.Context;
-import com.dwarfeng.springtelqos.stack.exception.TelqosException;
+import com.dwarfeng.springtelqos.sdk.configuration.TelqosCommand;
+import com.dwarfeng.springtelqos.sdk.util.CliCommandUtil;
+import com.dwarfeng.springtelqos.stack.command.CommandDescriptor;
+import com.dwarfeng.springtelqos.stack.command.CommandExecutor;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +23,14 @@ import java.util.Objects;
 @TelqosCommand
 public class IahnNodeCommand extends CliCommand {
 
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String IDENTITY = "iahnnode";
+
+    // region 指令选项
+
     private static final String COMMAND_OPTION_INSPECT_MESSAGE = "im";
     private static final String COMMAND_OPTION_INSPECT_MESSAGE_LONG_OPT = "inspect-message";
+    @SuppressWarnings({"SpellCheckingInspection", "RedundantSuppression"})
     private static final String COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE = "biml";
     private static final String COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE_LONG_OPT
             = "batch-inspect-message-by-locale";
@@ -66,91 +73,76 @@ public class IahnNodeCommand extends CliCommand {
             COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK
     };
 
-    private static final String COMMAND_OPTION_JSON = "json";
-    private static final String COMMAND_OPTION_JSON_FILE = "jf";
-    private static final String COMMAND_OPTION_JSON_FILE_LONG_OPT = "json-file";
+    private static final String COMMAND_SUB_OPTION_JSON = "json";
+    private static final String COMMAND_SUB_OPTION_JSON_FILE = "jf";
+    private static final String COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT = "json-file";
 
-    @SuppressWarnings("SpellCheckingInspection")
-    private static final String IDENTITY = "iahnnode";
-    private static final String DESCRIPTION = "国际化节点操作服务";
-
-    private static final String CMD_LINE_SYNTAX_INSPECT_MESSAGE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MESSAGE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_BATCH_INSPECT_MESSAGE_BY_LOCALE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_INSPECT_LOCALE_LIST = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_LOCALE_LIST) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_INSPECT_MEK_LIST = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MEK_LIST) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_INSPECT_MESSAGE_TABLE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MESSAGE_TABLE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_PUT_LOCALE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_PUT_LOCALE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_REMOVE_LOCALE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_REMOVE_LOCALE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_PUT_MEK = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_PUT_MEK) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_REMOVE_MEK = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_REMOVE_MEK) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_UPSERT_MESSAGE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_UPSERT_MESSAGE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_BATCH_UPSERT_MESSAGE_BY_LOCALE = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_BATCH_UPSERT_MESSAGE_BY_MEK = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-
-    private static final String[] CMD_LINE_ARRAY = {
-            CMD_LINE_SYNTAX_INSPECT_MESSAGE,
-            CMD_LINE_SYNTAX_BATCH_INSPECT_MESSAGE_BY_LOCALE,
-            CMD_LINE_SYNTAX_INSPECT_LOCALE_LIST,
-            CMD_LINE_SYNTAX_INSPECT_MEK_LIST,
-            CMD_LINE_SYNTAX_INSPECT_MESSAGE_TABLE,
-            CMD_LINE_SYNTAX_PUT_LOCALE,
-            CMD_LINE_SYNTAX_REMOVE_LOCALE,
-            CMD_LINE_SYNTAX_PUT_MEK,
-            CMD_LINE_SYNTAX_REMOVE_MEK,
-            CMD_LINE_SYNTAX_UPSERT_MESSAGE,
-            CMD_LINE_SYNTAX_BATCH_UPSERT_MESSAGE_BY_LOCALE,
-            CMD_LINE_SYNTAX_BATCH_UPSERT_MESSAGE_BY_MEK
-    };
-
-    private static final String CMD_LINE_SYNTAX = CommandUtil.syntax(CMD_LINE_ARRAY);
+    // endregion
 
     private static final String FORMATTED_LOCALE_DEFAULT = "#default";
 
     private final IahnNodeQosService iahnNodeQosService;
 
     public IahnNodeCommand(IahnNodeQosService iahnNodeQosService) {
-        super(IDENTITY, DESCRIPTION, CMD_LINE_SYNTAX);
+        super(IDENTITY);
         this.iahnNodeQosService = iahnNodeQosService;
     }
 
     @Override
-    protected List<Option> buildOptions() {
+    protected DescriptionProvider provideDescriptionProvider() {
+        return context -> "国际化节点操作服务";
+    }
+
+    @Override
+    protected CliSyntaxProvider provideCliSyntaxProvider() {
+        return this::cliSyntaxProvider;
+    }
+
+    private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
+        String identity = context.getRuntimeIdentity();
+        String[] patterns = new String[]{
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MESSAGE) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_LOCALE_LIST) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MEK_LIST) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT_MESSAGE_TABLE) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_PUT_LOCALE) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_REMOVE_LOCALE) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_PUT_MEK) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_REMOVE_MEK) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_UPSERT_MESSAGE) + " [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]"
+        };
+        return CliCommandUtil.cliSyntax(patterns);
+    }
+
+    @Override
+    protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
         list.add(
                 Option.builder(COMMAND_OPTION_INSPECT_MESSAGE).longOpt(COMMAND_OPTION_INSPECT_MESSAGE_LONG_OPT)
@@ -205,80 +197,78 @@ public class IahnNodeCommand extends CliCommand {
                         .desc("基于国际化 Mek 批量插入或更新国际化消息").build()
         );
         list.add(
-                Option.builder(COMMAND_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
+                Option.builder(COMMAND_SUB_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
         );
         list.add(
-                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON 文件")
-                        .hasArg().type(File.class).build()
+                Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
+                        .desc("JSON 文件").hasArg().type(File.class).build()
         );
         return list;
     }
 
     @Override
-    protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
-        try {
-            Pair<String, Integer> pair = CommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
-            if (pair.getRight() != 1) {
-                context.sendMessage(CommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
-                context.sendMessage(super.cmdLineSyntax);
-                return;
-            }
-            switch (pair.getLeft()) {
-                case COMMAND_OPTION_INSPECT_MESSAGE:
-                    handleInspectMessage(context, cmd);
-                    break;
-                case COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE:
-                    handleBatchInspectMessageByLocale(context, cmd);
-                    break;
-                case COMMAND_OPTION_INSPECT_LOCALE_LIST:
-                    handleInspectLocaleList(context, cmd);
-                    break;
-                case COMMAND_OPTION_INSPECT_MEK_LIST:
-                    handleInspectMekList(context, cmd);
-                    break;
-                case COMMAND_OPTION_INSPECT_MESSAGE_TABLE:
-                    handleInspectMessageTable(context, cmd);
-                    break;
-                case COMMAND_OPTION_PUT_LOCALE:
-                    handlePutLocale(context, cmd);
-                    break;
-                case COMMAND_OPTION_REMOVE_LOCALE:
-                    handleRemoveLocale(context, cmd);
-                    break;
-                case COMMAND_OPTION_PUT_MEK:
-                    handlePutMek(context, cmd);
-                    break;
-                case COMMAND_OPTION_REMOVE_MEK:
-                    handleRemoveMek(context, cmd);
-                    break;
-                case COMMAND_OPTION_UPSERT_MESSAGE:
-                    handleUpsertMessage(context, cmd);
-                    break;
-                case COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE:
-                    handleBatchUpsertMessageByLocale(context, cmd);
-                    break;
-                case COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK:
-                    handleBatchUpsertMessageByMek(context, cmd);
-                    break;
-            }
-        } catch (Exception e) {
-            throw new TelqosException(e);
+    protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
+        if (pair.getRight() != 1) {
+            context.sendMessage(CliCommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
+            context.sendMessage(context.getCommandManual(context.getRuntimeIdentity()));
+            return;
+        }
+        switch (pair.getLeft()) {
+            case COMMAND_OPTION_INSPECT_MESSAGE:
+                handleInspectMessage(context, cmd);
+                break;
+            case COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE:
+                handleBatchInspectMessageByLocale(context, cmd);
+                break;
+            case COMMAND_OPTION_INSPECT_LOCALE_LIST:
+                handleInspectLocaleList(context, cmd);
+                break;
+            case COMMAND_OPTION_INSPECT_MEK_LIST:
+                handleInspectMekList(context, cmd);
+                break;
+            case COMMAND_OPTION_INSPECT_MESSAGE_TABLE:
+                handleInspectMessageTable(context, cmd);
+                break;
+            case COMMAND_OPTION_PUT_LOCALE:
+                handlePutLocale(context, cmd);
+                break;
+            case COMMAND_OPTION_REMOVE_LOCALE:
+                handleRemoveLocale(context, cmd);
+                break;
+            case COMMAND_OPTION_PUT_MEK:
+                handlePutMek(context, cmd);
+                break;
+            case COMMAND_OPTION_REMOVE_MEK:
+                handleRemoveMek(context, cmd);
+                break;
+            case COMMAND_OPTION_UPSERT_MESSAGE:
+                handleUpsertMessage(context, cmd);
+                break;
+            case COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE:
+                handleBatchUpsertMessageByLocale(context, cmd);
+                break;
+            case COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK:
+                handleBatchUpsertMessageByMek(context, cmd);
+                break;
+            default:
+                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
         }
     }
 
-    private void handleInspectMessage(Context context, CommandLine cmd) throws Exception {
+    private void handleInspectMessage(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMessageInspectInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageInspectInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageInspectInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageInspectInfo.class)
@@ -301,19 +291,19 @@ public class IahnNodeCommand extends CliCommand {
         }
     }
 
-    private void handleBatchInspectMessageByLocale(Context context, CommandLine cmd) throws Exception {
+    private void handleBatchInspectMessageByLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMessageInspectByLocaleInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageInspectByLocaleInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageInspectByLocaleInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageInspectByLocaleInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageInspectByLocaleInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageInspectByLocaleInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageInspectByLocaleInfo.class)
@@ -343,19 +333,19 @@ public class IahnNodeCommand extends CliCommand {
         }
     }
 
-    private void handleInspectLocaleList(Context context, CommandLine cmd) throws Exception {
+    private void handleInspectLocaleList(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeLocaleListInspectInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocaleListInspectInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeLocaleListInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeLocaleListInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocaleListInspectInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeLocaleListInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeLocaleListInspectInfo.class)
@@ -378,12 +368,10 @@ public class IahnNodeCommand extends CliCommand {
     }
 
     private void processLocaleListInspectResultItems(
-            Context context, List<IahnNodeLocaleListInspectResult.Item> items
+            CommandExecutor.Context context, List<IahnNodeLocaleListInspectResult.Item> items
     ) throws Exception {
         while (true) {
-            CommandUtil.CropResult cropResult = CommandUtil.cropData(
-                    context, items, "数据总数: " + items.size(), "输入 q 退出"
-            );
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, items, "数据总数: " + items.size());
             if (cropResult.isExitFlag()) {
                 break;
             }
@@ -396,7 +384,7 @@ public class IahnNodeCommand extends CliCommand {
     }
 
     private void printIahnNodeLocaleListInspectResultItem(
-            Context context, int i, int endIndex, IahnNodeLocaleListInspectResult.Item item
+            CommandExecutor.Context context, int i, int endIndex, IahnNodeLocaleListInspectResult.Item item
     ) throws Exception {
         context.sendMessage(String.format("索引: %d/%d", i, endIndex));
         if (Objects.isNull(item)) {
@@ -411,19 +399,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("");
     }
 
-    private void handleInspectMekList(Context context, CommandLine cmd) throws Exception {
+    private void handleInspectMekList(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMekListInspectInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekListInspectInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMekListInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMekListInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekListInspectInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMekListInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMekListInspectInfo.class)
@@ -445,12 +433,11 @@ public class IahnNodeCommand extends CliCommand {
         }
     }
 
-    private void processMekListInspectResultItems(Context context, List<IahnNodeMekListInspectResult.Item> items)
-            throws Exception {
+    private void processMekListInspectResultItems(
+            CommandExecutor.Context context, List<IahnNodeMekListInspectResult.Item> items
+    ) throws Exception {
         while (true) {
-            CommandUtil.CropResult cropResult = CommandUtil.cropData(
-                    context, items, "数据总数: " + items.size(), "输入 q 退出"
-            );
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, items, "数据总数: " + items.size());
             if (cropResult.isExitFlag()) {
                 break;
             }
@@ -463,7 +450,7 @@ public class IahnNodeCommand extends CliCommand {
     }
 
     private void printIahnNodeMekListInspectResultItem(
-            Context context, int i, int endIndex, IahnNodeMekListInspectResult.Item item
+            CommandExecutor.Context context, int i, int endIndex, IahnNodeMekListInspectResult.Item item
     ) throws Exception {
         context.sendMessage(String.format("索引: %d/%d", i, endIndex));
         if (Objects.isNull(item)) {
@@ -477,19 +464,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("");
     }
 
-    private void handleInspectMessageTable(Context context, CommandLine cmd) throws Exception {
+    private void handleInspectMessageTable(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMessageTableInspectInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageTableInspectInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageTableInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageTableInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageTableInspectInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageTableInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageTableInspectInfo.class)
@@ -512,13 +499,11 @@ public class IahnNodeCommand extends CliCommand {
     }
 
     private void processMessageTableInspectResultItems(
-            Context context, List<IahnNodeMessageTableInspectResult.Column> columns,
+            CommandExecutor.Context context, List<IahnNodeMessageTableInspectResult.Column> columns,
             List<IahnNodeMessageTableInspectResult.Row> rows
     ) throws Exception {
         while (true) {
-            CommandUtil.CropResult cropResult = CommandUtil.cropData(
-                    context, rows, "数据总数: " + rows.size(), "输入 q 退出"
-            );
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, rows, "数据总数: " + rows.size());
             if (cropResult.isExitFlag()) {
                 break;
             }
@@ -531,8 +516,8 @@ public class IahnNodeCommand extends CliCommand {
     }
 
     private void printIahnNodeMessageTableInspectResultRow(
-            Context context, int i, int endIndex, List<IahnNodeMessageTableInspectResult.Column> columns,
-            IahnNodeMessageTableInspectResult.Row row
+            CommandExecutor.Context context, int i, int endIndex,
+            List<IahnNodeMessageTableInspectResult.Column> columns, IahnNodeMessageTableInspectResult.Row row
     ) throws Exception {
         // 在打印行之前，先打印列信息。
         context.sendMessage("列总数: " + columns.size());
@@ -576,19 +561,19 @@ public class IahnNodeCommand extends CliCommand {
         return sb.toString();
     }
 
-    private void handlePutLocale(Context context, CommandLine cmd) throws Exception {
+    private void handlePutLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeLocalePutInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocalePutInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeLocalePutInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeLocalePutInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocalePutInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeLocalePutInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeLocalePutInfo.class)
@@ -606,19 +591,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("推入成功");
     }
 
-    private void handleRemoveLocale(Context context, CommandLine cmd) throws Exception {
+    private void handleRemoveLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeLocaleRemoveInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocaleRemoveInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeLocaleRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeLocaleRemoveInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocaleRemoveInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeLocaleRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeLocaleRemoveInfo.class)
@@ -636,19 +621,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("移除成功");
     }
 
-    private void handlePutMek(Context context, CommandLine cmd) throws Exception {
+    private void handlePutMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMekPutInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekPutInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMekPutInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMekPutInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekPutInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMekPutInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMekPutInfo.class)
@@ -666,19 +651,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("推入成功");
     }
 
-    private void handleRemoveMek(Context context, CommandLine cmd) throws Exception {
+    private void handleRemoveMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMekRemoveInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekRemoveInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMekRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMekRemoveInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekRemoveInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMekRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMekRemoveInfo.class)
@@ -696,19 +681,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("移除成功");
     }
 
-    private void handleUpsertMessage(Context context, CommandLine cmd) throws Exception {
+    private void handleUpsertMessage(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMessageUpsertInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageUpsertInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageUpsertInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageUpsertInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageUpsertInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageUpsertInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageUpsertInfo.class)
@@ -726,19 +711,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("插入或更新成功");
     }
 
-    private void handleBatchUpsertMessageByLocale(Context context, CommandLine cmd) throws Exception {
+    private void handleBatchUpsertMessageByLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMessageUpsertByLocaleInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageUpsertByLocaleInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageUpsertByLocaleInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageUpsertByLocaleInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageUpsertByLocaleInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageUpsertByLocaleInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageUpsertByLocaleInfo.class)
@@ -756,19 +741,19 @@ public class IahnNodeCommand extends CliCommand {
         context.sendMessage("批量插入或更新成功");
     }
 
-    private void handleBatchUpsertMessageByMek(Context context, CommandLine cmd) throws Exception {
+    private void handleBatchUpsertMessageByMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         IahnNodeMessageUpsertByMekInfo info;
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageUpsertByMekInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageUpsertByMekInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageUpsertByMekInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageUpsertByMekInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageUpsertByMekInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageUpsertByMekInfo.class)

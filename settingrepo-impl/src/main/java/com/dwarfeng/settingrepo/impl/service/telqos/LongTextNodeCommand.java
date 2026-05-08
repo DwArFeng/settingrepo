@@ -6,10 +6,11 @@ import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputLongTextNodeInspectInfo;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.LongTextNodeQosService;
-import com.dwarfeng.springtelqos.node.config.TelqosCommand;
 import com.dwarfeng.springtelqos.sdk.command.CliCommand;
-import com.dwarfeng.springtelqos.stack.command.Context;
-import com.dwarfeng.springtelqos.stack.exception.TelqosException;
+import com.dwarfeng.springtelqos.sdk.configuration.TelqosCommand;
+import com.dwarfeng.springtelqos.sdk.util.CliCommandUtil;
+import com.dwarfeng.springtelqos.stack.command.CommandDescriptor;
+import com.dwarfeng.springtelqos.stack.command.CommandExecutor;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
@@ -31,6 +32,11 @@ import java.util.Objects;
 @TelqosCommand
 public class LongTextNodeCommand extends CliCommand {
 
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String IDENTITY = "ltxtnode";
+
+    // region 指令选项
+
     private static final String COMMAND_OPTION_INSPECT = "inspect";
     private static final String COMMAND_OPTION_DOWNLOAD = "download";
     private static final String COMMAND_OPTION_UPLOAD = "upload";
@@ -41,152 +47,131 @@ public class LongTextNodeCommand extends CliCommand {
             COMMAND_OPTION_UPLOAD
     };
 
-    private static final String COMMAND_OPTION_JSON = "json";
-    private static final String COMMAND_OPTION_JSON_FILE = "jf";
-    private static final String COMMAND_OPTION_JSON_FILE_LONG_OPT = "json-file";
+    private static final String COMMAND_SUB_OPTION_JSON = "json";
+    private static final String COMMAND_SUB_OPTION_JSON_FILE = "jf";
+    private static final String COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT = "json-file";
 
-    @SuppressWarnings("SpellCheckingInspection")
-    private static final String IDENTITY = "ltxtnode";
-    private static final String DESCRIPTION = "长文本节点操作服务";
-
-    private static final String CMD_LINE_SYNTAX_INSPECT = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_DOWNLOAD = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_DOWNLOAD) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_UPLOAD = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_UPLOAD) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-
-    private static final String[] CMD_LINE_ARRAY = new String[]{
-            CMD_LINE_SYNTAX_INSPECT,
-            CMD_LINE_SYNTAX_DOWNLOAD,
-            CMD_LINE_SYNTAX_UPLOAD
-    };
-
-    private static final String CMD_LINE_SYNTAX = CommandUtil.syntax(CMD_LINE_ARRAY);
+    // endregion
 
     private final LongTextNodeQosService longTextNodeQosService;
 
     public LongTextNodeCommand(LongTextNodeQosService longTextNodeQosService) {
-        super(IDENTITY, DESCRIPTION, CMD_LINE_SYNTAX);
+        super(IDENTITY);
         this.longTextNodeQosService = longTextNodeQosService;
     }
 
     @Override
-    protected List<Option> buildOptions() {
+    protected DescriptionProvider provideDescriptionProvider() {
+        return context -> "长文本节点操作服务";
+    }
+
+    @Override
+    protected CliSyntaxProvider provideCliSyntaxProvider() {
+        return this::cliSyntaxProvider;
+    }
+
+    private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
+        String identity = context.getRuntimeIdentity();
+        String[] patterns = new String[]{
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_INSPECT) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
+                        "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_DOWNLOAD) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
+                        "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_UPLOAD) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
+                        "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]"
+        };
+        return CliCommandUtil.cliSyntax(patterns);
+    }
+
+    @Override
+    protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_INSPECT).desc("查看长文本节点长文本").build());
-        list.add(Option.builder(COMMAND_OPTION_DOWNLOAD).desc("下载长文本节点长文本").build());
-        list.add(Option.builder(COMMAND_OPTION_UPLOAD).desc("上传长文本节点长文本").build());
-        list.add(
-                Option.builder(COMMAND_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
-        );
-        list.add(
-                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON 文本")
-                        .hasArg().type(File.class).build()
-        );
+        list.add(Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false).desc("查看长文本节点长文本").build());
+        list.add(Option.builder(COMMAND_OPTION_DOWNLOAD).optionalArg(true).hasArg(false).desc("下载长文本节点长文本").build());
+        list.add(Option.builder(COMMAND_OPTION_UPLOAD).optionalArg(true).hasArg(false).desc("上传长文本节点长文本").build());
+        list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
+        list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
+                .hasArg(true).type(File.class).desc("JSON 文本").build());
         return list;
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @Override
-    protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
-        try {
-            Pair<String, Integer> pair = CommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
-            if (pair.getRight() != 1) {
-                context.sendMessage(CommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
-                context.sendMessage(super.cmdLineSyntax);
-                return;
-            }
-            switch (pair.getLeft()) {
-                case COMMAND_OPTION_INSPECT:
-                    handleInspect(context, cmd);
-                    break;
-                case COMMAND_OPTION_DOWNLOAD:
-                    handleDownload(context, cmd);
-                    break;
-                case COMMAND_OPTION_UPLOAD:
-                    handleUpload(context, cmd);
-                    break;
-            }
-        } catch (Exception e) {
-            throw new TelqosException(e);
+    protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
+        if (pair.getRight() != 1) {
+            context.sendMessage(CliCommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
+            context.sendMessage(context.getCommandManual(context.getRuntimeIdentity()));
+            return;
+        }
+        switch (pair.getLeft()) {
+            case COMMAND_OPTION_INSPECT:
+                handleInspect(context, cmd);
+                break;
+            case COMMAND_OPTION_DOWNLOAD:
+                handleDownload(context, cmd);
+                break;
+            case COMMAND_OPTION_UPLOAD:
+                handleUpload(context, cmd);
+                break;
+            default:
+                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
         }
     }
 
-    private void handleInspect(Context context, CommandLine cmd) throws Exception {
+    private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         LongTextNodeInspectInfo info;
-
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 LongTextNodeInspectInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputLongTextNodeInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputLongTextNodeInspectInfo.class)
             );
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文本，转化为 LongTextListNodeInspectInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputLongTextNodeInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputLongTextNodeInspectInfo.class)
                 );
             }
         } else {
-            throw new IllegalArgumentException("未指定必要的参数");
+            throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 查看长文本节点。
         LongTextNodeInspectResult result = longTextNodeQosService.inspect(info);
-
-        // 输出结果。
         if (result == null) {
             context.sendMessage("查看结果: null");
-        } else {
-            context.sendMessage("查看结果: ");
-            context.sendMessage("  preview: " + result.getPreview());
-            context.sendMessage("  length: " + result.getLength());
-            context.sendMessage("  nullFlag: " + result.isNullFlag());
+            return;
         }
+        context.sendMessage("查看结果: ");
+        context.sendMessage("  preview: " + result.getPreview());
+        context.sendMessage("  length: " + result.getLength());
+        context.sendMessage("  nullFlag: " + result.isNullFlag());
     }
 
-    @SuppressWarnings("DuplicatedCode")
-    private void handleDownload(Context context, CommandLine cmd) throws Exception {
+    private void handleDownload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         DownloadInfo info;
-
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 DownloadInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = JSON.parseObject(json, DownloadInfo.class);
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文本，转化为 DeviceFileStreamDownloadInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = JSON.parseObject(in, DownloadInfo.class);
             }
         } else {
-            // 暂时未实现。
             throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 获取 LongTextNodeFileStream。
         LongTextNodeTextStream longTextNodeTextStream = longTextNodeQosService.downloadTextStream(
                 new LongTextNodeTextStreamDownloadInfo(info.getCategory(), info.getArgs())
         );
-
-        // 如果 LongTextNodeFileStream 为 null，则发送文本不存在信息。
         if (Objects.isNull(longTextNodeTextStream)) {
             context.sendMessage("长文本文件不存在");
             return;
         }
 
-        // 下载长文本。
         InputStream in = null;
         OutputStream out = null;
         try {
@@ -204,47 +189,36 @@ public class LongTextNodeCommand extends CliCommand {
                 out.close();
             }
         }
-
-        // 输出结果。
         context.sendMessage("文本下载成功");
     }
 
-    @SuppressWarnings("DuplicatedCode")
-    private void handleUpload(Context context, CommandLine commandLine) throws Exception {
+    private void handleUpload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         UploadInfo info;
-
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 UploadInfo。
-        if (commandLine.hasOption(COMMAND_OPTION_JSON)) {
-            String json = commandLine.getOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = cmd.getOptionValue(COMMAND_SUB_OPTION_JSON);
             info = JSON.parseObject(json, UploadInfo.class);
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文本，转化为 UploadInfo。
-        else if (commandLine.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) commandLine.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = JSON.parseObject(in, UploadInfo.class);
             }
         } else {
-            // 暂时未实现。
             throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 上传长文本。
         InputStream in = null;
         try {
             File file = new File(info.getFilePath());
             long length = file.length();
             in = Files.newInputStream(file.toPath());
-            longTextNodeQosService.uploadTextStream(new LongTextNodeTextStreamUploadInfo(
-                    info.getCategory(), info.getArgs(), length, in
-            ));
+            longTextNodeQosService.uploadTextStream(
+                    new LongTextNodeTextStreamUploadInfo(info.getCategory(), info.getArgs(), length, in)
+            );
         } finally {
             if (Objects.nonNull(in)) {
                 in.close();
             }
         }
-
-        // 输出结果。
         context.sendMessage("文本上传成功");
     }
 
