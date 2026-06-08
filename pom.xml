@@ -564,6 +564,21 @@
                 <artifactId>settingrepo-impl</artifactId>
                 <version>3.0.0.a-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>settingrepo-node</artifactId>
+                <version>3.0.0.a-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>settingrepo-node-all-he</artifactId>
+                <version>3.0.0.a-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>settingrepo-distribute</artifactId>
+                <version>3.0.0.a-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -609,5 +624,6 @@
         <module>settingrepo-sdk</module>
         <module>settingrepo-impl</module>
         <module>settingrepo-node</module>
+        <module>settingrepo-distribute</module>
     </modules>
 </project>

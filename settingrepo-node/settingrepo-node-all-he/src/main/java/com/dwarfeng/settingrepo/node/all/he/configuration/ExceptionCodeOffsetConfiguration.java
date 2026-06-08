@@ -1,4 +1,4 @@
-package com.dwarfeng.settingrepo.node.configuration;
+package com.dwarfeng.settingrepo.node.all.he.configuration;
 
 import com.dwarfeng.settingrepo.sdk.util.ServiceExceptionCodes;
 import org.springframework.beans.factory.annotation.Value;

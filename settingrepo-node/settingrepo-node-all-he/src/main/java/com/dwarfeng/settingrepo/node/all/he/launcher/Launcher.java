@@ -1,6 +1,6 @@
-package com.dwarfeng.settingrepo.node.launcher;
+package com.dwarfeng.settingrepo.node.all.he.launcher;
 
-import com.dwarfeng.settingrepo.node.handler.LauncherSettingHandler;
+import com.dwarfeng.settingrepo.node.all.he.handler.LauncherSettingHandler;
 import com.dwarfeng.settingrepo.stack.service.ResetQosService;
 import com.dwarfeng.settingrepo.stack.service.SupportQosService;
 import com.dwarfeng.springterminator.sdk.util.ApplicationUtil;

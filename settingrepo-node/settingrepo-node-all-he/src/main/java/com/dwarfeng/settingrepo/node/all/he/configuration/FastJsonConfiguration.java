@@ -1,4 +1,4 @@
-package com.dwarfeng.settingrepo.node.configuration;
+package com.dwarfeng.settingrepo.node.all.he.configuration;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.dwarfeng.settingrepo.sdk.bean.entity.*;

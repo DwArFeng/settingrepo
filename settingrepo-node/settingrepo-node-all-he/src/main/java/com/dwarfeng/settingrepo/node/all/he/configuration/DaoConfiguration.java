@@ -1,4 +1,4 @@
-package com.dwarfeng.settingrepo.node.configuration;
+package com.dwarfeng.settingrepo.node.all.he.configuration;
 
 import com.dwarfeng.settingrepo.impl.bean.BeanMapper;
 import com.dwarfeng.settingrepo.impl.bean.entity.*;

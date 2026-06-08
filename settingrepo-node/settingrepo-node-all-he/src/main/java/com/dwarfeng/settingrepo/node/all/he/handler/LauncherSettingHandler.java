@@ -1,4 +1,4 @@
-package com.dwarfeng.settingrepo.node.handler;
+package com.dwarfeng.settingrepo.node.all.he.handler;
 
 import com.dwarfeng.subgrade.stack.handler.Handler;
 import org.springframework.beans.factory.annotation.Value;

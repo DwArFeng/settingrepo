@@ -72,36 +72,36 @@ buildNumber.properties
 ## Logger Files
 #################
 /settingrepo-impl/logs/
-/settingrepo-node/logs/
+/settingrepo-node/settingrepo-node-all-he/logs/
 
 #################
 ## Configuration Files
 #################
 /settingrepo-impl/conf/
-/settingrepo-node/conf/
+/settingrepo-node/settingrepo-node-all-he/conf/
 
 #################
 ## Libext Files
 #################
-/settingrepo-node/libext/
+/settingrepo-node/settingrepo-node-all-he/libext/
 
 #################
 ## Opt Files
 #################
-/settingrepo-node/opt/
+/settingrepo-node/settingrepo-node-all-he/opt/
 
 #################
 ## Optext Files
 #################
-/settingrepo-node/optext/
+/settingrepo-node/settingrepo-node-all-he/optext/
 
 #################
 ## Confext Files
 #################
-/settingrepo-node/confext/
+/settingrepo-node/settingrepo-node-all-he/confext/
 
 #################
 ## Temp Files
 #################
 /settingrepo-impl/temp/
-/settingrepo-node/temp/
+/settingrepo-node/settingrepo-node-all-he/temp/
