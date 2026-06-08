@@ -1,4 +1,4 @@
-# ConfDirectory - 配置目录
+﻿# ConfDirectory - 配置目录
 
 ## 总览
 
@@ -61,11 +61,11 @@ conf
 数据库连接配置文件，除了标准的数据库配置四要素之外，还包括 Hibernate 的方言配置。
 
 ```properties
-jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://your-host-here:3306/settingrepo?serverTimezone=Asia/Shanghai&autoReconnect=true
-jdbc.username=root
-jdbc.password=your-password-here
-hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+com.dwarfeng.settingrepo.jdbc.driver=com.mysql.cj.jdbc.Driver
+com.dwarfeng.settingrepo.jdbc.url=jdbc:mysql://your-host-here:3306/settingrepo?serverTimezone=Asia/Shanghai&autoReconnect=true
+com.dwarfeng.settingrepo.jdbc.username=root
+com.dwarfeng.settingrepo.jdbc.password=your-password-here
+com.dwarfeng.settingrepo.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 ```
 
 ### performance.properties
@@ -74,13 +74,13 @@ hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
 ```properties
 # 数据库的批量写入量，设置激进的值以提高数据库的写入效率。
-hibernate.jdbc.batch_size=100
+com.dwarfeng.settingrepo.hibernate.jdbc.batch_size=100
 # 数据库的批量抓取量，设置激进的值以提高数据库的读取效率。
-hibernate.jdbc.fetch_size=50
+com.dwarfeng.settingrepo.hibernate.jdbc.fetch_size=50
 # 连接池最大活动连接数量
-data_source.max_active=20
+com.dwarfeng.settingrepo.data_source.max_active=20
 # 连接池最小空闲连接数量
-data_source.min_idle=0
+com.dwarfeng.settingrepo.data_source.min_idle=0
 ```
 
 ## datamark 目录
@@ -103,11 +103,11 @@ data_source.min_idle=0
 ```properties
 #---------------------------------配置说明----------------------------------------
 # 数据标记资源的 URL，格式参考 Spring 资源路径。
-# datamark.xxx.resource_url=classpath:datamark/default.storage
+# com.dwarfeng.settingrepo.datamark.xxx.resource_url=classpath:datamark/default.storage
 # 数据标记资源的字符集。
-# datamark.xxx.resource_charset=UTF-8
+# com.dwarfeng.settingrepo.datamark.xxx.resource_charset=UTF-8
 # 数据标记服务是否允许更新。
-# datamark.xxx.update_allowed=true
+# com.dwarfeng.settingrepo.datamark.xxx.update_allowed=true
 #
 #---------------------------------SettingCategory----------------------------------------
 # etc...
@@ -127,20 +127,20 @@ data_source.min_idle=0
 Dubbo 连接配置文件。
 
 ```properties
-dubbo.registry.zookeeper.address=zookeeper://your-host-here:2181
-dubbo.registry.zookeeper.timeout=3000
-dubbo.protocol.dubbo.port=20000
-dubbo.protocol.dubbo.host=your-host-here
-dubbo.provider.group=
-dubbo.consumer.snowflake.group=
+com.dwarfeng.settingrepo.dubbo.registry.zookeeper.address=zookeeper://your-host-here:2181
+com.dwarfeng.settingrepo.dubbo.registry.zookeeper.timeout=3000
+com.dwarfeng.settingrepo.dubbo.protocol.dubbo.port=20000
+com.dwarfeng.settingrepo.dubbo.protocol.dubbo.host=your-host-here
+com.dwarfeng.settingrepo.dubbo.provider.group=
+com.dwarfeng.settingrepo.dubbo.consumer.snowflake.group=
 ```
 
-其中，`dubbo.registry.zookeeper.address` 需要配置为 ZooKeeper 的地址，
-`dubbo.protocol.dubbo.host` 需要配置为本机的 IP 地址。
+其中，`com.dwarfeng.settingrepo.dubbo.registry.zookeeper.address` 需要配置为 ZooKeeper 的地址，
+`com.dwarfeng.settingrepo.dubbo.protocol.dubbo.host` 需要配置为本机的 IP 地址。
 
-如果您需要在本机启动多个 settingrepo 实例，那么需要为每个实例配置不同的 `dubbo.protocol.dubbo.port`。
+如果您需要在本机启动多个 settingrepo 实例，那么需要为每个实例配置不同的 `com.dwarfeng.settingrepo.dubbo.protocol.dubbo.port`。
 
-如果您在本机上部署了多个项目，每个项目中都使用了 settingrepo，那么需要为每个项目配置不同的 `dubbo.provider.group`，
+如果您在本机上部署了多个项目，每个项目中都使用了 settingrepo，那么需要为每个项目配置不同的 `com.dwarfeng.settingrepo.dubbo.provider.group`，
 以避免微服务错误的调用。
 
 ## ftp 目录
@@ -156,35 +156,53 @@ FTP 连接配置文件。
 
 ```properties
 # FTP 的主机名称。
-ftp.host=your-host-here
+com.dwarfeng.settingrepo.ftp.host=your-host-here
 # FTP 的端口号。
-ftp.port=21
+com.dwarfeng.settingrepo.ftp.port=21
 # FTP 的登录用户名。
-ftp.username=your-username-here
+com.dwarfeng.settingrepo.ftp.username=your-username-here
 # FTP 的登录密码。
-ftp.password=your-password-here
+com.dwarfeng.settingrepo.ftp.password=your-password-here
 # etc...
 # FTP 的数据连接模式。
 #  0: 本地主动模式（传统主动模式 / PORT 模式）。
 #  1: 远程主动模式（反向主动模式）。
 #  2: 本地被动模式（传统被动模式 / PASV 模式）。
 #  3: 远程被动模式（反向被动模式）。
-ftp.data_connection_mode=0
+com.dwarfeng.settingrepo.ftp.data_connection_mode=0
 # FTP 的数据超时时间。
-# ftp.data_connection_mode=0 时，数据连接时调用 ServerSocket.accept() 时也会应用此超时设置。
+# com.dwarfeng.settingrepo.ftp.data_connection_mode=0 时，数据连接时调用 ServerSocket.accept() 时也会应用此超时设置。
 # 建议将此值设置为大于 0，以避免服务端故障或网络丢包导致程序阻塞。
-ftp.data_timeout=-1
+com.dwarfeng.settingrepo.ftp.data_timeout=-1
 # etc...
 
 ```
 
 该配置文件中的注释较为完善，使用者可以根据注释对大部分参数进行妥善配置，以下对重要参数进行进一步说明。
 
-`ftp.data_connection_mode`: FTP 的数据连接模式。本项目支持 FTP 所有的 4 种连接模式，但是在实践中，
+`com.dwarfeng.settingrepo.ftp.data_connection_mode`: FTP 的数据连接模式。本项目支持 FTP 所有的 4 种连接模式，但是在实践中，
 多使用 `0（本地主动模式）` 和 `2（本地被动模式）`。
 
-`ftp.data_timeout`: FTP 的数据超时时间。需要强调，
-**当 `ftp.data_connection_mode=0` 时此值必须设置为大于 `0`，否则在服务端故障或是网络丢包时，程序将可能阻塞**。
+`com.dwarfeng.settingrepo.ftp.data_timeout`: FTP 的数据超时时间。需要强调，
+**当 `com.dwarfeng.settingrepo.ftp.data_connection_mode=0` 时此值必须设置为大于 `0`，否则在服务端故障或是网络丢包时，程序将可能阻塞**。
+
+### path.properties
+
+FTP 路径配置文件。
+
+```properties
+# FTP 根路径。
+#   该服务的所有文件都将存储在该路径下。
+#   如果该路径包含多级目录，请使用 / 分隔，分隔符不能出现在路径的首尾。
+#   解析绝对路径时会对路径的前后空字符（whitespace）进行修剪（trim）。
+#   正例：
+#     settingrepo
+#     settingrepo/node-1
+#   反例：
+#     /settingrepo
+#     settingrepo/node-1/
+com.dwarfeng.settingrepo.ftp.root_path=settingrepo
+```
 
 ## logging 目录
 
@@ -255,11 +273,11 @@ Redis 连接配置文件。
 
 ```properties
 # ip 地址
-redis.hostName=your-host-here
+com.dwarfeng.settingrepo.redis.hostName=your-host-here
 # 端口号
-redis.port=6379
+com.dwarfeng.settingrepo.redis.port=6379
 # 如果有密码
-redis.password=your-password-here
+com.dwarfeng.settingrepo.redis.password=your-password-here
 # etc...
 ```
 
@@ -272,7 +290,7 @@ Redis 前缀配置文件。
 #  缓存时实体的键的格式
 #------------------------------------------------------------------------------------
 # 格式化器支持对象的主键格式。
-cache.prefix.entity.formatter_support=entity.formatter_support.
+com.dwarfeng.settingrepo.cache.prefix.entity.formatter_support=com.dwarfeng.settingrepo.entity.formatter_support.
 # etc...
 ```
 
@@ -284,7 +302,7 @@ Redis 利用该配置文件，为缓存的主键添加前缀，以示区分。
 
 ```properties
 # 格式化器支持对象的主键格式。
-cache.prefix.entity.formatter_support=entity.settingrepo.formatter_support.
+com.dwarfeng.settingrepo.cache.prefix.entity.formatter_support=com.dwarfeng.settingrepo.entity.settingrepo.formatter_support.
 # etc...
 ```
 
@@ -297,7 +315,7 @@ Redis 缓存的超时配置文件。
 #  实体缓存时的超时时间
 #------------------------------------------------------------------------------------
 # 格式化器支持对象缓存的超时时间。
-cache.timeout.entity.formatter_support=3600000
+com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support=3600000
 # etc...
 ```
 
@@ -321,13 +339,13 @@ cache.timeout.entity.formatter_support=3600000
 
 ```properties
 # 任务执行器的线程池数量范围。
-executor.pool_size=50-75
+com.dwarfeng.settingrepo.executor.pool_size=20-40
 # 任务执行器的队列容量。
-executor.queue_capacity=100
+com.dwarfeng.settingrepo.executor.queue_capacity=100
 # 任务执行器的保活时间（秒）。
-executor.keep_alive=120
+com.dwarfeng.settingrepo.executor.keep_alive=120
 # 计划执行器的线程池数量范围。
-scheduler.pool_size=10
+com.dwarfeng.settingrepo.scheduler.pool_size=10
 ```
 
 ### exception.properties
@@ -336,15 +354,17 @@ ServiceException 的异常代码的偏移量配置。
 
 ```properties
 # settingrepo 工程自身的异常代号偏移量。
-settingrepo.exception_code_offset=10000
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset=10000
 # settingrepo 工程中 subgrade 的异常代号偏移量。
-settingrepo.exception_code_offset.subgrade=0
-# settingrepo 工程中 snowflake 的异常代号偏移量。
-settingrepo.exception_code_offset.snowflake=1500
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset.subgrade=0
+# settingrepo 工程中 spring-telqos 的异常代号偏移量。
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset.spring_telqos=2000
+# settingrepo 工程中 spring-terminator 的异常代号偏移量。
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset.spring_terminator=3000
 # settingrepo 工程中 dwarfeng-ftp 的异常代号偏移量。
-settingrepo.exception_code_offset.dwarfeng_ftp=2000
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset.dwarfeng_ftp=5000
 # settingrepo 工程中 dwarfeng-datamark 的异常代号偏移量。
-settingrepo.exception_code_offset.dwarfeng_datamark=2500
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset.dwarfeng_datamark=4000
 ```
 
 Subgrade 框架中，会将微服务抛出的异常映射为 `ServiceException`，每个 `ServiceException` 都有一个异常代码，
@@ -359,14 +379,14 @@ Subgrade 框架中，会将微服务抛出的异常映射为 `ServiceException`�
 
 ```properties
 # 国际化节点地区映射缓存的前缀。
-iahn.cache.prefix.locale_map=iahn.cache.locale_map.
+com.dwarfeng.settingrepo.iahn.cache.prefix.locale_map=com.dwarfeng.settingrepo.iahn.cache.locale_map.
 # 国际化节点地区映射缓存的超时时间。
-iahn.cache.timeout.locale_map=3600000
+com.dwarfeng.settingrepo.iahn.cache.timeout.locale_map=3600000
 #
 # 国际化节点消息映射缓存的前缀。
-iahn.cache.prefix.message_map=iahn.cache.message_map.
+com.dwarfeng.settingrepo.iahn.cache.prefix.message_map=com.dwarfeng.settingrepo.iahn.cache.message_map.
 # 国际化节点消息映射缓存的超时时间。
-iahn.cache.timeout.message_map=3600000
+com.dwarfeng.settingrepo.iahn.cache.timeout.message_map=3600000
 ```
 
 用于定义国际化节点在其业务逻辑中需要使用的配置项。
@@ -380,13 +400,13 @@ iahn.cache.timeout.message_map=3600000
 
 ```properties
 # 图片缩略图的宽度。
-image_thumbnail.width=980
+com.dwarfeng.settingrepo.image_thumbnail.width=980
 # 图片缩略图的高度。
-image_thumbnail.height=540
+com.dwarfeng.settingrepo.image_thumbnail.height=540
 # 图片缩略图的质量。
-image_thumbnail.quality=0.5
+com.dwarfeng.settingrepo.image_thumbnail.quality=0.5
 # 图片缩略图的输出格式。
-image_thumbnail.output_format=jpg
+com.dwarfeng.settingrepo.image_thumbnail.output_format=jpg
 ```
 
 该配置文件作用于 `ImageNode（图片节点）` 和 `ImageListNode（图片列表节点）`，用于对这些节点的缩略图生成业务逻辑。
@@ -402,12 +422,12 @@ image_thumbnail.output_format=jpg
 
 ```properties
 # 程序启动完成后，是否重置格式化器支持。
-launcher.reset_formatter_support=true
+com.dwarfeng.settingrepo.launcher.reset_formatter_support=true
 # 程序启动完成后，启动重置的延时时间。
 # 有些数据仓库以及重置器在启动后可能会需要一些时间进行自身的初始化，调整该参数以妥善的处理这些数据源和推送器。
 # 该参数等于 0，意味着启动后立即启动重置服务。
 # 该参数小于 0，意味着程序不主动启动重置服务，需要手动启动。
-launcher.start_reset_delay=30000
+com.dwarfeng.settingrepo.launcher.start_reset_delay=30000
 ```
 
 该配置文件决定了服务被运行后，哪些功能将会自动被执行。
@@ -416,6 +436,24 @@ launcher.start_reset_delay=30000
 专注与业务的处理； 另一部分则不执行数据业务并上线微服务，专注于响应调用方。
 
 自动执行是可选的配置功能，任何启动时没有自动执行的功能模块，均可以通过服务的 telqos 系统随时进行启用。
+
+### navigation.properties
+
+导航配置文件。
+
+```properties
+# 导航节点查询结果缓存的前缀。
+com.dwarfeng.settingrepo.navigation.cache.prefix.inspect_result=\
+  com.dwarfeng.settingrepo.navigation.cache.inspect_result.
+# 导航节点查询结果缓存的超时时间。
+com.dwarfeng.settingrepo.navigation.cache.timeout.inspect_result=3600000
+#
+# 导航节点索引格式化的起始值。
+com.dwarfeng.settingrepo.navigation.format.start_index=10
+# 导航节点索引格式化的步长。
+com.dwarfeng.settingrepo.navigation.format.index_step=10
+
+```
 
 ### push.properties
 
@@ -434,7 +472,7 @@ launcher.start_reset_delay=30000
 # 对于一个具体的项目，很可能只用一个推送器。此时希望加载
 # 推送器时只加载需要的那个，其余的推送器不加载。这个需求
 # 可以通过编辑 application-context-scan.xml 实现。
-pusher.type=drain
+com.dwarfeng.settingrepo.pusher.type=drain
 #
 ###################################################
 #                      drain                      #
@@ -445,13 +483,13 @@ pusher.type=drain
 #                      multi                      #
 ###################################################
 # 代理的推送器，推送器之间以逗号分隔。
-pusher.multi.delegate_types=drain
+com.dwarfeng.settingrepo.pusher.multi.delegate_types=drain
 #
 ###################################################
 #                       log                       #
 ###################################################
 # 记录日志的等级，由低到高依次是 TRACE, DEBUG, INFO, WARN, ERROR。
-pusher.log.log_level=INFO
+com.dwarfeng.settingrepo.pusher.log.log_level=INFO
 ```
 
 您不必对所有的配置项进行配置。
@@ -472,25 +510,25 @@ pusher.log.log_level=INFO
 #                   fixed_delay                   #
 ###################################################
 # 重置的间隔。
-resetter.fixed_delay.delay=43200000
+com.dwarfeng.settingrepo.resetter.fixed_delay.delay=43200000
 #
 ###################################################
 #                   fixed_rate                    #
 ###################################################
 # 重置的间隔。
-resetter.fixed_rate.rate=43200000
+com.dwarfeng.settingrepo.resetter.fixed_rate.rate=43200000
 #
 ###################################################
 #                      cron                       #
 ###################################################
 # 执行重置的 CRON 表达式。
-resetter.cron.cron=0 0 1 * * *
+com.dwarfeng.settingrepo.resetter.cron.cron=0 0 1 * * *
 #
 ###################################################
 #                      kafka                      #
 ###################################################
 # 引导服务器集群。
-resetter.kafka.bootstrap_servers=your-host-here:9092
+com.dwarfeng.settingrepo.resetter.kafka.bootstrap_servers=your-host-here:9092
 # etc...
 #
 ###################################################
@@ -515,18 +553,18 @@ Telqos 连接配置文件。
 
 ```properties
 # Telnet 端口。
-telqos.port=23
+com.dwarfeng.settingrepo.telqos.port=23
 # 字符集。
-telqos.charset=UTF-8
+com.dwarfeng.settingrepo.telqos.charset=UTF-8
 # 白名单表达式。
-telqos.whitelist_regex=
+com.dwarfeng.settingrepo.telqos.whitelist_regex=
 # 黑名单表达式。
-telqos.blacklist_regex=
+com.dwarfeng.settingrepo.telqos.blacklist_regex=
 ```
 
-如果您的项目中有多个包含 Telqos 模块的服务，您应该修改 `telqos.port` 的值，以避免端口冲突。
+如果您的项目中有多个包含 Telqos 模块的服务，您应该修改 `com.dwarfeng.settingrepo.telqos.port` 的值，以避免端口冲突。
 
-请根据操作系统的默认字符集，修改 `telqos.charset` 的值，以避免乱码。一般情况下，Windows 系统的默认字符集为 `GBK`，
+请根据操作系统的默认字符集，修改 `com.dwarfeng.settingrepo.telqos.charset` 的值，以避免乱码。一般情况下，Windows 系统的默认字符集为 `GBK`，
 Linux 系统的默认字符集为 `UTF-8`。
 
-如果您希望限制 Telqos 的使用范围，您可以修改 `telqos.whitelist_regex` 和 `telqos.blacklist_regex` 的值。
+如果您希望限制 Telqos 的使用范围，您可以修改 `com.dwarfeng.settingrepo.telqos.whitelist_regex` 和 `com.dwarfeng.settingrepo.telqos.blacklist_regex` 的值。
