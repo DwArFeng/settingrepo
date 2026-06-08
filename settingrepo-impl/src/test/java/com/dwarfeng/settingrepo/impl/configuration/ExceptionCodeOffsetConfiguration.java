@@ -13,19 +13,32 @@ public class ExceptionCodeOffsetConfiguration {
     private int exceptionCodeOffset;
     @Value("${settingrepo.exception_code_offset.subgrade}")
     private int subgradeExceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.snowflake}")
-    private int snowflakeExceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.dwarfeng_ftp}")
-    private int dwarfengFtpExceptionCodeOffset;
+    @Value("${settingrepo.exception_code_offset.spring_telqos}")
+    private int springTelqosExceptionCodeOffset;
+    @Value("${settingrepo.exception_code_offset.spring_terminator}")
+    private int springTerminatorExceptionCodeOffset;
     @Value("${settingrepo.exception_code_offset.dwarfeng_datamark}")
     private int dwarfengDatamarkExceptionCodeOffset;
+    @Value("${settingrepo.exception_code_offset.dwarfeng_ftp}")
+    private int dwarfengFtpExceptionCodeOffset;
 
     @PostConstruct
     public void init() {
         ServiceExceptionCodes.setExceptionCodeOffset(exceptionCodeOffset);
-        com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.setExceptionCodeOffset(subgradeExceptionCodeOffset);
-        com.dwarfeng.sfds.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(snowflakeExceptionCodeOffset);
-        com.dwarfeng.ftp.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(dwarfengFtpExceptionCodeOffset);
-        com.dwarfeng.datamark.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(dwarfengDatamarkExceptionCodeOffset);
+        com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.setExceptionCodeOffset(
+                subgradeExceptionCodeOffset
+        );
+        com.dwarfeng.springtelqos.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(
+                springTelqosExceptionCodeOffset
+        );
+        com.dwarfeng.springterminator.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(
+                springTerminatorExceptionCodeOffset
+        );
+        com.dwarfeng.datamark.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(
+                dwarfengDatamarkExceptionCodeOffset
+        );
+        com.dwarfeng.ftp.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(
+                dwarfengFtpExceptionCodeOffset
+        );
     }
 }
