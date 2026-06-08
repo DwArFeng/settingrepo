@@ -10,7 +10,7 @@
 
     <groupId>com.dwarfeng</groupId>
     <artifactId>settingrepo</artifactId>
-    <version>3.0.0.a-SNAPSHOT</version>
+    <version>3.0.0.a</version>
 
     <packaging>pom</packaging>
 
@@ -552,32 +552,32 @@
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-stack</artifactId>
-                <version>3.0.0.a-SNAPSHOT</version>
+                <version>3.0.0.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-sdk</artifactId>
-                <version>3.0.0.a-SNAPSHOT</version>
+                <version>3.0.0.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-impl</artifactId>
-                <version>3.0.0.a-SNAPSHOT</version>
+                <version>3.0.0.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-node</artifactId>
-                <version>3.0.0.a-SNAPSHOT</version>
+                <version>3.0.0.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-node-all-he</artifactId>
-                <version>3.0.0.a-SNAPSHOT</version>
+                <version>3.0.0.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>settingrepo-distribute</artifactId>
-                <version>3.0.0.a-SNAPSHOT</version>
+                <version>3.0.0.a</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
