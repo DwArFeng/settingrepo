@@ -25,7 +25,7 @@ public class ImageListNodeItemCrudOperation implements BatchCrudOperation<LongId
 
     private final FtpPathResolver ftpPathResolver;
 
-    @Value("${cache.timeout.entity.image_list_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.image_list_node_item}")
     private long imageListNodeItemTimeout;
 
     public ImageListNodeItemCrudOperation(

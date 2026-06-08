@@ -16,12 +16,19 @@
     </dubbo:application>
 
     <!-- Zookeeper 注册中心。 -->
-    <dubbo:registry address="${dubbo.registry.zookeeper.address}" timeout="${dubbo.registry.zookeeper.timeout}"/>
+    <dubbo:registry
+            address="${com.dwarfeng.settingrepo.dubbo.registry.zookeeper.address}"
+            timeout="${com.dwarfeng.settingrepo.dubbo.registry.zookeeper.timeout}"
+    />
 
     <!-- Dubbo 协议。 -->
     <dubbo:protocol
-            name="dubbo" port="${dubbo.protocol.dubbo.port}" host="${dubbo.protocol.dubbo.host}"
-            dispatcher="message" threadpool="fixed" threads="100"
+            name="dubbo"
+            port="${com.dwarfeng.settingrepo.dubbo.protocol.dubbo.port}"
+            host="${com.dwarfeng.settingrepo.dubbo.protocol.dubbo.host}"
+            dispatcher="message"
+            threadpool="fixed"
+            threads="100"
     />
 
     <!-- endregion -->
@@ -35,7 +42,7 @@
             id="snowflakeGenerateService"
             interface="com.dwarfeng.sfds.stack.service.GenerateService"
             check="false"
-            group="${dubbo.consumer.snowflake.group}"
+            group="${com.dwarfeng.settingrepo.dubbo.consumer.snowflake.group}"
     />
 
     <!-- endregion -->

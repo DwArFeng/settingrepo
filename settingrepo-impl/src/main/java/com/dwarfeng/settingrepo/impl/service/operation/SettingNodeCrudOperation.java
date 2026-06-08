@@ -41,7 +41,7 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final NavigationNodeDao navigationNodeDao;
     private final NavigationNodeCrudOperation navigationNodeCrudOperation;
 
-    @Value("${cache.timeout.entity.setting_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
     public SettingNodeCrudOperation(

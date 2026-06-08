@@ -27,7 +27,7 @@ public class IahnNodeLocaleCrudOperation implements BatchCrudOperation<IahnNodeL
     private final IahnNodeMessageDao iahnNodeMessageDao;
     private final IahnNodeMessageCache iahnNodeMessageCache;
 
-    @Value("${cache.timeout.entity.iahn_node_locale}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.iahn_node_locale}")
     private long iahnNodeLocaleTimeout;
 
     public IahnNodeLocaleCrudOperation(

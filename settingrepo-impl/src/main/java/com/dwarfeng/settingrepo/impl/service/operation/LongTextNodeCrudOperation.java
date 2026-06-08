@@ -24,7 +24,7 @@ public class LongTextNodeCrudOperation implements BatchCrudOperation<StringIdKey
 
     private final FtpPathResolver ftpPathResolver;
 
-    @Value("${cache.timeout.entity.long_text_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.long_text_node}")
     private long longTextNodeTimeout;
 
     public LongTextNodeCrudOperation(

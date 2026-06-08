@@ -51,7 +51,7 @@ public class DaoConfiguration {
     private final KvNodePresetCriteriaMaker kvNodePresetCriteriaMaker;
     private final KvNodeItemPresetCriteriaMaker kvNodeItemPresetCriteriaMaker;
 
-    @Value("${hibernate.jdbc.batch_size}")
+    @Value("${com.dwarfeng.settingrepo.hibernate.jdbc.batch_size}")
     private int batchSize;
 
     public DaoConfiguration(

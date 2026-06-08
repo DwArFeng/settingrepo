@@ -27,7 +27,7 @@ public class FileListNodeCrudOperation implements BatchCrudOperation<StringIdKey
     private final FileListNodeItemDao fileListNodeItemDao;
     private final FileListNodeItemCrudOperation fileListNodeItemCrudOperation;
 
-    @Value("${cache.timeout.entity.file_list_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.file_list_node}")
     private long fileListNodeTimeout;
 
     public FileListNodeCrudOperation(

@@ -44,14 +44,14 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
     private final HandlerValidator handlerValidator;
 
-    @Value("${navigation.cache.prefix.inspect_result}")
+    @Value("${com.dwarfeng.settingrepo.navigation.cache.prefix.inspect_result}")
     private String inspectResultCachePrefix;
-    @Value("${navigation.cache.timeout.inspect_result}")
+    @Value("${com.dwarfeng.settingrepo.navigation.cache.timeout.inspect_result}")
     private long inspectResultCacheTimeout;
 
-    @Value("${navigation.format.start_index}")
+    @Value("${com.dwarfeng.settingrepo.navigation.format.start_index}")
     private int formatStartIndex;
-    @Value("${navigation.format.index_step}")
+    @Value("${com.dwarfeng.settingrepo.navigation.format.index_step}")
     private int formatIndexStep;
 
     public NavigationNodeOperateHandlerImpl(

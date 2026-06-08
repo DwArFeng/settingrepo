@@ -43,7 +43,7 @@ public class IahnNodeCrudOperation implements BatchCrudOperation<StringIdKey, Ia
     private final IahnNodeMessageDao iahnNodeMessageDao;
     private final IahnNodeMessageCache iahnNodeMessageCache;
 
-    @Value("${cache.timeout.entity.iahn_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.iahn_node}")
     private long iahnNodeTimeout;
 
     public IahnNodeCrudOperation(

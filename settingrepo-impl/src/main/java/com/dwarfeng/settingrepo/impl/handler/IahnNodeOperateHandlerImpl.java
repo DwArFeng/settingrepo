@@ -47,14 +47,14 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
 
     private final HandlerValidator handlerValidator;
 
-    @Value("${iahn.cache.prefix.locale_map}")
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.prefix.locale_map}")
     private String localeMapCachePrefix;
-    @Value("${iahn.cache.prefix.message_map}")
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.prefix.message_map}")
     private String messageMapCachePrefix;
 
-    @Value("${iahn.cache.timeout.locale_map}")
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.locale_map}")
     private long localeMapCacheTimeout;
-    @Value("${iahn.cache.timeout.message_map}")
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.message_map}")
     private long messageMapCacheTimeout;
 
     public IahnNodeOperateHandlerImpl(

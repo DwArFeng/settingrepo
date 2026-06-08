@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class LauncherSettingHandler implements Handler {
 
-    @Value("${launcher.reset_formatter_support}")
+    @Value("${com.dwarfeng.settingrepo.launcher.reset_formatter_support}")
     private boolean resetFormatterSupport;
 
-    @Value("${launcher.start_reset_delay}")
+    @Value("${com.dwarfeng.settingrepo.launcher.start_reset_delay}")
     private long startResetDelay;
 
     public boolean isResetFormatterSupport() {

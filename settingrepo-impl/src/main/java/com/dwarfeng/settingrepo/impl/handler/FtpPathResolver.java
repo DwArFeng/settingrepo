@@ -65,7 +65,7 @@ public class FtpPathResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FtpPathResolver.class);
 
-    @Value("${ftp.root_path}")
+    @Value("${com.dwarfeng.settingrepo.ftp.root_path}")
     private String rootPathString;
 
     private final Lock lock = new ReentrantLock();

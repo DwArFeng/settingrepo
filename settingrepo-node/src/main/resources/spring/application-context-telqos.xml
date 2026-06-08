@@ -11,11 +11,11 @@
 
     <telqos:config>
         <telqos:connection-setting
-                port="${telqos.port}"
-                charset="${telqos.charset}"
+                port="${com.dwarfeng.settingrepo.telqos.port}"
+                charset="${com.dwarfeng.settingrepo.telqos.charset}"
                 banner-url="classpath:telqos/my-banner.txt"
-                whitelist-regex="${telqos.whitelist_regex}"
-                blacklist-regex="${telqos.blacklist_regex}"
+                whitelist-regex="${com.dwarfeng.settingrepo.telqos.whitelist_regex}"
+                blacklist-regex="${com.dwarfeng.settingrepo.telqos.blacklist_regex}"
         />
         <telqos:command>
             <telqos:command-impl package-scan="com.dwarfeng.springterminator.api.integration.springtelqos"/>

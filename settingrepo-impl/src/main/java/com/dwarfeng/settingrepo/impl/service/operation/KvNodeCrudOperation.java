@@ -28,7 +28,7 @@ public class KvNodeCrudOperation implements BatchCrudOperation<StringIdKey, KvNo
     private final KvNodeItemDao kvNodeItemDao;
     private final KvNodeItemCache kvNodeItemCache;
 
-    @Value("${cache.timeout.entity.kv_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.kv_node}")
     private long kvNodeTimeout;
 
     public KvNodeCrudOperation(

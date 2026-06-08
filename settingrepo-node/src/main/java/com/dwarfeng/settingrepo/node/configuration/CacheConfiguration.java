@@ -27,43 +27,43 @@ public class CacheConfiguration {
 
     private final RedisTemplate<String, ?> template;
 
-    @Value("${cache.prefix.entity.formatter_support}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.formatter_support}")
     private String formatterSupportPrefix;
-    @Value("${cache.prefix.entity.setting_category}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.setting_category}")
     private String settingCategoryPrefix;
-    @Value("${cache.prefix.entity.setting_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.setting_node}")
     private String settingNodePrefix;
-    @Value("${cache.prefix.entity.text_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.text_node}")
     private String textNodePrefix;
-    @Value("${cache.prefix.entity.image_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.image_node}")
     private String imageNodePrefix;
-    @Value("${cache.prefix.entity.image_list_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.image_list_node}")
     private String imageListNodePrefix;
-    @Value("${cache.prefix.entity.image_list_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.image_list_node_item}")
     private String imageListNodeItemPrefix;
-    @Value("${cache.prefix.entity.iahn_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.iahn_node}")
     private String iahnNodePrefix;
-    @Value("${cache.prefix.entity.iahn_node_locale}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.iahn_node_locale}")
     private String iahnNodeLocalePrefix;
-    @Value("${cache.prefix.entity.iahn_node_mek}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.iahn_node_mek}")
     private String iahnNodeMekPrefix;
-    @Value("${cache.prefix.entity.iahn_node_message}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.iahn_node_message}")
     private String iahnNodeMessagePrefix;
-    @Value("${cache.prefix.entity.long_text_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.long_text_node}")
     private String longTextNodePrefix;
-    @Value("${cache.prefix.entity.file_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.file_node}")
     private String fileNodePrefix;
-    @Value("${cache.prefix.entity.file_list_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.file_list_node}")
     private String fileListNodePrefix;
-    @Value("${cache.prefix.entity.file_list_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.file_list_node_item}")
     private String fileListNodeItemPrefix;
-    @Value("${cache.prefix.entity.navigation_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.navigation_node}")
     private String navigationNodePrefix;
-    @Value("${cache.prefix.entity.navigation_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.navigation_node_item}")
     private String navigationNodeItemPrefix;
-    @Value("${cache.prefix.entity.kv_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.kv_node}")
     private String kvNodePrefix;
-    @Value("${cache.prefix.entity.kv_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.kv_node_item}")
     private String kvNodeItemPrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {

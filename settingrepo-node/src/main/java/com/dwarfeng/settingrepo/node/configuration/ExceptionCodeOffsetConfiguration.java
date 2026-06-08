@@ -9,17 +9,17 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class ExceptionCodeOffsetConfiguration {
 
-    @Value("${settingrepo.exception_code_offset}")
+    @Value("${com.dwarfeng.settingrepo.settingrepo.exception_code_offset}")
     private int exceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.subgrade}")
+    @Value("${com.dwarfeng.settingrepo.settingrepo.exception_code_offset.subgrade}")
     private int subgradeExceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.spring_telqos}")
+    @Value("${com.dwarfeng.settingrepo.settingrepo.exception_code_offset.spring_telqos}")
     private int springTelqosExceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.spring_terminator}")
+    @Value("${com.dwarfeng.settingrepo.settingrepo.exception_code_offset.spring_terminator}")
     private int springTerminatorExceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.dwarfeng_datamark}")
+    @Value("${com.dwarfeng.settingrepo.settingrepo.exception_code_offset.dwarfeng_datamark}")
     private int dwarfengDatamarkExceptionCodeOffset;
-    @Value("${settingrepo.exception_code_offset.dwarfeng_ftp}")
+    @Value("${com.dwarfeng.settingrepo.settingrepo.exception_code_offset.dwarfeng_ftp}")
     private int dwarfengFtpExceptionCodeOffset;
 
     @PostConstruct

@@ -24,7 +24,7 @@ public class FileNodeCrudOperation implements BatchCrudOperation<StringIdKey, Fi
 
     private final FtpPathResolver ftpPathResolver;
 
-    @Value("${cache.timeout.entity.file_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.file_node}")
     private long fileNodeTimeout;
 
     public FileNodeCrudOperation(

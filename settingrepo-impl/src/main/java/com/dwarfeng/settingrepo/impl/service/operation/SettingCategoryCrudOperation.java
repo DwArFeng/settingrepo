@@ -27,7 +27,7 @@ public class SettingCategoryCrudOperation implements BatchCrudOperation<StringId
     private final SettingNodeDao settingNodeDao;
     private final SettingNodeCache settingNodeCache;
 
-    @Value("${cache.timeout.entity.setting_category}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.setting_category}")
     private long settingCategoryTimeout;
 
     public SettingCategoryCrudOperation(

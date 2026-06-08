@@ -27,7 +27,7 @@ public class IahnNodeMekCrudOperation implements BatchCrudOperation<IahnNodeMekK
     private final IahnNodeMessageDao iahnNodeMessageDao;
     private final IahnNodeMessageCache iahnNodeMessageCache;
 
-    @Value("${cache.timeout.entity.iahn_node_mek}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.iahn_node_mek}")
     private long iahnNodeMekTimeout;
 
     public IahnNodeMekCrudOperation(

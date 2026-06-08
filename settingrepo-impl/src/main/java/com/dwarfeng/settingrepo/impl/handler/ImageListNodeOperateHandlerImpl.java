@@ -41,13 +41,13 @@ public class ImageListNodeOperateHandlerImpl implements ImageListNodeOperateHand
 
     private final HandlerValidator handlerValidator;
 
-    @Value("${image_thumbnail.width}")
+    @Value("${com.dwarfeng.settingrepo.image_thumbnail.width}")
     private int thumbnailWidth;
-    @Value("${image_thumbnail.height}")
+    @Value("${com.dwarfeng.settingrepo.image_thumbnail.height}")
     private int thumbnailHeight;
-    @Value("${image_thumbnail.quality}")
+    @Value("${com.dwarfeng.settingrepo.image_thumbnail.quality}")
     private double thumbnailQuality;
-    @Value("${image_thumbnail.output_format}")
+    @Value("${com.dwarfeng.settingrepo.image_thumbnail.output_format}")
     private String thumbnailOutputFormat;
 
     public ImageListNodeOperateHandlerImpl(

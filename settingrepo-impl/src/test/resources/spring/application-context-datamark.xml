@@ -12,16 +12,16 @@
     <!-- SettingCategory 数据标识。 -->
     <datamark:handler
             handler-name="settingCategoryDatamarkHandler"
-            resource-url="${datamark.setting_category.resource_url}"
-            resource-charset="${datamark.setting_category.resource_charset}"
-            update-allowed="${datamark.setting_category.update_allowed}"
+            resource-url="${com.dwarfeng.settingrepo.datamark.setting_category.resource_url}"
+            resource-charset="${com.dwarfeng.settingrepo.datamark.setting_category.resource_charset}"
+            update-allowed="${com.dwarfeng.settingrepo.datamark.setting_category.update_allowed}"
     />
 
     <!-- SettingNode 数据标识。 -->
     <datamark:handler
             handler-name="settingNodeDatamarkHandler"
-            resource-url="${datamark.setting_node.resource_url}"
-            resource-charset="${datamark.setting_node.resource_charset}"
-            update-allowed="${datamark.setting_node.update_allowed}"
+            resource-url="${com.dwarfeng.settingrepo.datamark.setting_node.resource_url}"
+            resource-charset="${com.dwarfeng.settingrepo.datamark.setting_node.resource_charset}"
+            update-allowed="${com.dwarfeng.settingrepo.datamark.setting_node.update_allowed}"
     />
 </beans>

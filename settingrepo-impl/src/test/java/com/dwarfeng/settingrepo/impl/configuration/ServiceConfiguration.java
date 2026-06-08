@@ -68,13 +68,13 @@ public class ServiceConfiguration {
     private final KvNodeItemDao kvNodeItemDao;
     private final KvNodeItemCache kvNodeItemCache;
 
-    @Value("${cache.timeout.entity.formatter_support}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
-    @Value("${cache.timeout.entity.text_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.text_node}")
     private long textNodeTimeout;
-    @Value("${cache.timeout.entity.iahn_node_message}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.iahn_node_message}")
     private long iahnNodeMessageTimeout;
-    @Value("${cache.timeout.entity.kv_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.kv_node_item}")
     private long kvNodeItemTimeout;
 
     public ServiceConfiguration(

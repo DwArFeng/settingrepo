@@ -22,7 +22,7 @@ public class NavigationNodeItemCrudOperation implements BatchCrudOperation<LongI
     private final NavigationNodeItemDao navigationNodeItemDao;
     private final NavigationNodeItemCache navigationNodeItemCache;
 
-    @Value("${cache.timeout.entity.navigation_node_item}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.navigation_node_item}")
     private long navigationNodeItemTimeout;
 
     public NavigationNodeItemCrudOperation(

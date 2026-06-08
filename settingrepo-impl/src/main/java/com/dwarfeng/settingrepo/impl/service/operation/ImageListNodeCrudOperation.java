@@ -27,7 +27,7 @@ public class ImageListNodeCrudOperation implements BatchCrudOperation<StringIdKe
     private final ImageListNodeItemDao imageListNodeItemDao;
     private final ImageListNodeItemCrudOperation imageListNodeItemCrudOperation;
 
-    @Value("${cache.timeout.entity.image_list_node}")
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.image_list_node}")
     private long imageListNodeTimeout;
 
     public ImageListNodeCrudOperation(
