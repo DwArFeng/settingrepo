@@ -54,16 +54,16 @@
         <log4j2.version>2.25.4</log4j2.version>
         <jboss-logging.version>3.4.3.Final</jboss-logging.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <dutil.version>0.4.2.a-beta</dutil.version>
-        <snowflake.version>2.0.0.a</snowflake.version>
-        <subgrade.version>1.8.2.a</subgrade.version>
-        <spring-terminator.version>2.0.0.a</spring-terminator.version>
-        <spring-telqos.version>2.0.0.a</spring-telqos.version>
         <jackson.version>2.21.2</jackson.version>
         <groovy.version>4.0.31</groovy.version>
-        <dwarfeng-ftp.version>2.0.1.a</dwarfeng-ftp.version>
         <thumbnailator.version>0.4.20</thumbnailator.version>
+        <dutil.version>0.4.2.a-beta</dutil.version>
+        <subgrade.version>1.8.2.a</subgrade.version>
+        <spring-telqos.version>2.0.0.a</spring-telqos.version>
+        <spring-terminator.version>2.0.0.a</spring-terminator.version>
         <dwarfeng-datamark.version>2.0.1.a</dwarfeng-datamark.version>
+        <dwarfeng-ftp.version>2.0.1.a</dwarfeng-ftp.version>
+        <snowflake.version>2.0.0.a</snowflake.version>
         <!-- Maven 插件版本声明 -->
         <maven-clean-plugin.version>2.5</maven-clean-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
@@ -398,76 +398,6 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
-            <!-- Dutil 组件 -->
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>dutil-basic</artifactId>
-                <version>${dutil.version}</version>
-            </dependency>
-            <!-- SnowFlake 服务 -->
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>snowflake-distributed-service-api</artifactId>
-                <version>${snowflake.version}</version>
-            </dependency>
-            <!-- Subgrade 组件 -->
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>subgrade-stack</artifactId>
-                <version>${subgrade.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>subgrade-sdk</artifactId>
-                <version>${subgrade.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>mybatis</artifactId>
-                        <groupId>org.mybatis</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>mybatis-spring</artifactId>
-                        <groupId>org.mybatis</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>subgrade-impl</artifactId>
-                <version>${subgrade.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>mybatis</artifactId>
-                        <groupId>org.mybatis</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>mybatis-spring</artifactId>
-                        <groupId>org.mybatis</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!-- Spring-terminator 组件 -->
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>spring-terminator-core</artifactId>
-                <version>${spring-terminator.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>spring-terminator-api</artifactId>
-                <version>${spring-terminator.version}</version>
-            </dependency>
-            <!-- Spring-telqos 组件 -->
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>spring-telqos-core</artifactId>
-                <version>${spring-telqos.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>spring-telqos-api</artifactId>
-                <version>${spring-telqos.version}</version>
-            </dependency>
             <!-- Jackson 组件 -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -520,22 +450,75 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- Dwarfeng-ftp 组件 -->
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>dwarfeng-ftp-core</artifactId>
-                <version>${dwarfeng-ftp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dwarfeng</groupId>
-                <artifactId>dwarfeng-ftp-api</artifactId>
-                <version>${dwarfeng-ftp.version}</version>
-            </dependency>
             <!-- Thumbnailator 缩略图组件 -->
             <dependency>
                 <groupId>net.coobird</groupId>
                 <artifactId>thumbnailator</artifactId>
                 <version>${thumbnailator.version}</version>
+            </dependency>
+            <!-- Dutil 组件 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>dutil-basic</artifactId>
+                <version>${dutil.version}</version>
+            </dependency>
+            <!-- Subgrade 组件 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>subgrade-stack</artifactId>
+                <version>${subgrade.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>subgrade-sdk</artifactId>
+                <version>${subgrade.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>mybatis</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>mybatis-spring</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>subgrade-impl</artifactId>
+                <version>${subgrade.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>mybatis</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>mybatis-spring</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Spring-telqos 组件 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>spring-telqos-core</artifactId>
+                <version>${spring-telqos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>spring-telqos-api</artifactId>
+                <version>${spring-telqos.version}</version>
+            </dependency>
+            <!-- Spring-terminator 组件 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>spring-terminator-core</artifactId>
+                <version>${spring-terminator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>spring-terminator-api</artifactId>
+                <version>${spring-terminator.version}</version>
             </dependency>
             <!-- Dwarfeng-datamark 组件 -->
             <dependency>
@@ -547,6 +530,23 @@
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>dwarfeng-datamark-api</artifactId>
                 <version>${dwarfeng-datamark.version}</version>
+            </dependency>
+            <!-- Dwarfeng-ftp 组件 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>dwarfeng-ftp-core</artifactId>
+                <version>${dwarfeng-ftp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>dwarfeng-ftp-api</artifactId>
+                <version>${dwarfeng-ftp.version}</version>
+            </dependency>
+            <!-- SnowFlake 服务 -->
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>snowflake-distributed-service-api</artifactId>
+                <version>${snowflake.version}</version>
             </dependency>
             <!-- 程序自身组件 -->
             <dependency>
