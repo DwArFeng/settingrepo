@@ -169,7 +169,8 @@ public class IahnNodeMessageMaintainServiceImpl implements IahnNodeMessageMainta
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<IahnNodeMessageKey> batchInsertIfNotExists(@SkipRecord List<IahnNodeMessage> entities) throws ServiceException {
+    public List<IahnNodeMessageKey> batchInsertIfNotExists(@SkipRecord List<IahnNodeMessage> entities)
+            throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 
@@ -271,7 +272,8 @@ public class IahnNodeMessageMaintainServiceImpl implements IahnNodeMessageMainta
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public List<IahnNodeMessage> lookupAsList(String preset, Object[] objs, PagingInfo pagingInfo) throws ServiceException {
+    public List<IahnNodeMessage> lookupAsList(String preset, Object[] objs, PagingInfo pagingInfo)
+            throws ServiceException {
         return presetLookupService.lookupAsList(preset, objs, pagingInfo);
     }
 

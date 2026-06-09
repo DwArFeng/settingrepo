@@ -168,7 +168,8 @@ public class SettingCategoryMaintainServiceImpl implements SettingCategoryMainta
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<SettingCategory> entities) throws ServiceException {
+    public List<StringIdKey> batchInsertIfNotExists(@SkipRecord List<SettingCategory> entities)
+            throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 
@@ -222,7 +223,8 @@ public class SettingCategoryMaintainServiceImpl implements SettingCategoryMainta
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public PagedData<SettingCategory> lookup(String preset, Object[] objs, PagingInfo pagingInfo) throws ServiceException {
+    public PagedData<SettingCategory> lookup(String preset, Object[] objs, PagingInfo pagingInfo)
+            throws ServiceException {
         return presetLookupService.lookup(preset, objs, pagingInfo);
     }
 

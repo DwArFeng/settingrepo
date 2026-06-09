@@ -4,6 +4,23 @@
 
 ### 功能构建
 
+- `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.impl.handler.resetter.KafkaResetter。
+  - com.dwarfeng.settingrepo.impl.service.FileListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.FileListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.FormatterSupportMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeLocaleMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.IahnNodeMessageMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.LongTextNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.LongTextNodeQosServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.NavigationNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.NavigationNodeMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.SettingCategoryMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.configuration.CacheConfiguration。
+  - com.dwarfeng.settingrepo.impl.service.ImageListNodeItemMaintainServiceImplTest。
+
 - `settingrepo-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.settingrepo.sdk.bean.key.FastJsonIahnNodeLocaleKey。
 

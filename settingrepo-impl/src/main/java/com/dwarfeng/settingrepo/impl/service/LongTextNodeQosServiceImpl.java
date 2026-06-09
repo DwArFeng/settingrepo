@@ -16,7 +16,9 @@ public class LongTextNodeQosServiceImpl implements LongTextNodeQosService {
 
     private final ServiceExceptionMapper sem;
 
-    public LongTextNodeQosServiceImpl(LongTextNodeOperateHandler longTextNodeOperateHandler, ServiceExceptionMapper sem) {
+    public LongTextNodeQosServiceImpl(
+            LongTextNodeOperateHandler longTextNodeOperateHandler, ServiceExceptionMapper sem
+    ) {
         this.longTextNodeOperateHandler = longTextNodeOperateHandler;
         this.sem = sem;
     }

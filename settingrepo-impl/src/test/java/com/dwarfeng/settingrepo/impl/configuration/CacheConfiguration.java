@@ -244,7 +244,8 @@ public class CacheConfiguration {
 
     @Bean
     @SuppressWarnings("unchecked")
-    public RedisBatchBaseCache<LongIdKey, FileListNodeItem, FastJsonFileListNodeItem> fileListNodeItemRedisBatchBaseCache() {
+    public RedisBatchBaseCache<LongIdKey, FileListNodeItem, FastJsonFileListNodeItem>
+    fileListNodeItemRedisBatchBaseCache() {
         return new RedisBatchBaseCache<>(
                 (RedisTemplate<String, FastJsonFileListNodeItem>) template,
                 new LongIdStringKeyFormatter(fileListNodeItemPrefix),

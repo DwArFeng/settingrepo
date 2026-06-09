@@ -59,7 +59,9 @@ public class ImageListNodeItemMaintainServiceImplTest {
                 imageListNodeItem.setNodeKey(imageListNode.getKey());
                 imageListNodeItem.setKey(imageListNodeItemMaintainService.insert(imageListNodeItem));
 
-                ImageListNodeItem testImageListNodeItem = imageListNodeItemMaintainService.get(imageListNodeItem.getKey());
+                ImageListNodeItem testImageListNodeItem = imageListNodeItemMaintainService.get(
+                        imageListNodeItem.getKey()
+                );
                 assertEquals(BeanUtils.describe(imageListNodeItem), BeanUtils.describe(testImageListNodeItem));
                 imageListNodeItemMaintainService.update(imageListNodeItem);
                 testImageListNodeItem = imageListNodeItemMaintainService.get(imageListNodeItem.getKey());

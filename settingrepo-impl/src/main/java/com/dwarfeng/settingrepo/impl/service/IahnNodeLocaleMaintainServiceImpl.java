@@ -160,7 +160,8 @@ public class IahnNodeLocaleMaintainServiceImpl implements IahnNodeLocaleMaintain
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<IahnNodeLocaleKey> batchInsertIfExists(@SkipRecord List<IahnNodeLocale> elements) throws ServiceException {
+    public List<IahnNodeLocaleKey> batchInsertIfExists(@SkipRecord List<IahnNodeLocale> elements)
+            throws ServiceException {
         return crudService.batchInsertIfExists(elements);
     }
 
@@ -168,7 +169,8 @@ public class IahnNodeLocaleMaintainServiceImpl implements IahnNodeLocaleMaintain
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<IahnNodeLocaleKey> batchInsertIfNotExists(@SkipRecord List<IahnNodeLocale> entities) throws ServiceException {
+    public List<IahnNodeLocaleKey> batchInsertIfNotExists(@SkipRecord List<IahnNodeLocale> entities)
+            throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 

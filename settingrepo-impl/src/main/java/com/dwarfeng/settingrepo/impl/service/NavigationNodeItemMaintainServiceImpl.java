@@ -168,7 +168,8 @@ public class NavigationNodeItemMaintainServiceImpl implements NavigationNodeItem
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<LongIdKey> batchInsertIfNotExists(@SkipRecord List<NavigationNodeItem> entities) throws ServiceException {
+    public List<LongIdKey> batchInsertIfNotExists(@SkipRecord List<NavigationNodeItem> entities)
+            throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 
@@ -222,7 +223,8 @@ public class NavigationNodeItemMaintainServiceImpl implements NavigationNodeItem
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public PagedData<NavigationNodeItem> lookup(String preset, Object[] objs, PagingInfo pagingInfo) throws ServiceException {
+    public PagedData<NavigationNodeItem> lookup(String preset, Object[] objs, PagingInfo pagingInfo)
+            throws ServiceException {
         return presetLookupService.lookup(preset, objs, pagingInfo);
     }
 
