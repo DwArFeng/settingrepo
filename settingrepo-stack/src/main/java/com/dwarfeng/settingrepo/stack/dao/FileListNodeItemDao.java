@@ -12,6 +12,6 @@ import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
  * @author liulx
  * @since 2.4.2
  */
-public interface FileListNodeItemDao extends BatchBaseDao<LongIdKey, FileListNodeItem>, EntireLookupDao<FileListNodeItem>,
-        PresetLookupDao<FileListNodeItem> {
+public interface FileListNodeItemDao extends BatchBaseDao<LongIdKey, FileListNodeItem>,
+        EntireLookupDao<FileListNodeItem>, PresetLookupDao<FileListNodeItem> {
 }
