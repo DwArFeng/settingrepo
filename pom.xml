@@ -58,12 +58,12 @@
         <groovy.version>4.0.31</groovy.version>
         <thumbnailator.version>0.4.20</thumbnailator.version>
         <dutil.version>0.4.2.a-beta</dutil.version>
-        <subgrade.version>1.8.2.a</subgrade.version>
-        <spring-telqos.version>2.0.0.a</spring-telqos.version>
-        <spring-terminator.version>2.0.0.a</spring-terminator.version>
-        <dwarfeng-datamark.version>2.0.1.a</dwarfeng-datamark.version>
-        <dwarfeng-ftp.version>2.0.1.a</dwarfeng-ftp.version>
-        <snowflake.version>2.0.0.a</snowflake.version>
+        <subgrade.version>1.8.3.a</subgrade.version>
+        <spring-telqos.version>2.0.2.a</spring-telqos.version>
+        <spring-terminator.version>2.0.2.a</spring-terminator.version>
+        <dwarfeng-datamark.version>2.2.0.a</dwarfeng-datamark.version>
+        <dwarfeng-ftp.version>2.1.0.a</dwarfeng-ftp.version>
+        <snowflake.version>2.0.2.a</snowflake.version>
         <!-- Maven 插件版本声明 -->
         <maven-clean-plugin.version>2.5</maven-clean-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
