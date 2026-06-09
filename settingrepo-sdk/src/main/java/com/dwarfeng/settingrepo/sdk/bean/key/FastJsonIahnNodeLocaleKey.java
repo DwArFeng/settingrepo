@@ -89,7 +89,8 @@ public class FastJsonIahnNodeLocaleKey implements Key {
         if (o == null || getClass() != o.getClass()) return false;
 
         FastJsonIahnNodeLocaleKey that = (FastJsonIahnNodeLocaleKey) o;
-        return Objects.equals(nodeStringId, that.nodeStringId) && Objects.equals(language, that.language) && Objects.equals(country, that.country) && Objects.equals(variant, that.variant);
+        return Objects.equals(nodeStringId, that.nodeStringId) && Objects.equals(language, that.language) &&
+                Objects.equals(country, that.country) && Objects.equals(variant, that.variant);
     }
 
     @Override

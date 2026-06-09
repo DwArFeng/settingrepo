@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- `settingrepo-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.sdk.bean.key.FastJsonIahnNodeLocaleKey。
+
 - `settingrepo-stack` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.settingrepo.stack.dao.FileListNodeItemDao。
 
