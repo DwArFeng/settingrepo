@@ -1,8 +1,8 @@
 package com.dwarfeng.settingrepo.stack.service;
 
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
-import com.dwarfeng.subgrade.stack.service.Service;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.service.Service;
 
 /**
  * 文件列表节点 QOS 服务。

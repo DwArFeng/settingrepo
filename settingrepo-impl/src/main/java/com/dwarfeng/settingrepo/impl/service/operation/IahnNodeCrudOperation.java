@@ -18,10 +18,10 @@ import com.dwarfeng.settingrepo.stack.dao.IahnNodeMessageDao;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMekMaintainService;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMessageMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -77,7 +77,7 @@ public class IahnNodeCrudOperation implements BatchCrudOperation<StringIdKey, Ia
             return iahnNodeCache.get(key);
         } else {
             if (!iahnNodeDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             IahnNode iahnNode = iahnNodeDao.get(key);
             iahnNodeCache.push(iahnNode, iahnNodeTimeout);
@@ -141,7 +141,7 @@ public class IahnNodeCrudOperation implements BatchCrudOperation<StringIdKey, Ia
             return iahnNodeCache.batchGet(keys);
         } else {
             if (!iahnNodeDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<IahnNode> iahnNodes = iahnNodeDao.batchGet(keys);
             iahnNodeCache.batchPush(iahnNodes, iahnNodeTimeout);

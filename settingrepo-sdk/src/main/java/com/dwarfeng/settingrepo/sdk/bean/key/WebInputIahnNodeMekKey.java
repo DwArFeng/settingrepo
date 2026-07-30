@@ -1,13 +1,14 @@
 package com.dwarfeng.settingrepo.sdk.bean.key;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -19,7 +20,8 @@ import java.util.Objects;
  */
 public class WebInputIahnNodeMekKey implements Key {
 
-    private static final long serialVersionUID = -1985081364226956888L;
+    @Serial
+    private static final long serialVersionUID = -2401429918139397126L;
 
     public static IahnNodeMekKey toStackBean(WebInputIahnNodeMekKey webInputIahnNodeMekKey) {
         if (Objects.isNull(webInputIahnNodeMekKey)) {

@@ -3,8 +3,8 @@ package com.dwarfeng.settingrepo.stack.service;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodeInspectInfo;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodeInspectResult;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodePutInfo;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
-import com.dwarfeng.subgrade.stack.service.Service;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.service.Service;
 
 /**
  * 文本节点操作服务。

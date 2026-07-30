@@ -1,16 +1,18 @@
 package com.dwarfeng.settingrepo.node.all.he.launcher;
 
 import com.dwarfeng.settingrepo.node.all.he.handler.LauncherSettingHandler;
+import com.dwarfeng.settingrepo.node.all.he.internal.i18n.NodeMessageKey;
+import com.dwarfeng.settingrepo.node.all.he.internal.i18n.NodeMessages;
 import com.dwarfeng.settingrepo.stack.service.ResetQosService;
 import com.dwarfeng.settingrepo.stack.service.SupportQosService;
 import com.dwarfeng.springterminator.sdk.util.ApplicationUtil;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
-import java.util.Date;
+import java.time.Instant;
 
 /**
  * 程序启动器。
@@ -22,9 +24,9 @@ public class Launcher {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Launcher.class);
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         ApplicationUtil.launch(new String[]{
-                "classpath:spring/application-context*.xml",
+                "classpath:com/dwarfeng/settingrepo/node/all/he/spring/application-context*.xml",
                 "file:opt/opt*.xml",
                 "file:optext/opt*.xml"
         }, ctx -> {
@@ -46,12 +48,12 @@ public class Launcher {
         }
 
         // 重置格式化器支持。
-        LOGGER.info("重置格式化器支持...");
+        LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_RESETTING_FORMATTER_SUPPORT));
         SupportQosService supportQosService = ctx.getBean(SupportQosService.class);
         try {
             supportQosService.resetFormatter();
         } catch (ServiceException e) {
-            LOGGER.warn("格式化器支持重置失败，异常信息如下", e);
+            LOGGER.warn(NodeMessages.message(NodeMessageKey.LAUNCHER_RESET_FORMATTER_SUPPORT_FAILED), e);
         }
     }
 
@@ -68,24 +70,24 @@ public class Launcher {
         // 重置处理器是否启动重置服务。
         long startResetDelay = launcherSettingHandler.getStartResetDelay();
         if (startResetDelay == 0) {
-            LOGGER.info("立即启动重置服务...");
+            LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_STARTING_RESET_IMMEDIATELY));
             try {
                 resetQosService.start();
             } catch (ServiceException e) {
-                LOGGER.error("无法启动重置服务，异常原因如下", e);
+                LOGGER.error(NodeMessages.message(NodeMessageKey.LAUNCHER_START_RESET_FAILED), e);
             }
         } else if (startResetDelay > 0) {
-            LOGGER.info("{} 毫秒后启动重置服务...", startResetDelay);
+            LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_STARTING_RESET_DELAYED, startResetDelay));
             scheduler.schedule(
                     () -> {
-                        LOGGER.info("启动重置服务...");
+                        LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_STARTING_RESET));
                         try {
                             resetQosService.start();
                         } catch (ServiceException e) {
-                            LOGGER.error("无法启动重置服务，异常原因如下", e);
+                            LOGGER.error(NodeMessages.message(NodeMessageKey.LAUNCHER_START_RESET_FAILED), e);
                         }
                     },
-                    new Date(System.currentTimeMillis() + startResetDelay)
+                    Instant.now().plusMillis(startResetDelay)
             );
         }
     }

@@ -1,10 +1,11 @@
 package com.dwarfeng.settingrepo.sdk.bean.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.bean.key.FastJsonIahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeLocale;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,8 @@ import java.util.Objects;
  */
 public class FastJsonIahnNodeLocale implements Bean {
 
-    private static final long serialVersionUID = -6297777758958759768L;
+    @Serial
+    private static final long serialVersionUID = -5927981090872107655L;
 
     public static FastJsonIahnNodeLocale of(IahnNodeLocale iahnNodeLocale) {
         if (Objects.isNull(iahnNodeLocale)) {

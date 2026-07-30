@@ -1,5 +1,7 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.sdk.util.IahnUtils;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
@@ -10,21 +12,22 @@ import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
 import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
 import com.dwarfeng.settingrepo.stack.handler.IahnNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.*;
-import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
-import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.aop.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.basic.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Nullable;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Component
@@ -117,11 +120,11 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             } else {
                 matchedFormattedLocale = findMatchedFormattedLocale(settingNodeKey, language, country, variant);
                 if (Objects.isNull(matchedFormattedLocale)) {
-                    LOGGER.warn("不应该执行到此处, 将抛出异常, 请联系开发人员");
+                    LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_INTERNAL_UNREACHABLE));
                     throw new NullPointerException("matchedLocale should not be null");
                 }
                 redisTemplate.opsForValue().set(
-                        localMapCacheKey, matchedFormattedLocale, localeMapCacheTimeout, TimeUnit.MILLISECONDS
+                        localMapCacheKey, matchedFormattedLocale, Expiration.milliseconds(localeMapCacheTimeout)
                 );
             }
 
@@ -135,13 +138,13 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
                 List<MekMessagePair> mekMessagePairs = lookupMekMessagePair(settingNodeKey, matchedFormattedLocale);
                 message = null;
                 for (MekMessagePair mekMessagePair : mekMessagePairs) {
-                    String anchorMekId = mekMessagePair.getMekId();
-                    hashOperations.put(messageMapCacheKey, anchorMekId, mekMessagePair.getMessage());
+                    String anchorMekId = mekMessagePair.mekId();
+                    hashOperations.put(messageMapCacheKey, anchorMekId, mekMessagePair.message());
                     if (Objects.equals(anchorMekId, mekId)) {
-                        message = mekMessagePair.getMessage();
+                        message = mekMessagePair.message();
                     }
                 }
-                redisTemplate.expire(messageMapCacheKey, messageMapCacheTimeout, TimeUnit.MILLISECONDS);
+                redisTemplate.expire(messageMapCacheKey, Expiration.milliseconds(messageMapCacheTimeout));
             }
 
             // 构造结果并返回。
@@ -189,11 +192,11 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             } else {
                 matchedFormattedLocale = findMatchedFormattedLocale(settingNodeKey, language, country, variant);
                 if (Objects.isNull(matchedFormattedLocale)) {
-                    LOGGER.warn("不应该执行到此处, 将抛出异常, 请联系开发人员");
+                    LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_INTERNAL_UNREACHABLE));
                     throw new NullPointerException("matchedLocale should not be null");
                 }
                 redisTemplate.opsForValue().set(
-                        localMapCacheKey, matchedFormattedLocale, localeMapCacheTimeout, TimeUnit.MILLISECONDS
+                        localMapCacheKey, matchedFormattedLocale, Expiration.milliseconds(localeMapCacheTimeout)
                 );
             }
 
@@ -209,12 +212,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             } else {
                 List<MekMessagePair> mekMessagePairs = lookupMekMessagePair(settingNodeKey, matchedFormattedLocale);
                 for (MekMessagePair mekMessagePair : mekMessagePairs) {
-                    String anchorMekId = mekMessagePair.getMekId();
-                    String anchorMessage = mekMessagePair.getMessage();
-                    hashOperations.put(messageMapCacheKey, anchorMekId, mekMessagePair.getMessage());
+                    String anchorMekId = mekMessagePair.mekId();
+                    String anchorMessage = mekMessagePair.message();
+                    hashOperations.put(messageMapCacheKey, anchorMekId, mekMessagePair.message());
                     items.add(new IahnNodeMessageInspectByLocaleResult.Item(anchorMekId, anchorMessage));
                 }
-                redisTemplate.expire(messageMapCacheKey, messageMapCacheTimeout, TimeUnit.MILLISECONDS);
+                redisTemplate.expire(messageMapCacheKey, Expiration.milliseconds(messageMapCacheTimeout));
             }
 
             // 构造结果并返回。
@@ -1168,44 +1171,13 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
 
     private String parseCacheGeneralFormat(String prefix, StringIdKey settingNodeKey) {
         return prefix + settingNodeKey.getStringId() +
-                com.dwarfeng.subgrade.sdk.common.Constants.REDIS_KEY_WILDCARD_CHARACTER;
+                com.dwarfeng.subgrade.data.sdk.redis.formatter.StringKeyFormatter.REDIS_KEY_WILDCARD_CHARACTER;
     }
 
-    private static final class MekMessagePair {
-
-        private final String mekId;
-        private final String message;
-
-        public MekMessagePair(String mekId, String message) {
-            this.mekId = mekId;
-            this.message = message;
-        }
-
-        public String getMekId() {
-            return mekId;
-        }
-
-        public String getMessage() {
-            return message;
-        }
+    private record MekMessagePair(String mekId, String message) {
 
         @Override
-        public boolean equals(Object o) {
-            if (o == null || getClass() != o.getClass()) return false;
-
-            MekMessagePair that = (MekMessagePair) o;
-            return Objects.equals(mekId, that.mekId) && Objects.equals(message, that.message);
-        }
-
-        @Override
-        public int hashCode() {
-            int result = Objects.hashCode(mekId);
-            result = 31 * result + Objects.hashCode(message);
-            return result;
-        }
-
-        @Override
-        public String toString() {
+        public @NotNull String toString() {
             return "MekMessagePair{" +
                     "mekId='" + mekId + '\'' +
                     ", message='" + message + '\'' +

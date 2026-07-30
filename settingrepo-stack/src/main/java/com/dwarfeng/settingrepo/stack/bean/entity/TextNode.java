@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+
+import java.io.Serial;
 
 /**
  * 文本节点。
@@ -11,7 +13,8 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class TextNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -1395000876881261223L;
+    @Serial
+    private static final long serialVersionUID = -9130536476824650877L;
 
     private StringIdKey key;
     private String value;

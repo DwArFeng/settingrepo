@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+
+import java.io.Serial;
 
 /**
  * 文件列表节点。
@@ -11,7 +13,8 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class FileListNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -6437327921413918380L;
+    @Serial
+    private static final long serialVersionUID = -6226725962020515772L;
 
     private StringIdKey key;
 

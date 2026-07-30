@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class SettingNodeExistsInfo implements Dto {
 
-    private static final long serialVersionUID = -2161926541406135312L;
+    @Serial
+    private static final long serialVersionUID = -2206343874880663095L;
 
     private String category;
     private String[] args;

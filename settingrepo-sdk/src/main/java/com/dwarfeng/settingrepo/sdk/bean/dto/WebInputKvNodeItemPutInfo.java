@@ -1,13 +1,14 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.stack.bean.dto.KvNodeItemPutInfo;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -19,7 +20,8 @@ import java.util.Objects;
  */
 public class WebInputKvNodeItemPutInfo implements Bean {
 
-    private static final long serialVersionUID = 448278797230266832L;
+    @Serial
+    private static final long serialVersionUID = 4678326693881562455L;
 
     public static KvNodeItemPutInfo toStackBean(WebInputKvNodeItemPutInfo webInput) {
         if (Objects.isNull(webInput)) {

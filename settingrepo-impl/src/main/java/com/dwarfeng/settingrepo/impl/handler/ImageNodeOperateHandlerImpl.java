@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
-import com.dwarfeng.dutil.basic.io.IOUtil;
+import com.dwarfeng.dutil.basic.sdk.io.IOUtil;
 import com.dwarfeng.ftp.stack.handler.FtpHandler;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageNode;
@@ -10,10 +12,10 @@ import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
 import com.dwarfeng.settingrepo.stack.handler.ImageNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.ImageNodeMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
-import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.aop.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.basic.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -228,7 +230,7 @@ public class ImageNodeOperateHandlerImpl implements ImageNodeOperateHandler {
                     ftpPathResolver.resolvePath(FtpPathResolver.RELATIVE_IMAGE_NODE_THUMBNAIL), imageNode.getStoreName()
             );
             if (!existsThumbnail) {
-                LOGGER.info("图片节点 {} 的缩略图不存在, 将创建缩略图...", settingNodeKey);
+                LOGGER.info(ImplMessages.message(ImplMessageKey.LOG_IMAGE_THUMBNAIL_MISSING, settingNodeKey));
                 createThumbnail(imageNode.getStoreName());
             }
 

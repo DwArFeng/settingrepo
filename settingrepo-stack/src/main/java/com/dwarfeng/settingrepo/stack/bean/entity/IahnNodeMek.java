@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+
+import java.io.Serial;
 
 /**
  * 国际化节点 Mek。
@@ -12,7 +14,8 @@ import com.dwarfeng.subgrade.stack.bean.entity.Entity;
  */
 public class IahnNodeMek implements Entity<IahnNodeMekKey> {
 
-    private static final long serialVersionUID = -235604661513146828L;
+    @Serial
+    private static final long serialVersionUID = -1065903361308487814L;
 
     private IahnNodeMekKey key;
     private String label;

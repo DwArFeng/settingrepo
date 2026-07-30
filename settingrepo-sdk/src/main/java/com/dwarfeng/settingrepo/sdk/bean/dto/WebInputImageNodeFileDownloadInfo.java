@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.ImageNodeFileDownloadInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ import java.util.Objects;
  */
 public class WebInputImageNodeFileDownloadInfo implements Dto {
 
-    private static final long serialVersionUID = 8911362377513900742L;
+    @Serial
+    private static final long serialVersionUID = 2331926046157799814L;
 
     public static ImageNodeFileDownloadInfo toStackBean(WebInputImageNodeFileDownloadInfo webInput) {
         if (Objects.isNull(webInput)) {

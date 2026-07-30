@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.key;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,8 @@ import java.util.Objects;
  */
 public class FastJsonIahnNodeMessageKey implements Key {
 
-    private static final long serialVersionUID = 6374385683522362159L;
+    @Serial
+    private static final long serialVersionUID = 7199453416661865052L;
 
     public static FastJsonIahnNodeMessageKey of(IahnNodeMessageKey iahnNodeMessageKey) {
         if (Objects.isNull(iahnNodeMessageKey)) {

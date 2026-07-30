@@ -1,6 +1,9 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.NavigationNodeQosService;
@@ -61,7 +64,7 @@ public class NavigationNodeCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "导航节点操作服务";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_DESCRIPTION);
     }
 
     @Override
@@ -95,22 +98,37 @@ public class NavigationNodeCommand extends CliCommand {
         return CliCommandUtil.cliSyntax(patterns);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_SIZE).optionalArg(true).hasArg(false).desc("查看导航节点大小").build());
-        list.add(Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false).desc("查看导航节点").build());
+        list.add(
+                Option.builder(COMMAND_OPTION_SIZE).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_OPTION_SIZE)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_OPTION_INSPECT)).get()
+        );
         list.add(Option.builder(COMMAND_OPTION_INSERT_ITEM).longOpt(COMMAND_OPTION_INSERT_ITEM_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("插入导航节点条目").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_OPTION_INSERT)).get());
         list.add(Option.builder(COMMAND_OPTION_UPDATE_ITEM).longOpt(COMMAND_OPTION_UPDATE_ITEM_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("更新导航节点条目").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_OPTION_UPDATE)).get());
         list.add(Option.builder(COMMAND_OPTION_REMOVE_ITEM).longOpt(COMMAND_OPTION_REMOVE_ITEM_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("移除导航节点条目").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_OPTION_REMOVE)).get());
         list.add(Option.builder(COMMAND_OPTION_FORMAT_INDEX).longOpt(COMMAND_OPTION_FORMAT_INDEX_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("格式化导航节点索引").build());
-        list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_OPTION_FORMAT)).get());
+        list.add(
+                Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_STRING)).get()
+        );
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
-                .hasArg(true).type(File.class).desc("JSON 文件").build());
+                .hasArg(true).type(File.class)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_FILE)).get());
         return list;
     }
 
@@ -142,154 +160,165 @@ public class NavigationNodeCommand extends CliCommand {
                 handleFormatIndex(context, cmd);
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 
     private void handleSize(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NavigationNodeSizeInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputNavigationNodeSizeInfo.toStackBean(
                     JSON.parseObject(json, WebInputNavigationNodeSizeInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputNavigationNodeSizeInfo.toStackBean(
                         JSON.parseObject(in, WebInputNavigationNodeSizeInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         NavigationNodeSizeResult result = navigationNodeQosService.size(info);
         if (result == null) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage("查询结果: ");
-        context.sendMessage("  size: " + result.getSize());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_SIZE, result.getSize()));
     }
 
     private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NavigationNodeInspectInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputNavigationNodeInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputNavigationNodeInspectInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputNavigationNodeInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputNavigationNodeInspectInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         NavigationNodeInspectResult result = navigationNodeQosService.inspect(info);
         if (result == null) {
-            context.sendMessage("查看结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage("查看结果: ");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
         FastJsonNavigationNodeInspectResult fastJsonResult = FastJsonNavigationNodeInspectResult.of(result);
-        context.sendMessage(JSON.toJSONString(fastJsonResult, true));
+        context.sendMessage(JSON.toJSONString(fastJsonResult, JSONWriter.Feature.PrettyFormat));
     }
 
     private void handleInsertItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NavigationNodeItemInsertInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputNavigationNodeItemInsertInfo.toStackBean(
                     JSON.parseObject(json, WebInputNavigationNodeItemInsertInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputNavigationNodeItemInsertInfo.toStackBean(
                         JSON.parseObject(in, WebInputNavigationNodeItemInsertInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         NavigationNodeItemInsertResult result = navigationNodeQosService.insertItem(info);
         if (result == null) {
-            context.sendMessage("插入结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_INSERT_RESULT_NULL));
             return;
         }
-        context.sendMessage("插入成功");
-        context.sendMessage("  category: " + result.getCategory());
-        context.sendMessage("  args: " + java.util.Arrays.toString(result.getArgs()));
-        context.sendMessage("  itemKey: " + result.getItemKey());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_INSERT_SUCCEEDED));
+        context.sendMessage(
+                ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_FIELD_CATEGORY, result.getCategory())
+        );
+        context.sendMessage(
+                ImplMessages.message(
+                        ImplMessageKey.TELQOS_NAVIGATION_FIELD_ARGS,
+                        java.util.Arrays.toString(result.getArgs())
+                )
+        );
+        context.sendMessage(
+                ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_FIELD_ITEM_KEY, result.getItemKey())
+        );
     }
 
     private void handleUpdateItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NavigationNodeItemUpdateInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputNavigationNodeItemUpdateInfo.toStackBean(
                     JSON.parseObject(json, WebInputNavigationNodeItemUpdateInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputNavigationNodeItemUpdateInfo.toStackBean(
                         JSON.parseObject(in, WebInputNavigationNodeItemUpdateInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
         navigationNodeQosService.updateItem(info);
-        context.sendMessage("更新成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_UPDATE_SUCCEEDED));
     }
 
     private void handleRemoveItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NavigationNodeItemRemoveInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputNavigationNodeItemRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputNavigationNodeItemRemoveInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputNavigationNodeItemRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputNavigationNodeItemRemoveInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
         navigationNodeQosService.removeItem(info);
-        context.sendMessage("移除成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
     }
 
     private void handleFormatIndex(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NavigationNodeFormatIndexInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputNavigationNodeFormatIndexInfo.toStackBean(
                     JSON.parseObject(json, WebInputNavigationNodeFormatIndexInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputNavigationNodeFormatIndexInfo.toStackBean(
                         JSON.parseObject(in, WebInputNavigationNodeFormatIndexInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
         navigationNodeQosService.formatIndex(info);
-        context.sendMessage("格式化成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_FORMAT_SUCCEEDED));
     }
 }

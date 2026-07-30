@@ -1,6 +1,10 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 无效的国际化节点 Mek ID 异常。
@@ -10,6 +14,7 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class InvalidIahnNodeMekIdException extends HandlerException {
 
+    @Serial
     private static final long serialVersionUID = 1203099392270017880L;
 
     private final String mekId;
@@ -25,6 +30,6 @@ public class InvalidIahnNodeMekIdException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "无效的国际化节点 Mek ID: " + mekId;
+        return StackMessages.message(StackMessageKey.INVALID_IAHN_NODE_MEK_ID, mekId);
     }
 }

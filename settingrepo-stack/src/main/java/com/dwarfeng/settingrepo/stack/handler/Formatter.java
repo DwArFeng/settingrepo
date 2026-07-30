@@ -1,8 +1,8 @@
 package com.dwarfeng.settingrepo.stack.handler;
 
 import com.dwarfeng.settingrepo.stack.exception.FormatterException;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.handler.Handler;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.handler.Handler;
 
 /**
  * 格式化器。

@@ -1,12 +1,13 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageTableInspectResult;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageTableInspectResult.Column;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageTableInspectResult.Row;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageTableInspectResult.RowData;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,7 +21,8 @@ import java.util.stream.Collectors;
  */
 public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
-    private static final long serialVersionUID = 2736931849264518502L;
+    @Serial
+    private static final long serialVersionUID = -2376014327009728608L;
 
     public static FastJsonIahnNodeMessageTableInspectResult of(
             IahnNodeMessageTableInspectResult iahnNodeMessageTableInspectResult
@@ -79,7 +81,8 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
     public static class FastJsonColumn implements Dto {
 
-        private static final long serialVersionUID = 2732399126503321691L;
+        @Serial
+        private static final long serialVersionUID = -970620241478723875L;
 
         public static FastJsonColumn of(Column column) {
             if (Objects.isNull(column)) {
@@ -175,7 +178,8 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
     public static class FastJsonRow implements Dto {
 
-        private static final long serialVersionUID = -864384682524943876L;
+        @Serial
+        private static final long serialVersionUID = -826501410556006190L;
 
         public static FastJsonRow of(Row row) {
             if (Objects.isNull(row)) {
@@ -275,7 +279,8 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
     public static class FastJsonRowData implements Dto {
 
-        private static final long serialVersionUID = 3694522375231822075L;
+        @Serial
+        private static final long serialVersionUID = -1155499951394825420L;
 
         public static FastJsonRowData of(RowData rowData) {
             if (Objects.isNull(rowData)) {

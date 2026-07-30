@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class IahnNodeLocalePutInfo implements Dto {
 
-    private static final long serialVersionUID = -5075659887157223784L;
+    @Serial
+    private static final long serialVersionUID = -2833486786060375502L;
 
     private String category;
     private String[] args;

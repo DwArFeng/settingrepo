@@ -3,8 +3,8 @@ package com.dwarfeng.settingrepo.stack.handler;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodeInspectInfo;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodeInspectResult;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodePutInfo;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
-import com.dwarfeng.subgrade.stack.handler.Handler;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.basic.stack.handler.Handler;
 
 /**
  * 文本节点操作处理器。

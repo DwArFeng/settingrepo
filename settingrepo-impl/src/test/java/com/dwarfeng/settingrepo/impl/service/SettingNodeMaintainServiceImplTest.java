@@ -4,15 +4,15 @@ import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.settingrepo.stack.service.SettingCategoryMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/application-context*.xml")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:com/dwarfeng/settingrepo/impl/spring/application-context*.xml")
 public class SettingNodeMaintainServiceImplTest {
 
     private static final String SETTING_CATEGORY_ID = "test.setting_category";
@@ -36,7 +36,7 @@ public class SettingNodeMaintainServiceImplTest {
     private SettingCategory settingCategory;
     private List<SettingNode> settingNodes;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         settingCategory = new SettingCategory(
                 new StringIdKey(SETTING_CATEGORY_ID), "formatterType", "formatterParam", "remark"
@@ -51,7 +51,7 @@ public class SettingNodeMaintainServiceImplTest {
         }
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         settingNodes.clear();
     }
@@ -81,6 +81,7 @@ public class SettingNodeMaintainServiceImplTest {
         }
     }
 
+    @Test
     public void testForSettingCategoryCascade() throws Exception {
         try {
             settingCategoryMaintainService.insertOrUpdate(settingCategory);

@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputSettingNodeExistsInfo;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputSettingNodeInitInfo;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputSettingNodeInspectInfo;
@@ -67,7 +69,7 @@ public class SettingNodeCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "设置节点操作服务";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_SETTING_DESCRIPTION);
     }
 
     @Override
@@ -94,17 +96,34 @@ public class SettingNodeCommand extends CliCommand {
         return CliCommandUtil.cliSyntax(patterns);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_EXISTS).optionalArg(true).hasArg(false).desc("判断指定的设置节点是否存在").build());
-        list.add(Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false).desc("查看指定的设置节点").build());
-        list.add(Option.builder(COMMAND_OPTION_INIT).optionalArg(true).hasArg(false).desc("初始化指定的设置节点").build());
-        list.add(Option.builder(COMMAND_OPTION_REMOVE).optionalArg(true).hasArg(false).desc("移除指定的设置节点").build());
-        list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
+        list.add(
+                Option.builder(COMMAND_OPTION_EXISTS).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_OPTION_EXISTS)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_OPTION_INSPECT)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_INIT).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_OPTION_INIT)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_REMOVE).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_OPTION_REMOVE)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_STRING)).get()
+        );
         list.add(
                 Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
-                        .hasArg(true).type(File.class).desc("JSON 文件").build()
+                        .hasArg(true).type(File.class)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_FILE)).get()
         );
         return list;
     }
@@ -131,113 +150,125 @@ public class SettingNodeCommand extends CliCommand {
                 handleRemove(context, cmd);
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 
     private void handleExists(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         SettingNodeExistsInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputSettingNodeExistsInfo.toStackBean(
                     JSON.parseObject(json, WebInputSettingNodeExistsInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputSettingNodeExistsInfo.toStackBean(
                         JSON.parseObject(in, WebInputSettingNodeExistsInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         SettingNodeExistsResult result = settingNodeQosService.exists(info);
-        context.sendMessage("节点存在: " + result.isExists());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_EXISTS, result.isExists()));
     }
 
     private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         SettingNodeInspectInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputSettingNodeInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputSettingNodeInspectInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputSettingNodeInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputSettingNodeInspectInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         SettingNodeInspectResult result = settingNodeQosService.inspect(info);
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage("查询结果: ");
-        context.sendMessage("  type: " + result.getType() + " (" + formatSettingNodeType(result.getType()) + ")");
-        context.sendMessage("  lastModifiedDate: " + result.getLastModifiedDate());
-        context.sendMessage("  remark: " + result.getRemark());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(
+                ImplMessages.message(
+                        ImplMessageKey.TELQOS_SETTING_FIELD_TYPE,
+                        result.getType(),
+                        formatSettingNodeType(result.getType())
+                )
+        );
+        context.sendMessage(
+                ImplMessages.message(
+                        ImplMessageKey.TELQOS_SETTING_FIELD_LAST_MODIFIED_DATE,
+                        result.getLastModifiedDate()
+                )
+        );
+        context.sendMessage(
+                ImplMessages.message(ImplMessageKey.TELQOS_SETTING_FIELD_REMARK, result.getRemark())
+        );
     }
 
     private String formatSettingNodeType(int type) {
-        switch (type) {
-            case Constants.SETTING_NODE_TYPE_TEXT:
-                return "文本";
-            case Constants.SETTING_NODE_TYPE_LONG_TEXT:
-                return "长文本";
-            case Constants.SETTING_NODE_TYPE_IMAGE:
-                return "图片";
-            case Constants.SETTING_NODE_TYPE_IMAGE_LIST:
-                return "图片列表";
-            default:
-                return "未知";
-        }
+        return switch (type) {
+            case Constants.SETTING_NODE_TYPE_TEXT -> ImplMessages.message(ImplMessageKey.TELQOS_SETTING_TYPE_TEXT);
+            case Constants.SETTING_NODE_TYPE_LONG_TEXT ->
+                    ImplMessages.message(ImplMessageKey.TELQOS_SETTING_TYPE_LONG_TEXT);
+            case Constants.SETTING_NODE_TYPE_IMAGE -> ImplMessages.message(ImplMessageKey.TELQOS_SETTING_TYPE_IMAGE);
+            case Constants.SETTING_NODE_TYPE_IMAGE_LIST ->
+                    ImplMessages.message(ImplMessageKey.TELQOS_SETTING_TYPE_IMAGE_LIST);
+            default -> ImplMessages.message(ImplMessageKey.TELQOS_SETTING_TYPE_UNKNOWN);
+        };
     }
 
     private void handleInit(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         SettingNodeInitInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputSettingNodeInitInfo.toStackBean(JSON.parseObject(json, WebInputSettingNodeInitInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputSettingNodeInitInfo.toStackBean(JSON.parseObject(in, WebInputSettingNodeInitInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         settingNodeQosService.init(info);
-        context.sendMessage("初始化成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_INIT_SUCCEEDED));
     }
 
     private void handleRemove(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         SettingNodeRemoveInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputSettingNodeRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputSettingNodeRemoveInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputSettingNodeRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputSettingNodeRemoveInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         settingNodeQosService.remove(info);
-        context.sendMessage("删除成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_DELETE_SUCCEEDED));
     }
 }

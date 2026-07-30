@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 文件节点查看结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class FileNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = -4779845435107896465L;
+    @Serial
+    private static final long serialVersionUID = 3780005671546975141L;
 
     private String originName;
     private long length;

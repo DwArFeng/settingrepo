@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
 import java.io.InputStream;
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,8 @@ import java.util.Arrays;
  */
 public class FileListNodeFileStreamUploadInfo implements Dto {
 
-    private static final long serialVersionUID = 4885030647323859949L;
+    @Serial
+    private static final long serialVersionUID = -3745257872103703345L;
 
     private String category;
     private String[] args;

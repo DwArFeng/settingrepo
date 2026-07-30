@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public class IahnNodeMessageTableInspectResult implements Dto {
 
-    private static final long serialVersionUID = -4858521834311748731L;
+    @Serial
+    private static final long serialVersionUID = 7389299921734116920L;
 
     private List<Column> columns;
     private List<Row> rows;
@@ -51,7 +53,8 @@ public class IahnNodeMessageTableInspectResult implements Dto {
 
     public static class Column implements Dto {
 
-        private static final long serialVersionUID = 766419378907398811L;
+        @Serial
+        private static final long serialVersionUID = 1847099871241298687L;
 
         /**
          * 语言。
@@ -159,7 +162,8 @@ public class IahnNodeMessageTableInspectResult implements Dto {
 
     public static class Row implements Dto {
 
-        private static final long serialVersionUID = -8707280150292419293L;
+        @Serial
+        private static final long serialVersionUID = -3184474810131349466L;
 
         private String mekId;
         private String label;
@@ -232,7 +236,8 @@ public class IahnNodeMessageTableInspectResult implements Dto {
 
     public static class RowData implements Dto {
 
-        private static final long serialVersionUID = 4068057436578441062L;
+        @Serial
+        private static final long serialVersionUID = -2167546338192261494L;
 
         private String message;
 

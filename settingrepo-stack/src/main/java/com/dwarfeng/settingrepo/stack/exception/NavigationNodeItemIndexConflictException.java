@@ -1,8 +1,12 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 导航节点条目索引冲突异常。
@@ -12,7 +16,8 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class NavigationNodeItemIndexConflictException extends HandlerException {
 
-    private static final long serialVersionUID = 8891213341252581513L;
+    @Serial
+    private static final long serialVersionUID = -6297734274526580729L;
 
     private final StringIdKey settingNodeKey;
     private final LongIdKey parentNavigationNodeItemKey;
@@ -37,7 +42,9 @@ public class NavigationNodeItemIndexConflictException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "导航节点条目索引冲突, 设置节点主键: " + settingNodeKey + ", 父导航节点条目主键: " +
-                parentNavigationNodeItemKey + ", 索引: " + index;
+        return StackMessages.message(
+                StackMessageKey.NAVIGATION_NODE_ITEM_INDEX_CONFLICT,
+                settingNodeKey, parentNavigationNodeItemKey, index
+        );
     }
 }

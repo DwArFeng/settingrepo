@@ -6,11 +6,11 @@ import com.dwarfeng.settingrepo.stack.cache.ImageListNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.ImageListNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.ImageListNodeItemDao;
 import com.dwarfeng.settingrepo.stack.service.ImageListNodeItemMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +54,7 @@ public class ImageListNodeCrudOperation implements BatchCrudOperation<StringIdKe
             return imageListNodeCache.get(key);
         } else {
             if (!imageListNodeDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             ImageListNode imageListNode = imageListNodeDao.get(key);
             imageListNodeCache.push(imageListNode, imageListNodeTimeout);
@@ -102,7 +102,7 @@ public class ImageListNodeCrudOperation implements BatchCrudOperation<StringIdKe
             return imageListNodeCache.batchGet(keys);
         } else {
             if (!imageListNodeDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<ImageListNode> imageListNodes = imageListNodeDao.batchGet(keys);
             imageListNodeCache.batchPush(imageListNodes, imageListNodeTimeout);

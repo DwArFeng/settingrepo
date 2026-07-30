@@ -1,13 +1,15 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -93,7 +95,7 @@ public class FtpPathResolver {
      * @param relativePath 相对路径。
      * @return 解析后的路径。
      */
-    public String[] resolvePath(@Nonnull String[] relativePath) {
+    public String[] resolvePath(@NotNull String[] relativePath) {
         String[] rootPath = rootPath();
         String[] path = new String[rootPath.length + relativePath.length];
         System.arraycopy(rootPath, 0, path, 0, rootPath.length);
@@ -130,12 +132,12 @@ public class FtpPathResolver {
         }
         // 值校验：如果以分隔符开头或结尾，则进行警告，并置位空路径。
         if (Strings.CS.startsWith(rootPathString, ROOT_PATH_STRING_SEPARATOR_STRING)) {
-            LOGGER.warn("根路径 {} 非法, 将使用默认的根路径代替", rootPathString);
+            LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_FTP_ROOT_PATH_INVALID, rootPathString));
             rootPath = new String[0];
             return;
         }
         if (Strings.CS.endsWith(rootPathString, ROOT_PATH_STRING_SEPARATOR_STRING)) {
-            LOGGER.warn("根路径 {} 非法, 将使用默认的根路径代替", rootPathString);
+            LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_FTP_ROOT_PATH_INVALID, rootPathString));
             rootPath = new String[0];
             return;
         }

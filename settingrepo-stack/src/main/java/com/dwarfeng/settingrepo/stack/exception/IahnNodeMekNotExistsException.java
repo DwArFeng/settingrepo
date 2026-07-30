@@ -1,7 +1,11 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 国际化节点 Mek 不存在异常。
@@ -11,6 +15,7 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class IahnNodeMekNotExistsException extends HandlerException {
 
+    @Serial
     private static final long serialVersionUID = 8898498586070860781L;
 
     private final IahnNodeMekKey iahnNodeMekKey;
@@ -26,6 +31,6 @@ public class IahnNodeMekNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "国际化节点 Mek " + iahnNodeMekKey + " 不存在";
+        return StackMessages.message(StackMessageKey.IAHN_NODE_MEK_NOT_EXISTS, iahnNodeMekKey);
     }
 }

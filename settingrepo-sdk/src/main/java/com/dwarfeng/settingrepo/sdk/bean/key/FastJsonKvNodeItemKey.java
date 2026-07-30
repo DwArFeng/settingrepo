@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.key;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class FastJsonKvNodeItemKey implements Key {
 
-    private static final long serialVersionUID = 735247462787452878L;
+    @Serial
+    private static final long serialVersionUID = -7244116137115629111L;
 
     public static FastJsonKvNodeItemKey of(KvNodeItemKey kvNodeItemKey) {
         if (Objects.isNull(kvNodeItemKey)) {

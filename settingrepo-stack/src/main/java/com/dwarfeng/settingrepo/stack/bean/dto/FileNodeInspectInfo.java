@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class FileNodeInspectInfo implements Dto {
 
-    private static final long serialVersionUID = 2965744683524641089L;
+    @Serial
+    private static final long serialVersionUID = 2898936354314892228L;
 
     private String category;
     private String[] args;

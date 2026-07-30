@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.KvNodeCountResult;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class FastJsonKvNodeCountResult implements Bean {
 
-    private static final long serialVersionUID = 8470940555290637605L;
+    @Serial
+    private static final long serialVersionUID = 6027244191919697915L;
 
     public static FastJsonKvNodeCountResult of(KvNodeCountResult kvNodeCountResult) {
         if (Objects.isNull(kvNodeCountResult)) {

@@ -1,7 +1,11 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 国际化节点地区不存在异常。
@@ -11,6 +15,7 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class IahnNodeLocaleNotExistsException extends HandlerException {
 
+    @Serial
     private static final long serialVersionUID = 5675858874401519682L;
 
     private final IahnNodeLocaleKey iahnNodeLocaleKey;
@@ -26,6 +31,6 @@ public class IahnNodeLocaleNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "国际化节点地区 " + iahnNodeLocaleKey + " 不存在";
+        return StackMessages.message(StackMessageKey.IAHN_NODE_LOCALE_NOT_EXISTS, iahnNodeLocaleKey);
     }
 }

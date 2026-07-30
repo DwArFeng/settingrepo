@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.NavigationNodeUpdateInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ import java.util.Objects;
  */
 public class WebInputNavigationNodeUpdateInfo implements Dto {
 
-    private static final long serialVersionUID = -2963545554610577254L;
+    @Serial
+    private static final long serialVersionUID = 7224200180763995792L;
 
     public static NavigationNodeUpdateInfo toStackBean(WebInputNavigationNodeUpdateInfo webInput) {
         if (Objects.isNull(webInput)) {

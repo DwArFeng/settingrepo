@@ -2,9 +2,10 @@ package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +15,8 @@ import java.util.Set;
 @Table(name = "tbl_iahn_node_locale")
 public class HibernateIahnNodeLocale implements Bean {
 
-    private static final long serialVersionUID = -1640948406902130315L;
+    @Serial
+    private static final long serialVersionUID = -572716315343916815L;
 
     // region 主键
 

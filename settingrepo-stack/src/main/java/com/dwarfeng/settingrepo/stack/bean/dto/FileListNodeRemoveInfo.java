@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class FileListNodeRemoveInfo implements Dto {
 
-    private static final long serialVersionUID = 8042635780294005973L;
+    @Serial
+    private static final long serialVersionUID = -6214906447111474887L;
 
     private String category;
     private String[] args;

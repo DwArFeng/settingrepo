@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.impl.bean.key;
 
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class HibernateIahnNodeLocaleKey implements Bean, Serializable {
 
-    private static final long serialVersionUID = -4810929816505755894L;
+    @Serial
+    private static final long serialVersionUID = 3288920095023937756L;
 
     private String nodeStringId;
     private String language;

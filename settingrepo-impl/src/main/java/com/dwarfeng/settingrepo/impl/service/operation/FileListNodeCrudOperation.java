@@ -6,11 +6,11 @@ import com.dwarfeng.settingrepo.stack.cache.FileListNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.FileListNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.FileListNodeItemDao;
 import com.dwarfeng.settingrepo.stack.service.FileListNodeItemMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +54,7 @@ public class FileListNodeCrudOperation implements BatchCrudOperation<StringIdKey
             return fileListNodeCache.get(key);
         } else {
             if (!fileListNodeDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             FileListNode fileListNode = fileListNodeDao.get(key);
             fileListNodeCache.push(fileListNode, fileListNodeTimeout);
@@ -102,7 +102,7 @@ public class FileListNodeCrudOperation implements BatchCrudOperation<StringIdKey
             return fileListNodeCache.batchGet(keys);
         } else {
             if (!fileListNodeDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<FileListNode> fileListNodes = fileListNodeDao.batchGet(keys);
             fileListNodeCache.batchPush(fileListNodes, fileListNodeTimeout);

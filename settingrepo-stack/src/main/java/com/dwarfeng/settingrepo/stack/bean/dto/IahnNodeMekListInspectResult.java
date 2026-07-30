@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public class IahnNodeMekListInspectResult implements Dto {
 
-    private static final long serialVersionUID = 4564127871356444078L;
+    @Serial
+    private static final long serialVersionUID = -2770184208499197598L;
 
     private List<Item> items;
 
@@ -40,7 +42,8 @@ public class IahnNodeMekListInspectResult implements Dto {
 
     public static class Item implements Dto {
 
-        private static final long serialVersionUID = 8665069976405039437L;
+        @Serial
+        private static final long serialVersionUID = 4439857988976610340L;
 
         private String mekId;
         private String label;

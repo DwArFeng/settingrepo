@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+
+import java.io.Serial;
 
 /**
  * 图片列表节点。
@@ -11,7 +13,8 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class ImageListNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = 2769456600347694948L;
+    @Serial
+    private static final long serialVersionUID = 163358219631278755L;
 
     private StringIdKey key;
 

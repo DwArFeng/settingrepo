@@ -4,10 +4,10 @@ import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
 import com.dwarfeng.settingrepo.stack.cache.SettingNodeCache;
 import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.*;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -91,7 +91,7 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             return settingNodeCache.get(key);
         } else {
             if (!settingNodeDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             SettingNode settingNode = settingNodeDao.get(key);
             settingNodeCache.push(settingNode, settingNodeTimeout);
@@ -169,7 +169,7 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             return settingNodeCache.batchGet(keys);
         } else {
             if (!settingNodeDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<SettingNode> settingNodes = settingNodeDao.batchGet(keys);
             settingNodeCache.batchPush(settingNodes, settingNodeTimeout);

@@ -1,17 +1,18 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageUpsertByLocaleInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +29,8 @@ import static com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageUpsertByLoc
  */
 public class WebInputIahnNodeMessageUpsertByLocaleInfo implements Dto {
 
-    private static final long serialVersionUID = -8846595784119244499L;
+    @Serial
+    private static final long serialVersionUID = -5372767475688429279L;
 
     public static IahnNodeMessageUpsertByLocaleInfo toStackBean(WebInputIahnNodeMessageUpsertByLocaleInfo webInput) {
         if (Objects.isNull(webInput)) {
@@ -138,7 +140,8 @@ public class WebInputIahnNodeMessageUpsertByLocaleInfo implements Dto {
 
     public static class WebInputItem implements Dto {
 
-        private static final long serialVersionUID = 2336064879979288811L;
+        @Serial
+        private static final long serialVersionUID = 9005810227111608706L;
 
         public static Item toStackBean(WebInputItem webInput) {
             if (Objects.isNull(webInput)) {

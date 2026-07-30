@@ -1,10 +1,11 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.NavigationNodeItemInsertResult;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.JSFixedFastJsonLongIdKey;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -16,7 +17,8 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonNavigationNodeItemInsertResult implements Bean {
 
-    private static final long serialVersionUID = -846823129016867790L;
+    @Serial
+    private static final long serialVersionUID = 1447451151077300161L;
 
     public static JSFixedFastJsonNavigationNodeItemInsertResult of(
             NavigationNodeItemInsertResult navigationNodeItemInsertResult

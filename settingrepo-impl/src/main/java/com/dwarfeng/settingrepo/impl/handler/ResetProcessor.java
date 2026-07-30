@@ -1,8 +1,10 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
 import com.dwarfeng.settingrepo.stack.handler.PushHandler;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -36,7 +38,7 @@ public class ResetProcessor {
         try {
             pushHandler.formatReset();
         } catch (Exception e) {
-            LOGGER.warn("推送路由被重置消息时发生异常, 本次消息将不会被推送, 异常信息如下: ", e);
+            LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_RESET_MESSAGE_PUSH_FAILED), e);
         }
     }
 }

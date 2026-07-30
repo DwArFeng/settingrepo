@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+
+import java.io.Serial;
 
 /**
  * 设置类别。
@@ -11,7 +13,8 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class SettingCategory implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -2037886562008953343L;
+    @Serial
+    private static final long serialVersionUID = -7026144684199437984L;
 
     private StringIdKey key;
     private String formatterType;

@@ -1,7 +1,11 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 设置节点存在异常。
@@ -11,7 +15,8 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class SettingNodeExistsException extends HandlerException {
 
-    private static final long serialVersionUID = -7687873256433515287L;
+    @Serial
+    private static final long serialVersionUID = 1759757175626546352L;
 
     private final StringIdKey settingNodeKey;
 
@@ -26,6 +31,6 @@ public class SettingNodeExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "设置节点 " + settingNodeKey + " 已经存在";
+        return StackMessages.message(StackMessageKey.SETTING_NODE_EXISTS, settingNodeKey);
     }
 }

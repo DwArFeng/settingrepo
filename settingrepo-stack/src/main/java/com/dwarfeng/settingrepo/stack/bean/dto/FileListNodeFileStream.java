@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
 import java.io.InputStream;
+import java.io.Serial;
 
 /**
  * 文件列表节点文件流。
@@ -12,7 +13,8 @@ import java.io.InputStream;
  */
 public class FileListNodeFileStream implements Dto {
 
-    private static final long serialVersionUID = 6227410433705509283L;
+    @Serial
+    private static final long serialVersionUID = -3136657090073807387L;
 
     private String originName;
     private long length;

@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.NavigationNodeInspectResult;
 import com.dwarfeng.settingrepo.stack.bean.dto.NavigationNodeInspectResult.Item;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.JSFixedFastJsonLongIdKey;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,7 +20,8 @@ import java.util.stream.Collectors;
  */
 public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
 
-    private static final long serialVersionUID = 717591849167078619L;
+    @Serial
+    private static final long serialVersionUID = -1004209377824528916L;
 
     public static JSFixedFastJsonNavigationNodeInspectResult of(
             NavigationNodeInspectResult navigationNodeInspectResult
@@ -96,7 +98,8 @@ public class JSFixedFastJsonNavigationNodeInspectResult implements Bean {
      */
     public static class JSFixedFastJsonItem implements Bean {
 
-        private static final long serialVersionUID = -7458442234882016966L;
+        @Serial
+        private static final long serialVersionUID = 1884856813274180420L;
 
         public static JSFixedFastJsonItem of(Item item) {
             if (Objects.isNull(item)) {

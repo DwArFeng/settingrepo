@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Date;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Date;
  */
 public class SettingNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = 8408125690249895375L;
+    @Serial
+    private static final long serialVersionUID = 4331575155265807760L;
 
     private int type;
     private Date lastModifiedDate;

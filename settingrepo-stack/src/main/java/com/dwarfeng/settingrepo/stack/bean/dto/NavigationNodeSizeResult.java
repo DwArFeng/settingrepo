@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 导航节点大小结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class NavigationNodeSizeResult implements Dto {
 
-    private static final long serialVersionUID = 5382883051495406537L;
+    @Serial
+    private static final long serialVersionUID = -4510878128392324553L;
 
     /**
      * 导航节点的数量。

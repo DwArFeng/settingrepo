@@ -1,13 +1,14 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.NavigationNodeFormatIndexInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.WebInputLongIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.WebInputLongIdKey;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -19,7 +20,8 @@ import java.util.Objects;
  */
 public class WebInputNavigationNodeFormatIndexInfo implements Bean {
 
-    private static final long serialVersionUID = 7915253396315117927L;
+    @Serial
+    private static final long serialVersionUID = -3025913874325889645L;
 
     public static NavigationNodeFormatIndexInfo toStackBean(WebInputNavigationNodeFormatIndexInfo webInput) {
         if (Objects.isNull(webInput)) {

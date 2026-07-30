@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 设置节点存在结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class SettingNodeExistsResult implements Dto {
 
-    private static final long serialVersionUID = 7194584927540276792L;
+    @Serial
+    private static final long serialVersionUID = 7903561730316012047L;
 
     private boolean exists;
 

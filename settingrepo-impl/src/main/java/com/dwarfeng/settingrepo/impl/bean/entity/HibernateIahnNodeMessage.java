@@ -2,9 +2,10 @@ package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateIahnNodeMessageKey;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,8 @@ import java.util.Objects;
 @Table(name = "tbl_iahn_node_message")
 public class HibernateIahnNodeMessage implements Bean {
 
-    private static final long serialVersionUID = -8313653148934662532L;
+    @Serial
+    private static final long serialVersionUID = -8153262988077169684L;
 
     // region 主键
 

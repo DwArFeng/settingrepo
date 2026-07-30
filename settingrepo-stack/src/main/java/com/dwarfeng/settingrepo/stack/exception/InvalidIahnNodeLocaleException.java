@@ -1,6 +1,10 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 无效的国际化节点地区异常。
@@ -10,6 +14,7 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class InvalidIahnNodeLocaleException extends HandlerException {
 
+    @Serial
     private static final long serialVersionUID = -2404856197358272385L;
 
     private final String language;
@@ -31,6 +36,6 @@ public class InvalidIahnNodeLocaleException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "无效的国际化节点地区: language = " + language + ", country = " + country + ", variant = " + variant;
+        return StackMessages.message(StackMessageKey.INVALID_IAHN_NODE_LOCALE, language, country, variant);
     }
 }

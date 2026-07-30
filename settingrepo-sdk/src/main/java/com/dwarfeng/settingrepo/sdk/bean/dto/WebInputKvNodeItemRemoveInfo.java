@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.KvNodeItemRemoveInfo;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ import java.util.Objects;
  */
 public class WebInputKvNodeItemRemoveInfo implements Bean {
 
-    private static final long serialVersionUID = 6438258527683116965L;
+    @Serial
+    private static final long serialVersionUID = -164960112649917098L;
 
     public static KvNodeItemRemoveInfo toStackBean(WebInputKvNodeItemRemoveInfo webInput) {
         if (Objects.isNull(webInput)) {

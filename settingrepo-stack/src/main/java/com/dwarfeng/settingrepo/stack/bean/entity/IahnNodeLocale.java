@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+
+import java.io.Serial;
 
 /**
  * 国际化节点地区。
@@ -12,7 +14,8 @@ import com.dwarfeng.subgrade.stack.bean.entity.Entity;
  */
 public class IahnNodeLocale implements Entity<IahnNodeLocaleKey> {
 
-    private static final long serialVersionUID = 3281667116306732315L;
+    @Serial
+    private static final long serialVersionUID = 5752180661799323870L;
 
     private IahnNodeLocaleKey key;
     private String label;

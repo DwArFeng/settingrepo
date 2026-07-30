@@ -18,7 +18,7 @@
 
     <artifactId>settingrepo-node</artifactId>
     <name>settingrepo-node</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/DwArFeng/settingrepo</url>
 
     <properties>
         <!-- 进行工程编码声明 -->

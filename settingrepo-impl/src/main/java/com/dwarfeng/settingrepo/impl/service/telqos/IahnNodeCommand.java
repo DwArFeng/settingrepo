@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeQosService;
@@ -90,7 +92,7 @@ public class IahnNodeCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "国际化节点操作服务";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_IAHN_DESCRIPTION);
     }
 
     @Override
@@ -146,62 +148,65 @@ public class IahnNodeCommand extends CliCommand {
         List<Option> list = new ArrayList<>();
         list.add(
                 Option.builder(COMMAND_OPTION_INSPECT_MESSAGE).longOpt(COMMAND_OPTION_INSPECT_MESSAGE_LONG_OPT)
-                        .desc("查询国际化消息").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_QUERY_MESSAGE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE)
                         .longOpt(COMMAND_OPTION_BATCH_INSPECT_MESSAGE_BY_LOCALE_LONG_OPT)
-                        .desc("基于国际化地区批量查询国际化消息").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_QUERY_BY_LOCALE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_INSPECT_LOCALE_LIST).longOpt(COMMAND_OPTION_INSPECT_LOCALE_LIST_LONG_OPT)
-                        .desc("查询国际化地区列表").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_QUERY_LOCALES)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_INSPECT_MEK_LIST).longOpt(COMMAND_OPTION_INSPECT_MEK_LIST_LONG_OPT)
-                        .desc("查询国际化 Mek 列表").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_QUERY_MEKS)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_INSPECT_MESSAGE_TABLE)
                         .longOpt(COMMAND_OPTION_INSPECT_MESSAGE_TABLE_LONG_OPT)
-                        .desc("查询国际化消息表").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_QUERY_TABLE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_PUT_LOCALE).longOpt(COMMAND_OPTION_PUT_LOCALE_LONG_OPT)
-                        .desc("推入国际化地区").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_PUSH_LOCALE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_REMOVE_LOCALE).longOpt(COMMAND_OPTION_REMOVE_LOCALE_LONG_OPT)
-                        .desc("移除国际化地区").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_REMOVE_LOCALE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_PUT_MEK).longOpt(COMMAND_OPTION_PUT_MEK_LONG_OPT)
-                        .desc("推入国际化 Mek").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_PUSH_MEK)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_REMOVE_MEK).longOpt(COMMAND_OPTION_REMOVE_MEK_LONG_OPT)
-                        .desc("移除国际化 Mek").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_REMOVE_MEK)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_UPSERT_MESSAGE).longOpt(COMMAND_OPTION_UPSERT_MESSAGE_LONG_OPT)
-                        .desc("插入或更新国际化消息").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_UPSERT_MESSAGE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE)
                         .longOpt(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE_LONG_OPT)
-                        .desc("基于国际化地区批量插入或更新国际化消息").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_UPSERT_BY_LOCALE)).get()
         );
         list.add(
                 Option.builder(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK)
                         .longOpt(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK_LONG_OPT)
-                        .desc("基于国际化 Mek 批量插入或更新国际化消息").build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_OPTION_UPSERT_BY_MEK)).get()
         );
         list.add(
-                Option.builder(COMMAND_SUB_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
+                Option.builder(COMMAND_SUB_OPTION_JSON)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_STRING))
+                        .hasArg().type(String.class).get()
         );
         list.add(
                 Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
-                        .desc("JSON 文件").hasArg().type(File.class).build()
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_FILE))
+                        .hasArg().type(File.class).get()
         );
         return list;
     }
@@ -252,7 +257,9 @@ public class IahnNodeCommand extends CliCommand {
                 handleBatchUpsertMessageByMek(context, cmd);
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 
@@ -261,14 +268,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageInspectInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageInspectInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageInspectInfo.class)
@@ -276,7 +283,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 查询国际化消息。
@@ -284,10 +291,10 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
         } else {
-            context.sendMessage("查询结果: ");
-            context.sendMessage("  message: " + result.getMessage());
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_MESSAGE, result.getMessage()));
         }
     }
 
@@ -296,14 +303,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageInspectByLocaleInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageInspectByLocaleInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageInspectByLocaleInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageInspectByLocaleInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageInspectByLocaleInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageInspectByLocaleInfo.class)
@@ -311,18 +318,18 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 基于国际化地区批量查询国际化消息。
         IahnNodeMessageInspectByLocaleResult result = iahnNodeQosService.batchInspectMessageByLocale(info);
 
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
         } else {
-            context.sendMessage("查询结果: ");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
             List<IahnNodeMessageInspectByLocaleResult.Item> items = result.getItems();
-            context.sendMessage("  items: total size: " + items.size());
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_ITEMS_TOTAL_SIZE, items.size()));
             for (int i = 0; i < items.size(); i++) {
                 IahnNodeMessageInspectByLocaleResult.Item item = items.get(i);
                 context.sendMessage(String.format(
@@ -338,14 +345,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocaleListInspectInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeLocaleListInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeLocaleListInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocaleListInspectInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeLocaleListInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeLocaleListInspectInfo.class)
@@ -353,7 +360,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 查询国际化地区列表。
@@ -361,7 +368,7 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
         } else {
             processLocaleListInspectResultItems(context, result.getItems());
         }
@@ -371,14 +378,18 @@ public class IahnNodeCommand extends CliCommand {
             CommandExecutor.Context context, List<IahnNodeLocaleListInspectResult.Item> items
     ) throws Exception {
         while (true) {
-            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, items, "数据总数: " + items.size());
-            if (cropResult.isExitFlag()) {
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
+                    context,
+                    items,
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, items.size())
+            );
+            if (cropResult.exitFlag()) {
                 break;
             }
             context.sendMessage("");
-            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+            for (int i = cropResult.beginIndex(); i < cropResult.endIndex(); i++) {
                 IahnNodeLocaleListInspectResult.Item item = items.get(i);
-                printIahnNodeLocaleListInspectResultItem(context, i, cropResult.getEndIndex(), item);
+                printIahnNodeLocaleListInspectResultItem(context, i, cropResult.endIndex(), item);
             }
         }
     }
@@ -386,15 +397,25 @@ public class IahnNodeCommand extends CliCommand {
     private void printIahnNodeLocaleListInspectResultItem(
             CommandExecutor.Context context, int i, int endIndex, IahnNodeLocaleListInspectResult.Item item
     ) throws Exception {
-        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
         if (Objects.isNull(item)) {
             context.sendMessage("null");
         } else {
-            context.sendMessage(String.format("  language: %s", item.getLanguage()));
-            context.sendMessage(String.format("  country: %s", item.getCountry()));
-            context.sendMessage(String.format("  variant: %s", item.getVariant()));
-            context.sendMessage(String.format("  label: %s", item.getLabel()));
-            context.sendMessage(String.format("  remark: %s", item.getRemark()));
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_LANGUAGE), item.getLanguage())
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_COUNTRY), item.getCountry())
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_VARIANT), item.getVariant())
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_LABEL), item.getLabel())
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_REMARK), item.getRemark())
+            );
         }
         context.sendMessage("");
     }
@@ -404,14 +425,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekListInspectInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMekListInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMekListInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekListInspectInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMekListInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMekListInspectInfo.class)
@@ -419,7 +440,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 查询国际化 Mek 列表。
@@ -427,7 +448,7 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
         } else {
             processMekListInspectResultItems(context, result.getItems());
         }
@@ -437,29 +458,45 @@ public class IahnNodeCommand extends CliCommand {
             CommandExecutor.Context context, List<IahnNodeMekListInspectResult.Item> items
     ) throws Exception {
         while (true) {
-            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, items, "数据总数: " + items.size());
-            if (cropResult.isExitFlag()) {
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
+                    context,
+                    items,
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, items.size())
+            );
+            if (cropResult.exitFlag()) {
                 break;
             }
             context.sendMessage("");
-            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+            for (int i = cropResult.beginIndex(); i < cropResult.endIndex(); i++) {
                 IahnNodeMekListInspectResult.Item item = items.get(i);
-                printIahnNodeMekListInspectResultItem(context, i, cropResult.getEndIndex(), item);
+                printIahnNodeMekListInspectResultItem(context, i, cropResult.endIndex(), item);
             }
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void printIahnNodeMekListInspectResultItem(
             CommandExecutor.Context context, int i, int endIndex, IahnNodeMekListInspectResult.Item item
     ) throws Exception {
-        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
         if (Objects.isNull(item)) {
             context.sendMessage("null");
         } else {
-            context.sendMessage(String.format("  mekId: %s", item.getMekId()));
-            context.sendMessage(String.format("  label: %s", item.getLabel()));
-            context.sendMessage(String.format("  defaultMessage: %s", item.getDefaultMessage()));
-            context.sendMessage(String.format("  remark: %s", item.getRemark()));
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_MEK_ID), item.getMekId())
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_LABEL), item.getLabel())
+            );
+            context.sendMessage(
+                    String.format(
+                            ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_DEFAULT_MESSAGE),
+                            item.getDefaultMessage()
+                    )
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_REMARK), item.getRemark())
+            );
         }
         context.sendMessage("");
     }
@@ -469,14 +506,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageTableInspectInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageTableInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageTableInspectInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageTableInspectInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageTableInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageTableInspectInfo.class)
@@ -484,7 +521,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 查询国际化消息表。
@@ -492,7 +529,7 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
         } else {
             processMessageTableInspectResultItems(context, result.getColumns(), result.getRows());
         }
@@ -503,45 +540,69 @@ public class IahnNodeCommand extends CliCommand {
             List<IahnNodeMessageTableInspectResult.Row> rows
     ) throws Exception {
         while (true) {
-            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, rows, "数据总数: " + rows.size());
-            if (cropResult.isExitFlag()) {
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
+                    context,
+                    rows,
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, rows.size())
+            );
+            if (cropResult.exitFlag()) {
                 break;
             }
             context.sendMessage("");
-            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+            for (int i = cropResult.beginIndex(); i < cropResult.endIndex(); i++) {
                 IahnNodeMessageTableInspectResult.Row row = rows.get(i);
-                printIahnNodeMessageTableInspectResultRow(context, i, cropResult.getEndIndex(), columns, row);
+                printIahnNodeMessageTableInspectResultRow(context, i, cropResult.endIndex(), columns, row);
             }
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void printIahnNodeMessageTableInspectResultRow(
             CommandExecutor.Context context, int i, int endIndex,
             List<IahnNodeMessageTableInspectResult.Column> columns, IahnNodeMessageTableInspectResult.Row row
     ) throws Exception {
         // 在打印行之前，先打印列信息。
-        context.sendMessage("列总数: " + columns.size());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_COLUMN_TOTAL, columns.size()));
         for (int ci = 0; ci < columns.size(); ci++) {
             IahnNodeMessageTableInspectResult.Column column = columns.get(ci);
             String language = column.getLanguage();
             String country = column.getCountry();
             String variant = column.getVariant();
-            context.sendMessage(String.format("  %3d: %s", ci, formatLocale(language, country, variant)));
+            context.sendMessage(
+                    String.format(
+                            ImplMessages.message(ImplMessageKey.TELQOS_IAHN_COLUMN),
+                            ci,
+                            formatLocale(language, country, variant)
+                    )
+            );
         }
         // 打印行信息。
-        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
         if (Objects.isNull(row)) {
             context.sendMessage("null");
         } else {
-            context.sendMessage(String.format("  mekId: %s", row.getMekId()));
-            context.sendMessage(String.format("  label: %s", row.getLabel()));
-            context.sendMessage(String.format("  defaultMessage: %s", row.getDefaultMessage()));
-            context.sendMessage(String.format("  remark: %s", row.getRemark()));
-            context.sendMessage("  rowDatas: ");
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_MEK_ID), row.getMekId())
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_LABEL), row.getLabel())
+            );
+            context.sendMessage(
+                    String.format(
+                            ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_DEFAULT_MESSAGE),
+                            row.getDefaultMessage()
+                    )
+            );
+            context.sendMessage(
+                    String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_REMARK), row.getRemark())
+            );
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_ROW_DATAS));
             for (int ri = 0; ri < row.getRowDatas().size(); ri++) {
                 IahnNodeMessageTableInspectResult.RowData rowData = row.getRowDatas().get(ri);
-                context.sendMessage(String.format("    %3d: ", ri));
-                context.sendMessage(String.format("      message: %s", rowData.getMessage()));
+                context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_ROW), ri));
+                context.sendMessage(String.format(
+                        ImplMessages.message(ImplMessageKey.TELQOS_IAHN_ROW_MESSAGE), rowData.getMessage()
+                ));
             }
         }
     }
@@ -566,14 +627,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocalePutInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeLocalePutInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeLocalePutInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocalePutInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeLocalePutInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeLocalePutInfo.class)
@@ -581,14 +642,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 推入国际化地区。
         iahnNodeQosService.putLocale(info);
 
         // 输出结果。
-        context.sendMessage("推入成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_PUSH_SUCCEEDED));
     }
 
     private void handleRemoveLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -596,14 +657,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeLocaleRemoveInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeLocaleRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeLocaleRemoveInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeLocaleRemoveInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeLocaleRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeLocaleRemoveInfo.class)
@@ -611,14 +672,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 移除国际化地区。
         iahnNodeQosService.removeLocale(info);
 
         // 输出结果。
-        context.sendMessage("移除成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
     }
 
     private void handlePutMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -626,14 +687,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekPutInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMekPutInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMekPutInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekPutInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMekPutInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMekPutInfo.class)
@@ -641,14 +702,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 推入国际化 Mek。
         iahnNodeQosService.putMek(info);
 
         // 输出结果。
-        context.sendMessage("推入成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_PUSH_SUCCEEDED));
     }
 
     private void handleRemoveMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -656,14 +717,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMekRemoveInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMekRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMekRemoveInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMekRemoveInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMekRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMekRemoveInfo.class)
@@ -671,14 +732,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 移除国际化 Mek。
         iahnNodeQosService.removeMek(info);
 
         // 输出结果。
-        context.sendMessage("移除成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
     }
 
     private void handleUpsertMessage(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -686,14 +747,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageUpsertInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageUpsertInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageUpsertInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageUpsertInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageUpsertInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageUpsertInfo.class)
@@ -701,14 +762,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 插入或更新国际化消息。
         iahnNodeQosService.upsertMessage(info);
 
         // 输出结果。
-        context.sendMessage("插入或更新成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_UPSERT_SUCCEEDED));
     }
 
     private void handleBatchUpsertMessageByLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -716,14 +777,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageUpsertByLocaleInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageUpsertByLocaleInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageUpsertByLocaleInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageUpsertByLocaleInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageUpsertByLocaleInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageUpsertByLocaleInfo.class)
@@ -731,14 +792,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 基于国际化地区批量插入或更新国际化消息。
         iahnNodeQosService.batchUpsertMessageByLocale(info);
 
         // 输出结果。
-        context.sendMessage("批量插入或更新成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_BATCH_UPSERT_SUCCEEDED));
     }
 
     private void handleBatchUpsertMessageByMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -746,14 +807,14 @@ public class IahnNodeCommand extends CliCommand {
 
         // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeMessageUpsertByMekInfo。
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputIahnNodeMessageUpsertByMekInfo.toStackBean(
                     JSON.parseObject(json, WebInputIahnNodeMessageUpsertByMekInfo.class)
             );
         }
         // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeMessageUpsertByMekInfo。
         else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputIahnNodeMessageUpsertByMekInfo.toStackBean(
                         JSON.parseObject(in, WebInputIahnNodeMessageUpsertByMekInfo.class)
@@ -761,13 +822,13 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         // 基于国际化 Mek 批量插入或更新国际化消息。
         iahnNodeQosService.batchUpsertMessageByMek(info);
 
         // 输出结果。
-        context.sendMessage("批量插入或更新成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_BATCH_UPSERT_SUCCEEDED));
     }
 }

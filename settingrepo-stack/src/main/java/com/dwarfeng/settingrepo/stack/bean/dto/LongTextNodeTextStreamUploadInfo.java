@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
 import java.io.InputStream;
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -13,8 +14,9 @@ import java.util.Arrays;
  */
 public class LongTextNodeTextStreamUploadInfo implements Dto {
 
-    private static final long serialVersionUID = -1237361294112403404L;
-    
+    @Serial
+    private static final long serialVersionUID = -83147111865184105L;
+
     private String category;
     private String[] args;
     private long length;

@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class FileListNodeSizeInfo implements Dto {
 
-    private static final long serialVersionUID = 242187300371960735L;
+    @Serial
+    private static final long serialVersionUID = 1984336593325762644L;
 
     private String category;
     private String[] args;

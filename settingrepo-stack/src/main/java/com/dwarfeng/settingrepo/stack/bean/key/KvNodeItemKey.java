@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.key;
 
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Objects;
  */
 public class KvNodeItemKey implements Key {
 
-    private static final long serialVersionUID = -3291240787630817424L;
+    @Serial
+    private static final long serialVersionUID = 577121050397661327L;
 
     private String nodeStringId;
     private String itemStringId;

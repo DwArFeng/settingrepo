@@ -9,9 +9,9 @@ import com.dwarfeng.settingrepo.stack.cache.IahnNodeMessageCache;
 import com.dwarfeng.settingrepo.stack.dao.IahnNodeMekDao;
 import com.dwarfeng.settingrepo.stack.dao.IahnNodeMessageDao;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMessageMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +53,7 @@ public class IahnNodeMekCrudOperation implements BatchCrudOperation<IahnNodeMekK
             return iahnNodeMekCache.get(key);
         } else {
             if (!iahnNodeMekDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             IahnNodeMek iahnNodeMek = iahnNodeMekDao.get(key);
             iahnNodeMekCache.push(iahnNodeMek, iahnNodeMekTimeout);
@@ -103,7 +103,7 @@ public class IahnNodeMekCrudOperation implements BatchCrudOperation<IahnNodeMekK
             return iahnNodeMekCache.batchGet(keys);
         } else {
             if (!iahnNodeMekDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<IahnNodeMek> iahnNodeMeks = iahnNodeMekDao.batchGet(keys);
             iahnNodeMekCache.batchPush(iahnNodeMeks, iahnNodeMekTimeout);

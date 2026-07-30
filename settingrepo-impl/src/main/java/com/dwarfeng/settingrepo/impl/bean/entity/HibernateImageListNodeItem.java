@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateLongIdKey;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateStringIdKey;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.Optional;
 
 @Entity
@@ -13,7 +14,8 @@ import java.util.Optional;
 @Table(name = "tbl_image_list_node_item")
 public class HibernateImageListNodeItem implements Bean {
 
-    private static final long serialVersionUID = 1003333315045930066L;
+    @Serial
+    private static final long serialVersionUID = 2573051412983039432L;
 
     // region 主键
 

@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.impl.bean.key;
 
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,7 +14,8 @@ import java.util.Objects;
  */
 public class HibernateKvNodeItemKey implements Bean, Serializable {
 
-    private static final long serialVersionUID = -2102223121183731211L;
+    @Serial
+    private static final long serialVersionUID = 4166511138158862951L;
 
     private String nodeStringId;
     private String itemStringId;

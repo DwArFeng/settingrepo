@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.key;
 
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -13,7 +14,8 @@ import java.util.Objects;
  */
 public class IahnNodeLocaleKey implements Key {
 
-    private static final long serialVersionUID = -3379889751388384743L;
+    @Serial
+    private static final long serialVersionUID = 1173055187107565677L;
 
     private String nodeStringId;
 

@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class ImageNodeFileDownloadInfo implements Dto {
 
-    private static final long serialVersionUID = -8737225389110088716L;
+    @Serial
+    private static final long serialVersionUID = 1836102729992961513L;
 
     private String category;
     private String[] args;

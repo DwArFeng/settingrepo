@@ -1,15 +1,16 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import com.dwarfeng.datamark.sdk.jpa.DatamarkEntityListener;
 import com.dwarfeng.datamark.sdk.jpa.DatamarkField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateStringIdKey;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
+import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,7 +20,8 @@ import java.util.Optional;
 @EntityListeners(DatamarkEntityListener.class)
 public class HibernateSettingNode implements Bean {
 
-    private static final long serialVersionUID = 4311995287621600928L;
+    @Serial
+    private static final long serialVersionUID = 2491148675403228192L;
 
     // region 主键
 
@@ -35,8 +37,7 @@ public class HibernateSettingNode implements Bean {
     private int type;
 
     @Column(name = "last_modified_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
+    private Instant lastModifiedDate;
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
@@ -105,11 +106,11 @@ public class HibernateSettingNode implements Bean {
         this.type = type;
     }
 
-    public Date getLastModifiedDate() {
+    public Instant getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 

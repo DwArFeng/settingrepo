@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class IahnNodeMekPutInfo implements Dto {
 
-    private static final long serialVersionUID = 1251089527362614701L;
+    @Serial
+    private static final long serialVersionUID = 7135118829662357332L;
 
     private String category;
     private String[] args;

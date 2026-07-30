@@ -1,8 +1,8 @@
 package com.dwarfeng.settingrepo.stack.cache;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.data.stack.cache.BatchBaseCache;
 
 /**
  * 导航节点条目缓存。

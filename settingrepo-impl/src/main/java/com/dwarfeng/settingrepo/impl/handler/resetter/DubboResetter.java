@@ -1,12 +1,14 @@
 package com.dwarfeng.settingrepo.impl.handler.resetter;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.handler.resetter.AbstractResetter;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
-import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
-import com.dwarfeng.subgrade.stack.log.LogLevel;
-import com.dwarfeng.subgrade.stack.service.Service;
+import com.dwarfeng.subgrade.basic.sdk.exception.ServiceExceptionHelper;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceExceptionMapper;
+import com.dwarfeng.subgrade.basic.stack.log.LogLevel;
+import com.dwarfeng.subgrade.basic.stack.service.Service;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
@@ -44,7 +46,6 @@ public class DubboResetter extends AbstractResetter {
     private ServiceConfig<DubboResetService> dubboService = null;
     private boolean startFlag = false;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public DubboResetter(
             ApplicationContext ctx,
             RegistryConfig registry,
@@ -59,7 +60,7 @@ public class DubboResetter extends AbstractResetter {
     protected void doStart() throws Exception {
         lock.lock();
         try {
-            LOGGER.info("Dubbo resetter 开启...");
+            LOGGER.info(ImplMessages.message(ImplMessageKey.LOG_DUBBO_RESETTER_STARTING));
 
             // 判断启动状态，如已经启动，则什么也不做。
             if (startFlag) {
@@ -96,7 +97,7 @@ public class DubboResetter extends AbstractResetter {
     protected void doStop() throws Exception {
         lock.lock();
         try {
-            LOGGER.info("Dubbo resetter 停止...");
+            LOGGER.info(ImplMessages.message(ImplMessageKey.LOG_DUBBO_RESETTER_STOPPING));
 
             // 判断启动状态，如已经停止，则什么也不做。
             if (!startFlag) {
@@ -152,7 +153,7 @@ public class DubboResetter extends AbstractResetter {
         @Override
         public boolean resetFormat() throws ServiceException {
             try {
-                LOGGER.info("接收到格式化重置消息, 正在重置格式化...");
+                LOGGER.info(ImplMessages.message(ImplMessageKey.LOG_RESET_MESSAGE_RECEIVED));
                 context.resetFormat();
                 return true;
             } catch (Exception e) {

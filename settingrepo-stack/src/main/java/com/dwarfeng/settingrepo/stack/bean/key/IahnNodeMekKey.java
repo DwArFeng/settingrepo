@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.key;
 
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -13,7 +14,8 @@ import java.util.Objects;
  */
 public class IahnNodeMekKey implements Key {
 
-    private static final long serialVersionUID = -8954168874893920126L;
+    @Serial
+    private static final long serialVersionUID = 4082010757398925401L;
 
     private String nodeStringId;
     private String mekId;

@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.FastJsonLongIdKey;
+import com.dwarfeng.subgrade.web.sdk.bean.key.FastJsonStringIdKey;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,8 @@ import java.util.Objects;
  */
 public class FastJsonNavigationNodeItem implements Bean {
 
-    private static final long serialVersionUID = -7723091851965895672L;
+    @Serial
+    private static final long serialVersionUID = 4722897188951083181L;
 
     public static FastJsonNavigationNodeItem of(NavigationNodeItem navigationNodeItem) {
         if (Objects.isNull(navigationNodeItem)) {

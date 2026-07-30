@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class ImageListNodeChangeOrderInfo implements Dto {
 
-    private static final long serialVersionUID = -5043039259796091238L;
+    @Serial
+    private static final long serialVersionUID = -972995441354908454L;
 
     private String category;
     private String[] args;

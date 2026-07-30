@@ -1,15 +1,21 @@
 package com.dwarfeng.settingrepo.impl.dao.preset;
 
-import com.dwarfeng.subgrade.sdk.hibernate.criteria.PresetCriteriaMaker;
-import org.hibernate.criterion.DetachedCriteria;
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateIahnNode;
+import com.dwarfeng.subgrade.data.sdk.hibernate.criteria.PresetCriteriaMaker;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IahnNodePresetCriteriaMaker implements PresetCriteriaMaker {
+public class IahnNodePresetCriteriaMaker implements PresetCriteriaMaker<HibernateIahnNode> {
 
     @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
-    public void makeCriteria(DetachedCriteria detachedCriteria, String s, Object[] objects) {
+    public void makeCriteria(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateIahnNode> root,
+            String s, Object[] objects
+    ) {
         switch (s) {
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + s);

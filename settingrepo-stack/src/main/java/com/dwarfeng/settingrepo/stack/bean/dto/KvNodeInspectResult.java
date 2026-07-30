@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public class KvNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = -5860638190054285932L;
+    @Serial
+    private static final long serialVersionUID = 6019999587413758743L;
 
     private List<Item> items;
 
@@ -46,7 +48,8 @@ public class KvNodeInspectResult implements Dto {
      */
     public static class Item implements Dto {
 
-        private static final long serialVersionUID = -9131463083538197465L;
+        @Serial
+        private static final long serialVersionUID = 2644265322226802992L;
 
         private String itemStringId;
         private String value;

@@ -1,5 +1,7 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.handler.FormatterMaker;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.exception.FormatterException;
@@ -30,7 +32,7 @@ public class FormatterHandlerImpl implements FormatterHandler {
     public Formatter make(SettingCategory settingCategory) throws FormatterException {
         try {
             // 生成触发器。
-            LOGGER.debug("通过格式化器信息构建新的的格式化器...");
+            LOGGER.debug(ImplMessages.message(ImplMessageKey.LOG_FORMATTER_BUILDING));
             FormatterMaker formatterMaker = formatterMakers.stream()
                     .filter(maker -> maker.supportType(settingCategory.getFormatterType())).findFirst()
                     .orElseThrow(() -> new UnsupportedFormatterTypeException(settingCategory.getFormatterType()));
@@ -40,8 +42,8 @@ public class FormatterHandlerImpl implements FormatterHandler {
             } catch (Exception e) {
                 throw new FormatterMakeException(e);
             }
-            LOGGER.debug("格式化器构建成功!");
-            LOGGER.debug("格式化器: {}", formatter);
+            LOGGER.debug(ImplMessages.message(ImplMessageKey.LOG_FORMATTER_BUILT));
+            LOGGER.debug(ImplMessages.message(ImplMessageKey.LOG_FORMATTER_DETAIL, formatter));
             return formatter;
         } catch (FormatterException e) {
             throw e;

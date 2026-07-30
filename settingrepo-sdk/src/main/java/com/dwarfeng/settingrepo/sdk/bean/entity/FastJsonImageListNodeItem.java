@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageListNodeItem;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.FastJsonLongIdKey;
+import com.dwarfeng.subgrade.web.sdk.bean.key.FastJsonStringIdKey;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,8 @@ import java.util.Objects;
  */
 public class FastJsonImageListNodeItem implements Bean {
 
-    private static final long serialVersionUID = -7452967759521503851L;
+    @Serial
+    private static final long serialVersionUID = 2456589432075808369L;
 
     public static FastJsonImageListNodeItem of(ImageListNodeItem imageListNodeItem) {
         if (Objects.isNull(imageListNodeItem)) {

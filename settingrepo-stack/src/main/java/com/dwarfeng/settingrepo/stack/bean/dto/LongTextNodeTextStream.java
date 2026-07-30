@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
 import java.io.InputStream;
+import java.io.Serial;
 
 /**
  * 长文本节点文本流。
@@ -12,8 +13,9 @@ import java.io.InputStream;
  */
 public class LongTextNodeTextStream implements Dto {
 
-    private static final long serialVersionUID = 2517514725072155089L;
-    
+    @Serial
+    private static final long serialVersionUID = 7495972727350670197L;
+
     private long length;
     private InputStream content;
 

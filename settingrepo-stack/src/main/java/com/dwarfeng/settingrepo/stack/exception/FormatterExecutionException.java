@@ -1,5 +1,7 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
+import java.io.Serial;
+
 /**
  * 格式化器执行异常。
  *
@@ -8,6 +10,7 @@ package com.dwarfeng.settingrepo.stack.exception;
  */
 public class FormatterExecutionException extends FormatterException {
 
+    @Serial
     private static final long serialVersionUID = -4378992086774101567L;
 
     public FormatterExecutionException() {

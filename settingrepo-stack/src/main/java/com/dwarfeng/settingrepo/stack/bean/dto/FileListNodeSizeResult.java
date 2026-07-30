@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 文件列表节点大小结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class FileListNodeSizeResult implements Dto {
 
-    private static final long serialVersionUID = -9091647946465822984L;
+    @Serial
+    private static final long serialVersionUID = -3262057642757901010L;
 
     private int size;
 

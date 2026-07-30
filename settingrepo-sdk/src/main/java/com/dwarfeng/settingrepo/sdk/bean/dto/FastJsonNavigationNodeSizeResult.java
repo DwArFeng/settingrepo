@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.NavigationNodeSizeResult;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class FastJsonNavigationNodeSizeResult implements Bean {
 
-    private static final long serialVersionUID = 3455691046721120681L;
+    @Serial
+    private static final long serialVersionUID = -3863640307199002928L;
 
     public static FastJsonNavigationNodeSizeResult of(NavigationNodeSizeResult navigationNodeSizeResult) {
         if (Objects.isNull(navigationNodeSizeResult)) {

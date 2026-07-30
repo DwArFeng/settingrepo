@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,8 @@ import java.util.Arrays;
  */
 public class NavigationNodeItemInsertInfo implements Dto {
 
-    private static final long serialVersionUID = -2194411145923658721L;
+    @Serial
+    private static final long serialVersionUID = 3285978368370796697L;
 
     /**
      * 设置类别。

@@ -1,10 +1,11 @@
 package com.dwarfeng.settingrepo.sdk.bean.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.FastJsonStringIdKey;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
@@ -17,7 +18,8 @@ import java.util.Objects;
  */
 public class FastJsonSettingNode implements Bean {
 
-    private static final long serialVersionUID = 8600379519907048459L;
+    @Serial
+    private static final long serialVersionUID = -7189431228626923854L;
 
     public static FastJsonSettingNode of(SettingNode settingNode) {
         if (Objects.isNull(settingNode)) {

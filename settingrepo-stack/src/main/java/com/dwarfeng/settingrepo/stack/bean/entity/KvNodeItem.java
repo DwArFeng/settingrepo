@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
 import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+
+import java.io.Serial;
 
 /**
  * 键值对条目节点。
@@ -11,7 +13,8 @@ import com.dwarfeng.subgrade.stack.bean.entity.Entity;
  */
 public class KvNodeItem implements Entity<KvNodeItemKey> {
 
-    private static final long serialVersionUID = -2821373809212236619L;
+    @Serial
+    private static final long serialVersionUID = -1879497813848236184L;
 
     private KvNodeItemKey key;
     private String value;

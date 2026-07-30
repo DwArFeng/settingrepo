@@ -1,0 +1,64 @@
+module com.dwarfeng.settingrepo.impl {
+
+    requires com.dwarfeng.settingrepo.base;
+    requires com.dwarfeng.settingrepo.stack;
+    requires com.dwarfeng.settingrepo.sdk;
+    requires com.dwarfeng.datamark.core;
+    requires com.dwarfeng.dutil.basic;
+    requires com.dwarfeng.ftp.core;
+    requires com.dwarfeng.springtelqos.core;
+    requires com.dwarfeng.subgrade.aop;
+    requires com.dwarfeng.subgrade.basic;
+    requires com.dwarfeng.subgrade.cache;
+    requires com.dwarfeng.subgrade.data;
+    requires com.dwarfeng.subgrade.lifecycle;
+    requires com.alibaba.fastjson2;
+    requires dubbo;
+    requires jakarta.annotation;
+    requires jakarta.persistence;
+    requires jakarta.validation;
+    requires kafka.clients;
+    requires net.coobird.thumbnailator;
+    requires org.apache.commons.cli;
+    requires org.apache.commons.lang3;
+    requires org.apache.groovy;
+    requires org.hibernate.orm.core;
+    requires org.mapstruct;
+    requires org.slf4j;
+    requires spring.aop;
+    requires spring.beans;
+    requires spring.context;
+    requires spring.core;
+    requires spring.data.redis;
+    requires spring.kafka;
+    requires spring.tx;
+    requires static org.jetbrains.annotations;
+
+    exports com.dwarfeng.settingrepo.impl.bean;
+    exports com.dwarfeng.settingrepo.impl.bean.entity;
+    exports com.dwarfeng.settingrepo.impl.bean.key;
+    exports com.dwarfeng.settingrepo.impl.cache;
+    exports com.dwarfeng.settingrepo.impl.dao;
+    exports com.dwarfeng.settingrepo.impl.dao.preset;
+    exports com.dwarfeng.settingrepo.impl.handler;
+    exports com.dwarfeng.settingrepo.impl.handler.formatter;
+    exports com.dwarfeng.settingrepo.impl.handler.pusher;
+    exports com.dwarfeng.settingrepo.impl.handler.resetter;
+    exports com.dwarfeng.settingrepo.impl.service;
+    exports com.dwarfeng.settingrepo.impl.service.operation;
+    exports com.dwarfeng.settingrepo.impl.service.telqos;
+
+    opens com.dwarfeng.settingrepo.impl.bean.entity to org.hibernate.orm.core;
+    opens com.dwarfeng.settingrepo.impl.bean.key to org.hibernate.orm.core;
+    opens com.dwarfeng.settingrepo.impl.cache to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.dao to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.dao.preset to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.handler to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.handler.formatter to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.handler.pusher to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.handler.resetter to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.service to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.service.operation to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.service.telqos to spring.core, spring.beans, spring.context, spring.aop;
+    opens com.dwarfeng.settingrepo.impl.i18n to com.dwarfeng.settingrepo.base;
+}

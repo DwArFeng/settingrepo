@@ -1,7 +1,7 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
-import com.dwarfeng.dutil.basic.io.IOUtil;
-import com.dwarfeng.dutil.basic.io.StringInputStream;
+import com.dwarfeng.dutil.basic.impl.io.StringInputStream;
+import com.dwarfeng.dutil.basic.sdk.io.IOUtil;
 import com.dwarfeng.ftp.stack.handler.FtpHandler;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
@@ -11,14 +11,14 @@ import com.dwarfeng.settingrepo.stack.handler.FormatLocalCacheHandler;
 import com.dwarfeng.settingrepo.stack.handler.LongTextNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.LongTextNodeMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
-import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.aop.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.basic.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Nonnull;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -415,13 +415,13 @@ public class LongTextNodeOperateHandlerImpl implements LongTextNodeOperateHandle
         }
 
         @Override
-        public void write(@Nonnull byte[] b) throws IOException {
+        public void write(byte @NotNull [] b) throws IOException {
             out.write(b);
             collectPreview(b, 0, b.length);
         }
 
         @Override
-        public void write(@Nonnull byte[] b, int off, int len) throws IOException {
+        public void write(byte @NotNull [] b, int off, int len) throws IOException {
             out.write(b, off, len);
             collectPreview(b, off, len);
         }

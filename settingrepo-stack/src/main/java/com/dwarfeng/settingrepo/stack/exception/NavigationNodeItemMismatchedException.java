@@ -1,8 +1,12 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 导航节点条目不匹配异常。
@@ -12,7 +16,8 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class NavigationNodeItemMismatchedException extends HandlerException {
 
-    private static final long serialVersionUID = 2978418863941017214L;
+    @Serial
+    private static final long serialVersionUID = -2987395587963407958L;
 
     private final LongIdKey navigationNodeItemKey;
     private final StringIdKey settingNodeKey;
@@ -32,6 +37,8 @@ public class NavigationNodeItemMismatchedException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "导航节点条目 " + navigationNodeItemKey + " 与设置节点 " + settingNodeKey + " 不匹配";
+        return StackMessages.message(
+                StackMessageKey.NAVIGATION_NODE_ITEM_MISMATCHED, navigationNodeItemKey, settingNodeKey
+        );
     }
 }

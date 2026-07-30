@@ -1,14 +1,15 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.sdk.util.ValidSettingNodeType;
 import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodeInitInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -20,7 +21,8 @@ import java.util.Objects;
  */
 public class WebInputSettingNodeInitInfo implements Dto {
 
-    private static final long serialVersionUID = 2882223257075802263L;
+    @Serial
+    private static final long serialVersionUID = -5209739013958580963L;
 
     public static SettingNodeInitInfo toStackBean(WebInputSettingNodeInitInfo webInput) {
         if (Objects.isNull(webInput)) {

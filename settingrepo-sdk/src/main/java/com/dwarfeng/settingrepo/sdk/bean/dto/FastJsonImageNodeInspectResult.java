@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.ImageNodeInspectResult;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class FastJsonImageNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = -1126448898462772738L;
+    @Serial
+    private static final long serialVersionUID = -1206408332161721064L;
 
     public static FastJsonImageNodeInspectResult of(ImageNodeInspectResult imageNodeInspectResult) {
         if (Objects.isNull(imageNodeInspectResult)) {

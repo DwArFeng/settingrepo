@@ -3,10 +3,11 @@ package com.dwarfeng.settingrepo.impl.bean.entity;
 import com.dwarfeng.datamark.sdk.jpa.DatamarkEntityListener;
 import com.dwarfeng.datamark.sdk.jpa.DatamarkField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateStringIdKey;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -17,7 +18,8 @@ import java.util.Set;
 @EntityListeners(DatamarkEntityListener.class)
 public class HibernateIahnNode implements Bean {
 
-    private static final long serialVersionUID = -5898276320949960235L;
+    @Serial
+    private static final long serialVersionUID = 8729416430591146977L;
 
     // region 主键
 

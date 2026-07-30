@@ -1,14 +1,15 @@
 package com.dwarfeng.settingrepo.sdk.bean.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
-import com.dwarfeng.subgrade.sdk.bean.key.WebInputStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.web.sdk.bean.key.WebInputStringIdKey;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -19,7 +20,8 @@ import java.util.Objects;
  */
 public class WebInputSettingCategory implements Bean {
 
-    private static final long serialVersionUID = 6525417544234163644L;
+    @Serial
+    private static final long serialVersionUID = 2398272098282860800L;
 
     public static SettingCategory toStackBean(WebInputSettingCategory webInputSettingCategory) {
         if (Objects.isNull(webInputSettingCategory)) {

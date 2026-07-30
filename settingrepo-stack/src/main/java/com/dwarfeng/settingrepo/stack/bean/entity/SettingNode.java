@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -14,7 +15,8 @@ import java.util.Date;
  */
 public class SettingNode implements Entity<StringIdKey> {
 
-    private static final long serialVersionUID = -7463247247008588989L;
+    @Serial
+    private static final long serialVersionUID = 4288484549030264598L;
 
     private StringIdKey key;
 

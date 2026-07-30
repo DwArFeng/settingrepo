@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public class IahnNodeMessageInspectByLocaleResult implements Dto {
 
-    private static final long serialVersionUID = 8035552976824156471L;
+    @Serial
+    private static final long serialVersionUID = 8953738290232058729L;
 
     private List<Item> items;
 
@@ -40,7 +42,8 @@ public class IahnNodeMessageInspectByLocaleResult implements Dto {
 
     public static class Item implements Dto {
 
-        private static final long serialVersionUID = 2160644012714735066L;
+        @Serial
+        private static final long serialVersionUID = 1878406404737966196L;
 
         private String mekId;
         private String message;

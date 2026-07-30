@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Arrays;
  */
 public class IahnNodeLocaleRemoveInfo implements Dto {
 
-    private static final long serialVersionUID = -4267627568448890196L;
+    @Serial
+    private static final long serialVersionUID = 3698556128240997593L;
 
     private String category;
     private String[] args;

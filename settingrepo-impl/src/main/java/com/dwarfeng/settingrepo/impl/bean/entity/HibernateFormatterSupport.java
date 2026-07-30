@@ -1,10 +1,11 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateStringIdKey;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.Optional;
 
 @Entity
@@ -12,7 +13,8 @@ import java.util.Optional;
 @Table(name = "tbl_formatter_support")
 public class HibernateFormatterSupport implements Bean {
 
-    private static final long serialVersionUID = -5164348286890483578L;
+    @Serial
+    private static final long serialVersionUID = -8869077780626472749L;
 
     // region 主键
 

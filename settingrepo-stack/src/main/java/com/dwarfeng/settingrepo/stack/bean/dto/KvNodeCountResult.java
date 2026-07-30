@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 键值对节点数量结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class KvNodeCountResult implements Dto {
 
-    private static final long serialVersionUID = 7694120255718793802L;
+    @Serial
+    private static final long serialVersionUID = -7147930577392465410L;
 
     private int count;
 

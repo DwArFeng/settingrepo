@@ -2,7 +2,7 @@ package com.dwarfeng.settingrepo.stack.cache;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
-import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
+import com.dwarfeng.subgrade.data.stack.cache.BatchBaseCache;
 
 /**
  * 国际化节点 Mek 缓存。

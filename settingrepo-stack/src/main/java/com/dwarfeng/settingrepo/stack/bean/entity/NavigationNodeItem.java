@@ -1,8 +1,10 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+
+import java.io.Serial;
 
 /**
  * 导航节点条目。
@@ -12,7 +14,8 @@ import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
  */
 public class NavigationNodeItem implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = -6974897929313466769L;
+    @Serial
+    private static final long serialVersionUID = -2668938576452225944L;
 
     private LongIdKey key;
     private StringIdKey nodeKey;

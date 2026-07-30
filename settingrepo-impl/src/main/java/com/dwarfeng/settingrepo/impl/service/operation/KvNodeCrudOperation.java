@@ -8,10 +8,10 @@ import com.dwarfeng.settingrepo.stack.cache.KvNodeItemCache;
 import com.dwarfeng.settingrepo.stack.dao.KvNodeDao;
 import com.dwarfeng.settingrepo.stack.dao.KvNodeItemDao;
 import com.dwarfeng.settingrepo.stack.service.KvNodeItemMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -55,7 +55,7 @@ public class KvNodeCrudOperation implements BatchCrudOperation<StringIdKey, KvNo
             return kvNodeCache.get(key);
         } else {
             if (!kvNodeDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             KvNode kvNode = kvNodeDao.get(key);
             kvNodeCache.push(kvNode, kvNodeTimeout);
@@ -104,7 +104,7 @@ public class KvNodeCrudOperation implements BatchCrudOperation<StringIdKey, KvNo
             return kvNodeCache.batchGet(keys);
         } else {
             if (!kvNodeDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<KvNode> kvNodes = kvNodeDao.batchGet(keys);
             kvNodeCache.batchPush(kvNodes, kvNodeTimeout);

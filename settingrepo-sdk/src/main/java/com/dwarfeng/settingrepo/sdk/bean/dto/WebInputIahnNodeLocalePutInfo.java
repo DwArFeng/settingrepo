@@ -1,16 +1,17 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeLocalePutInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -22,7 +23,8 @@ import java.util.Objects;
  */
 public class WebInputIahnNodeLocalePutInfo implements Dto {
 
-    private static final long serialVersionUID = -1018021530429573650L;
+    @Serial
+    private static final long serialVersionUID = -2084357232729547508L;
 
     public static IahnNodeLocalePutInfo toStackBean(WebInputIahnNodeLocalePutInfo webInput) {
         if (Objects.isNull(webInput)) {

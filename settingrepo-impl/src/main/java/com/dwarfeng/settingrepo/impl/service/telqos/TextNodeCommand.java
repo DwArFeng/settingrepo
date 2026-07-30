@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextNodeInspectInfo;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextNodePutInfo;
 import com.dwarfeng.settingrepo.stack.bean.dto.TextNodeInspectInfo;
@@ -53,7 +55,7 @@ public class TextNodeCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "文本节点操作服务";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_TEXT_DESCRIPTION);
     }
 
     @Override
@@ -74,14 +76,25 @@ public class TextNodeCommand extends CliCommand {
         return CliCommandUtil.cliSyntax(patterns);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false).desc("查看指定的文本节点").build());
-        list.add(Option.builder(COMMAND_OPTION_PUT).optionalArg(true).hasArg(false).desc("向指定的文本节点中放入指定的信息").build());
-        list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_TEXT_OPTION_INSPECT)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_PUT).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_TEXT_OPTION_PUT)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_STRING)).get()
+        );
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
-                .hasArg(true).type(File.class).desc("JSON 文件").build());
+                .hasArg(true).type(File.class)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_FILE)).get());
         return list;
     }
 
@@ -101,50 +114,52 @@ public class TextNodeCommand extends CliCommand {
                 handlePut(context, cmd);
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 
     private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         TextNodeInspectInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputTextNodeInspectInfo.toStackBean(JSON.parseObject(json, WebInputTextNodeInspectInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputTextNodeInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputTextNodeInspectInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         TextNodeInspectResult result = textNodeQosService.inspect(info);
         if (Objects.isNull(result)) {
-            context.sendMessage("查看结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage("查看结果: ");
-        context.sendMessage("  value: " + result.getValue());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_VALUE, result.getValue()));
     }
 
     private void handlePut(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         TextNodePutInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputTextNodePutInfo.toStackBean(JSON.parseObject(json, WebInputTextNodePutInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputTextNodePutInfo.toStackBean(JSON.parseObject(in, WebInputTextNodePutInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         textNodeQosService.put(info);
-        context.sendMessage("放入成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_PUT_SUCCEEDED));
     }
 }

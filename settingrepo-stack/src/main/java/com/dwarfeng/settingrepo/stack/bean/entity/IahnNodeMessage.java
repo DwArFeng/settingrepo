@@ -1,7 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.entity;
 
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
-import com.dwarfeng.subgrade.stack.bean.entity.Entity;
+import com.dwarfeng.subgrade.basic.stack.bean.entity.Entity;
+
+import java.io.Serial;
 
 /**
  * 国际化节点消息。
@@ -12,7 +14,8 @@ import com.dwarfeng.subgrade.stack.bean.entity.Entity;
  */
 public class IahnNodeMessage implements Entity<IahnNodeMessageKey> {
 
-    private static final long serialVersionUID = 3192277474156192168L;
+    @Serial
+    private static final long serialVersionUID = -717686620794562443L;
 
     private IahnNodeMessageKey key;
     private String message;

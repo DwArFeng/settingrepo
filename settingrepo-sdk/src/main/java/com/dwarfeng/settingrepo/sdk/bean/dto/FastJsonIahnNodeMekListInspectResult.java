@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMekListInspectResult;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,7 +20,8 @@ import static com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMekListInspectResu
  */
 public class FastJsonIahnNodeMekListInspectResult implements Dto {
 
-    private static final long serialVersionUID = 3852471955324015030L;
+    @Serial
+    private static final long serialVersionUID = 9188009974221326612L;
 
     public static FastJsonIahnNodeMekListInspectResult of(IahnNodeMekListInspectResult iahnNodeMekListInspectResult) {
         if (Objects.isNull(iahnNodeMekListInspectResult)) {
@@ -60,7 +62,8 @@ public class FastJsonIahnNodeMekListInspectResult implements Dto {
 
     public static class FastJsonItem implements Dto {
 
-        private static final long serialVersionUID = 8830581739508158992L;
+        @Serial
+        private static final long serialVersionUID = -1258101071984915674L;
 
         public static FastJsonItem of(Item item) {
             if (Objects.isNull(item)) {

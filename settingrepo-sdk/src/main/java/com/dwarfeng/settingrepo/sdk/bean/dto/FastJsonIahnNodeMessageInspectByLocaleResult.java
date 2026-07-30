@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageInspectByLocaleResult;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,7 +20,8 @@ import static com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageInspectByLo
  */
 public class FastJsonIahnNodeMessageInspectByLocaleResult implements Dto {
 
-    private static final long serialVersionUID = 613525923547340563L;
+    @Serial
+    private static final long serialVersionUID = 3399564844564802751L;
 
     public static FastJsonIahnNodeMessageInspectByLocaleResult of(
             IahnNodeMessageInspectByLocaleResult iahnNodeMessageInspectByLocaleResult
@@ -62,7 +64,8 @@ public class FastJsonIahnNodeMessageInspectByLocaleResult implements Dto {
 
     public static class FastJsonItem implements Dto {
 
-        private static final long serialVersionUID = -7119579550762057543L;
+        @Serial
+        private static final long serialVersionUID = -8209008706927335723L;
 
         public static FastJsonItem of(Item item) {
             if (Objects.isNull(item)) {

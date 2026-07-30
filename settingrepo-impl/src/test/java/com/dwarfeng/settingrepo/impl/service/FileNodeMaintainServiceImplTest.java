@@ -2,24 +2,24 @@ package com.dwarfeng.settingrepo.impl.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.FileNode;
 import com.dwarfeng.settingrepo.stack.service.FileNodeMaintainService;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/application-context*.xml")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:com/dwarfeng/settingrepo/impl/spring/application-context*.xml")
 public class FileNodeMaintainServiceImplTest {
 
     @Autowired
@@ -27,7 +27,7 @@ public class FileNodeMaintainServiceImplTest {
 
     private final List<FileNode> fileNodes = new ArrayList<>();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         for (int i = 0; i < 5; i++) {
             FileNode fileNode = new FileNode(
@@ -37,7 +37,7 @@ public class FileNodeMaintainServiceImplTest {
         }
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         fileNodes.clear();
     }

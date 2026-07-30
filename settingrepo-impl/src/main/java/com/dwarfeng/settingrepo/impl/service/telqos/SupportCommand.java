@@ -1,5 +1,7 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.stack.service.SupportQosService;
 import com.dwarfeng.springtelqos.sdk.command.CliCommand;
 import com.dwarfeng.springtelqos.sdk.configuration.TelqosCommand;
@@ -38,7 +40,7 @@ public class SupportCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "支持操作";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_SUPPORT_DESCRIPTION);
     }
 
     @Override
@@ -58,7 +60,7 @@ public class SupportCommand extends CliCommand {
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
         list.add(Option.builder().longOpt(COMMAND_OPTION_RESET_FORMATTER).optionalArg(true).hasArg(false)
-                .desc("重置格式化器支持").build());
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_SUPPORT_OPTION_RESET_FORMATTER)).get());
         return list;
     }
 
@@ -74,10 +76,12 @@ public class SupportCommand extends CliCommand {
         switch (pair.getLeft()) {
             case COMMAND_OPTION_RESET_FORMATTER:
                 supportQosService.resetFormatter();
-                context.sendMessage("重置格式化器支持成功。");
+                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SUPPORT_RESET_FORMATTER_SUCCEEDED));
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 }

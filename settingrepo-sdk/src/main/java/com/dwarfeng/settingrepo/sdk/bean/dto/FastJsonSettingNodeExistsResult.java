@@ -1,9 +1,10 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.SettingNodeExistsResult;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class FastJsonSettingNodeExistsResult implements Dto {
 
-    private static final long serialVersionUID = 7537344396695332112L;
+    @Serial
+    private static final long serialVersionUID = -6720200739353048447L;
 
     public static FastJsonSettingNodeExistsResult of(SettingNodeExistsResult settingNodeExistsResult) {
         if (Objects.isNull(settingNodeExistsResult)) {

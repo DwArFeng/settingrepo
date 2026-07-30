@@ -1,85 +1,120 @@
 package com.dwarfeng.settingrepo.impl.dao.preset;
 
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateSettingNode;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.sdk.hibernate.criteria.PresetCriteriaMaker;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import com.dwarfeng.subgrade.data.sdk.hibernate.criteria.PresetCriteriaMaker;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Component
-public class SettingNodePresetCriteriaMaker implements PresetCriteriaMaker {
+public class SettingNodePresetCriteriaMaker implements PresetCriteriaMaker<HibernateSettingNode> {
 
     @Override
-    public void makeCriteria(DetachedCriteria detachedCriteria, String s, Object[] objects) {
+    public void makeCriteria(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateSettingNode> root,
+            String s, Object[] objects
+    ) {
         switch (s) {
             case SettingNodeMaintainService.ID_LIKE:
-                idLike(detachedCriteria, objects);
+                idLike(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             case SettingNodeMaintainService.REACHABLE:
-                reachable(detachedCriteria, objects);
+                reachable(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             case SettingNodeMaintainService.ID_LIKE_REACHABLE:
-                idLikeReachable(detachedCriteria, objects);
+                idLikeReachable(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             case SettingNodeMaintainService.CATEGORY_EQUALS:
-                categoryEquals(detachedCriteria, objects);
+                categoryEquals(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             case SettingNodeMaintainService.UNREACHABLE:
-                unreachable(detachedCriteria, objects);
+                unreachable(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + s);
         }
     }
 
-    private void idLike(DetachedCriteria detachedCriteria, Object[] objects) {
+    @SuppressWarnings("DuplicatedCode")
+    private void idLike(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateSettingNode> root,
+            Object[] objects
+    ) {
         try {
             String pattern = (String) objects[0];
-            detachedCriteria.add(Restrictions.like("stringId", pattern, MatchMode.ANYWHERE));
-            detachedCriteria.addOrder(Order.asc("stringId"));
+            CriteriaQueryHelper.addRestriction(
+                    criteriaBuilder,
+                    criteriaQuery,
+                    CriteriaQueryHelper.likeAnywhere(criteriaBuilder, root.get("stringId"), pattern)
+            );
+            CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("stringId")));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }
     }
 
-    private void reachable(DetachedCriteria detachedCriteria, Object[] objects) {
+    private void reachable(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateSettingNode> root,
+            Object[] objects
+    ) {
         try {
-            detachedCriteria.add(Restrictions.eq("reachable", true));
-            detachedCriteria.addOrder(Order.asc("stringId"));
+            CriteriaQueryHelper.addRestriction(
+                    criteriaBuilder, criteriaQuery, criteriaBuilder.equal(root.get("reachable"), true)
+            );
+            CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("stringId")));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }
     }
 
-    private void idLikeReachable(DetachedCriteria detachedCriteria, Object[] objects) {
+    private void idLikeReachable(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateSettingNode> root,
+            Object[] objects
+    ) {
         try {
             String pattern = (String) objects[0];
-            detachedCriteria.add(Restrictions.like("stringId", pattern, MatchMode.ANYWHERE));
-            detachedCriteria.add(Restrictions.eq("reachable", true));
-            detachedCriteria.addOrder(Order.asc("stringId"));
+            CriteriaQueryHelper.addRestriction(
+                    criteriaBuilder,
+                    criteriaQuery,
+                    CriteriaQueryHelper.likeAnywhere(criteriaBuilder, root.get("stringId"), pattern)
+            );
+            CriteriaQueryHelper.addRestriction(
+                    criteriaBuilder, criteriaQuery, criteriaBuilder.equal(root.get("reachable"), true)
+            );
+            CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("stringId")));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }
     }
 
-    private void categoryEquals(DetachedCriteria detachedCriteria, Object[] objects) {
+    private void categoryEquals(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateSettingNode> root,
+            Object[] objects
+    ) {
         try {
             String category = (String) objects[0];
-            detachedCriteria.add(Restrictions.eq("category", category));
-            detachedCriteria.addOrder(Order.asc("stringId"));
+            CriteriaQueryHelper.addRestriction(
+                    criteriaBuilder, criteriaQuery, criteriaBuilder.equal(root.get("category"), category)
+            );
+            CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("stringId")));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }
     }
 
-    private void unreachable(DetachedCriteria detachedCriteria, Object[] objects) {
+    private void unreachable(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateSettingNode> root,
+            Object[] objects
+    ) {
         try {
-            detachedCriteria.add(Restrictions.eq("reachable", false));
-            detachedCriteria.addOrder(Order.asc("stringId"));
+            CriteriaQueryHelper.addRestriction(
+                    criteriaBuilder, criteriaQuery, criteriaBuilder.equal(root.get("reachable"), false)
+            );
+            CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("stringId")));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }

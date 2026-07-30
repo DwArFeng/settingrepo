@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.stack.bean.dto.LongTextNodeTextDownloadInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ import java.util.Objects;
  */
 public class WebInputLongTextNodeTextDownloadInfo implements Dto {
 
-    private static final long serialVersionUID = 7880791076081230295L;
+    @Serial
+    private static final long serialVersionUID = -3967883290126593135L;
 
     public static LongTextNodeTextDownloadInfo toStackBean(WebInputLongTextNodeTextDownloadInfo webInput) {
         if (Objects.isNull(webInput)) {

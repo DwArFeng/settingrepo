@@ -1,7 +1,11 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 文件列表节点索引越界异常。
@@ -11,7 +15,8 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class FileListNodeIndexOutOfBoundException extends HandlerException {
 
-    private static final long serialVersionUID = 3724657099968337316L;
+    @Serial
+    private static final long serialVersionUID = 1081061041901363267L;
 
     private final StringIdKey settingNodeKey;
     private final int expectedMinIndex;
@@ -43,9 +48,10 @@ public class FileListNodeIndexOutOfBoundException extends HandlerException {
         if (expectedMinIndex <= expectedMaxIndex) {
             expectedIndexRange = "[" + expectedMinIndex + ", " + expectedMaxIndex + "]";
         } else {
-            expectedIndexRange = "空集合";
+            expectedIndexRange = StackMessages.message(StackMessageKey.INDEX_RANGE_EMPTY);
         }
-        return "文件列表节点索引越界, 节点主键: " + settingNodeKey +
-                ", 期望的索引范围: " + expectedIndexRange + ", 实际的索引: " + actualIndex;
+        return StackMessages.message(
+                StackMessageKey.FILE_LIST_NODE_INDEX_OUT_OF_BOUND, settingNodeKey, expectedIndexRange, actualIndex
+        );
     }
 }

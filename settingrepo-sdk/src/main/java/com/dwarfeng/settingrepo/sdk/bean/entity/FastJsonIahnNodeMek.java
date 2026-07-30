@@ -1,10 +1,11 @@
 package com.dwarfeng.settingrepo.sdk.bean.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.bean.key.FastJsonIahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeMek;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,8 @@ import java.util.Objects;
  */
 public class FastJsonIahnNodeMek implements Bean {
 
-    private static final long serialVersionUID = 1870329586215755973L;
+    @Serial
+    private static final long serialVersionUID = 6388154390900812968L;
 
     public static FastJsonIahnNodeMek of(IahnNodeMek iahnNodeMek) {
         if (Objects.isNull(iahnNodeMek)) {

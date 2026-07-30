@@ -1,13 +1,14 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.stack.bean.dto.ImageNodeFileUploadInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -19,7 +20,8 @@ import java.util.Objects;
  */
 public class WebInputImageNodeFileUploadInfo implements Dto {
 
-    private static final long serialVersionUID = 8730645282226758636L;
+    @Serial
+    private static final long serialVersionUID = 2884526877317217205L;
 
     public static ImageNodeFileUploadInfo toStackBean(WebInputImageNodeFileUploadInfo webInput) {
         if (Objects.isNull(webInput)) {

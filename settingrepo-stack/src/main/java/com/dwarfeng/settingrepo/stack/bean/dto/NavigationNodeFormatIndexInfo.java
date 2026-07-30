@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,9 @@ import java.util.Arrays;
  */
 public class NavigationNodeFormatIndexInfo implements Dto {
 
-    private static final long serialVersionUID = 289937262226503677L;
+    @Serial
+    private static final long serialVersionUID = -7777444226116241262L;
+
     /**
      * 设置类别。
      */

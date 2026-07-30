@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 国际化节点消息查询结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class IahnNodeMessageInspectResult implements Dto {
 
-    private static final long serialVersionUID = -8620531795802211610L;
+    @Serial
+    private static final long serialVersionUID = 1667494795169569821L;
 
     private String message;
 

@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.impl.bean.key;
 
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,7 +15,8 @@ import java.util.Objects;
  */
 public class HibernateIahnNodeMekKey implements Bean, Serializable {
 
-    private static final long serialVersionUID = 912150813982278471L;
+    @Serial
+    private static final long serialVersionUID = -7433032743493664901L;
 
     private String nodeStringId;
     private String mekId;

@@ -1,14 +1,15 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.stack.bean.dto.ImageListNodeFileUpdateInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -20,7 +21,8 @@ import java.util.Objects;
  */
 public class WebInputImageListNodeFileUpdateInfo implements Dto {
 
-    private static final long serialVersionUID = -7395674978617665555L;
+    @Serial
+    private static final long serialVersionUID = -8967215664209776236L;
 
     public static ImageListNodeFileUpdateInfo toStackBean(WebInputImageListNodeFileUpdateInfo webInput) {
         if (Objects.isNull(webInput)) {

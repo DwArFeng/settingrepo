@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 长文本节点文本。
@@ -10,8 +12,9 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class LongTextNodeText implements Dto {
 
-    private static final long serialVersionUID = 3683187033686779403L;
-    
+    @Serial
+    private static final long serialVersionUID = 2005819155947543448L;
+
     private String content;
 
     public LongTextNodeText() {

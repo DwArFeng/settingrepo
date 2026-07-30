@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.KvNodeQosService;
@@ -64,7 +66,7 @@ public class KvNodeCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "键值对节点操作服务";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_KV_DESCRIPTION);
     }
 
     @Override
@@ -98,24 +100,35 @@ public class KvNodeCommand extends CliCommand {
         return CliCommandUtil.cliSyntax(patterns);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
         list.add(Option.builder(COMMAND_OPTION_COUNT).longOpt(COMMAND_OPTION_COUNT_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("键值对节点的条目数量").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_KV_OPTION_COUNT)).get());
         list.add(Option.builder(COMMAND_OPTION_INSPECT).longOpt(COMMAND_OPTION_INSPECT_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("查看键值对节点").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_KV_OPTION_INSPECT)).get());
         list.add(Option.builder(COMMAND_OPTION_INSPECT_ITEM).longOpt(COMMAND_OPTION_INSPECT_ITEM_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("查看键值对节点中的指定条目").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_KV_OPTION_INSPECT_ITEM)).get());
         list.add(Option.builder(COMMAND_OPTION_PUT_ITEM).longOpt(COMMAND_OPTION_PUT_ITEM_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("向键值对节点中放入指定条目").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_KV_OPTION_PUT)).get());
         list.add(Option.builder(COMMAND_OPTION_REMOVE_ITEM).longOpt(COMMAND_OPTION_REMOVE_ITEM_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("移除键值对节点中的指定条目").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_KV_OPTION_REMOVE)).get());
         list.add(Option.builder(COMMAND_OPTION_CLEAR).longOpt(COMMAND_OPTION_CLEAR_LONG_OPT)
-                .optionalArg(true).hasArg(false).desc("清空键值对节点中的全部条目").build());
-        list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
+                .optionalArg(true).hasArg(false)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_KV_OPTION_CLEAR)).get());
+        list.add(
+                Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_STRING)).get()
+        );
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
-                .hasArg(true).type(File.class).desc("JSON 文件").build());
+                .hasArg(true).type(File.class)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_FILE)).get());
         return list;
     }
 
@@ -147,50 +160,52 @@ public class KvNodeCommand extends CliCommand {
                 handleClear(context, cmd);
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 
     private void handleCount(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         KvNodeCountInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputKvNodeCountInfo.toStackBean(JSON.parseObject(json, WebInputKvNodeCountInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputKvNodeCountInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeCountInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         KvNodeCountResult result = kvNodeQosService.count(info);
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage("查询结果: ");
-        context.sendMessage("  count: " + result.getCount());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_FIELD_COUNT, result.getCount()));
     }
 
     private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         KvNodeInspectInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputKvNodeInspectInfo.toStackBean(JSON.parseObject(json, WebInputKvNodeInspectInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputKvNodeInspectInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeInspectInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         KvNodeInspectResult result = kvNodeQosService.inspect(info);
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
             return;
         }
         processInspectResultItems(context, result.getItems());
@@ -199,14 +214,18 @@ public class KvNodeCommand extends CliCommand {
     private void processInspectResultItems(CommandExecutor.Context context, List<KvNodeInspectResult.Item> items)
             throws Exception {
         while (true) {
-            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(context, items, "数据总数: " + items.size());
-            if (cropResult.isExitFlag()) {
+            CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
+                    context,
+                    items,
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, items.size())
+            );
+            if (cropResult.exitFlag()) {
                 break;
             }
             context.sendMessage("");
-            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
+            for (int i = cropResult.beginIndex(); i < cropResult.endIndex(); i++) {
                 KvNodeInspectResult.Item item = items.get(i);
-                printKvNodeInspectResultItem(context, i, cropResult.getEndIndex(), item);
+                printKvNodeInspectResultItem(context, i, cropResult.endIndex(), item);
             }
         }
     }
@@ -214,12 +233,22 @@ public class KvNodeCommand extends CliCommand {
     private void printKvNodeInspectResultItem(
             CommandExecutor.Context context, int i, int endIndex, KvNodeInspectResult.Item item
     ) throws Exception {
-        context.sendMessage(String.format("索引: %d/%d", i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
         if (Objects.isNull(item)) {
             context.sendMessage("null");
         } else {
-            context.sendMessage(String.format("  itemStringId: %s", item.getItemStringId()));
-            context.sendMessage(String.format("  value: %s", item.getValue()));
+            context.sendMessage(
+                    String.format(
+                            ImplMessages.message(ImplMessageKey.TELQOS_KV_FIELD_ITEM_STRING_ID),
+                            item.getItemStringId()
+                    )
+            );
+            context.sendMessage(
+                    String.format(
+                            ImplMessages.message(ImplMessageKey.TELQOS_KV_FIELD_VALUE_FORMAT),
+                            item.getValue()
+                    )
+            );
         }
         context.sendMessage("");
     }
@@ -227,82 +256,82 @@ public class KvNodeCommand extends CliCommand {
     private void handleInspectItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         KvNodeItemInspectInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputKvNodeItemInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputKvNodeItemInspectInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputKvNodeItemInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputKvNodeItemInspectInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         KvNodeItemInspectResult result = kvNodeQosService.inspectItem(info);
         if (Objects.isNull(result)) {
-            context.sendMessage("查询结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage("查询结果: ");
-        context.sendMessage("  value: " + result.getValue());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_VALUE, result.getValue()));
     }
 
     private void handlePutItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         KvNodeItemPutInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputKvNodeItemPutInfo.toStackBean(JSON.parseObject(json, WebInputKvNodeItemPutInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputKvNodeItemPutInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeItemPutInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
         kvNodeQosService.putItem(info);
-        context.sendMessage("放入成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_PUT_SUCCEEDED));
     }
 
     private void handleRemoveItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         KvNodeItemRemoveInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputKvNodeItemRemoveInfo.toStackBean(
                     JSON.parseObject(json, WebInputKvNodeItemRemoveInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputKvNodeItemRemoveInfo.toStackBean(
                         JSON.parseObject(in, WebInputKvNodeItemRemoveInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
         kvNodeQosService.removeItem(info);
-        context.sendMessage("移除成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
     }
 
     private void handleClear(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         KvNodeClearInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputKvNodeClearInfo.toStackBean(JSON.parseObject(json, WebInputKvNodeClearInfo.class));
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputKvNodeClearInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeClearInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
         kvNodeQosService.clear(info);
-        context.sendMessage("清空成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_CLEAR_SUCCEEDED));
     }
 }

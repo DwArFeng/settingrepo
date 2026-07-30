@@ -1,23 +1,25 @@
 package com.dwarfeng.settingrepo.impl.handler.formatter;
 
-import com.dwarfeng.dutil.basic.io.IOUtil;
-import com.dwarfeng.dutil.basic.io.StringOutputStream;
+import com.dwarfeng.dutil.basic.impl.io.StringOutputStream;
+import com.dwarfeng.dutil.basic.sdk.io.IOUtil;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.handler.formatter.AbstractFormatterRegistry;
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory;
 import com.dwarfeng.settingrepo.stack.exception.FormatterException;
 import com.dwarfeng.settingrepo.stack.exception.FormatterExecutionException;
 import com.dwarfeng.settingrepo.stack.exception.FormatterMakeException;
 import com.dwarfeng.settingrepo.stack.handler.Formatter;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 import groovy.lang.GroovyClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -31,6 +33,9 @@ import java.nio.charset.StandardCharsets;
 public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
 
     public static final String FORMATTER_TYPE = "groovy_formatter";
+
+    private static final String EXAMPLE_PROCESSOR_RESOURCE_PATH =
+            "/com/dwarfeng/settingrepo/impl/groovy/ExampleFormatterProcessor.groovy";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroovyFormatterRegistry.class);
 
@@ -54,10 +59,9 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
     @Override
     public String provideExampleContent() {
         try {
-            Resource resource = ctx.getResource("classpath:groovy/ExampleFormatterProcessor.groovy");
             String example;
             try (
-                    InputStream sin = resource.getInputStream();
+                    InputStream sin = openExampleProcessorResource();
                     StringOutputStream sout = new StringOutputStream(StandardCharsets.UTF_8, true)
             ) {
                 IOUtil.trans(sin, sout, 4096);
@@ -66,9 +70,17 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
             }
             return example;
         } catch (Exception e) {
-            LOGGER.warn("读取文件 classpath:groovy/ExampleFormatterProcessor.groovy 时出现异常", e);
+            LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_GROOVY_EXAMPLE_PROCESSOR_READ_FAILED), e);
             return "";
         }
+    }
+
+    private InputStream openExampleProcessorResource() throws IOException {
+        InputStream inputStream = GroovyFormatterRegistry.class.getResourceAsStream(EXAMPLE_PROCESSOR_RESOURCE_PATH);
+        if (inputStream == null) {
+            throw new IOException("Resource not found: " + EXAMPLE_PROCESSOR_RESOURCE_PATH);
+        }
+        return inputStream;
     }
 
     @Override
@@ -76,7 +88,7 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
         try (GroovyClassLoader classLoader = new GroovyClassLoader()) {
             // 通过 Groovy 脚本生成处理器。
             Class<?> aClass = classLoader.parseClass(settingCategory.getFormatterParam());
-            Processor processor = (Processor) aClass.newInstance();
+            Processor processor = (Processor) aClass.getDeclaredConstructor().newInstance();
             ctx.getAutowireCapableBeanFactory().autowireBean(processor);
             // 构建过滤器对象。
             return ctx.getBean(GroovyFormatter.class, settingCategory, processor);

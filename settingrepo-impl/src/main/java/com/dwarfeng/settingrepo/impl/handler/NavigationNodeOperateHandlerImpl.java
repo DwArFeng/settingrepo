@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonNavigationNodeInspectResult;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
@@ -12,12 +14,12 @@ import com.dwarfeng.settingrepo.stack.handler.NavigationNodeOperateHandler;
 import com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService;
 import com.dwarfeng.settingrepo.stack.service.NavigationNodeMaintainService;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
-import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
-import com.dwarfeng.subgrade.stack.generation.KeyGenerator;
+import com.dwarfeng.subgrade.aop.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.basic.sdk.exception.HandlerExceptionHelper;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.basic.stack.generation.KeyGenerator;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -196,7 +198,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             NavigationNodeItem navigationNodeItem = navigationNodeItemMaintainService.get(navigationNodeItemKey);
             // 构造子节点列表，并 put 到 childrenMap 中。
             if (childrenMap.containsKey(navigationNodeItemKey)) {
-                LOGGER.warn("不应该执行到此处, 将抛出异常, 请联系开发人员");
+                LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_INTERNAL_UNREACHABLE));
                 throw new IllegalStateException("childrenMap should not contain key: " + navigationNodeItemKey);
             }
             List<NavigationNodeInspectResult.Item> children = new ArrayList<>();
@@ -218,7 +220,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
                 List<NavigationNodeInspectResult.Item> parentChildren =
                         childrenMap.get(navigationNodeItem.getParentKey());
                 if (Objects.isNull(parentChildren)) {
-                    LOGGER.warn("不应该执行到此处, 将抛出异常, 请联系开发人员");
+                    LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_INTERNAL_UNREACHABLE));
                     throw new IllegalStateException(
                             "parent children list should not be null: " + navigationNodeItem.getParentKey()
                     );

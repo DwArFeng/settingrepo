@@ -1,14 +1,16 @@
 package com.dwarfeng.settingrepo.impl.handler.pusher;
 
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.handler.Pusher;
 import com.dwarfeng.settingrepo.sdk.handler.pusher.AbstractPusher;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
@@ -52,7 +54,7 @@ public class MultiPusher extends AbstractPusher {
             try {
                 delegate.formatReset();
             } catch (Exception e) {
-                LOGGER.warn("代理推送器推送数据失败，异常信息如下: ", e);
+                LOGGER.warn(ImplMessages.message(ImplMessageKey.LOG_PROXY_PUSHER_PUSH_FAILED), e);
             }
         }
     }

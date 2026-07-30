@@ -1,16 +1,17 @@
 package com.dwarfeng.settingrepo.sdk.bean.key;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
-import com.dwarfeng.subgrade.stack.bean.key.Key;
+import com.dwarfeng.subgrade.basic.stack.bean.key.Key;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Objects;
 
 /**
@@ -22,7 +23,8 @@ import java.util.Objects;
  */
 public class WebInputIahnNodeLocaleKey implements Key {
 
-    private static final long serialVersionUID = 7369652489382839652L;
+    @Serial
+    private static final long serialVersionUID = 3502691450265178552L;
 
     public static IahnNodeLocaleKey toStackBean(WebInputIahnNodeLocaleKey webInputIahnNodeLocaleKey) {
         if (Objects.isNull(webInputIahnNodeLocaleKey)) {

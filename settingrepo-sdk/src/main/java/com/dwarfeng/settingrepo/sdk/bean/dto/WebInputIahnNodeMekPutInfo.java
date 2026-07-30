@@ -1,13 +1,14 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMekPutInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -19,7 +20,8 @@ import java.util.Objects;
  */
 public class WebInputIahnNodeMekPutInfo implements Dto {
 
-    private static final long serialVersionUID = -3951215790001796932L;
+    @Serial
+    private static final long serialVersionUID = 8781512464201050472L;
 
     public static IahnNodeMekPutInfo toStackBean(WebInputIahnNodeMekPutInfo webInput) {
         if (Objects.isNull(webInput)) {

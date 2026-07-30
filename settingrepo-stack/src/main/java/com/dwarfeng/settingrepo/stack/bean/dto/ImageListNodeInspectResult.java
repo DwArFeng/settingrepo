@@ -1,7 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public class ImageListNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = -736868678879487633L;
+    @Serial
+    private static final long serialVersionUID = 2339681037619444733L;
 
     private List<Item> items;
 
@@ -46,7 +48,8 @@ public class ImageListNodeInspectResult implements Dto {
      */
     public static class Item implements Dto {
 
-        private static final long serialVersionUID = -1610935291935138615L;
+        @Serial
+        private static final long serialVersionUID = 7629828455694739167L;
 
         private boolean nullFlag;
         private String originName;

@@ -1,17 +1,18 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageUpsertByMekInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +29,8 @@ import static com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMessageUpsertByMek
  */
 public class WebInputIahnNodeMessageUpsertByMekInfo implements Dto {
 
-    private static final long serialVersionUID = 5538580866745580813L;
+    @Serial
+    private static final long serialVersionUID = -495133910103441315L;
 
     public static IahnNodeMessageUpsertByMekInfo toStackBean(WebInputIahnNodeMessageUpsertByMekInfo webInput) {
         if (Objects.isNull(webInput)) {
@@ -112,7 +114,8 @@ public class WebInputIahnNodeMessageUpsertByMekInfo implements Dto {
 
     public static class WebInputItem implements Dto {
 
-        private static final long serialVersionUID = 2044386978817104000L;
+        @Serial
+        private static final long serialVersionUID = 8263384217690872533L;
 
         public static Item toStackBean(WebInputItem webInput) {
             if (Objects.isNull(webInput)) {

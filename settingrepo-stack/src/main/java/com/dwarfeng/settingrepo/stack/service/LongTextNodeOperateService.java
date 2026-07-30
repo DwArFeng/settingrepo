@@ -1,10 +1,10 @@
 package com.dwarfeng.settingrepo.stack.service;
 
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
-import com.dwarfeng.subgrade.stack.service.Service;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.service.Service;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * 长文本节点操作服务。

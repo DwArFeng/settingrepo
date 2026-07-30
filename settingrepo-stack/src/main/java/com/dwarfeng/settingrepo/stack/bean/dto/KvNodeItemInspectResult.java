@@ -1,6 +1,8 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+
+import java.io.Serial;
 
 /**
  * 键值对节点条目查看结果。
@@ -10,7 +12,8 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
  */
 public class KvNodeItemInspectResult implements Dto {
 
-    private static final long serialVersionUID = -534255578334562888L;
+    @Serial
+    private static final long serialVersionUID = -1260340796002085350L;
 
     private String value;
 

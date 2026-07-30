@@ -5,10 +5,10 @@ import com.dwarfeng.settingrepo.impl.handler.FtpPathResolver;
 import com.dwarfeng.settingrepo.stack.bean.entity.ImageNode;
 import com.dwarfeng.settingrepo.stack.cache.ImageNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.ImageNodeDao;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -50,7 +50,7 @@ public class ImageNodeCrudOperation implements BatchCrudOperation<StringIdKey, I
             return imageNodeCache.get(key);
         } else {
             if (!imageNodeDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             ImageNode imageNode = imageNodeDao.get(key);
             imageNodeCache.push(imageNode, imageNodeTimeout);
@@ -110,7 +110,7 @@ public class ImageNodeCrudOperation implements BatchCrudOperation<StringIdKey, I
             return imageNodeCache.batchGet(keys);
         } else {
             if (!imageNodeDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<ImageNode> imageNodes = imageNodeDao.batchGet(keys);
             imageNodeCache.batchPush(imageNodes, imageNodeTimeout);

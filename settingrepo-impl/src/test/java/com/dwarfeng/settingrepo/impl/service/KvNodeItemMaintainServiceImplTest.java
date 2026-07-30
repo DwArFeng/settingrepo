@@ -5,23 +5,23 @@ import com.dwarfeng.settingrepo.stack.bean.entity.KvNodeItem;
 import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
 import com.dwarfeng.settingrepo.stack.service.KvNodeItemMaintainService;
 import com.dwarfeng.settingrepo.stack.service.KvNodeMaintainService;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/application-context*.xml")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:com/dwarfeng/settingrepo/impl/spring/application-context*.xml")
 public class KvNodeItemMaintainServiceImplTest {
 
     private static final String KV_NODE_ID = "test.kv_node";
@@ -35,7 +35,7 @@ public class KvNodeItemMaintainServiceImplTest {
     private KvNodeItem kvNodeItem;
     private KvNode kvNode;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         kvNodeItem = new KvNodeItem(
                 new KvNodeItemKey(KV_NODE_ID, ITEM_INDEX), "value"
@@ -43,7 +43,7 @@ public class KvNodeItemMaintainServiceImplTest {
         kvNode = new KvNode(new StringIdKey(KV_NODE_ID), 1);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         kvNodeItem = null;
         kvNode = null;

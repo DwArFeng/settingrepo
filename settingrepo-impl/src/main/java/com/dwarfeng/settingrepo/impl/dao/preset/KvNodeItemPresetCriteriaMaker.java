@@ -1,31 +1,34 @@
 package com.dwarfeng.settingrepo.impl.dao.preset;
 
+import com.dwarfeng.settingrepo.impl.bean.entity.HibernateKvNodeItem;
 import com.dwarfeng.settingrepo.stack.service.KvNodeItemMaintainService;
-import com.dwarfeng.subgrade.sdk.hibernate.criteria.PresetCriteriaMaker;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.data.sdk.hibernate.criteria.PresetCriteriaMaker;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import static org.hibernate.criterion.Order.asc;
-
 @Component
-public class KvNodeItemPresetCriteriaMaker implements PresetCriteriaMaker {
+public class KvNodeItemPresetCriteriaMaker implements PresetCriteriaMaker<HibernateKvNodeItem> {
 
     @Override
-    public void makeCriteria(DetachedCriteria detachedCriteria, String s, Object[] objects) {
+    public void makeCriteria(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateKvNodeItem> root,
+            String s, Object[] objects
+    ) {
         switch (s) {
             case KvNodeItemMaintainService.CHILD_FOR_NODE:
-                childForNode(detachedCriteria, objects);
+                childForNode(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             case KvNodeItemMaintainService.STRING_ID_ASC:
-                stringIdAsc(detachedCriteria, objects);
+                stringIdAsc(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             case KvNodeItemMaintainService.CHILD_FOR_NODE_ITEM_STRING_ID_ASC:
-                childForNodeItemStringIdAsc(detachedCriteria, objects);
+                childForNodeItemStringIdAsc(criteriaBuilder, criteriaQuery, root, objects);
                 break;
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + s);
@@ -33,14 +36,23 @@ public class KvNodeItemPresetCriteriaMaker implements PresetCriteriaMaker {
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private void childForNode(DetachedCriteria detachedCriteria, Object[] objects) {
+    private void childForNode(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateKvNodeItem> root,
+            Object[] objects
+    ) {
         try {
             if (Objects.isNull(objects[0])) {
-                detachedCriteria.add(Restrictions.isNull("nodeStringId"));
+                CriteriaQueryHelper.addRestriction(
+                        criteriaBuilder, criteriaQuery, criteriaBuilder.isNull(root.get("nodeStringId"))
+                );
             } else {
                 StringIdKey stringIdKey = (StringIdKey) objects[0];
-                detachedCriteria.add(
-                        Restrictions.eqOrIsNull("nodeStringId", stringIdKey.getStringId())
+                CriteriaQueryHelper.addRestriction(
+                        criteriaBuilder,
+                        criteriaQuery,
+                        CriteriaQueryHelper.equalOrIsNull(
+                                criteriaBuilder, root.get("nodeStringId"), stringIdKey.getStringId()
+                        )
                 );
             }
         } catch (Exception e) {
@@ -50,21 +62,33 @@ public class KvNodeItemPresetCriteriaMaker implements PresetCriteriaMaker {
 
     // 为了保持代码的一致性，此处不做简化。
     @SuppressWarnings("unused")
-    private void stringIdAsc(DetachedCriteria detachedCriteria, Object[] objects) {
-        detachedCriteria.addOrder(asc("stringId"));
+    private void stringIdAsc(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateKvNodeItem> root,
+            Object[] objects
+    ) {
+        CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("stringId")));
     }
 
-    private void childForNodeItemStringIdAsc(DetachedCriteria detachedCriteria, Object[] objects) {
+    private void childForNodeItemStringIdAsc(
+            CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery, Root<HibernateKvNodeItem> root,
+            Object[] objects
+    ) {
         try {
             if (Objects.isNull(objects[0])) {
-                detachedCriteria.add(Restrictions.isNull("nodeStringId"));
+                CriteriaQueryHelper.addRestriction(
+                        criteriaBuilder, criteriaQuery, criteriaBuilder.isNull(root.get("nodeStringId"))
+                );
             } else {
                 StringIdKey stringIdKey = (StringIdKey) objects[0];
-                detachedCriteria.add(
-                        Restrictions.eqOrIsNull("nodeStringId", stringIdKey.getStringId())
+                CriteriaQueryHelper.addRestriction(
+                        criteriaBuilder,
+                        criteriaQuery,
+                        CriteriaQueryHelper.equalOrIsNull(
+                                criteriaBuilder, root.get("nodeStringId"), stringIdKey.getStringId()
+                        )
                 );
             }
-            detachedCriteria.addOrder(asc("itemStringId"));
+            CriteriaQueryHelper.addOrder(criteriaQuery, criteriaBuilder.asc(root.get("itemStringId")));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }

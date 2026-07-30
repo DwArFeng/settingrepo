@@ -1,11 +1,12 @@
 package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateLongIdKey;
+import com.dwarfeng.subgrade.data.sdk.bean.key.hibernate.HibernateStringIdKey;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.Optional;
 
 @Entity
@@ -13,7 +14,8 @@ import java.util.Optional;
 @Table(name = "tbl_navigation_node_item")
 public class HibernateNavigationNodeItem implements Bean {
 
-    private static final long serialVersionUID = -5797505043800131488L;
+    @Serial
+    private static final long serialVersionUID = -7762326754622162778L;
 
     // region 主键
 

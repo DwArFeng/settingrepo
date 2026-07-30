@@ -1,10 +1,10 @@
 package com.dwarfeng.settingrepo.stack.service;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.FileListNodeItem;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.service.BatchCrudService;
-import com.dwarfeng.subgrade.stack.service.EntireLookupService;
-import com.dwarfeng.subgrade.stack.service.PresetLookupService;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.data.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.data.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.data.stack.service.PresetLookupService;
 
 /**
  * 文本列表项维护服务。

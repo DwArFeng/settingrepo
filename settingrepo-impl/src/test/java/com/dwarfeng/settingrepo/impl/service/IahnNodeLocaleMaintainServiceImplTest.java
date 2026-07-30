@@ -5,23 +5,23 @@ import com.dwarfeng.settingrepo.stack.bean.entity.IahnNodeLocale;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeLocaleMaintainService;
 import com.dwarfeng.settingrepo.stack.service.IahnNodeMaintainService;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/application-context*.xml")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:com/dwarfeng/settingrepo/impl/spring/application-context*.xml")
 public class IahnNodeLocaleMaintainServiceImplTest {
 
     private static final String SETTING_NODE_ID = "test.iahn_node";
@@ -38,7 +38,7 @@ public class IahnNodeLocaleMaintainServiceImplTest {
     private IahnNodeLocale iahnNodeLocale;
     private IahnNode iahnNode;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         iahnNodeLocale = new IahnNodeLocale(
                 new IahnNodeLocaleKey(SETTING_NODE_ID, LANGUAGE, COUNTRY, VARIANT), "label", "remark"
@@ -46,7 +46,7 @@ public class IahnNodeLocaleMaintainServiceImplTest {
         iahnNode = new IahnNode(new StringIdKey(SETTING_NODE_ID));
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         iahnNodeLocale = null;
         iahnNode = null;

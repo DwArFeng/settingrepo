@@ -4,25 +4,25 @@ import com.dwarfeng.settingrepo.stack.bean.entity.FileListNode;
 import com.dwarfeng.settingrepo.stack.bean.entity.FileListNodeItem;
 import com.dwarfeng.settingrepo.stack.service.FileListNodeItemMaintainService;
 import com.dwarfeng.settingrepo.stack.service.FileListNodeMaintainService;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/application-context*.xml")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:com/dwarfeng/settingrepo/impl/spring/application-context*.xml")
 public class FileListNodeItemMaintainServiceImplTest {
 
     @Autowired
@@ -33,7 +33,7 @@ public class FileListNodeItemMaintainServiceImplTest {
     private List<FileListNodeItem> fileListNodeItems;
     private FileListNode fileListNode;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         fileListNodeItems = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -45,7 +45,7 @@ public class FileListNodeItemMaintainServiceImplTest {
         fileListNode = new FileListNode(new StringIdKey("test.file_list_node"), 12450);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         fileListNodeItems.clear();
         fileListNode = null;

@@ -1,8 +1,8 @@
 package com.dwarfeng.settingrepo.stack.cache;
 
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingNode;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.data.stack.cache.BatchBaseCache;
 
 /**
  * 设置节点缓存。

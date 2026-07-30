@@ -1,14 +1,15 @@
 package com.dwarfeng.settingrepo.sdk.bean.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeCountry;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeLanguage;
 import com.dwarfeng.settingrepo.sdk.util.ValidIahnNodeVariant;
 import com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeLocaleRemoveInfo;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -20,7 +21,8 @@ import java.util.Objects;
  */
 public class WebInputIahnNodeLocaleRemoveInfo implements Dto {
 
-    private static final long serialVersionUID = -8473282523554248521L;
+    @Serial
+    private static final long serialVersionUID = 27996393645495115L;
 
     public static IahnNodeLocaleRemoveInfo toStackBean(WebInputIahnNodeLocaleRemoveInfo webInput) {
         if (Objects.isNull(webInput)) {

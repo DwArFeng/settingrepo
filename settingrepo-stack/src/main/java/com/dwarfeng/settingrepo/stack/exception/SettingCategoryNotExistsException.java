@@ -1,7 +1,11 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.HandlerException;
+
+import java.io.Serial;
 
 /**
  * 设置类别不存在异常。
@@ -11,7 +15,8 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  */
 public class SettingCategoryNotExistsException extends HandlerException {
 
-    private static final long serialVersionUID = -6547946517141879958L;
+    @Serial
+    private static final long serialVersionUID = -3778076986687696508L;
 
     private final StringIdKey settingCategoryKey;
 
@@ -26,6 +31,6 @@ public class SettingCategoryNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return "设置类别 " + settingCategoryKey + " 不存在";
+        return StackMessages.message(StackMessageKey.SETTING_CATEGORY_NOT_EXISTS, settingCategoryKey);
     }
 }

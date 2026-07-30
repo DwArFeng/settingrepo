@@ -7,10 +7,10 @@ import com.dwarfeng.settingrepo.stack.cache.SettingNodeCache;
 import com.dwarfeng.settingrepo.stack.dao.SettingCategoryDao;
 import com.dwarfeng.settingrepo.stack.dao.SettingNodeDao;
 import com.dwarfeng.settingrepo.stack.service.SettingNodeMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +53,7 @@ public class SettingCategoryCrudOperation implements BatchCrudOperation<StringId
             return settingCategoryCache.get(key);
         } else {
             if (!settingCategoryDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             SettingCategory settingCategory = settingCategoryDao.get(key);
             settingCategoryCache.push(settingCategory, settingCategoryTimeout);
@@ -106,7 +106,7 @@ public class SettingCategoryCrudOperation implements BatchCrudOperation<StringId
             return settingCategoryCache.batchGet(keys);
         } else {
             if (!settingCategoryDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<SettingCategory> settingCategories = settingCategoryDao.batchGet(keys);
             settingCategoryCache.batchPush(settingCategories, settingCategoryTimeout);

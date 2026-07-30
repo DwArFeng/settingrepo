@@ -1,11 +1,17 @@
 package com.dwarfeng.settingrepo.stack.exception;
 
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessageKey;
+import com.dwarfeng.settingrepo.stack.internal.i18n.StackMessages;
+
+import java.io.Serial;
+
 /**
  * @author DwArFeng
  * @since 1.0.0
  */
 public class UnsupportedFormatterTypeException extends FormatterException {
 
+    @Serial
     private static final long serialVersionUID = 230153361991622499L;
 
     private final String type;
@@ -21,6 +27,6 @@ public class UnsupportedFormatterTypeException extends FormatterException {
 
     @Override
     public String getMessage() {
-        return "不支持的格式化器类型: " + type;
+        return StackMessages.message(StackMessageKey.UNSUPPORTED_FORMATTER_TYPE, type);
     }
 }

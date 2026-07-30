@@ -1,8 +1,10 @@
 package com.dwarfeng.settingrepo.impl.service.telqos;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.annotation.JSONField;
-import com.dwarfeng.dutil.basic.io.IOUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.annotation.JSONField;
+import com.dwarfeng.dutil.basic.sdk.io.IOUtil;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey;
+import com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessages;
 import com.dwarfeng.settingrepo.sdk.bean.dto.WebInputLongTextNodeInspectInfo;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.service.LongTextNodeQosService;
@@ -11,17 +13,14 @@ import com.dwarfeng.springtelqos.sdk.configuration.TelqosCommand;
 import com.dwarfeng.springtelqos.sdk.util.CliCommandUtil;
 import com.dwarfeng.springtelqos.stack.command.CommandDescriptor;
 import com.dwarfeng.springtelqos.stack.command.CommandExecutor;
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class LongTextNodeCommand extends CliCommand {
 
     @Override
     protected DescriptionProvider provideDescriptionProvider() {
-        return context -> "长文本节点操作服务";
+        return _ -> ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_DESCRIPTION);
     }
 
     @Override
@@ -90,12 +89,25 @@ public class LongTextNodeCommand extends CliCommand {
     @Override
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false).desc("查看长文本节点长文本").build());
-        list.add(Option.builder(COMMAND_OPTION_DOWNLOAD).optionalArg(true).hasArg(false).desc("下载长文本节点长文本").build());
-        list.add(Option.builder(COMMAND_OPTION_UPLOAD).optionalArg(true).hasArg(false).desc("上传长文本节点长文本").build());
-        list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
+        list.add(
+                Option.builder(COMMAND_OPTION_INSPECT).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_OPTION_INSPECT)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_DOWNLOAD).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_OPTION_DOWNLOAD)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_UPLOAD).optionalArg(true).hasArg(false)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_OPTION_UPLOAD)).get()
+        );
+        list.add(
+                Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class)
+                        .desc(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_OPTION_JSON_STRING)).get()
+        );
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
-                .hasArg(true).type(File.class).desc("JSON 文本").build());
+                .hasArg(true).type(File.class)
+                .desc(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_OPTION_JSON_TEXT)).get());
         return list;
     }
 
@@ -119,59 +131,61 @@ public class LongTextNodeCommand extends CliCommand {
                 handleUpload(context, cmd);
                 break;
             default:
-                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+                throw new IllegalStateException(
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                );
         }
     }
 
     private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         LongTextNodeInspectInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = WebInputLongTextNodeInspectInfo.toStackBean(
                     JSON.parseObject(json, WebInputLongTextNodeInspectInfo.class)
             );
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = WebInputLongTextNodeInspectInfo.toStackBean(
                         JSON.parseObject(in, WebInputLongTextNodeInspectInfo.class)
                 );
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         LongTextNodeInspectResult result = longTextNodeQosService.inspect(info);
         if (result == null) {
-            context.sendMessage("查看结果: null");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage("查看结果: ");
-        context.sendMessage("  preview: " + result.getPreview());
-        context.sendMessage("  length: " + result.getLength());
-        context.sendMessage("  nullFlag: " + result.isNullFlag());
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_FIELD_PREVIEW, result.getPreview()));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_LENGTH, result.getLength()));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_FIELD_NULL_FLAG, result.isNullFlag()));
     }
 
     @SuppressWarnings("DuplicatedCode")
     private void handleDownload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         DownloadInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            String json = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             info = JSON.parseObject(json, DownloadInfo.class);
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = JSON.parseObject(in, DownloadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         LongTextNodeTextStream longTextNodeTextStream = longTextNodeQosService.downloadTextStream(
                 new LongTextNodeTextStreamDownloadInfo(info.getCategory(), info.getArgs())
         );
         if (Objects.isNull(longTextNodeTextStream)) {
-            context.sendMessage("长文本文件不存在");
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_FILE_NOT_FOUND));
             return;
         }
 
@@ -192,7 +206,7 @@ public class LongTextNodeCommand extends CliCommand {
                 out.close();
             }
         }
-        context.sendMessage("文本下载成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_DOWNLOAD_SUCCEEDED));
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -202,12 +216,12 @@ public class LongTextNodeCommand extends CliCommand {
             String json = cmd.getOptionValue(COMMAND_SUB_OPTION_JSON);
             info = JSON.parseObject(json, UploadInfo.class);
         } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            File jsonFile = cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 info = JSON.parseObject(in, UploadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException("not supported yet");
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
         }
 
         InputStream in = null;
@@ -223,12 +237,13 @@ public class LongTextNodeCommand extends CliCommand {
                 in.close();
             }
         }
-        context.sendMessage("文本上传成功");
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_UPLOAD_SUCCEEDED));
     }
 
     public static class DownloadInfo implements Dto {
 
-        private static final long serialVersionUID = 994434960276409697L;
+        @Serial
+        private static final long serialVersionUID = 7602416370662364407L;
 
         @JSONField(name = "category")
         @NotNull
@@ -283,7 +298,8 @@ public class LongTextNodeCommand extends CliCommand {
 
     public static class UploadInfo implements Dto {
 
-        private static final long serialVersionUID = -4968992173360509085L;
+        @Serial
+        private static final long serialVersionUID = 98545532558945067L;
 
         @JSONField(name = "category")
         @NotNull

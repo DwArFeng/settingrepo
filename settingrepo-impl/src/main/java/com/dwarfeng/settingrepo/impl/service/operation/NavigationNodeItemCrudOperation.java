@@ -4,10 +4,11 @@ import com.dwarfeng.settingrepo.stack.bean.entity.NavigationNodeItem;
 import com.dwarfeng.settingrepo.stack.cache.NavigationNodeItemCache;
 import com.dwarfeng.settingrepo.stack.dao.NavigationNodeItemDao;
 import com.dwarfeng.settingrepo.stack.service.NavigationNodeItemMaintainService;
-import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes;
-import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
-import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.data.sdk.exception.ServiceExceptionCodeSuppliers;
+import com.dwarfeng.subgrade.data.sdk.service.custom.operation.BatchCrudOperation;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +45,7 @@ public class NavigationNodeItemCrudOperation implements BatchCrudOperation<LongI
             return navigationNodeItemCache.get(key);
         } else {
             if (!navigationNodeItemDao.exists(key)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             NavigationNodeItem navigationNodeItem = navigationNodeItemDao.get(key);
             navigationNodeItemCache.push(navigationNodeItem, navigationNodeItemTimeout);
@@ -71,7 +72,7 @@ public class NavigationNodeItemCrudOperation implements BatchCrudOperation<LongI
         DescendantStruct descendantStruct = findDescendant(key);
 
         // 依次删除子孙节点。
-        List<NavigationNodeItem> descendantNavigationNodeItems = descendantStruct.getNavigationNodeItems();
+        List<NavigationNodeItem> descendantNavigationNodeItems = descendantStruct.navigationNodeItems();
         descendantNavigationNodeItems.forEach((item -> item.setParentKey(null)));
         navigationNodeItemDao.batchUpdate(descendantNavigationNodeItems);
         List<LongIdKey> descendantNavigationNodeItemKeys = descendantNavigationNodeItems.stream()
@@ -126,7 +127,7 @@ public class NavigationNodeItemCrudOperation implements BatchCrudOperation<LongI
             return navigationNodeItemCache.batchGet(keys);
         } else {
             if (!navigationNodeItemDao.allExists(keys)) {
-                throw new ServiceException(ServiceExceptionCodes.ENTITY_NOT_EXIST);
+                throw new ServiceException(ServiceExceptionCodeSuppliers.ENTITY_NOT_EXIST.get());
             }
             List<NavigationNodeItem> navigationNodeItems = navigationNodeItemDao.batchGet(keys);
             navigationNodeItemCache.batchPush(navigationNodeItems, navigationNodeItemTimeout);
@@ -153,20 +154,10 @@ public class NavigationNodeItemCrudOperation implements BatchCrudOperation<LongI
         }
     }
 
-    private static final class DescendantStruct {
-
-        private final List<NavigationNodeItem> navigationNodeItems;
-
-        private DescendantStruct(List<NavigationNodeItem> navigationNodeItems) {
-            this.navigationNodeItems = navigationNodeItems;
-        }
-
-        public List<NavigationNodeItem> getNavigationNodeItems() {
-            return navigationNodeItems;
-        }
+    private record DescendantStruct(List<NavigationNodeItem> navigationNodeItems) {
 
         @Override
-        public String toString() {
+        public @NotNull String toString() {
             return "DescendantStruct{" +
                     "navigationNodeItems=" + navigationNodeItems +
                     '}';

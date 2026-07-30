@@ -1,8 +1,9 @@
 package com.dwarfeng.settingrepo.stack.bean.dto;
 
-import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.basic.stack.bean.dto.Dto;
+import com.dwarfeng.subgrade.basic.stack.bean.key.LongIdKey;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -13,7 +14,8 @@ import java.util.List;
  */
 public class NavigationNodeInspectResult implements Dto {
 
-    private static final long serialVersionUID = -6919073643971809314L;
+    @Serial
+    private static final long serialVersionUID = 4450833546591403575L;
 
     /**
      * 导航节点的数量。
@@ -82,7 +84,8 @@ public class NavigationNodeInspectResult implements Dto {
      */
     public static class Item implements Dto {
 
-        private static final long serialVersionUID = -7179048417214123643L;
+        @Serial
+        private static final long serialVersionUID = 4917396274935459649L;
 
         /**
          * 节点条目主键。

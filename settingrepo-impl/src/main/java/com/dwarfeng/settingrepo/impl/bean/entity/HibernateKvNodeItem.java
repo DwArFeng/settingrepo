@@ -2,9 +2,10 @@ package com.dwarfeng.settingrepo.impl.bean.entity;
 
 import com.dwarfeng.settingrepo.impl.bean.key.HibernateKvNodeItemKey;
 import com.dwarfeng.settingrepo.sdk.util.Constraints;
-import com.dwarfeng.subgrade.stack.bean.Bean;
+import com.dwarfeng.subgrade.basic.stack.bean.Bean;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,8 @@ import java.util.Objects;
 @Table(name = "tbl_kv_node_item")
 public class HibernateKvNodeItem implements Bean {
 
-    private static final long serialVersionUID = 180871182559860850L;
+    @Serial
+    private static final long serialVersionUID = -950450596568502190L;
 
     // region 主键
 
