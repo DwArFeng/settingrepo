@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- `settingrepo-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
+  - com.dwarfeng.settingrepo.sdk.util.ServiceExceptionHelper。
+
 - 依赖升级。
   - 升级 `aspectj` 依赖版本为 `1.8.14` 以规避漏洞。
   - 升级 `jackson` 依赖版本为 `2.21.5` 以规避漏洞。

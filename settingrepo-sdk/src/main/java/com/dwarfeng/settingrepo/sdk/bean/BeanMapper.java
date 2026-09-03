@@ -214,7 +214,7 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     KvNodeItem kvNodeItemFromFastJson(FastJsonKvNodeItem fastJsonKvNodeItem);
 
-    // endregiona
+    // endregion
 
     // region Settingrepo DTO
 

@@ -44,7 +44,10 @@ public final class ServiceExceptionHelper {
         map.put(IahnNodeLocaleNotExistsException.class, ServiceExceptionCodes.IAHN_NODE_LOCALE_NOT_EXISTS);
         map.put(IahnNodeMekNotExistsException.class, ServiceExceptionCodes.IAHN_NODE_MEK_NOT_EXISTS);
         map.put(FileListNodeIndexOutOfBoundException.class, ServiceExceptionCodes.FILE_LIST_NODE_INDEX_OUT_OF_BOUND);
-        map.put(NavigationNodeItemIndexConflictException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_INDEX_CONFLICT);
+        map.put(
+                NavigationNodeItemIndexConflictException.class,
+                ServiceExceptionCodes.NAVIGATION_NODE_ITEM_INDEX_CONFLICT
+        );
         map.put(NavigationNodeItemMismatchedException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_MISMATCHED);
         map.put(NavigationNodeItemNotExistsException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_NOT_EXISTS);
         return map;
