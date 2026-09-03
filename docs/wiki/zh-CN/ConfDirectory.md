@@ -51,8 +51,8 @@ conf
 
 ## database 目录
 
-| 文件名                    | 说明        |
-|------------------------|-----------|
+| 文件名                 | 说明               |
+|------------------------|--------------------|
 | connection.properties  | 数据库连接配置文件 |
 | performance.properties | 数据库性能配置文件 |
 
@@ -85,8 +85,8 @@ com.dwarfeng.settingrepo.data_source.min_idle=0
 
 ## datamark 目录
 
-| 文件名                 | 说明        |
-|---------------------|-----------|
+| 文件名              | 说明               |
+|---------------------|--------------------|
 | settings.properties | 数据标记的配置文件 |
 
 ### settings.properties
@@ -111,15 +111,12 @@ com.dwarfeng.settingrepo.data_source.min_idle=0
 #
 #---------------------------------SettingCategory----------------------------------------
 # etc...
-#
-#---------------------------------SettingNode----------------------------------------
-# etc...
 ```
 
 ## dubbo 目录
 
-| 文件名                   | 说明           |
-|-----------------------|--------------|
+| 文件名                | 说明               |
+|-----------------------|--------------------|
 | connection.properties | Dubbo 连接配置文件 |
 
 ### connection.properties
@@ -145,8 +142,8 @@ com.dwarfeng.settingrepo.dubbo.consumer.snowflake.group=
 
 ## ftp 目录
 
-| 文件名                   | 说明         |
-|-----------------------|------------|
+| 文件名                | 说明             |
+|-----------------------|------------------|
 | connection.properties | FTP 连接配置文件 |
 | path.properties       | FTP 路径配置文件 |
 
@@ -175,7 +172,6 @@ com.dwarfeng.settingrepo.ftp.data_connection_mode=0
 # 建议将此值设置为大于 0，以避免服务端故障或网络丢包导致程序阻塞。
 com.dwarfeng.settingrepo.ftp.data_timeout=-1
 # etc...
-
 ```
 
 该配置文件中的注释较为完善，使用者可以根据注释对大部分参数进行妥善配置，以下对重要参数进行进一步说明。
@@ -206,10 +202,10 @@ com.dwarfeng.settingrepo.ftp.root_path=settingrepo
 
 ## logging 目录
 
-| 文件名                      | 说明                     |
-|--------------------------|------------------------|
-| README.md                | 说明文件                   |
-| settings.xml             | 日志配置的配置文件              |
+| 文件名                   | 说明                                 |
+|--------------------------|--------------------------------------|
+| README.md                | 说明文件                             |
+| settings.xml             | 日志配置的配置文件                   |
 | settings-ref-linux.xml   | Linux 系统中日志配置的配置参考文件   |
 | settings-ref-windows.xml | Windows 系统中日志配置的配置参考文件 |
 
@@ -251,18 +247,18 @@ com.dwarfeng.settingrepo.ftp.root_path=settingrepo
 </Configuration>
 ```
 
-需要注意的是，日志配置 **必须** 定义在 `settings.xml` 中才能生效，所有的 `settings-ref-xxx.xml` 都是参考文件，
-在这些文件中进行任何配置的修改 **均不会生效**。
+需要注意的是，项目内部代码的日志配置定义在 `settings.xml` 中， 插件代码的日志配置定义在 `confext/logging-settings.xml` 中；
+所有的 `settings-ref-xxx.xml` 都是参考文件，在这些文件中进行任何配置的修改 **均不会生效**。
 
-常用的做法是，针对不同的操作系统，将参考文件中的内容直接复制到 `settings.xml` 中，随后对 `settings.xml` 中的内容进行修改。
+常用的做法是，针对不同的操作系统，将参考文件中的内容直接复制到 `settings.xml` 中， 随后对 `settings.xml` 中的内容进行修改。
 
 - 如果服务运行一天产生的日志超过了配置上限，可上调 `rolling_file.rollover.max` 参数。
 - 如果存在等保需求，日志至少需要保留 6 个月，需要调整 `rolling_file.rollover.delete_age` 参数至 `200D`。
 
 ## redis 目录
 
-| 文件名                   | 说明   |
-|-----------------------|------|
+| 文件名                | 说明     |
+|-----------------------|----------|
 | connection.properties | 连接配置 |
 | prefix.properties     | 前缀配置 |
 | timeout.properties    | 超时配置 |
@@ -323,15 +319,15 @@ com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support=3600000
 
 ## settingrepo 目录
 
-| 文件名                        | 说明                           |
-|----------------------------|------------------------------|
-| background.properties      | 后台服务配置文件，包括线程池的线程数及其它        |
-| exception.properties       | ServiceException 的异常代码的偏移量配置 |
-| iahn.properties            | 国际化节点配置文件                    |
-| image-thumbnail.properties | 图片缩略图配置文件                    |
-| launcher.properties        | 启动器配置文件                      |
-| push.properties            | 推送服务配置文件                     |
-| reset.properties           | 重置服务配置文件                     |
+| 文件名                     | 说明                                       |
+|----------------------------|--------------------------------------------|
+| background.properties      | 后台服务配置文件，包括线程池的线程数及其它 |
+| exception.properties       | ServiceException 的异常代码的偏移量配置    |
+| iahn.properties            | 国际化节点配置文件                         |
+| image-thumbnail.properties | 图片缩略图配置文件                         |
+| launcher.properties        | 启动器配置文件                             |
+| push.properties            | 推送服务配置文件                           |
+| reset.properties           | 重置服务配置文件                           |
 
 ### background.properties
 
@@ -354,7 +350,7 @@ ServiceException 的异常代码的偏移量配置。
 
 ```properties
 # settingrepo 工程自身的异常代号偏移量。
-com.dwarfeng.settingrepo.settingrepo.exception_code_offset=10000
+com.dwarfeng.settingrepo.settingrepo.exception_code_offset=1000
 # settingrepo 工程中 subgrade 的异常代号偏移量。
 com.dwarfeng.settingrepo.settingrepo.exception_code_offset.subgrade=0
 # settingrepo 工程中 spring-telqos 的异常代号偏移量。
@@ -543,8 +539,8 @@ com.dwarfeng.settingrepo.resetter.kafka.bootstrap_servers=your-host-here:9092
 
 ## telqos 目录
 
-| 文件名                   | 说明   |
-|-----------------------|------|
+| 文件名                | 说明     |
+|-----------------------|----------|
 | connection.properties | 连接配置 |
 
 ### connection.properties

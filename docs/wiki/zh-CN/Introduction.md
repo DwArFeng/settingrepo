@@ -47,6 +47,7 @@ Telnet 运维平台指令合集：
 - 文件。
 - 文件列表。
 - 导航。
+- 键值。
 
 ## 安装说明
 
@@ -77,7 +78,7 @@ Telnet 运维平台指令合集：
    找到打包后的目标文件。
 
    ```
-   settingrepo-node/target/settingrepo-node-[version]-release.tar.gz
+   settingrepo-distribute/target/distribute/settingrepo-all-he/settingrepo-all-he-${version}-release.tar.gz
    ```
 
    将其解压至 windows 系统或者 linux 系统。

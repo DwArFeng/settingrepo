@@ -25,7 +25,7 @@
             <password>your-password-here</password>
         </server>
         <server>
-            <id>rdc-snapshots</id>
+            <id>xxx-snapshots</id>
             <username>your-username-here</username>
             <password>your-password-here</password>
         </server>
@@ -34,14 +34,28 @@
     <profiles>
         <profile>
             <id>xxx</id>
-            <properties>
-                <altReleaseDeploymentRepository>
-                    xxx-releases::default::https://your-repository-url-here/
-                </altReleaseDeploymentRepository>
-                <altSnapshotDeploymentRepository>
-                    xxx-snapshots::default::https://your-repository-url-here/
-                </altSnapshotDeploymentRepository>
-            </properties>
+            <repositories>
+                <repository>
+                    <id>xxx-releases</id>
+                    <url>https://your-repository-url-here/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>xxx-snapshots</id>
+                    <url>https://your-repository-url-here/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
         </profile>
     </profiles>
 

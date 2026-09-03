@@ -4,6 +4,16 @@
 
 ### 功能构建
 
+- 更新 README.md。
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/CompileBySource.md。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/Introduction.md。
+  - docs/wiki/zh-CN/SystemRequirements.md。
+  - docs/wiki/zh-CN/UsingTelqos.md。
+  - docs/wiki/zh-CN/VersionBlacklist.md。
+
 - `settingrepo-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
   - com.dwarfeng.settingrepo.sdk.util.ServiceExceptionHelper。
