@@ -74,6 +74,7 @@ public class NavigationNodeCrudOperation implements BatchCrudOperation<StringIdK
         navigationNodeDao.update(navigationNode);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public void delete(StringIdKey key) throws Exception {
         List<NavigationNodeItem> navigationNodeItems = navigationNodeItemDao.lookup(

@@ -83,6 +83,7 @@ public class ImageListNodeCommand extends CliCommand {
         return this::cliSyntaxProvider;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
         String identity = context.getRuntimeIdentity();
         String[] patterns = new String[]{
@@ -128,6 +129,7 @@ public class ImageListNodeCommand extends CliCommand {
         return list;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
@@ -223,6 +225,7 @@ public class ImageListNodeCommand extends CliCommand {
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleDownload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         DownloadInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
@@ -259,6 +262,7 @@ public class ImageListNodeCommand extends CliCommand {
         context.sendMessage("文件下载成功");
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleUpload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         UploadInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
@@ -287,6 +291,7 @@ public class ImageListNodeCommand extends CliCommand {
         context.sendMessage("文件上传成功");
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleUpdate(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         UpdateInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {

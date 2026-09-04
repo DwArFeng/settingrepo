@@ -70,6 +70,7 @@ public class LongTextNodeCommand extends CliCommand {
         return this::cliSyntaxProvider;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
         String identity = context.getRuntimeIdentity();
         String[] patterns = new String[]{
@@ -98,6 +99,7 @@ public class LongTextNodeCommand extends CliCommand {
         return list;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
@@ -150,6 +152,7 @@ public class LongTextNodeCommand extends CliCommand {
         context.sendMessage("  nullFlag: " + result.isNullFlag());
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleDownload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         DownloadInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
@@ -192,6 +195,7 @@ public class LongTextNodeCommand extends CliCommand {
         context.sendMessage("文本下载成功");
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleUpload(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         UploadInfo info;
         if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {

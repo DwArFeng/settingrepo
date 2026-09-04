@@ -64,6 +64,7 @@ public class NavigationNodeItemCrudOperation implements BatchCrudOperation<LongI
         navigationNodeItemDao.update(navigationNodeItem);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public void delete(LongIdKey key) throws Exception {
         // 寻找自身的子孙节点。
