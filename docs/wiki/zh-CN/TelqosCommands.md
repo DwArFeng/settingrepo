@@ -9,13 +9,13 @@ lc
 
 ## 概览
 
-本文档主要介绍 Setting Repository 2.x 版本提供的 Telqos 命令。
+本文档主要介绍 Settingrepo 提供的 Telqos 命令。
 
-Setting Repository 2.x 版本提供的 Telqos 命令分为两类：
+Settingrepo 提供的 Telqos 命令分为三类：
 
 - 基础命令：Telqos 项目的内置命令，包括列出命令和查看命令等维护性命令。
 - 第三方命令：Telqos 项目集成的第三方命令。
-- 服务命令：Setting Repository 2.x 版本提供的服务功能相关的命令。
+- 服务命令：Settingrepo 提供的服务功能相关的命令。
 
 本文将会基于命令的一下几个方面进行介绍：
 

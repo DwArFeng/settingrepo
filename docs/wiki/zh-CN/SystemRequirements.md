@@ -17,7 +17,7 @@
 
 ### 核心功能
 
-- JRE 1.8。
+- JDK 25。
 - 任意关系型数据库，如：MySQL、Oracle、SQL Server 等。
    - MySQL 8.0.19。
 - Redis 5.0.7。

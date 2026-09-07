@@ -65,7 +65,7 @@ com.dwarfeng.settingrepo.jdbc.driver=com.mysql.cj.jdbc.Driver
 com.dwarfeng.settingrepo.jdbc.url=jdbc:mysql://your-host-here:3306/settingrepo?serverTimezone=Asia/Shanghai&autoReconnect=true
 com.dwarfeng.settingrepo.jdbc.username=root
 com.dwarfeng.settingrepo.jdbc.password=your-password-here
-com.dwarfeng.settingrepo.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+com.dwarfeng.settingrepo.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 ```
 
 ### performance.properties
