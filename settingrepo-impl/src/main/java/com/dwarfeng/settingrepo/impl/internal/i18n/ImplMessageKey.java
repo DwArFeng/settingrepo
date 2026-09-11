@@ -24,9 +24,7 @@ public enum ImplMessageKey {
     LOG_KAFKA_CONSUMER_PROPERTIES_CONFIGURED(IMPL, "log.kafka_consumer_properties_configured"),
     LOG_KAFKA_CONSUMER_FACTORY_CONFIGURING(IMPL, "log.kafka_consumer_factory_configuring"),
     LOG_KAFKA_CONSUMER_FACTORY_CONFIGURED(IMPL, "log.kafka_consumer_factory_configured"),
-    LOG_KAFKA_LISTENER_CONTAINER_FACTORY_CONFIGURING(
-            IMPL, "log.kafka_listener_container_factory_configuring"
-    ),
+    LOG_KAFKA_LISTENER_CONTAINER_FACTORY_CONFIGURING(IMPL, "log.kafka_listener_container_factory_configuring"),
     LOG_FORMATTER_BUILDING(IMPL, "log.formatter_building"),
     LOG_FORMATTER_BUILT(IMPL, "log.formatter_built"),
     LOG_FORMATTER_DETAIL(IMPL, "log.formatter_detail"),

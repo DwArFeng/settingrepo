@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey。
+
 - 优化 `pom.xml` 文件中的依赖配置。
 
 - 依赖升级。
