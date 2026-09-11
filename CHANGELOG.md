@@ -4,6 +4,8 @@
 
 ### 功能构建
 
+- `settingrepo-sdk` 补充服务异常与国际化回归测试。
+
 - `settingrepo-impl` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.settingrepo.impl.internal.i18n.ImplMessageKey。
 
