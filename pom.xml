@@ -71,7 +71,7 @@
         <groovy.version>4.0.31</groovy.version>
         <thumbnailator.version>0.4.20</thumbnailator.version>
         <dutil.version>2.0.1.a</dutil.version>
-        <subgrade.version>2.0.0.a</subgrade.version>
+        <subgrade.version>2.1.0.a</subgrade.version>
         <spring-telqos.version>3.0.0.a</spring-telqos.version>
         <spring-terminator.version>3.0.0.a</spring-terminator.version>
         <dwarfeng-datamark.version>3.0.2.a</dwarfeng-datamark.version>
