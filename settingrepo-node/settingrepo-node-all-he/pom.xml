@@ -294,14 +294,6 @@
         </dependency>
         <dependency>
             <groupId>com.dwarfeng</groupId>
-            <artifactId>settingrepo-stack</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.dwarfeng</groupId>
-            <artifactId>settingrepo-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.dwarfeng</groupId>
             <artifactId>settingrepo-impl</artifactId>
         </dependency>
     </dependencies>
