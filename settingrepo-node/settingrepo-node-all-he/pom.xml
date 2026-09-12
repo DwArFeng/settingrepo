@@ -337,6 +337,30 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+            <!-- Maven 强制规则插件，用于检查构建环境。 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-build-baseline</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[25,26)</version>
+                                </requireJavaVersion>
+                                <requireMavenVersion>
+                                    <version>[3.9.16,)</version>
+                                </requireMavenVersion>
+                                <dependencyConvergence/>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Maven 打包插件，用于打可以运行的 jar 包。 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -370,30 +394,6 @@
                             <tarLongFileMode>gnu</tarLongFileMode>
                             <attach>false</attach>
                             <finalName>settingrepo-${node.function}-${node.configuration}-${project.version}</finalName>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Maven 强制规则插件，用于检查构建环境。 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce-build-baseline</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>[25,26)</version>
-                                </requireJavaVersion>
-                                <requireMavenVersion>
-                                    <version>[3.9.16,)</version>
-                                </requireMavenVersion>
-                                <dependencyConvergence/>
-                            </rules>
                         </configuration>
                     </execution>
                 </executions>
