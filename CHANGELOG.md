@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化部分内置 Groovy 脚本内容。
+  - com/dwarfeng/settingrepo/impl/groovy/ExampleFormatterProcessor.groovy。
+
 - 新增依赖。
   - 增加依赖 `javax.servlet-api` 以规避漏洞，版本为 `4.0.1`。
   - 增加依赖 `jetty` 以规避漏洞，版本为 `9.4.58.v20250814`。

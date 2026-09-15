@@ -1,3 +1,5 @@
+package com.dwarfeng.settingrepo.impl.groovy
+
 import com.dwarfeng.settingrepo.impl.handler.formatter.GroovyFormatterRegistry
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory
 import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey
@@ -8,7 +10,7 @@ import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey
  * <p>
  * 将输入的所有参数简单的拼接在一起，形成的字符串作为主键的字符串返回。
  */
-@SuppressWarnings("GrPackage")
+@SuppressWarnings('unused')
 class ExampleFormatterProcessor implements GroovyFormatterRegistry.Processor {
 
     @Override
