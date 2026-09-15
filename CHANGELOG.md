@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh-CN/Formatter.md。
+  - docs/wiki/zh-CN/PresetFormatterImplements.md。
+
 - 优化部分内置 Groovy 脚本内容。
   - com/dwarfeng/settingrepo/impl/groovy/ExampleFormatterProcessor.groovy。
 
