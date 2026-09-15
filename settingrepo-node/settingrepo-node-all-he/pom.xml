@@ -24,8 +24,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>25</maven.compiler.release>
+        <!-- Node 模块构型声明 -->
         <node.function>all</node.function>
         <node.configuration>he</node.configuration>
+        <!-- 主方法类声明 -->
         <mainClass>com.dwarfeng.settingrepo.node.all.he.launcher.Launcher</mainClass>
     </properties>
 
