@@ -4,6 +4,12 @@
 
 ### 功能构建
 
+- 优化部分国际化文本。
+  - com/dwarfeng/settingrepo/impl/i18n/messages.properties。
+  - com/dwarfeng/settingrepo/impl/i18n/messages_zh_CN.properties。
+  - com/dwarfeng/settingrepo/node/all/he/i18n/messages.properties。
+  - com/dwarfeng/settingrepo/node/all/he/i18n/messages_zh_CN.properties。
+
 - 优化文件格式。
   - 优化 `pom.xml` 文件的格式。
 
