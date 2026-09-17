@@ -36,6 +36,6 @@ public class InvalidIahnNodeLocaleException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.INVALID_IAHN_NODE_LOCALE, language, country, variant);
+        return StackMessages.message(StackMessageKey.EXCEPTION_INVALID_IAHN_NODE_LOCALE, language, country, variant);
     }
 }

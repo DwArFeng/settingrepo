@@ -31,6 +31,6 @@ public class SettingCategoryNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.SETTING_CATEGORY_NOT_EXISTS, settingCategoryKey);
+        return StackMessages.message(StackMessageKey.EXCEPTION_SETTING_CATEGORY_NOT_EXISTS, settingCategoryKey);
     }
 }

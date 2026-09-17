@@ -31,6 +31,6 @@ public class SettingNodeExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.SETTING_NODE_EXISTS, settingNodeKey);
+        return StackMessages.message(StackMessageKey.EXCEPTION_SETTING_NODE_EXISTS, settingNodeKey);
     }
 }

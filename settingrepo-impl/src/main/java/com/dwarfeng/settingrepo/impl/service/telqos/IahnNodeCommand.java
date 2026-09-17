@@ -258,7 +258,7 @@ public class IahnNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -283,7 +283,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 查询国际化消息。
@@ -291,9 +291,9 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
         } else {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_HEADER));
             context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_MESSAGE, result.getMessage()));
         }
     }
@@ -318,18 +318,18 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 基于国际化地区批量查询国际化消息。
         IahnNodeMessageInspectByLocaleResult result = iahnNodeQosService.batchInspectMessageByLocale(info);
 
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
         } else {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_HEADER));
             List<IahnNodeMessageInspectByLocaleResult.Item> items = result.getItems();
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_ITEMS_TOTAL_SIZE, items.size()));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_ITEMS_TOTAL_SIZE, items.size()));
             for (int i = 0; i < items.size(); i++) {
                 IahnNodeMessageInspectByLocaleResult.Item item = items.get(i);
                 context.sendMessage(String.format(
@@ -360,7 +360,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 查询国际化地区列表。
@@ -368,7 +368,7 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
         } else {
             processLocaleListInspectResultItems(context, result.getItems());
         }
@@ -381,7 +381,7 @@ public class IahnNodeCommand extends CliCommand {
             CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
                     context,
                     items,
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, items.size())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_DATA_TOTAL, items.size())
             );
             if (cropResult.exitFlag()) {
                 break;
@@ -397,7 +397,7 @@ public class IahnNodeCommand extends CliCommand {
     private void printIahnNodeLocaleListInspectResultItem(
             CommandExecutor.Context context, int i, int endIndex, IahnNodeLocaleListInspectResult.Item item
     ) throws Exception {
-        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_INDEX), i, endIndex));
         if (Objects.isNull(item)) {
             context.sendMessage("null");
         } else {
@@ -440,7 +440,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 查询国际化 Mek 列表。
@@ -448,7 +448,7 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
         } else {
             processMekListInspectResultItems(context, result.getItems());
         }
@@ -461,7 +461,7 @@ public class IahnNodeCommand extends CliCommand {
             CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
                     context,
                     items,
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, items.size())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_DATA_TOTAL, items.size())
             );
             if (cropResult.exitFlag()) {
                 break;
@@ -478,7 +478,7 @@ public class IahnNodeCommand extends CliCommand {
     private void printIahnNodeMekListInspectResultItem(
             CommandExecutor.Context context, int i, int endIndex, IahnNodeMekListInspectResult.Item item
     ) throws Exception {
-        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_INDEX), i, endIndex));
         if (Objects.isNull(item)) {
             context.sendMessage("null");
         } else {
@@ -521,7 +521,7 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 查询国际化消息表。
@@ -529,7 +529,7 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
         } else {
             processMessageTableInspectResultItems(context, result.getColumns(), result.getRows());
         }
@@ -543,7 +543,7 @@ public class IahnNodeCommand extends CliCommand {
             CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
                     context,
                     rows,
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, rows.size())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_DATA_TOTAL, rows.size())
             );
             if (cropResult.exitFlag()) {
                 break;
@@ -562,7 +562,7 @@ public class IahnNodeCommand extends CliCommand {
             List<IahnNodeMessageTableInspectResult.Column> columns, IahnNodeMessageTableInspectResult.Row row
     ) throws Exception {
         // 在打印行之前，先打印列信息。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_COLUMN_TOTAL, columns.size()));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_COLUMN_TOTAL, columns.size()));
         for (int ci = 0; ci < columns.size(); ci++) {
             IahnNodeMessageTableInspectResult.Column column = columns.get(ci);
             String language = column.getLanguage();
@@ -570,14 +570,14 @@ public class IahnNodeCommand extends CliCommand {
             String variant = column.getVariant();
             context.sendMessage(
                     String.format(
-                            ImplMessages.message(ImplMessageKey.TELQOS_IAHN_COLUMN),
+                            ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_COLUMN),
                             ci,
                             formatLocale(language, country, variant)
                     )
             );
         }
         // 打印行信息。
-        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_INDEX), i, endIndex));
         if (Objects.isNull(row)) {
             context.sendMessage("null");
         } else {
@@ -596,12 +596,12 @@ public class IahnNodeCommand extends CliCommand {
             context.sendMessage(
                     String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_REMARK), row.getRemark())
             );
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_ROW_DATAS));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_ROW_DATAS));
             for (int ri = 0; ri < row.getRowDatas().size(); ri++) {
                 IahnNodeMessageTableInspectResult.RowData rowData = row.getRowDatas().get(ri);
-                context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_ROW), ri));
+                context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_ROW), ri));
                 context.sendMessage(String.format(
-                        ImplMessages.message(ImplMessageKey.TELQOS_IAHN_ROW_MESSAGE), rowData.getMessage()
+                        ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_ROW_MESSAGE), rowData.getMessage()
                 ));
             }
         }
@@ -642,14 +642,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 推入国际化地区。
         iahnNodeQosService.putLocale(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_PUSH_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_RESULT_PUSH_SUCCEEDED));
     }
 
     private void handleRemoveLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -672,14 +672,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 移除国际化地区。
         iahnNodeQosService.removeLocale(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_REMOVE_SUCCEEDED));
     }
 
     private void handlePutMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -702,14 +702,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 推入国际化 Mek。
         iahnNodeQosService.putMek(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_PUSH_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_RESULT_PUSH_SUCCEEDED));
     }
 
     private void handleRemoveMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -732,14 +732,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 移除国际化 Mek。
         iahnNodeQosService.removeMek(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_REMOVE_SUCCEEDED));
     }
 
     private void handleUpsertMessage(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -762,14 +762,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 插入或更新国际化消息。
         iahnNodeQosService.upsertMessage(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_UPSERT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_RESULT_UPSERT_SUCCEEDED));
     }
 
     private void handleBatchUpsertMessageByLocale(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -792,14 +792,14 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 基于国际化地区批量插入或更新国际化消息。
         iahnNodeQosService.batchUpsertMessageByLocale(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_BATCH_UPSERT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_RESULT_BATCH_UPSERT_SUCCEEDED));
     }
 
     private void handleBatchUpsertMessageByMek(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -822,13 +822,13 @@ public class IahnNodeCommand extends CliCommand {
             }
         } else {
             // 暂时未实现。
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         // 基于国际化 Mek 批量插入或更新国际化消息。
         iahnNodeQosService.batchUpsertMessageByMek(info);
 
         // 输出结果。
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_BATCH_UPSERT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_RESULT_BATCH_UPSERT_SUCCEEDED));
     }
 }

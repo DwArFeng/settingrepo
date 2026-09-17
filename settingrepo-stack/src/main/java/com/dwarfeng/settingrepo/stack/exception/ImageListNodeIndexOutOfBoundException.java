@@ -48,10 +48,10 @@ public class ImageListNodeIndexOutOfBoundException extends HandlerException {
         if (expectedMinIndex <= expectedMaxIndex) {
             expectedIndexRange = "[" + expectedMinIndex + ", " + expectedMaxIndex + "]";
         } else {
-            expectedIndexRange = StackMessages.message(StackMessageKey.INDEX_RANGE_EMPTY);
+            expectedIndexRange = StackMessages.message(StackMessageKey.EXCEPTION_INDEX_RANGE_EMPTY);
         }
         return StackMessages.message(
-                StackMessageKey.IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND, settingNodeKey, expectedIndexRange, actualIndex
+                StackMessageKey.EXCEPTION_IMAGE_LIST_NODE_INDEX_OUT_OF_BOUND, settingNodeKey, expectedIndexRange, actualIndex
         );
     }
 }

@@ -109,22 +109,22 @@ public class ResetCommand extends CliCommand {
                 break;
             case COMMAND_OPTION_START:
                 resetQosService.start();
-                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_RESET_STARTED));
+                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_RESET_RESULT_STARTED));
                 break;
             case COMMAND_OPTION_STOP:
                 resetQosService.stop();
-                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_RESET_STOPPED));
+                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_RESET_RESULT_STOPPED));
                 break;
             case COMMAND_OPTION_STATUS:
                 printStatus(context);
                 break;
             case COMMAND_OPTION_RESET_FORMAT:
                 resetQosService.resetFormat();
-                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_RESET_SUCCEEDED));
+                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_RESET_RESULT_SUCCEEDED));
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }

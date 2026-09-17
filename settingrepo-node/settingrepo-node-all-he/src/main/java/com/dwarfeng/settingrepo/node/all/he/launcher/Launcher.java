@@ -48,12 +48,12 @@ public class Launcher {
         }
 
         // 重置格式化器支持。
-        LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_RESETTING_FORMATTER_SUPPORT));
+        LOGGER.info(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_RESETTING_FORMATTER_SUPPORT));
         SupportQosService supportQosService = ctx.getBean(SupportQosService.class);
         try {
             supportQosService.resetFormatter();
         } catch (ServiceException e) {
-            LOGGER.warn(NodeMessages.message(NodeMessageKey.LAUNCHER_RESET_FORMATTER_SUPPORT_FAILED), e);
+            LOGGER.warn(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_RESET_FORMATTER_SUPPORT_FAILED), e);
         }
     }
 
@@ -70,21 +70,21 @@ public class Launcher {
         // 重置处理器是否启动重置服务。
         long startResetDelay = launcherSettingHandler.getStartResetDelay();
         if (startResetDelay == 0) {
-            LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_STARTING_RESET_IMMEDIATELY));
+            LOGGER.info(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_STARTING_RESET_IMMEDIATELY));
             try {
                 resetQosService.start();
             } catch (ServiceException e) {
-                LOGGER.error(NodeMessages.message(NodeMessageKey.LAUNCHER_START_RESET_FAILED), e);
+                LOGGER.error(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_START_RESET_FAILED), e);
             }
         } else if (startResetDelay > 0) {
-            LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_STARTING_RESET_DELAYED, startResetDelay));
+            LOGGER.info(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_STARTING_RESET_DELAYED, startResetDelay));
             scheduler.schedule(
                     () -> {
-                        LOGGER.info(NodeMessages.message(NodeMessageKey.LAUNCHER_STARTING_RESET));
+                        LOGGER.info(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_STARTING_RESET));
                         try {
                             resetQosService.start();
                         } catch (ServiceException e) {
-                            LOGGER.error(NodeMessages.message(NodeMessageKey.LAUNCHER_START_RESET_FAILED), e);
+                            LOGGER.error(NodeMessages.message(NodeMessageKey.LOG_LAUNCHER_START_RESET_FAILED), e);
                         }
                     },
                     Instant.now().plusMillis(startResetDelay)

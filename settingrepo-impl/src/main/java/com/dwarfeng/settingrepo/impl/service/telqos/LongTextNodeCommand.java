@@ -132,7 +132,7 @@ public class LongTextNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -152,15 +152,15 @@ public class LongTextNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         LongTextNodeInspectResult result = longTextNodeQosService.inspect(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_HEADER));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_FIELD_PREVIEW, result.getPreview()));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_LENGTH, result.getLength()));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_FIELD_NULL_FLAG, result.isNullFlag()));
@@ -178,14 +178,14 @@ public class LongTextNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, DownloadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         LongTextNodeTextStream longTextNodeTextStream = longTextNodeQosService.downloadTextStream(
                 new LongTextNodeTextStreamDownloadInfo(info.getCategory(), info.getArgs())
         );
         if (Objects.isNull(longTextNodeTextStream)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_FILE_NOT_FOUND));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_RESULT_FILE_NOT_FOUND));
             return;
         }
 
@@ -206,7 +206,7 @@ public class LongTextNodeCommand extends CliCommand {
                 out.close();
             }
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_DOWNLOAD_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_RESULT_DOWNLOAD_SUCCEEDED));
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -221,7 +221,7 @@ public class LongTextNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, UploadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         InputStream in = null;
@@ -237,7 +237,7 @@ public class LongTextNodeCommand extends CliCommand {
                 in.close();
             }
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_UPLOAD_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_LONG_TEXT_RESULT_UPLOAD_SUCCEEDED));
     }
 
     public static class DownloadInfo implements Dto {

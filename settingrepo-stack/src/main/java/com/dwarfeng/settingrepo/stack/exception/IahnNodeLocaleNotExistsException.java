@@ -31,6 +31,6 @@ public class IahnNodeLocaleNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.IAHN_NODE_LOCALE_NOT_EXISTS, iahnNodeLocaleKey);
+        return StackMessages.message(StackMessageKey.EXCEPTION_IAHN_NODE_LOCALE_NOT_EXISTS, iahnNodeLocaleKey);
     }
 }

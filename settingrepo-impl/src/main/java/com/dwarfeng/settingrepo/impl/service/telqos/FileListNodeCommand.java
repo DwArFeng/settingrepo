@@ -189,7 +189,7 @@ public class FileListNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -207,14 +207,14 @@ public class FileListNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         FileListNodeSizeResult result = fileListNodeQosService.size(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_SIZE_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_RESULT_SIZE_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_SIZE_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_RESULT_SIZE_HEADER));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_SIZE, result.getSize()));
     }
 
@@ -233,27 +233,27 @@ public class FileListNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         FileListNodeInspectResult result = fileListNodeQosService.inspect(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_HEADER));
         List<FileListNodeInspectResult.Item> items = result.getItems();
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_ITEMS_TOTAL_SIZE, items.size()));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_ITEMS_TOTAL_SIZE, items.size()));
         for (int i = 0; i < items.size(); i++) {
             FileListNodeInspectResult.Item item = items.get(i);
             context.sendMessage("    " + i + "/" + items.size() + ": ");
             context.sendMessage(
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_ITEM_NULL_FLAG, item.isNullFlag())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_ITEM_NULL_FLAG, item.isNullFlag())
             );
             context.sendMessage(
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_ITEM_ORIGIN_NAME, item.getOriginName())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_ITEM_ORIGIN_NAME, item.getOriginName())
             );
             context.sendMessage(
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_ITEM_LENGTH, item.getLength())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_ITEM_LENGTH, item.getLength())
             );
         }
     }
@@ -270,13 +270,13 @@ public class FileListNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, DownloadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         FileListNodeFileStream fileListNodeFileStream = fileListNodeQosService.downloadFileStream(
                 new FileListNodeFileStreamDownloadInfo(info.getCategory(), info.getArgs(), info.getIndex())
         );
         if (fileListNodeFileStream == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FILE_NOT_FOUND));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_FILE_NOT_FOUND));
             return;
         }
         InputStream in = null;
@@ -292,7 +292,7 @@ public class FileListNodeCommand extends CliCommand {
             if (Objects.nonNull(in)) in.close();
             if (Objects.nonNull(out)) out.close();
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FILE_DOWNLOAD_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_FILE_DOWNLOAD_SUCCEEDED));
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -307,7 +307,7 @@ public class FileListNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, UploadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         InputStream in = null;
         try {
@@ -321,7 +321,7 @@ public class FileListNodeCommand extends CliCommand {
         } finally {
             if (Objects.nonNull(in)) in.close();
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FILE_UPLOAD_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_FILE_UPLOAD_SUCCEEDED));
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -336,7 +336,7 @@ public class FileListNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, UpdateInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         InputStream in = null;
         try {
@@ -350,7 +350,7 @@ public class FileListNodeCommand extends CliCommand {
         } finally {
             if (Objects.nonNull(in)) in.close();
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_UPDATE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_RESULT_UPDATE_SUCCEEDED));
     }
 
     private void handleChangeOrder(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -368,10 +368,10 @@ public class FileListNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         fileListNodeQosService.changeOrder(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_ORDER_CHANGE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FILE_LIST_RESULT_ORDER_CHANGE_SUCCEEDED));
     }
 
     private void handleRemove(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -389,10 +389,10 @@ public class FileListNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         fileListNodeQosService.remove(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_REMOVE_SUCCEEDED));
     }
 
     public static class DownloadInfo implements Dto {

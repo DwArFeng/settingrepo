@@ -90,11 +90,11 @@ public class FormatLocalCacheCommand extends CliCommand {
                 break;
             case COMMAND_OPTION_CLEAR:
                 formatQosService.clearLocalCache();
-                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FORMAT_LOCAL_CACHE_CLEARED));
+                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_FORMAT_LOCAL_CACHE_RESULT_CLEARED));
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -103,7 +103,7 @@ public class FormatLocalCacheCommand extends CliCommand {
         StringIdKey settingCategoryKey = new StringIdKey(cmd.getParsedOptionValue(COMMAND_OPTION_LOOKUP));
         Formatter formatter = formatQosService.getFormatter(settingCategoryKey);
         if (Objects.isNull(formatter)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_NOT_EXISTS));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_NOT_EXISTS));
         } else {
             context.sendMessage(formatter.toString());
         }

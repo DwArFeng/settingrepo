@@ -151,7 +151,7 @@ public class SettingNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -171,11 +171,11 @@ public class SettingNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         SettingNodeExistsResult result = settingNodeQosService.exists(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_EXISTS, result.isExists()));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_RESULT_EXISTS, result.isExists()));
     }
 
     private void handleInspect(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -193,15 +193,15 @@ public class SettingNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         SettingNodeInspectResult result = settingNodeQosService.inspect(info);
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_HEADER));
         context.sendMessage(
                 ImplMessages.message(
                         ImplMessageKey.TELQOS_SETTING_FIELD_TYPE,
@@ -243,11 +243,11 @@ public class SettingNodeCommand extends CliCommand {
                 info = WebInputSettingNodeInitInfo.toStackBean(JSON.parseObject(in, WebInputSettingNodeInitInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         settingNodeQosService.init(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_INIT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_RESULT_INIT_SUCCEEDED));
     }
 
     private void handleRemove(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -265,10 +265,10 @@ public class SettingNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         settingNodeQosService.remove(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_DELETE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SETTING_RESULT_DELETE_SUCCEEDED));
     }
 }

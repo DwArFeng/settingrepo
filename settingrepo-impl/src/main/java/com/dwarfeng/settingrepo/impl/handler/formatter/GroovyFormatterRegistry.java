@@ -48,12 +48,12 @@ public class GroovyFormatterRegistry extends AbstractFormatterRegistry {
 
     @Override
     public String provideLabel() {
-        return "Groovy 格式化器";
+        return ImplMessages.message(ImplMessageKey.SPI_FORMATTER_GROOVY_FORMATTER_LABEL);
     }
 
     @Override
     public String provideDescription() {
-        return "通过自定义的 Groovy 脚本对数据进行判断。";
+        return ImplMessages.message(ImplMessageKey.SPI_FORMATTER_GROOVY_FORMATTER_DESCRIPTION);
     }
 
     @Override

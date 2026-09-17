@@ -31,6 +31,6 @@ public class NavigationNodeItemNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.NAVIGATION_NODE_ITEM_NOT_EXISTS, navigationNodeItemKey);
+        return StackMessages.message(StackMessageKey.EXCEPTION_NAVIGATION_NODE_ITEM_NOT_EXISTS, navigationNodeItemKey);
     }
 }

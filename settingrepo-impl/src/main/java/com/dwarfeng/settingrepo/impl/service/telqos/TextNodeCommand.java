@@ -115,7 +115,7 @@ public class TextNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -133,15 +133,15 @@ public class TextNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         TextNodeInspectResult result = textNodeQosService.inspect(info);
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_HEADER));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_VALUE, result.getValue()));
     }
 
@@ -156,10 +156,10 @@ public class TextNodeCommand extends CliCommand {
                 info = WebInputTextNodePutInfo.toStackBean(JSON.parseObject(in, WebInputTextNodePutInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         textNodeQosService.put(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_PUT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_RESULT_PUT_SUCCEEDED));
     }
 }

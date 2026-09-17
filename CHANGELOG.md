@@ -4,6 +4,8 @@
 
 ### 功能构建
 
+- 优化项目的国际化机制以及消息键规范。
+
 - 优化部分国际化文本。
   - com/dwarfeng/settingrepo/impl/i18n/messages.properties。
   - com/dwarfeng/settingrepo/impl/i18n/messages_zh_CN.properties。

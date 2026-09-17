@@ -31,6 +31,6 @@ public class IahnNodeMekNotExistsException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.IAHN_NODE_MEK_NOT_EXISTS, iahnNodeMekKey);
+        return StackMessages.message(StackMessageKey.EXCEPTION_IAHN_NODE_MEK_NOT_EXISTS, iahnNodeMekKey);
     }
 }

@@ -27,6 +27,6 @@ public class UnsupportedFormatterTypeException extends FormatterException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.UNSUPPORTED_FORMATTER_TYPE, type);
+        return StackMessages.message(StackMessageKey.EXCEPTION_UNSUPPORTED_FORMATTER_TYPE, type);
     }
 }

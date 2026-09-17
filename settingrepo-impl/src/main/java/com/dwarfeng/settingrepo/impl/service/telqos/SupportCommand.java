@@ -76,11 +76,11 @@ public class SupportCommand extends CliCommand {
         switch (pair.getLeft()) {
             case COMMAND_OPTION_RESET_FORMATTER:
                 supportQosService.resetFormatter();
-                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SUPPORT_RESET_FORMATTER_SUCCEEDED));
+                context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_SUPPORT_RESULT_RESET_FORMATTER_SUCCEEDED));
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }

@@ -10,12 +10,12 @@ import static com.dwarfeng.settingrepo.node.all.he.internal.i18n.NodeMessages.Ca
  */
 public enum NodeMessageKey {
 
-    LAUNCHER_RESETTING_FORMATTER_SUPPORT(NODE, "launcher.resetting_formatter_support"),
-    LAUNCHER_RESET_FORMATTER_SUPPORT_FAILED(NODE, "launcher.reset_formatter_support_failed"),
-    LAUNCHER_STARTING_RESET_IMMEDIATELY(NODE, "launcher.starting_reset_immediately"),
-    LAUNCHER_START_RESET_FAILED(NODE, "launcher.start_reset_failed"),
-    LAUNCHER_STARTING_RESET_DELAYED(NODE, "launcher.starting_reset_delayed"),
-    LAUNCHER_STARTING_RESET(NODE, "launcher.starting_reset");
+    LOG_LAUNCHER_RESET_FORMATTER_SUPPORT_FAILED(NODE, "log.launcher_reset_formatter_support_failed"),
+    LOG_LAUNCHER_RESETTING_FORMATTER_SUPPORT(NODE, "log.launcher_resetting_formatter_support"),
+    LOG_LAUNCHER_START_RESET_FAILED(NODE, "log.launcher_start_reset_failed"),
+    LOG_LAUNCHER_STARTING_RESET(NODE, "log.launcher_starting_reset"),
+    LOG_LAUNCHER_STARTING_RESET_DELAYED(NODE, "log.launcher_starting_reset_delayed"),
+    LOG_LAUNCHER_STARTING_RESET_IMMEDIATELY(NODE, "log.launcher_starting_reset_immediately");
 
     private final NodeMessages.Catalog catalog;
     private final String key;

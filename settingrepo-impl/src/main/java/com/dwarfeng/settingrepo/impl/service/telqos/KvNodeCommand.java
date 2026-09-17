@@ -161,7 +161,7 @@ public class KvNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -177,15 +177,15 @@ public class KvNodeCommand extends CliCommand {
                 info = WebInputKvNodeCountInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeCountInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         KvNodeCountResult result = kvNodeQosService.count(info);
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_HEADER));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_FIELD_COUNT, result.getCount()));
     }
 
@@ -200,12 +200,12 @@ public class KvNodeCommand extends CliCommand {
                 info = WebInputKvNodeInspectInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeInspectInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         KvNodeInspectResult result = kvNodeQosService.inspect(info);
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
             return;
         }
         processInspectResultItems(context, result.getItems());
@@ -217,7 +217,7 @@ public class KvNodeCommand extends CliCommand {
             CliCommandUtil.CropResult cropResult = CliCommandUtil.cropData(
                     context,
                     items,
-                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_DATA_TOTAL, items.size())
+                    ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_DATA_TOTAL, items.size())
             );
             if (cropResult.exitFlag()) {
                 break;
@@ -233,7 +233,7 @@ public class KvNodeCommand extends CliCommand {
     private void printKvNodeInspectResultItem(
             CommandExecutor.Context context, int i, int endIndex, KvNodeInspectResult.Item item
     ) throws Exception {
-        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_INDEX), i, endIndex));
+        context.sendMessage(String.format(ImplMessages.message(ImplMessageKey.TELQOS_IAHN_FIELD_INDEX), i, endIndex));
         if (Objects.isNull(item)) {
             context.sendMessage("null");
         } else {
@@ -268,15 +268,15 @@ public class KvNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         KvNodeItemInspectResult result = kvNodeQosService.inspectItem(info);
         if (Objects.isNull(result)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_HEADER));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_VALUE, result.getValue()));
     }
 
@@ -291,10 +291,10 @@ public class KvNodeCommand extends CliCommand {
                 info = WebInputKvNodeItemPutInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeItemPutInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         kvNodeQosService.putItem(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_PUT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_RESULT_PUT_SUCCEEDED));
     }
 
     private void handleRemoveItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -312,10 +312,10 @@ public class KvNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         kvNodeQosService.removeItem(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_REMOVE_SUCCEEDED));
     }
 
     private void handleClear(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -329,9 +329,9 @@ public class KvNodeCommand extends CliCommand {
                 info = WebInputKvNodeClearInfo.toStackBean(JSON.parseObject(in, WebInputKvNodeClearInfo.class));
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         kvNodeQosService.clear(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_CLEAR_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_KV_RESULT_CLEAR_SUCCEEDED));
     }
 }

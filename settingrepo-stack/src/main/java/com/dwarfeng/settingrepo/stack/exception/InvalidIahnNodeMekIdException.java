@@ -30,6 +30,6 @@ public class InvalidIahnNodeMekIdException extends HandlerException {
 
     @Override
     public String getMessage() {
-        return StackMessages.message(StackMessageKey.INVALID_IAHN_NODE_MEK_ID, mekId);
+        return StackMessages.message(StackMessageKey.EXCEPTION_INVALID_IAHN_NODE_MEK_ID, mekId);
     }
 }

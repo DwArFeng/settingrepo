@@ -133,7 +133,7 @@ public class ImageNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -152,15 +152,15 @@ public class ImageNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         ImageNodeInspectResult result = imageNodeQosService.inspect(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_HEADER));
         context.sendMessage(
                 ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_ORIGIN_NAME, result.getOriginName())
         );
@@ -181,14 +181,14 @@ public class ImageNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, DownloadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         ImageNodeFileStream imageNodeFileStream = imageNodeQosService.downloadFileStream(
                 new ImageNodeFileStreamDownloadInfo(info.getCategory(), info.getArgs())
         );
         if (Objects.isNull(imageNodeFileStream)) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_IMAGE_FILE_NOT_FOUND));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_IMAGE_FILE_NOT_FOUND));
             return;
         }
 
@@ -209,7 +209,7 @@ public class ImageNodeCommand extends CliCommand {
                 out.close();
             }
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FILE_DOWNLOAD_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_FILE_DOWNLOAD_SUCCEEDED));
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -224,7 +224,7 @@ public class ImageNodeCommand extends CliCommand {
                 info = JSON.parseObject(in, UploadInfo.class);
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         InputStream in = null;
@@ -241,7 +241,7 @@ public class ImageNodeCommand extends CliCommand {
                 in.close();
             }
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FILE_UPLOAD_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_FILE_UPLOAD_SUCCEEDED));
     }
 
     public static class DownloadInfo implements Dto {

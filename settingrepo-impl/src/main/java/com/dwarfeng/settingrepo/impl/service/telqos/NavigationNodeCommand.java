@@ -161,7 +161,7 @@ public class NavigationNodeCommand extends CliCommand {
                 break;
             default:
                 throw new IllegalStateException(
-                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INTERNAL_UNREACHABLE)
+                        ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INTERNAL_UNREACHABLE)
                 );
         }
     }
@@ -181,15 +181,15 @@ public class NavigationNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         NavigationNodeSizeResult result = navigationNodeQosService.size(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_QUERY_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_QUERY_RESULT_HEADER));
         context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_FIELD_SIZE, result.getSize()));
     }
 
@@ -208,15 +208,15 @@ public class NavigationNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         NavigationNodeInspectResult result = navigationNodeQosService.inspect(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_INSPECT_RESULT_HEADER));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_INSPECT_RESULT_HEADER));
         FastJsonNavigationNodeInspectResult fastJsonResult = FastJsonNavigationNodeInspectResult.of(result);
         context.sendMessage(JSON.toJSONString(fastJsonResult, JSONWriter.Feature.PrettyFormat));
     }
@@ -236,15 +236,15 @@ public class NavigationNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
 
         NavigationNodeItemInsertResult result = navigationNodeQosService.insertItem(info);
         if (result == null) {
-            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_INSERT_RESULT_NULL));
+            context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_RESULT_INSERT_RESULT_NULL));
             return;
         }
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_INSERT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_RESULT_INSERT_SUCCEEDED));
         context.sendMessage(
                 ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_FIELD_CATEGORY, result.getCategory())
         );
@@ -274,10 +274,10 @@ public class NavigationNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         navigationNodeQosService.updateItem(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_UPDATE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_RESULT_UPDATE_SUCCEEDED));
     }
 
     private void handleRemoveItem(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -295,10 +295,10 @@ public class NavigationNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         navigationNodeQosService.removeItem(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_REMOVE_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_REMOVE_SUCCEEDED));
     }
 
     private void handleFormatIndex(CommandExecutor.Context context, CommandLine cmd) throws Exception {
@@ -316,9 +316,9 @@ public class NavigationNodeCommand extends CliCommand {
                 );
             }
         } else {
-            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_UNSUPPORTED));
+            throw new UnsupportedOperationException(ImplMessages.message(ImplMessageKey.TELQOS_COMMON_RESULT_UNSUPPORTED));
         }
         navigationNodeQosService.formatIndex(info);
-        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_FORMAT_SUCCEEDED));
+        context.sendMessage(ImplMessages.message(ImplMessageKey.TELQOS_NAVIGATION_RESULT_FORMAT_SUCCEEDED));
     }
 }

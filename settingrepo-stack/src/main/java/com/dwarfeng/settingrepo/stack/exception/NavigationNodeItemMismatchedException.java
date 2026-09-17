@@ -38,7 +38,7 @@ public class NavigationNodeItemMismatchedException extends HandlerException {
     @Override
     public String getMessage() {
         return StackMessages.message(
-                StackMessageKey.NAVIGATION_NODE_ITEM_MISMATCHED, navigationNodeItemKey, settingNodeKey
+                StackMessageKey.EXCEPTION_NAVIGATION_NODE_ITEM_MISMATCHED, navigationNodeItemKey, settingNodeKey
         );
     }
 }

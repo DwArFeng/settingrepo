@@ -43,7 +43,7 @@ public class NavigationNodeItemIndexConflictException extends HandlerException {
     @Override
     public String getMessage() {
         return StackMessages.message(
-                StackMessageKey.NAVIGATION_NODE_ITEM_INDEX_CONFLICT,
+                StackMessageKey.EXCEPTION_NAVIGATION_NODE_ITEM_INDEX_CONFLICT,
                 settingNodeKey, parentNavigationNodeItemKey, index
         );
     }
