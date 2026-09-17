@@ -24,7 +24,7 @@ public class Launcher {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Launcher.class);
 
-    static void main(String[] args) {
+    static void main() {
         ApplicationUtil.launch(new String[]{
                 "classpath:com/dwarfeng/settingrepo/node/all/he/spring/application-context*.xml",
                 "file:opt/opt*.xml",
