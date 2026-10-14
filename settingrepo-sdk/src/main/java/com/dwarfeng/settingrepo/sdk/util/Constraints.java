@@ -40,7 +40,7 @@ public final class Constraints {
     /**
      * 国际化节点 MEK 的长度约束。
      */
-    public static final int LENGTH_IAHN_NODE_MEK_ID = 100;
+    public static final int LENGTH_IAHN_NODE_MEK_ID = 200;
 
     /**
      * 国际化节点地区的长度约束。

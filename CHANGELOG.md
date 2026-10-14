@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化项目中的部分常量值。
+  - com.dwarfeng.settingrepo.sdk.util.Constraints.LENGTH_IAHN_NODE_MEK_ID。
+
 - 依赖升级。
   - 升级 `jackson` 依赖版本为 `2.21.7` 以规避漏洞。
   - 升级 `subgrade` 依赖版本为 `1.10.0.a` 以规避漏洞。
