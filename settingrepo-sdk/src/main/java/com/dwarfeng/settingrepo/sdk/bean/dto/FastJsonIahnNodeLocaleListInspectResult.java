@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class FastJsonIahnNodeLocaleListInspectResult implements Dto {
 
-    private static final long serialVersionUID = 3359685658231465907L;
+    private static final long serialVersionUID = -9024576942121702831L;
 
     public static FastJsonIahnNodeLocaleListInspectResult of(
             IahnNodeLocaleListInspectResult iahnNodeLocaleListInspectResult
@@ -29,6 +29,20 @@ public class FastJsonIahnNodeLocaleListInspectResult implements Dto {
             return new FastJsonIahnNodeLocaleListInspectResult(
                     Optional.ofNullable(iahnNodeLocaleListInspectResult.getItems()).map(
                             f -> f.stream().map(FastJsonItem::of).collect(Collectors.toList())
+                    ).orElse(null)
+            );
+        }
+    }
+
+    public static IahnNodeLocaleListInspectResult toStackBean(
+            FastJsonIahnNodeLocaleListInspectResult fastJson
+    ) {
+        if (Objects.isNull(fastJson)) {
+            return null;
+        } else {
+            return new IahnNodeLocaleListInspectResult(
+                    Optional.ofNullable(fastJson.getItems()).map(
+                            f -> f.stream().map(FastJsonItem::toStackBean).collect(Collectors.toList())
                     ).orElse(null)
             );
         }
@@ -61,7 +75,7 @@ public class FastJsonIahnNodeLocaleListInspectResult implements Dto {
 
     public static class FastJsonItem implements Dto {
 
-        private static final long serialVersionUID = -8761004088021859013L;
+        private static final long serialVersionUID = 5651062817569048282L;
 
         public static FastJsonItem of(Item item) {
             if (Objects.isNull(item)) {
@@ -73,6 +87,20 @@ public class FastJsonIahnNodeLocaleListInspectResult implements Dto {
                         item.getVariant(),
                         item.getLabel(),
                         item.getRemark()
+                );
+            }
+        }
+
+        public static Item toStackBean(FastJsonItem fastJson) {
+            if (Objects.isNull(fastJson)) {
+                return null;
+            } else {
+                return new Item(
+                        fastJson.getLanguage(),
+                        fastJson.getCountry(),
+                        fastJson.getVariant(),
+                        fastJson.getLabel(),
+                        fastJson.getRemark()
                 );
             }
         }

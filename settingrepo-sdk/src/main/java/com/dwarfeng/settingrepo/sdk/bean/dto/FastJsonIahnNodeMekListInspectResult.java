@@ -19,7 +19,7 @@ import static com.dwarfeng.settingrepo.stack.bean.dto.IahnNodeMekListInspectResu
  */
 public class FastJsonIahnNodeMekListInspectResult implements Dto {
 
-    private static final long serialVersionUID = 3852471955324015030L;
+    private static final long serialVersionUID = -5788894934495556176L;
 
     public static FastJsonIahnNodeMekListInspectResult of(IahnNodeMekListInspectResult iahnNodeMekListInspectResult) {
         if (Objects.isNull(iahnNodeMekListInspectResult)) {
@@ -28,6 +28,18 @@ public class FastJsonIahnNodeMekListInspectResult implements Dto {
             return new FastJsonIahnNodeMekListInspectResult(
                     Optional.ofNullable(iahnNodeMekListInspectResult.getItems()).map(
                             f -> f.stream().map(FastJsonItem::of).collect(Collectors.toList())
+                    ).orElse(null)
+            );
+        }
+    }
+
+    public static IahnNodeMekListInspectResult toStackBean(FastJsonIahnNodeMekListInspectResult fastJson) {
+        if (Objects.isNull(fastJson)) {
+            return null;
+        } else {
+            return new IahnNodeMekListInspectResult(
+                    Optional.ofNullable(fastJson.getItems()).map(
+                            f -> f.stream().map(FastJsonItem::toStackBean).collect(Collectors.toList())
                     ).orElse(null)
             );
         }
@@ -60,7 +72,7 @@ public class FastJsonIahnNodeMekListInspectResult implements Dto {
 
     public static class FastJsonItem implements Dto {
 
-        private static final long serialVersionUID = 8830581739508158992L;
+        private static final long serialVersionUID = 5582980421629343849L;
 
         public static FastJsonItem of(Item item) {
             if (Objects.isNull(item)) {
@@ -71,6 +83,19 @@ public class FastJsonIahnNodeMekListInspectResult implements Dto {
                         item.getLabel(),
                         item.getDefaultMessage(),
                         item.getRemark()
+                );
+            }
+        }
+
+        public static Item toStackBean(FastJsonItem fastJson) {
+            if (Objects.isNull(fastJson)) {
+                return null;
+            } else {
+                return new Item(
+                        fastJson.getMekId(),
+                        fastJson.getLabel(),
+                        fastJson.getDefaultMessage(),
+                        fastJson.getRemark()
                 );
             }
         }

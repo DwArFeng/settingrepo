@@ -1,5 +1,9 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.alibaba.fastjson.JSON;
+import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonIahnNodeLocaleListInspectResult;
+import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonIahnNodeMekListInspectResult;
+import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonIahnNodeMessageTableInspectResult;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.sdk.util.IahnUtils;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
@@ -51,11 +55,23 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     private String localeMapCachePrefix;
     @Value("${com.dwarfeng.settingrepo.iahn.cache.prefix.message_map}")
     private String messageMapCachePrefix;
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.prefix.locale_list}")
+    private String localeListCachePrefix;
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.prefix.mek_list}")
+    private String mekListCachePrefix;
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.prefix.message_table}")
+    private String messageTableCachePrefix;
 
     @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.locale_map}")
     private long localeMapCacheTimeout;
     @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.message_map}")
     private long messageMapCacheTimeout;
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.locale_list}")
+    private long localeListCacheTimeout;
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.mek_list}")
+    private long mekListCacheTimeout;
+    @Value("${com.dwarfeng.settingrepo.iahn.cache.timeout.message_table}")
+    private long messageTableCacheTimeout;
 
     public IahnNodeOperateHandlerImpl(
             SettingNodeMaintainService settingNodeMaintainService,
@@ -362,25 +378,42 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
                 return null;
             }
 
-            // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。
-            List<IahnNodeLocale> iahnNodeLocales = iahnNodeLocaleMaintainService.lookupAsList(
-                    IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
-            );
+            // 读取 IahnNodeLocaleListInspectResult。
+            IahnNodeLocaleListInspectResult result;
+            String localeListCacheKey = parseCacheKey(localeListCachePrefix, settingNodeKey);
+            if (redisTemplate.hasKey(localeListCacheKey)) {
+                String resultString = redisTemplate.opsForValue().get(localeListCacheKey);
+                result = FastJsonIahnNodeLocaleListInspectResult.toStackBean(
+                        JSON.parseObject(resultString, FastJsonIahnNodeLocaleListInspectResult.class)
+                );
+            } else {
+                // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。
+                List<IahnNodeLocale> iahnNodeLocales = iahnNodeLocaleMaintainService.lookupAsList(
+                        IahnNodeLocaleMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
+                );
 
-            // 构造 IahnNodeLocaleListInspectResult 并返回。
-            List<IahnNodeLocaleListInspectResult.Item> items = iahnNodeLocales
-                    .stream()
-                    .map(
-                            iahnNodeLocale -> new IahnNodeLocaleListInspectResult.Item(
-                                    iahnNodeLocale.getKey().getLanguage(),
-                                    iahnNodeLocale.getKey().getCountry(),
-                                    iahnNodeLocale.getKey().getVariant(),
-                                    iahnNodeLocale.getLabel(),
-                                    iahnNodeLocale.getRemark()
-                            )
-                    )
-                    .collect(Collectors.toList());
-            return new IahnNodeLocaleListInspectResult(items);
+                // 构造 IahnNodeLocaleListInspectResult。
+                List<IahnNodeLocaleListInspectResult.Item> items = iahnNodeLocales
+                        .stream()
+                        .map(
+                                iahnNodeLocale -> new IahnNodeLocaleListInspectResult.Item(
+                                        iahnNodeLocale.getKey().getLanguage(),
+                                        iahnNodeLocale.getKey().getCountry(),
+                                        iahnNodeLocale.getKey().getVariant(),
+                                        iahnNodeLocale.getLabel(),
+                                        iahnNodeLocale.getRemark()
+                                )
+                        )
+                        .collect(Collectors.toList());
+                result = new IahnNodeLocaleListInspectResult(items);
+                String resultString = JSON.toJSONString(FastJsonIahnNodeLocaleListInspectResult.of(result));
+                redisTemplate.opsForValue().set(
+                        localeListCacheKey, resultString, localeListCacheTimeout, TimeUnit.MILLISECONDS
+                );
+            }
+
+            // 返回结果。
+            return result;
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -411,24 +444,41 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
                 return null;
             }
 
-            // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeMek。
-            List<IahnNodeMek> iahnNodeMeks = iahnNodeMekMaintainService.lookupAsList(
-                    IahnNodeMekMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
-            );
+            // 读取 IahnNodeMekListInspectResult。
+            IahnNodeMekListInspectResult result;
+            String mekListCacheKey = parseCacheKey(mekListCachePrefix, settingNodeKey);
+            if (redisTemplate.hasKey(mekListCacheKey)) {
+                String resultString = redisTemplate.opsForValue().get(mekListCacheKey);
+                result = FastJsonIahnNodeMekListInspectResult.toStackBean(
+                        JSON.parseObject(resultString, FastJsonIahnNodeMekListInspectResult.class)
+                );
+            } else {
+                // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeMek。
+                List<IahnNodeMek> iahnNodeMeks = iahnNodeMekMaintainService.lookupAsList(
+                        IahnNodeMekMaintainService.CHILD_FOR_NODE_ORDERED, new Object[]{settingNodeKey}
+                );
 
-            // 构造 IahnNodeMekListInspectResult 并返回。
-            List<IahnNodeMekListInspectResult.Item> items = iahnNodeMeks
-                    .stream()
-                    .map(
-                            iahnNodeMek -> new IahnNodeMekListInspectResult.Item(
-                                    iahnNodeMek.getKey().getMekId(),
-                                    iahnNodeMek.getLabel(),
-                                    iahnNodeMek.getDefaultMessage(),
-                                    iahnNodeMek.getRemark()
-                            )
-                    )
-                    .collect(Collectors.toList());
-            return new IahnNodeMekListInspectResult(items);
+                // 构造 IahnNodeMekListInspectResult。
+                List<IahnNodeMekListInspectResult.Item> items = iahnNodeMeks
+                        .stream()
+                        .map(
+                                iahnNodeMek -> new IahnNodeMekListInspectResult.Item(
+                                        iahnNodeMek.getKey().getMekId(),
+                                        iahnNodeMek.getLabel(),
+                                        iahnNodeMek.getDefaultMessage(),
+                                        iahnNodeMek.getRemark()
+                                )
+                        )
+                        .collect(Collectors.toList());
+                result = new IahnNodeMekListInspectResult(items);
+                String resultString = JSON.toJSONString(FastJsonIahnNodeMekListInspectResult.of(result));
+                redisTemplate.opsForValue().set(
+                        mekListCacheKey, resultString, mekListCacheTimeout, TimeUnit.MILLISECONDS
+                );
+            }
+
+            // 返回结果。
+            return result;
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -458,6 +508,15 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             // 如果节点不适配，则直接返回 null。
             if (!settingNodeMatching(settingNode)) {
                 return null;
+            }
+
+            // 从缓存中读取 IahnNodeMessageTableInspectResult。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            if (redisTemplate.hasKey(messageTableCacheKey)) {
+                String resultString = redisTemplate.opsForValue().get(messageTableCacheKey);
+                return FastJsonIahnNodeMessageTableInspectResult.toStackBean(
+                        JSON.parseObject(resultString, FastJsonIahnNodeMessageTableInspectResult.class)
+                );
             }
 
             // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。
@@ -540,8 +599,15 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
                 rows.get(rowIndex).getRowDatas().get(columnIndex).setMessage(iahnNodeMessage.getMessage());
             }
 
-            // 构造 IahnNodeMessageTableInspectResult 并返回。
-            return new IahnNodeMessageTableInspectResult(columns, rows);
+            // 构造 IahnNodeMessageTableInspectResult。
+            IahnNodeMessageTableInspectResult result = new IahnNodeMessageTableInspectResult(columns, rows);
+            String resultString = JSON.toJSONString(FastJsonIahnNodeMessageTableInspectResult.of(result));
+            redisTemplate.opsForValue().set(
+                    messageTableCacheKey, resultString, messageTableCacheTimeout, TimeUnit.MILLISECONDS
+            );
+
+            // 返回结果。
+            return result;
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -636,6 +702,14 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除地区列表缓存。
+            String localeListCacheKey = parseCacheKey(localeListCachePrefix, settingNodeKey);
+            redisTemplate.delete(localeListCacheKey);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -703,6 +777,14 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除地区列表缓存。
+            String localeListCacheKey = parseCacheKey(localeListCachePrefix, settingNodeKey);
+            redisTemplate.delete(localeListCacheKey);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -794,6 +876,14 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除 Mek 列表缓存。
+            String mekListCacheKey = parseCacheKey(mekListCachePrefix, settingNodeKey);
+            redisTemplate.delete(mekListCacheKey);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -857,6 +947,14 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除 Mek 列表缓存。
+            String mekListCacheKey = parseCacheKey(mekListCachePrefix, settingNodeKey);
+            redisTemplate.delete(mekListCacheKey);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -937,6 +1035,10 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -1031,6 +1133,10 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -1127,6 +1233,10 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
             Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
             redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -1160,6 +1270,10 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String prefix, StringIdKey settingNodeKey, String language, String country, String variant
     ) {
         return prefix + settingNodeKey.getStringId() + "." + formatLocale(language, country, variant);
+    }
+
+    private String parseCacheKey(String prefix, StringIdKey settingNodeKey) {
+        return prefix + settingNodeKey.getStringId();
     }
 
     private String parseCacheKey(String prefix, StringIdKey settingNodeKey, String formattedLocale) {

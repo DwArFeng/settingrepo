@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
-    private static final long serialVersionUID = 2736931849264518502L;
+    private static final long serialVersionUID = 5925069339897126214L;
 
     public static FastJsonIahnNodeMessageTableInspectResult of(
             IahnNodeMessageTableInspectResult iahnNodeMessageTableInspectResult
@@ -34,6 +34,23 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
                     ).orElse(null),
                     Optional.ofNullable(iahnNodeMessageTableInspectResult.getRows()).map(
                             f -> f.stream().map(FastJsonRow::of).collect(Collectors.toList())
+                    ).orElse(null)
+            );
+        }
+    }
+
+    public static IahnNodeMessageTableInspectResult toStackBean(
+            FastJsonIahnNodeMessageTableInspectResult fastJson
+    ) {
+        if (Objects.isNull(fastJson)) {
+            return null;
+        } else {
+            return new IahnNodeMessageTableInspectResult(
+                    Optional.ofNullable(fastJson.getColumns()).map(
+                            f -> f.stream().map(FastJsonColumn::toStackBean).collect(Collectors.toList())
+                    ).orElse(null),
+                    Optional.ofNullable(fastJson.getRows()).map(
+                            f -> f.stream().map(FastJsonRow::toStackBean).collect(Collectors.toList())
                     ).orElse(null)
             );
         }
@@ -79,7 +96,7 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
     public static class FastJsonColumn implements Dto {
 
-        private static final long serialVersionUID = 2732399126503321691L;
+        private static final long serialVersionUID = -1275709862456796718L;
 
         public static FastJsonColumn of(Column column) {
             if (Objects.isNull(column)) {
@@ -91,6 +108,20 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
                         column.getVariant(),
                         column.getLabel(),
                         column.getRemark()
+                );
+            }
+        }
+
+        public static Column toStackBean(FastJsonColumn fastJson) {
+            if (Objects.isNull(fastJson)) {
+                return null;
+            } else {
+                return new Column(
+                        fastJson.getLanguage(),
+                        fastJson.getCountry(),
+                        fastJson.getVariant(),
+                        fastJson.getLabel(),
+                        fastJson.getRemark()
                 );
             }
         }
@@ -175,7 +206,7 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
     public static class FastJsonRow implements Dto {
 
-        private static final long serialVersionUID = -864384682524943876L;
+        private static final long serialVersionUID = 5630701631784431312L;
 
         public static FastJsonRow of(Row row) {
             if (Objects.isNull(row)) {
@@ -188,6 +219,22 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
                         row.getRemark(),
                         Optional.ofNullable(row.getRowDatas()).map(
                                 f -> f.stream().map(FastJsonRowData::of).collect(Collectors.toList())
+                        ).orElse(null)
+                );
+            }
+        }
+
+        public static Row toStackBean(FastJsonRow fastJson) {
+            if (Objects.isNull(fastJson)) {
+                return null;
+            } else {
+                return new Row(
+                        fastJson.getMekId(),
+                        fastJson.getLabel(),
+                        fastJson.getDefaultMessage(),
+                        fastJson.getRemark(),
+                        Optional.ofNullable(fastJson.getRowDatas()).map(
+                                f -> f.stream().map(FastJsonRowData::toStackBean).collect(Collectors.toList())
                         ).orElse(null)
                 );
             }
@@ -275,7 +322,7 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
 
     public static class FastJsonRowData implements Dto {
 
-        private static final long serialVersionUID = 3694522375231822075L;
+        private static final long serialVersionUID = 8247738317047395777L;
 
         public static FastJsonRowData of(RowData rowData) {
             if (Objects.isNull(rowData)) {
@@ -283,6 +330,16 @@ public class FastJsonIahnNodeMessageTableInspectResult implements Dto {
             } else {
                 return new FastJsonRowData(
                         rowData.getMessage()
+                );
+            }
+        }
+
+        public static RowData toStackBean(FastJsonRowData fastJson) {
+            if (Objects.isNull(fastJson)) {
+                return null;
+            } else {
+                return new RowData(
+                        fastJson.getMessage()
                 );
             }
         }
