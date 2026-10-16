@@ -82,7 +82,6 @@ public class NavigationNodeItemPresetCriteriaMaker implements PresetCriteriaMake
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private void childForParentIndexAsc(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
@@ -99,7 +98,6 @@ public class NavigationNodeItemPresetCriteriaMaker implements PresetCriteriaMake
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private void childForParentIndexDesc(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
@@ -116,7 +114,6 @@ public class NavigationNodeItemPresetCriteriaMaker implements PresetCriteriaMake
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private void childForParentIndexEq(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
@@ -214,7 +211,6 @@ public class NavigationNodeItemPresetCriteriaMaker implements PresetCriteriaMake
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private void childForNodeNameLike(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             if (Objects.isNull(objects[0])) {
