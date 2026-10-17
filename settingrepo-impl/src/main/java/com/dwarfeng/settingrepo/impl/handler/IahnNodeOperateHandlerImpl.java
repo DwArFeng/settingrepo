@@ -1242,6 +1242,48 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Override
+    public void clearCache(IahnNodeClearCacheInfo info) throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 清除地区映射缓存。
+            String localeMapCacheGeneralFormat = parseCacheGeneralFormat(localeMapCachePrefix, settingNodeKey);
+            Set<String> localeMapCacheKeys = redisTemplate.keys(localeMapCacheGeneralFormat);
+            redisTemplate.delete(localeMapCacheKeys);
+
+            // 清除消息映射缓存。
+            String messageMapCacheGeneralFormat = parseCacheGeneralFormat(messageMapCachePrefix, settingNodeKey);
+            Set<String> messageMapCacheKeys = redisTemplate.keys(messageMapCacheGeneralFormat);
+            redisTemplate.delete(messageMapCacheKeys);
+
+            // 清除地区列表缓存。
+            String localeListCacheKey = parseCacheKey(localeListCachePrefix, settingNodeKey);
+            redisTemplate.delete(localeListCacheKey);
+
+            // 清除 Mek 列表缓存。
+            String mekListCacheKey = parseCacheKey(mekListCachePrefix, settingNodeKey);
+            redisTemplate.delete(mekListCacheKey);
+
+            // 清除消息表缓存。
+            String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
+            redisTemplate.delete(messageTableCacheKey);
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
     // 为了代码的可读性，不简化此方法。
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean settingNodeMatching(SettingNode settingNode) {

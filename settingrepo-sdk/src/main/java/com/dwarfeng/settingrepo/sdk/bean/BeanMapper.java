@@ -364,6 +364,15 @@ public interface BeanMapper {
             WebInputIahnNodeMessageUpsertInfo webInputIahnNodeMessageUpsertInfo
     );
 
+    WebInputIahnNodeClearCacheInfo iahnNodeClearCacheInfoToWebInput(
+            IahnNodeClearCacheInfo iahnNodeClearCacheInfo
+    );
+
+    @InheritInverseConfiguration
+    IahnNodeClearCacheInfo iahnNodeClearCacheInfoFromWebInput(
+            WebInputIahnNodeClearCacheInfo webInputIahnNodeClearCacheInfo
+    );
+
     WebInputImageListNodeChangeOrderInfo imageListNodeChangeOrderInfoToWebInput(
             ImageListNodeChangeOrderInfo imageListNodeChangeOrderInfo
     );
@@ -827,6 +836,15 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     NavigationNodeUpdateInfo navigationNodeUpdateInfoFromWebInput(
             WebInputNavigationNodeUpdateInfo webInputNavigationNodeUpdateInfo
+    );
+
+    WebInputNavigationNodeClearCacheInfo navigationNodeClearCacheInfoToWebInput(
+            NavigationNodeClearCacheInfo navigationNodeClearCacheInfo
+    );
+
+    @InheritInverseConfiguration
+    NavigationNodeClearCacheInfo navigationNodeClearCacheInfoFromWebInput(
+            WebInputNavigationNodeClearCacheInfo webInputNavigationNodeClearCacheInfo
     );
 
     FastJsonKvNodeCountResult kvNodeCountResultToFastJson(KvNodeCountResult kvNodeCountResult);

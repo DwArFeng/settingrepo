@@ -77,4 +77,13 @@ public class NavigationNodeQosServiceImpl implements NavigationNodeQosService {
             throw ServiceExceptionHelper.logParse("格式化导航节点索引时发生异常", LogLevel.WARN, e, sem);
         }
     }
+
+    @Override
+    public void clearCache(NavigationNodeClearCacheInfo info) throws ServiceException {
+        try {
+            navigationNodeOperateHandler.clearCache(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("清除导航节点缓存时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
 }

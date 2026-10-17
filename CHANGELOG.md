@@ -4,7 +4,9 @@
 
 ### 功能构建
 
-- (无)
+- 为部分节点增加节点粒度清理缓存的能力。
+  - com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService。
+  - com.dwarfeng.settingrepo.stack.service.NavigationNodeOperateService。
 
 ### Bug 修复
 

@@ -36,6 +36,8 @@ public class NavigationNodeCommand extends CliCommand {
     private static final String COMMAND_OPTION_REMOVE_ITEM_LONG_OPT = "remove-item";
     private static final String COMMAND_OPTION_FORMAT_INDEX = "fi";
     private static final String COMMAND_OPTION_FORMAT_INDEX_LONG_OPT = "format-index";
+    private static final String COMMAND_OPTION_CLEAR_CACHE = "cc";
+    private static final String COMMAND_OPTION_CLEAR_CACHE_LONG_OPT = "clear-cache";
 
     private static final String[] COMMAND_OPTION_ARRAY = new String[]{
             COMMAND_OPTION_SIZE,
@@ -43,7 +45,8 @@ public class NavigationNodeCommand extends CliCommand {
             COMMAND_OPTION_INSERT_ITEM,
             COMMAND_OPTION_UPDATE_ITEM,
             COMMAND_OPTION_REMOVE_ITEM,
-            COMMAND_OPTION_FORMAT_INDEX
+            COMMAND_OPTION_FORMAT_INDEX,
+            COMMAND_OPTION_CLEAR_CACHE
     };
 
     private static final String COMMAND_SUB_OPTION_JSON = "json";
@@ -90,6 +93,9 @@ public class NavigationNodeCommand extends CliCommand {
                         "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
                 identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_FORMAT_INDEX) +
                         " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
+                        "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_CLEAR_CACHE) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
                         "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]"
         };
         return CliCommandUtil.cliSyntax(patterns);
@@ -108,6 +114,8 @@ public class NavigationNodeCommand extends CliCommand {
                 .optionalArg(true).hasArg(false).desc("移除导航节点条目").build());
         list.add(Option.builder(COMMAND_OPTION_FORMAT_INDEX).longOpt(COMMAND_OPTION_FORMAT_INDEX_LONG_OPT)
                 .optionalArg(true).hasArg(false).desc("格式化导航节点索引").build());
+        list.add(Option.builder(COMMAND_OPTION_CLEAR_CACHE).longOpt(COMMAND_OPTION_CLEAR_CACHE_LONG_OPT)
+                .optionalArg(true).hasArg(false).desc("清除导航节点缓存").build());
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
                 .hasArg(true).type(File.class).desc("JSON 文件").build());
@@ -140,6 +148,9 @@ public class NavigationNodeCommand extends CliCommand {
                 break;
             case COMMAND_OPTION_FORMAT_INDEX:
                 handleFormatIndex(context, cmd);
+                break;
+            case COMMAND_OPTION_CLEAR_CACHE:
+                handleClearCache(context, cmd);
                 break;
             default:
                 throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
@@ -291,5 +302,32 @@ public class NavigationNodeCommand extends CliCommand {
         }
         navigationNodeQosService.formatIndex(info);
         context.sendMessage("格式化成功");
+    }
+
+    private void handleClearCache(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        NavigationNodeClearCacheInfo info;
+        // 如果有 -json 选项，则从选项中获取 JSON，转化为 NavigationNodeClearCacheInfo。
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            info = WebInputNavigationNodeClearCacheInfo.toStackBean(
+                    JSON.parseObject(json, WebInputNavigationNodeClearCacheInfo.class)
+            );
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 NavigationNodeClearCacheInfo。
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            try (FileInputStream in = new FileInputStream(jsonFile)) {
+                info = WebInputNavigationNodeClearCacheInfo.toStackBean(
+                        JSON.parseObject(in, WebInputNavigationNodeClearCacheInfo.class)
+                );
+            }
+        } else {
+            throw new UnsupportedOperationException("not supported yet");
+        }
+
+        // 清除导航节点缓存。
+        navigationNodeQosService.clearCache(info);
+
+        // 输出结果。
+        context.sendMessage("清理缓存成功");
     }
 }

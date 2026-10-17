@@ -133,4 +133,13 @@ public class IahnNodeQosServiceImpl implements IahnNodeQosService {
             );
         }
     }
+
+    @Override
+    public void clearCache(IahnNodeClearCacheInfo info) throws ServiceException {
+        try {
+            iahnNodeOperateHandler.clearCache(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("清除国际化节点缓存时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
 }

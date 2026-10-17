@@ -116,4 +116,13 @@ public interface IahnNodeQosService extends Service {
      * @throws ServiceException 服务异常。
      */
     void batchUpsertMessageByMek(IahnNodeMessageUpsertByMekInfo info) throws ServiceException;
+
+    /**
+     * 清理国际化节点缓存。
+     *
+     * @param info 缓存清理信息。
+     * @throws ServiceException 服务异常。
+     * @since 3.0.4
+     */
+    void clearCache(IahnNodeClearCacheInfo info) throws ServiceException;
 }

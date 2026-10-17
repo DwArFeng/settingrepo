@@ -89,4 +89,13 @@ public interface NavigationNodeOperateHandler extends Handler {
      * @throws HandlerException 处理器异常。
      */
     void formatIndex(NavigationNodeFormatIndexInfo info) throws HandlerException;
+
+    /**
+     * 清理导航节点缓存。
+     *
+     * @param info 缓存清理信息。
+     * @throws HandlerException 处理器异常。
+     * @since 3.0.4
+     */
+    void clearCache(NavigationNodeClearCacheInfo info) throws HandlerException;
 }

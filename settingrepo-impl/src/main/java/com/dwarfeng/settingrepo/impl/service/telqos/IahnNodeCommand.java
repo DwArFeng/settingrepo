@@ -57,6 +57,8 @@ public class IahnNodeCommand extends CliCommand {
     @SuppressWarnings("SpellCheckingInspection")
     private static final String COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK = "bumm";
     private static final String COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK_LONG_OPT = "batch-upsert-message-by-mek";
+    private static final String COMMAND_OPTION_CLEAR_CACHE = "cc";
+    private static final String COMMAND_OPTION_CLEAR_CACHE_LONG_OPT = "clear-cache";
 
     private static final String[] COMMAND_OPTION_ARRAY = {
             COMMAND_OPTION_INSPECT_MESSAGE,
@@ -70,7 +72,8 @@ public class IahnNodeCommand extends CliCommand {
             COMMAND_OPTION_REMOVE_MEK,
             COMMAND_OPTION_UPSERT_MESSAGE,
             COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_LOCALE,
-            COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK
+            COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK,
+            COMMAND_OPTION_CLEAR_CACHE
     };
 
     private static final String COMMAND_SUB_OPTION_JSON = "json";
@@ -136,6 +139,9 @@ public class IahnNodeCommand extends CliCommand {
                         CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
                 identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK) +
                         " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
+                        CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_CLEAR_CACHE) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] [" +
                         CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]"
         };
         return CliCommandUtil.cliSyntax(patterns);
@@ -197,6 +203,10 @@ public class IahnNodeCommand extends CliCommand {
                         .desc("基于国际化 Mek 批量插入或更新国际化消息").build()
         );
         list.add(
+                Option.builder(COMMAND_OPTION_CLEAR_CACHE).longOpt(COMMAND_OPTION_CLEAR_CACHE_LONG_OPT)
+                        .desc("清除国际化节点缓存").build()
+        );
+        list.add(
                 Option.builder(COMMAND_SUB_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
         );
         list.add(
@@ -250,6 +260,9 @@ public class IahnNodeCommand extends CliCommand {
                 break;
             case COMMAND_OPTION_BATCH_UPSERT_MESSAGE_BY_MEK:
                 handleBatchUpsertMessageByMek(context, cmd);
+                break;
+            case COMMAND_OPTION_CLEAR_CACHE:
+                handleClearCache(context, cmd);
                 break;
             default:
                 throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
@@ -769,5 +782,32 @@ public class IahnNodeCommand extends CliCommand {
 
         // 输出结果。
         context.sendMessage("批量插入或更新成功");
+    }
+
+    private void handleClearCache(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        IahnNodeClearCacheInfo info;
+        // 如果有 -json 选项，则从选项中获取 JSON，转化为 IahnNodeClearCacheInfo。
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            info = WebInputIahnNodeClearCacheInfo.toStackBean(
+                    JSON.parseObject(json, WebInputIahnNodeClearCacheInfo.class)
+            );
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 IahnNodeClearCacheInfo。
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            try (FileInputStream in = new FileInputStream(jsonFile)) {
+                info = WebInputIahnNodeClearCacheInfo.toStackBean(
+                        JSON.parseObject(in, WebInputIahnNodeClearCacheInfo.class)
+                );
+            }
+        } else {
+            throw new UnsupportedOperationException("not supported yet");
+        }
+
+        // 清除国际化节点缓存。
+        iahnNodeQosService.clearCache(info);
+
+        // 输出结果。
+        context.sendMessage("清理缓存成功");
     }
 }

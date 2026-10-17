@@ -621,6 +621,29 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
         }
     }
 
+    @BehaviorAnalyse
+    @Override
+    public void clearCache(NavigationNodeClearCacheInfo info) throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 清除查看结果缓存。
+            String inspectResultCacheKey = parseCacheKey(inspectResultCachePrefix, settingNodeKey);
+            redisTemplate.delete(inspectResultCacheKey);
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
     // 为了代码的可读性，不简化此方法。
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean settingNodeMatching(SettingNode settingNode) {
