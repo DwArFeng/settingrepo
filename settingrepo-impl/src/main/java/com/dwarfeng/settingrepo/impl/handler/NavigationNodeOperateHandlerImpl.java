@@ -1,6 +1,5 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonNavigationNodeInspectResult;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
@@ -26,6 +25,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHandler {
@@ -38,7 +38,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
 
     private final FormatLocalCacheHandler formatLocalCacheHandler;
 
-    private final RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     private final KeyGenerator<LongIdKey> keyGenerator;
 
@@ -59,7 +59,7 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             NavigationNodeMaintainService navigationNodeMaintainService,
             NavigationNodeItemMaintainService navigationNodeItemMaintainService,
             FormatLocalCacheHandler formatLocalCacheHandler,
-            RedisTemplate<String, String> redisTemplate,
+            RedisTemplate<String, Object> redisTemplate,
             KeyGenerator<LongIdKey> keyGenerator,
             HandlerValidator handlerValidator
     ) {
@@ -149,9 +149,8 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
             NavigationNodeInspectResult result;
             String inspectResultCacheKey = parseCacheKey(inspectResultCachePrefix, settingNodeKey);
             if (redisTemplate.hasKey(inspectResultCacheKey)) {
-                String resultString = redisTemplate.opsForValue().get(inspectResultCacheKey);
                 result = FastJsonNavigationNodeInspectResult.toStackBean(
-                        JSON.parseObject(resultString, FastJsonNavigationNodeInspectResult.class)
+                        (FastJsonNavigationNodeInspectResult) redisTemplate.opsForValue().get(inspectResultCacheKey)
                 );
             } else {
                 List<NavigationNodeInspectResult.Item> children = findNavigationNodeItemDescendant(settingNodeKey);
@@ -160,8 +159,12 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
                         navigationNode.getContent(),
                         children
                 );
-                String resultString = JSON.toJSONString(FastJsonNavigationNodeInspectResult.of(result));
-                redisTemplate.opsForValue().set(inspectResultCacheKey, resultString, inspectResultCacheTimeout);
+                redisTemplate.opsForValue().set(
+                        inspectResultCacheKey,
+                        Objects.requireNonNull(FastJsonNavigationNodeInspectResult.of(result)),
+                        inspectResultCacheTimeout,
+                        TimeUnit.MILLISECONDS
+                );
             }
 
             // 返回结果。

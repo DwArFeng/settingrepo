@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 优化部分节点缓存的数据格式。
+  - com.dwarfeng.settingrepo.impl.handler.IahnNodeOperateHandlerImpl。
+  - com.dwarfeng.settingrepo.impl.handler.NavigationNodeOperateHandlerImpl。
+
 - 为部分节点增加节点粒度清理缓存的能力。
   - com.dwarfeng.settingrepo.stack.service.IahnNodeOperateService。
   - com.dwarfeng.settingrepo.stack.service.NavigationNodeOperateService。
