@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh-CN/Formatter.md。
+  - docs/wiki/zh-CN/PresetFormatterImplements.md。
+
 - 优化部分节点缓存的数据格式。
   - com.dwarfeng.settingrepo.impl.handler.IahnNodeOperateHandlerImpl。
   - com.dwarfeng.settingrepo.impl.handler.NavigationNodeOperateHandlerImpl。
