@@ -1,0 +1,19 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "language": "zh",
+  "country": "CN",
+  "variant": null,
+  "items": [
+    {
+      "mek_id": "example.mek.1",
+      "message": "示例消息一"
+    },
+    {
+      "mek_id": "example.mek.2",
+      "message": "示例消息二"
+    }
+  ]
+}

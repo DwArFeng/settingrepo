@@ -4,6 +4,8 @@
 
 ### 功能构建
 
+- 新增 Telqos 运维手册。
+
 - Wiki 编写。
   - docs/wiki/zh-CN/Formatter.md。
   - docs/wiki/zh-CN/PresetFormatterImplements.md。

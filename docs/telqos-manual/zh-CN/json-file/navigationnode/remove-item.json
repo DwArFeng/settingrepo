@@ -1,0 +1,9 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "item_key": {
+    "long_id": 1
+  }
+}

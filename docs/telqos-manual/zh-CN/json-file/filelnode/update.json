@@ -1,0 +1,8 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "index": 0,
+  "file_path": "confext/telqos/ltxt/bar.txt"
+}

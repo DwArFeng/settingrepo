@@ -27,6 +27,12 @@ wiki 为项目的开发人员为本项目编写的详细文档，包含不同语
 1. [简介](./Introduction.md) - 即本文件。
 2. [目录](./Contents.md) - 文档目录。
 
+### telqos-manual
+
+Telqos 运维手册，包含连接方式、命令说明以及可直接修改并用于 `-jf` 选项的 JSON 输入文件。主要入口为：
+
+1. [Telqos 运维手册](../../telqos-manual/README.md) - Telqos 使用指南与 JSON 输入文件索引。
+
 ## 运行截图
 
 Telnet 运维平台 banner：

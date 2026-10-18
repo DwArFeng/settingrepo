@@ -1,0 +1,10 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "mek_id": "example.mek",
+  "label": "示例标签",
+  "default_message": "示例默认消息",
+  "remark": "示例备注"
+}

@@ -1,0 +1,13 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "parent_item_key": {
+    "long_id": 1
+  },
+  "index": 0,
+  "name": "示例条目",
+  "content": "示例内容",
+  "remark": "示例备注"
+}

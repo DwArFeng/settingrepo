@@ -1,0 +1,11 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "language": "zh",
+  "country": "CN",
+  "variant": null,
+  "label": "示例标签",
+  "remark": "示例备注"
+}
