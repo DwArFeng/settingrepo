@@ -65,4 +65,13 @@ public interface KvNodeOperateHandler extends Handler {
      * @throws HandlerException 处理器异常。
      */
     void clear(KvNodeClearInfo info) throws HandlerException;
+
+    /**
+     * 清理键值对节点缓存。
+     *
+     * @param info 缓存清理信息。
+     * @throws HandlerException 处理器异常。
+     * @since 3.1.0
+     */
+    void clearCache(KvNodeClearCacheInfo info) throws HandlerException;
 }

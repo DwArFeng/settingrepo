@@ -1,5 +1,6 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonKvNodeItemInspectResult;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
 import com.dwarfeng.settingrepo.stack.bean.entity.KvNode;
@@ -15,11 +16,15 @@ import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -37,19 +42,28 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
 
     private final FormatLocalCacheHandler formatLocalCacheHandler;
 
+    private final RedisTemplate<String, Object> redisTemplate;
+
     private final HandlerValidator handlerValidator;
+
+    @Value("${com.dwarfeng.settingrepo.kv.cache.prefix.inspect_result}")
+    private String inspectResultCachePrefix;
+    @Value("${com.dwarfeng.settingrepo.kv.cache.timeout.inspect_result}")
+    private long inspectResultCacheTimeout;
 
     public KvNodeOperateHandlerImpl(
             SettingNodeMaintainService settingNodeMaintainService,
             KvNodeMaintainService kvNodeMaintainService,
             KvNodeItemMaintainService kvNodeItemMaintainService,
             FormatLocalCacheHandler formatLocalCacheHandler,
+            RedisTemplate<String, Object> redisTemplate,
             HandlerValidator handlerValidator
     ) {
         this.settingNodeMaintainService = settingNodeMaintainService;
         this.kvNodeMaintainService = kvNodeMaintainService;
         this.kvNodeItemMaintainService = kvNodeItemMaintainService;
         this.formatLocalCacheHandler = formatLocalCacheHandler;
+        this.redisTemplate = redisTemplate;
         this.handlerValidator = handlerValidator;
     }
 
@@ -161,20 +175,37 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
                 return null;
             }
 
-            // 若键值对节点记录不存在则初始化。
-            ensureKvNode(settingNodeKey);
+            // 读取 KvNodeItemInspectResult。
+            KvNodeItemInspectResult result;
+            String inspectResultCacheKey = parseCacheKey(inspectResultCachePrefix, settingNodeKey, itemStringId);
+            if (redisTemplate.hasKey(inspectResultCacheKey)) {
+                result = FastJsonKvNodeItemInspectResult.toStackBean(
+                        (FastJsonKvNodeItemInspectResult) redisTemplate.opsForValue().get(inspectResultCacheKey)
+                );
+            } else {
+                // 若键值对节点记录不存在则初始化。
+                ensureKvNode(settingNodeKey);
 
-            // 构造条目主键并查询实体。
-            KvNodeItemKey itemKey = new KvNodeItemKey(settingNodeKey.getStringId(), itemStringId);
-            KvNodeItem kvNodeItem = kvNodeItemMaintainService.getIfExists(itemKey);
+                // 构造条目主键并查询实体。
+                KvNodeItemKey itemKey = new KvNodeItemKey(settingNodeKey.getStringId(), itemStringId);
+                KvNodeItem kvNodeItem = kvNodeItemMaintainService.getIfExists(itemKey);
 
-            // 如果条目不存在，则返回 value 为 null 的结果。
-            if (Objects.isNull(kvNodeItem)) {
-                return new KvNodeItemInspectResult(null);
+                // 如果条目不存在，则返回 value 为 null 的结果。
+                if (Objects.isNull(kvNodeItem)) {
+                    result = new KvNodeItemInspectResult(null);
+                } else {
+                    result = new KvNodeItemInspectResult(kvNodeItem.getValue());
+                }
+                redisTemplate.opsForValue().set(
+                        inspectResultCacheKey,
+                        Objects.requireNonNull(FastJsonKvNodeItemInspectResult.of(result)),
+                        inspectResultCacheTimeout,
+                        TimeUnit.MILLISECONDS
+                );
             }
 
-            // 构造 KvNodeItemInspectResult 并返回。
-            return new KvNodeItemInspectResult(kvNodeItem.getValue());
+            // 返回结果。
+            return result;
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -211,6 +242,13 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
 
             // 根据当前条目数量同步键值对节点的 count。
             syncKvNodeCountFromItems(settingNodeKey, kvNode);
+
+            // 清除查询结果缓存。
+            String inspectResultCacheGeneralFormat = parseCacheGeneralFormat(
+                    inspectResultCachePrefix, settingNodeKey
+            );
+            Set<String> inspectResultCacheKeys = redisTemplate.keys(inspectResultCacheGeneralFormat);
+            redisTemplate.delete(inspectResultCacheKeys);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -247,6 +285,13 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
 
             // 根据当前条目数量同步键值对节点的 count。
             syncKvNodeCountFromItems(settingNodeKey, kvNode);
+
+            // 清除查询结果缓存。
+            String inspectResultCacheGeneralFormat = parseCacheGeneralFormat(
+                    inspectResultCachePrefix, settingNodeKey
+            );
+            Set<String> inspectResultCacheKeys = redisTemplate.keys(inspectResultCacheGeneralFormat);
+            redisTemplate.delete(inspectResultCacheKeys);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -288,6 +333,39 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
 
             // 根据当前条目数量同步键值对节点的 count（清空后应为 0）。
             syncKvNodeCountFromItems(settingNodeKey, kvNode);
+
+            // 清除查询结果缓存。
+            String inspectResultCacheGeneralFormat = parseCacheGeneralFormat(
+                    inspectResultCachePrefix, settingNodeKey
+            );
+            Set<String> inspectResultCacheKeys = redisTemplate.keys(inspectResultCacheGeneralFormat);
+            redisTemplate.delete(inspectResultCacheKeys);
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
+    @BehaviorAnalyse
+    @Override
+    public void clearCache(KvNodeClearCacheInfo info) throws HandlerException {
+        try {
+            // 展开参数。
+            String category = info.getCategory();
+            String[] args = info.getArgs();
+
+            // 确认设置类别存在。
+            StringIdKey settingCategoryKey = new StringIdKey(category);
+            handlerValidator.makeSureSettingCategoryExists(settingCategoryKey);
+
+            // 根据 category 以及 args 获取对应的设置节点主键。
+            StringIdKey settingNodeKey = formatLocalCacheHandler.get(settingCategoryKey).format(args);
+
+            // 清除查询结果缓存。
+            String inspectResultCacheGeneralFormat = parseCacheGeneralFormat(
+                    inspectResultCachePrefix, settingNodeKey
+            );
+            Set<String> inspectResultCacheKeys = redisTemplate.keys(inspectResultCacheGeneralFormat);
+            redisTemplate.delete(inspectResultCacheKeys);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -333,6 +411,15 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
             return false;
         }
         return Objects.equals(settingNode.getType(), Constants.SETTING_NODE_TYPE_KV);
+    }
+
+    private String parseCacheKey(String prefix, StringIdKey settingNodeKey, String itemStringId) {
+        return prefix + settingNodeKey.getStringId() + "." + itemStringId;
+    }
+
+    private String parseCacheGeneralFormat(String prefix, StringIdKey settingNodeKey) {
+        return prefix + settingNodeKey.getStringId() +
+                com.dwarfeng.subgrade.sdk.common.Constants.REDIS_KEY_WILDCARD_CHARACTER;
     }
 
     // 获取键值对节点实体；若不存在则初始化为 count 为 0 并插入或更新。

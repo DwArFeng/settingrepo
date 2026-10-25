@@ -869,6 +869,15 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     KvNodeClearInfo kvNodeClearInfoFromWebInput(WebInputKvNodeClearInfo webInputKvNodeClearInfo);
 
+    WebInputKvNodeClearCacheInfo kvNodeClearCacheInfoToWebInput(
+            KvNodeClearCacheInfo kvNodeClearCacheInfo
+    );
+
+    @InheritInverseConfiguration
+    KvNodeClearCacheInfo kvNodeClearCacheInfoFromWebInput(
+            WebInputKvNodeClearCacheInfo webInputKvNodeClearCacheInfo
+    );
+
     WebInputKvNodeCountInfo kvNodeCountInfoToWebInput(KvNodeCountInfo kvNodeCountInfo);
 
     @InheritInverseConfiguration

@@ -39,6 +39,8 @@ public class KvNodeCommand extends CliCommand {
     private static final String COMMAND_OPTION_REMOVE_ITEM_LONG_OPT = "remove-item";
     private static final String COMMAND_OPTION_CLEAR = "clr";
     private static final String COMMAND_OPTION_CLEAR_LONG_OPT = "clear";
+    private static final String COMMAND_OPTION_CLEAR_CACHE = "cc";
+    private static final String COMMAND_OPTION_CLEAR_CACHE_LONG_OPT = "clear-cache";
 
     private static final String[] COMMAND_OPTION_ARRAY = new String[]{
             COMMAND_OPTION_COUNT,
@@ -46,7 +48,8 @@ public class KvNodeCommand extends CliCommand {
             COMMAND_OPTION_INSPECT_ITEM,
             COMMAND_OPTION_PUT_ITEM,
             COMMAND_OPTION_REMOVE_ITEM,
-            COMMAND_OPTION_CLEAR
+            COMMAND_OPTION_CLEAR,
+            COMMAND_OPTION_CLEAR_CACHE
     };
 
     private static final String COMMAND_SUB_OPTION_JSON = "json";
@@ -93,6 +96,9 @@ public class KvNodeCommand extends CliCommand {
                         "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
                 identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_CLEAR) +
                         " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
+                        "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]",
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_CLEAR_CACHE) +
+                        " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
                         "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]"
         };
         return CliCommandUtil.cliSyntax(patterns);
@@ -113,6 +119,8 @@ public class KvNodeCommand extends CliCommand {
                 .optionalArg(true).hasArg(false).desc("移除键值对节点中的指定条目").build());
         list.add(Option.builder(COMMAND_OPTION_CLEAR).longOpt(COMMAND_OPTION_CLEAR_LONG_OPT)
                 .optionalArg(true).hasArg(false).desc("清空键值对节点中的全部条目").build());
+        list.add(Option.builder(COMMAND_OPTION_CLEAR_CACHE).longOpt(COMMAND_OPTION_CLEAR_CACHE_LONG_OPT)
+                .optionalArg(true).hasArg(false).desc("清除键值对节点缓存").build());
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build());
         list.add(Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
                 .hasArg(true).type(File.class).desc("JSON 文件").build());
@@ -145,6 +153,9 @@ public class KvNodeCommand extends CliCommand {
                 break;
             case COMMAND_OPTION_CLEAR:
                 handleClear(context, cmd);
+                break;
+            case COMMAND_OPTION_CLEAR_CACHE:
+                handleClearCache(context, cmd);
                 break;
             default:
                 throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
@@ -304,5 +315,26 @@ public class KvNodeCommand extends CliCommand {
         }
         kvNodeQosService.clear(info);
         context.sendMessage("清空成功");
+    }
+
+    private void handleClearCache(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        KvNodeClearCacheInfo info;
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
+            info = WebInputKvNodeClearCacheInfo.toStackBean(
+                    JSON.parseObject(json, WebInputKvNodeClearCacheInfo.class)
+            );
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
+            try (FileInputStream in = new FileInputStream(jsonFile)) {
+                info = WebInputKvNodeClearCacheInfo.toStackBean(
+                        JSON.parseObject(in, WebInputKvNodeClearCacheInfo.class)
+                );
+            }
+        } else {
+            throw new UnsupportedOperationException("not supported yet");
+        }
+        kvNodeQosService.clearCache(info);
+        context.sendMessage("清理缓存成功");
     }
 }

@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class FastJsonKvNodeItemInspectResult implements Bean {
 
-    private static final long serialVersionUID = 2010463673493731983L;
+    private static final long serialVersionUID = 7205439635561614694L;
 
     public static FastJsonKvNodeItemInspectResult of(KvNodeItemInspectResult kvNodeItemInspectResult) {
         if (Objects.isNull(kvNodeItemInspectResult)) {
@@ -22,6 +22,16 @@ public class FastJsonKvNodeItemInspectResult implements Bean {
         } else {
             return new FastJsonKvNodeItemInspectResult(
                     kvNodeItemInspectResult.getValue()
+            );
+        }
+    }
+
+    public static KvNodeItemInspectResult toStackBean(FastJsonKvNodeItemInspectResult fastJson) {
+        if (Objects.isNull(fastJson)) {
+            return null;
+        } else {
+            return new KvNodeItemInspectResult(
+                    fastJson.getValue()
             );
         }
     }

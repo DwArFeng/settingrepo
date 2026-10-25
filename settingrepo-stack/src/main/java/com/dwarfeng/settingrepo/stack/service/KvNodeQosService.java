@@ -65,4 +65,13 @@ public interface KvNodeQosService extends Service {
      * @throws ServiceException 服务异常。
      */
     void clear(KvNodeClearInfo info) throws ServiceException;
+
+    /**
+     * 清理键值对节点缓存。
+     *
+     * @param info 缓存清理信息。
+     * @throws ServiceException 服务异常。
+     * @since 3.1.0
+     */
+    void clearCache(KvNodeClearCacheInfo info) throws ServiceException;
 }

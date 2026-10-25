@@ -74,4 +74,13 @@ public class KvNodeQosServiceImpl implements KvNodeQosService {
             throw ServiceExceptionHelper.logParse("清空键值对节点时发生异常", LogLevel.WARN, e, sem);
         }
     }
+
+    @Override
+    public void clearCache(KvNodeClearCacheInfo info) throws ServiceException {
+        try {
+            kvNodeOperateHandler.clearCache(info);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("清除键值对节点缓存时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
 }
