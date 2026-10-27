@@ -25,6 +25,22 @@
             update-allowed="${com.dwarfeng.settingrepo.datamark.setting_node.update_allowed}"
     />
 
+    <!-- WarmupSetting 数据标识。 -->
+    <datamark:handler
+            handler-name="warmupSettingDatamarkHandler"
+            resource-url="${com.dwarfeng.settingrepo.datamark.warmup_setting.resource_url}"
+            resource-charset="${com.dwarfeng.settingrepo.datamark.warmup_setting.resource_charset}"
+            update-allowed="${com.dwarfeng.settingrepo.datamark.warmup_setting.update_allowed}"
+    />
+
+    <!-- WarmupDriverInfo 数据标识。 -->
+    <datamark:handler
+            handler-name="warmupDriverInfoDatamarkHandler"
+            resource-url="${com.dwarfeng.settingrepo.datamark.warmup_driver_info.resource_url}"
+            resource-charset="${com.dwarfeng.settingrepo.datamark.warmup_driver_info.resource_charset}"
+            update-allowed="${com.dwarfeng.settingrepo.datamark.warmup_driver_info.update_allowed}"
+    />
+
     <!-- QoS 服务。 -->
     <datamark:qos/>
 </beans>

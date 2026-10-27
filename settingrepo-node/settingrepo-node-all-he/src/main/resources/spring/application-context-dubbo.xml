@@ -200,6 +200,22 @@
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
     />
 
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.WarmupDriverInfoMaintainService"
+            ref="warmupDriverInfoMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.WarmupSettingMaintainService"
+            ref="warmupSettingMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.WarmupDriverSupportMaintainService"
+            ref="warmupDriverSupportMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+
     <!-- endregion -->
 
     <!-- endregion -->

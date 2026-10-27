@@ -6,10 +6,7 @@ import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeLocaleKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMekKey;
 import com.dwarfeng.settingrepo.stack.bean.key.IahnNodeMessageKey;
 import com.dwarfeng.settingrepo.stack.bean.key.KvNodeItemKey;
-import com.dwarfeng.settingrepo.stack.cache.FormatterSupportCache;
-import com.dwarfeng.settingrepo.stack.cache.IahnNodeMessageCache;
-import com.dwarfeng.settingrepo.stack.cache.KvNodeItemCache;
-import com.dwarfeng.settingrepo.stack.cache.TextNodeCache;
+import com.dwarfeng.settingrepo.stack.cache.*;
 import com.dwarfeng.settingrepo.stack.dao.*;
 import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
 import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
@@ -67,6 +64,12 @@ public class ServiceConfiguration {
     private final KvNodeDao kvNodeDao;
     private final KvNodeItemDao kvNodeItemDao;
     private final KvNodeItemCache kvNodeItemCache;
+    private final WarmupDriverInfoDao warmupDriverInfoDao;
+    private final WarmupDriverInfoCache warmupDriverInfoCache;
+    private final WarmupDriverSupportDao warmupDriverSupportDao;
+    private final WarmupDriverSupportCache warmupDriverSupportCache;
+    private final WarmupSettingCrudOperation warmupSettingCrudOperation;
+    private final WarmupSettingDao warmupSettingDao;
 
     @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -76,6 +79,10 @@ public class ServiceConfiguration {
     private long iahnNodeMessageTimeout;
     @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.kv_node_item}")
     private long kvNodeItemTimeout;
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.warmup_driver_info}")
+    private long warmupDriverInfoTimeout;
+    @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.warmup_driver_support}")
+    private long warmupDriverSupportTimeout;
 
     public ServiceConfiguration(
             ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration,
@@ -117,7 +124,13 @@ public class ServiceConfiguration {
             KvNodeCrudOperation kvNodeCrudOperation,
             KvNodeDao kvNodeDao,
             KvNodeItemDao kvNodeItemDao,
-            KvNodeItemCache kvNodeItemCache
+            KvNodeItemCache kvNodeItemCache,
+            WarmupDriverInfoDao warmupDriverInfoDao,
+            WarmupDriverInfoCache warmupDriverInfoCache,
+            WarmupDriverSupportDao warmupDriverSupportDao,
+            WarmupDriverSupportCache warmupDriverSupportCache,
+            WarmupSettingCrudOperation warmupSettingCrudOperation,
+            WarmupSettingDao warmupSettingDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -159,6 +172,12 @@ public class ServiceConfiguration {
         this.kvNodeDao = kvNodeDao;
         this.kvNodeItemDao = kvNodeItemDao;
         this.kvNodeItemCache = kvNodeItemCache;
+        this.warmupDriverInfoDao = warmupDriverInfoDao;
+        this.warmupDriverInfoCache = warmupDriverInfoCache;
+        this.warmupDriverSupportDao = warmupDriverSupportDao;
+        this.warmupDriverSupportCache = warmupDriverSupportCache;
+        this.warmupSettingCrudOperation = warmupSettingCrudOperation;
+        this.warmupSettingDao = warmupSettingDao;
     }
 
     @Bean
@@ -698,6 +717,94 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 kvNodeItemDao
+        );
+    }
+
+    @Bean
+    public GeneralBatchCrudService<LongIdKey, WarmupDriverInfo> warmupDriverInfoGeneralBatchCrudService() {
+        return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupDriverInfoDao,
+                warmupDriverInfoCache,
+                generateConfiguration.snowflakeLongIdKeyGenerator(),
+                warmupDriverInfoTimeout
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<WarmupDriverInfo> warmupDriverInfoDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupDriverInfoDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<WarmupDriverInfo> warmupDriverInfoDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupDriverInfoDao
+        );
+    }
+
+    @Bean
+    public GeneralBatchCrudService<StringIdKey, WarmupDriverSupport> warmupDriverSupportGeneralBatchCrudService() {
+        return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupDriverSupportDao,
+                warmupDriverSupportCache,
+                new ExceptionKeyGenerator<>(),
+                warmupDriverSupportTimeout
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<WarmupDriverSupport> warmupDriverSupportDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupDriverSupportDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<WarmupDriverSupport> warmupDriverSupportDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupDriverSupportDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<LongIdKey, WarmupSetting> warmupSettingCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupSettingCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<WarmupSetting> warmupSettingDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupSettingDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<WarmupSetting> warmupSettingDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                warmupSettingDao
         );
     }
 }

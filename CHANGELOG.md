@@ -4,6 +4,11 @@
 
 ### 功能构建
 
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.service.WarmupDriverInfoMaintainService。
+  - com.dwarfeng.settingrepo.stack.service.WarmupDriverSupportMaintainService。
+  - com.dwarfeng.settingrepo.stack.service.WarmupSettingMaintainService。
+
 - 增加部分节点操作服务有关 TTL 的方法。
   - com.dwarfeng.settingrepo.stack.handler.IahnNodeOperateHandler。
   - com.dwarfeng.settingrepo.stack.handler.KvNodeOperateHandler。

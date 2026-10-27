@@ -40,6 +40,9 @@ public class FastJsonConfiguration {
         ParserConfig.getGlobalInstance().addAccept(FastJsonIahnNodeMekListInspectResult.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonIahnNodeMessageTableInspectResult.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonNavigationNodeInspectResult.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupDriverInfo.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupDriverSupport.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupSetting.class.getCanonicalName());
         LOGGER.debug("FastJson autotype 白名单配置完毕");
     }
 }

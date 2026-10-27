@@ -238,5 +238,32 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     KvNodeItem kvNodeItemFromHibernate(HibernateKvNodeItem hibernateKvNodeItem);
 
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "longId", ignore = true)
+    @Mapping(target = "driverInfos", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateWarmupSetting warmupSettingToHibernate(WarmupSetting warmupSetting);
+
+    @InheritInverseConfiguration
+    WarmupSetting warmupSettingFromHibernate(HibernateWarmupSetting hibernateWarmupSetting);
+
+    @Mapping(target = "warmupSettingLongId", ignore = true)
+    @Mapping(target = "warmupSetting", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "longId", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateWarmupDriverInfo warmupDriverInfoToHibernate(WarmupDriverInfo warmupDriverInfo);
+
+    @InheritInverseConfiguration
+    WarmupDriverInfo warmupDriverInfoFromHibernate(HibernateWarmupDriverInfo hibernateWarmupDriverInfo);
+
+    @Mapping(target = "stringId", ignore = true)
+    HibernateWarmupDriverSupport warmupDriverSupportToHibernate(WarmupDriverSupport warmupDriverSupport);
+
+    @InheritInverseConfiguration
+    WarmupDriverSupport warmupDriverSupportFromHibernate(
+            HibernateWarmupDriverSupport hibernateWarmupDriverSupport
+    );
+
     // endregion
 }

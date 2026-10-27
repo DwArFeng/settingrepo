@@ -214,6 +214,43 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     KvNodeItem kvNodeItemFromFastJson(FastJsonKvNodeItem fastJsonKvNodeItem);
 
+    FastJsonWarmupSetting warmupSettingToFastJson(WarmupSetting warmupSetting);
+
+    @InheritInverseConfiguration
+    WarmupSetting warmupSettingFromFastJson(FastJsonWarmupSetting fastJsonWarmupSetting);
+
+    FastJsonWarmupDriverInfo warmupDriverInfoToFastJson(WarmupDriverInfo warmupDriverInfo);
+
+    @InheritInverseConfiguration
+    WarmupDriverInfo warmupDriverInfoFromFastJson(FastJsonWarmupDriverInfo fastJsonWarmupDriverInfo);
+
+    FastJsonWarmupDriverSupport warmupDriverSupportToFastJson(WarmupDriverSupport warmupDriverSupport);
+
+    @InheritInverseConfiguration
+    WarmupDriverSupport warmupDriverSupportFromFastJson(FastJsonWarmupDriverSupport fastJsonWarmupDriverSupport);
+
+    JSFixedFastJsonWarmupSetting warmupSettingToJSFixedFastJson(WarmupSetting warmupSetting);
+
+    @InheritInverseConfiguration
+    WarmupSetting warmupSettingFromJSFixedFastJson(JSFixedFastJsonWarmupSetting jSFixedFastJsonWarmupSetting);
+
+    JSFixedFastJsonWarmupDriverInfo warmupDriverInfoToJSFixedFastJson(WarmupDriverInfo warmupDriverInfo);
+
+    @InheritInverseConfiguration
+    WarmupDriverInfo warmupDriverInfoFromJSFixedFastJson(
+            JSFixedFastJsonWarmupDriverInfo jSFixedFastJsonWarmupDriverInfo
+    );
+
+    WebInputWarmupSetting warmupSettingToWebInput(WarmupSetting warmupSetting);
+
+    @InheritInverseConfiguration
+    WarmupSetting warmupSettingFromWebInput(WebInputWarmupSetting webInputWarmupSetting);
+
+    WebInputWarmupDriverInfo warmupDriverInfoToWebInput(WarmupDriverInfo warmupDriverInfo);
+
+    @InheritInverseConfiguration
+    WarmupDriverInfo warmupDriverInfoFromWebInput(WebInputWarmupDriverInfo webInputWarmupDriverInfo);
+
     // endregion
 
     // region Settingrepo DTO
