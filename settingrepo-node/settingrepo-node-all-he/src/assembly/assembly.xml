@@ -42,6 +42,15 @@
             <fileMode>0644</fileMode>
         </fileSet>
         <fileSet>
+            <outputDirectory>docs</outputDirectory>
+            <directory>../../docs</directory>
+            <includes>
+                <include>telqos-manual/**/*.json</include>
+            </includes>
+            <filtered>false</filtered>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
             <outputDirectory>bin</outputDirectory>
             <directory>src/main/resources/binres</directory>
             <includes>
