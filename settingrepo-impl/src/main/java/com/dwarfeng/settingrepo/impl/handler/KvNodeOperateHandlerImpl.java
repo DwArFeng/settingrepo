@@ -154,6 +154,18 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
     @BehaviorAnalyse
     @Override
     public KvNodeItemInspectResult inspectItem(KvNodeItemInspectInfo info) throws HandlerException {
+        return doInspectItem(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Override
+    public KvNodeItemInspectResult inspectItemWithResetTtl(KvNodeItemInspectInfo info) throws HandlerException {
+        return doInspectItem(info, true);
+    }
+
+    private KvNodeItemInspectResult doInspectItem(KvNodeItemInspectInfo info, boolean resetTtl)
+            throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -182,6 +194,12 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
                 result = FastJsonKvNodeItemInspectResult.toStackBean(
                         (FastJsonKvNodeItemInspectResult) redisTemplate.opsForValue().get(inspectResultCacheKey)
                 );
+                // 需要重置缓存 TTL 时，在命中分支中刷新缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            inspectResultCacheKey, inspectResultCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 // 若键值对节点记录不存在则初始化。
                 ensureKvNode(settingNodeKey);

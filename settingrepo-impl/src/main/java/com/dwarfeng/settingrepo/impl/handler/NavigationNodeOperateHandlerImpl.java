@@ -116,6 +116,18 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
     @BehaviorAnalyse
     @Override
     public NavigationNodeInspectResult inspect(NavigationNodeInspectInfo info) throws HandlerException {
+        return doInspect(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Override
+    public NavigationNodeInspectResult inspectWithResetTtl(NavigationNodeInspectInfo info) throws HandlerException {
+        return doInspect(info, true);
+    }
+
+    private NavigationNodeInspectResult doInspect(NavigationNodeInspectInfo info, boolean resetTtl)
+            throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -152,6 +164,12 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
                 result = FastJsonNavigationNodeInspectResult.toStackBean(
                         (FastJsonNavigationNodeInspectResult) redisTemplate.opsForValue().get(inspectResultCacheKey)
                 );
+                // 需要重置缓存 TTL 时，在命中分支中刷新缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            inspectResultCacheKey, inspectResultCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 List<NavigationNodeInspectResult.Item> children = findNavigationNodeItemDescendant(settingNodeKey);
                 result = new NavigationNodeInspectResult(

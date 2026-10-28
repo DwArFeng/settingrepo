@@ -96,6 +96,20 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     @BehaviorAnalyse
     @Override
     public IahnNodeMessageInspectResult inspectMessage(IahnNodeMessageInspectInfo info) throws HandlerException {
+        return doInspectMessage(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeMessageInspectResult inspectMessageWithResetTtl(IahnNodeMessageInspectInfo info)
+            throws HandlerException {
+        return doInspectMessage(info, true);
+    }
+
+    private IahnNodeMessageInspectResult doInspectMessage(IahnNodeMessageInspectInfo info, boolean resetTtl)
+            throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -129,6 +143,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String matchedFormattedLocale;
             if (redisTemplate.hasKey(localMapCacheKey)) {
                 matchedFormattedLocale = (String) redisTemplate.opsForValue().get(localMapCacheKey);
+                // 需要重置缓存 TTL 时，在命中分支中刷新地区映射缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            localMapCacheKey, localeMapCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 matchedFormattedLocale = findMatchedFormattedLocale(settingNodeKey, language, country, variant);
                 if (Objects.isNull(matchedFormattedLocale)) {
@@ -146,6 +166,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             HashOperations<String, String, Object> hashOperations = redisTemplate.opsForHash();
             if (redisTemplate.hasKey(messageMapCacheKey)) {
                 message = (String) hashOperations.get(messageMapCacheKey, mekId);
+                // 需要重置缓存 TTL 时，在命中分支中刷新消息映射缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            messageMapCacheKey, messageMapCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 List<MekMessagePair> mekMessagePairs = lookupMekMessagePair(settingNodeKey, matchedFormattedLocale);
                 message = null;
@@ -171,6 +197,22 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     @Override
     public IahnNodeMessageInspectByLocaleResult batchInspectMessageByLocale(IahnNodeMessageInspectByLocaleInfo info)
             throws HandlerException {
+        return doBatchInspectMessageByLocale(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeMessageInspectByLocaleResult batchInspectMessageByLocaleWithResetTtl(
+            IahnNodeMessageInspectByLocaleInfo info
+    ) throws HandlerException {
+        return doBatchInspectMessageByLocale(info, true);
+    }
+
+    private IahnNodeMessageInspectByLocaleResult doBatchInspectMessageByLocale(
+            IahnNodeMessageInspectByLocaleInfo info, boolean resetTtl
+    ) throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -201,6 +243,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             String matchedFormattedLocale;
             if (redisTemplate.hasKey(localMapCacheKey)) {
                 matchedFormattedLocale = (String) redisTemplate.opsForValue().get(localMapCacheKey);
+                // 需要重置缓存 TTL 时，在命中分支中刷新地区映射缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            localMapCacheKey, localeMapCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 matchedFormattedLocale = findMatchedFormattedLocale(settingNodeKey, language, country, variant);
                 if (Objects.isNull(matchedFormattedLocale)) {
@@ -218,6 +266,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             HashOperations<String, String, Object> hashOperations = redisTemplate.opsForHash();
             if (redisTemplate.hasKey(messageMapCacheKey)) {
                 Map<String, Object> itemMap = hashOperations.entries(messageMapCacheKey);
+                // 需要重置缓存 TTL 时，在命中分支中刷新消息映射缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            messageMapCacheKey, messageMapCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
                 for (Map.Entry<String, Object> entry : itemMap.entrySet()) {
                     items.add(new IahnNodeMessageInspectByLocaleResult.Item(
                             entry.getKey(), (String) entry.getValue()
@@ -359,6 +413,21 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     @Override
     public IahnNodeLocaleListInspectResult inspectLocaleList(IahnNodeLocaleListInspectInfo info)
             throws HandlerException {
+        return doInspectLocaleList(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeLocaleListInspectResult inspectLocaleListWithResetTtl(IahnNodeLocaleListInspectInfo info)
+            throws HandlerException {
+        return doInspectLocaleList(info, true);
+    }
+
+    private IahnNodeLocaleListInspectResult doInspectLocaleList(
+            IahnNodeLocaleListInspectInfo info, boolean resetTtl
+    ) throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -386,6 +455,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
                 result = FastJsonIahnNodeLocaleListInspectResult.toStackBean(
                         (FastJsonIahnNodeLocaleListInspectResult) redisTemplate.opsForValue().get(localeListCacheKey)
                 );
+                // 需要重置缓存 TTL 时，在命中分支中刷新地区列表缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            localeListCacheKey, localeListCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。
                 List<IahnNodeLocale> iahnNodeLocales = iahnNodeLocaleMaintainService.lookupAsList(
@@ -426,6 +501,20 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     @Nullable
     @Override
     public IahnNodeMekListInspectResult inspectMekList(IahnNodeMekListInspectInfo info) throws HandlerException {
+        return doInspectMekList(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeMekListInspectResult inspectMekListWithResetTtl(IahnNodeMekListInspectInfo info)
+            throws HandlerException {
+        return doInspectMekList(info, true);
+    }
+
+    private IahnNodeMekListInspectResult doInspectMekList(IahnNodeMekListInspectInfo info, boolean resetTtl)
+            throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -453,6 +542,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
                 result = FastJsonIahnNodeMekListInspectResult.toStackBean(
                         (FastJsonIahnNodeMekListInspectResult) redisTemplate.opsForValue().get(mekListCacheKey)
                 );
+                // 需要重置缓存 TTL 时，在命中分支中刷新 Mek 列表缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            mekListCacheKey, mekListCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
             } else {
                 // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeMek。
                 List<IahnNodeMek> iahnNodeMeks = iahnNodeMekMaintainService.lookupAsList(
@@ -493,6 +588,21 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
     @Override
     public IahnNodeMessageTableInspectResult inspectMessageTable(IahnNodeMessageTableInspectInfo info)
             throws HandlerException {
+        return doInspectMessageTable(info, false);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    @BehaviorAnalyse
+    @Nullable
+    @Override
+    public IahnNodeMessageTableInspectResult inspectMessageTableWithResetTtl(IahnNodeMessageTableInspectInfo info)
+            throws HandlerException {
+        return doInspectMessageTable(info, true);
+    }
+
+    private IahnNodeMessageTableInspectResult doInspectMessageTable(
+            IahnNodeMessageTableInspectInfo info, boolean resetTtl
+    ) throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -516,11 +626,18 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
             // 从缓存中读取 IahnNodeMessageTableInspectResult。
             String messageTableCacheKey = parseCacheKey(messageTableCachePrefix, settingNodeKey);
             if (redisTemplate.hasKey(messageTableCacheKey)) {
-                return FastJsonIahnNodeMessageTableInspectResult.toStackBean(
+                IahnNodeMessageTableInspectResult result = FastJsonIahnNodeMessageTableInspectResult.toStackBean(
                         (FastJsonIahnNodeMessageTableInspectResult) redisTemplate.opsForValue().get(
                                 messageTableCacheKey
                         )
                 );
+                // 需要重置缓存 TTL 时，在命中分支中刷新消息表缓存的生存时间。
+                if (resetTtl) {
+                    redisTemplate.expire(
+                            messageTableCacheKey, messageTableCacheTimeout, TimeUnit.MILLISECONDS
+                    );
+                }
+                return result;
             }
 
             // 按照顺序查询属于 settingNodeKey 的所有 IahnNodeLocale。

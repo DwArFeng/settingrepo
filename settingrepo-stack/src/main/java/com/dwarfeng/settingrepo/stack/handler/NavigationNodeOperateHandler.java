@@ -34,6 +34,20 @@ public interface NavigationNodeOperateHandler extends Handler {
     NavigationNodeInspectResult inspect(NavigationNodeInspectInfo info) throws HandlerException;
 
     /**
+     * 查看导航节点，并重置查看结果缓存 TTL。
+     *
+     * <p>
+     * 查询逻辑与 {@link #inspect(NavigationNodeInspectInfo)} 完全一致。<br>
+     * 当查看结果缓存命中时，额外将缓存的生存时间重置为配置值。
+     *
+     * @param info 导航节点查看信息。
+     * @return 导航节点查看结果。
+     * @throws HandlerException 处理器异常。
+     * @since 3.1.0
+     */
+    NavigationNodeInspectResult inspectWithResetTtl(NavigationNodeInspectInfo info) throws HandlerException;
+
+    /**
      * 更新导航节点。
      *
      * @param info 导航节点更新信息。

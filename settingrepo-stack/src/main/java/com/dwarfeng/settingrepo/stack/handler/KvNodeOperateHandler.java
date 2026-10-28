@@ -40,6 +40,20 @@ public interface KvNodeOperateHandler extends Handler {
     KvNodeItemInspectResult inspectItem(KvNodeItemInspectInfo info) throws HandlerException;
 
     /**
+     * 查看键值对节点中的指定条目，并重置条目的查询结果缓存 TTL。
+     *
+     * <p>
+     * 查询逻辑与 {@link #inspectItem(KvNodeItemInspectInfo)} 完全一致。<br>
+     * 当查询结果缓存命中时，额外将缓存的生存时间重置为配置值。
+     *
+     * @param info 键值对节点条目查看信息。
+     * @return 键值对节点条目查看结果。
+     * @throws HandlerException 处理器异常。
+     * @since 3.1.0
+     */
+    KvNodeItemInspectResult inspectItemWithResetTtl(KvNodeItemInspectInfo info) throws HandlerException;
+
+    /**
      * 向键值对节点中放入指定条目。
      *
      * <p>

@@ -4,6 +4,11 @@
 
 ### 功能构建
 
+- 增加部分节点操作服务有关 TTL 的方法。
+  - com.dwarfeng.settingrepo.stack.handler.IahnNodeOperateHandler。
+  - com.dwarfeng.settingrepo.stack.handler.KvNodeOperateHandler。
+  - com.dwarfeng.settingrepo.stack.handler.NavigationNodeOperateHandler。
+
 - 键值对节点功能优化。
   - 为键值对节点条目查询增加缓存支持，并在数据变更后清理关联缓存。
   - 为键值对节点增加节点粒度清理缓存的能力。
