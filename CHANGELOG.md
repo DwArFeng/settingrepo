@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh-CN/PresetWarmupDriverImplements.md。
+  - docs/wiki/zh-CN/Warmup.md。
+
 - Wiki 更新。
   - docs/wiki/zh-CN/ConfDirectory.md。
   - docs/wiki/zh-CN/Formatter.md。

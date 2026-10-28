@@ -38,6 +38,9 @@
 
 - [Formatter](./Formatter.md) - 格式化器，详细说明了本项目的格式化器机制。
 - [Preset Formatter Implements](./PresetFormatterImplements.md) - 预设格式化器实现，详细说明了本项目内置的格式化器。
+- [Warmup](./Warmup.md) - 预热机制，详细说明了预热设置、驱动器、缓存和运行条件。
+- [Preset Warmup Driver Implements](./PresetWarmupDriverImplements.md) - 预设预热驱动器实现，
+  详细说明了本项目内置的预热驱动器。
 
 ## 维护与调试
 
