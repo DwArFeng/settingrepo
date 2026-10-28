@@ -57,9 +57,11 @@ public class FixedDelayResetter extends AbstractResetter {
             try {
                 LOGGER.info("计划时间已到, 重置格式化...");
                 context.resetFormat();
+                LOGGER.info("计划时间已到, 重置预热...");
+                context.resetWarmup();
             } catch (Exception e) {
                 String message = "重置器 " + FixedDelayResetter.this +
-                        " 执行重置调度时发生异常, 格式化将不会重置, 异常信息如下: ";
+                        " 执行重置调度时发生异常, 相关功能可能不会完全重置, 异常信息如下: ";
                 LOGGER.warn(message, e);
             }
         }

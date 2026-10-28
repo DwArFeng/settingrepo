@@ -41,6 +41,13 @@ public class LogPusher extends AbstractPusher {
         logData(title, message);
     }
 
+    @Override
+    public void warmupReset() throws HandlerException {
+        String title = "预热重置事件:";
+        String message = StringUtils.EMPTY;
+        logData(title, message);
+    }
+
     private void logData(String title, String message) throws HandlerException {
         String logLevel = this.logLevel.toUpperCase();
         switch (logLevel) {

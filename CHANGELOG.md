@@ -4,6 +4,17 @@
 
 ### 功能构建
 
+- 实现预设预热驱动器。
+  - com.dwarfeng.settingrepo.impl.handler.wudriver.CronWarmupDriverProvider。
+  - com.dwarfeng.settingrepo.impl.handler.wudriver.CronWarmupDriverSupporter。
+  - com.dwarfeng.settingrepo.impl.handler.wudriver.FixedDelayWarmupDriverProvider。
+  - com.dwarfeng.settingrepo.impl.handler.wudriver.FixedDelayWarmupDriverSupporter。
+  - com.dwarfeng.settingrepo.impl.handler.wudriver.FixedRateWarmupDriverProvider。
+  - com.dwarfeng.settingrepo.impl.handler.wudriver.FixedRateWarmupDriverSupporter。
+
+- 实现核心机制。
+  - 预热机制。
+
 - 建立实体以及维护服务，并通过单元测试。
   - com.dwarfeng.settingrepo.stack.service.WarmupDriverInfoMaintainService。
   - com.dwarfeng.settingrepo.stack.service.WarmupDriverSupportMaintainService。

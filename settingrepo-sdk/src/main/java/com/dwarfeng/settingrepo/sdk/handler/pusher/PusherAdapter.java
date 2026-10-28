@@ -33,6 +33,11 @@ public abstract class PusherAdapter extends AbstractPusher {
     public void formatReset() throws HandlerException {
     }
 
+    @SuppressWarnings("RedundantThrows")
+    @Override
+    public void warmupReset() throws HandlerException {
+    }
+
     @Override
     public String toString() {
         return "PusherAdapter{" +

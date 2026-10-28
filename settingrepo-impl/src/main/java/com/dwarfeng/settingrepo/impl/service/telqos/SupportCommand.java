@@ -21,10 +21,16 @@ public class SupportCommand extends CliCommand {
 
     // region 指令选项
 
-    private static final String COMMAND_OPTION_RESET_FORMATTER = "reset-formatter";
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String COMMAND_OPTION_RESET_FORMATTER = "rf";
+    private static final String COMMAND_OPTION_RESET_FORMATTER_LONG_OPT = "reset-formatter";
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String COMMAND_OPTION_RESET_WARMUP_DRIVER = "rwd";
+    private static final String COMMAND_OPTION_RESET_WARMUP_DRIVER_LONG_OPT = "reset-warmup-driver";
 
     private static final String[] COMMAND_OPTION_ARRAY = new String[]{
-            COMMAND_OPTION_RESET_FORMATTER
+            COMMAND_OPTION_RESET_FORMATTER,
+            COMMAND_OPTION_RESET_WARMUP_DRIVER
     };
 
     // endregion
@@ -49,7 +55,8 @@ public class SupportCommand extends CliCommand {
     private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
         String identity = context.getRuntimeIdentity();
         String[] patterns = new String[]{
-                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_RESET_FORMATTER)
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_RESET_FORMATTER),
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_RESET_WARMUP_DRIVER)
         };
         return CliCommandUtil.cliSyntax(patterns);
     }
@@ -57,12 +64,17 @@ public class SupportCommand extends CliCommand {
     @Override
     protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder().longOpt(COMMAND_OPTION_RESET_FORMATTER).optionalArg(true).hasArg(false)
-                .desc("重置格式化器支持").build());
+        list.add(
+                Option.builder(COMMAND_OPTION_RESET_FORMATTER).longOpt(COMMAND_OPTION_RESET_FORMATTER_LONG_OPT)
+                        .optionalArg(true).hasArg(false).desc("重置格式化器支持").build()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_RESET_WARMUP_DRIVER).longOpt(COMMAND_OPTION_RESET_WARMUP_DRIVER_LONG_OPT)
+                        .optionalArg(true).hasArg(false).desc("重置预热驱动器支持").build()
+        );
         return list;
     }
 
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
     protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
@@ -75,6 +87,10 @@ public class SupportCommand extends CliCommand {
             case COMMAND_OPTION_RESET_FORMATTER:
                 supportQosService.resetFormatter();
                 context.sendMessage("重置格式化器支持成功。");
+                break;
+            case COMMAND_OPTION_RESET_WARMUP_DRIVER:
+                supportQosService.resetWarmupDriver();
+                context.sendMessage("重置预热驱动器支持成功。");
                 break;
             default:
                 throw new IllegalStateException("不应该执行到此处, 请联系开发人员");

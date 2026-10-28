@@ -1,9 +1,12 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
 import com.dwarfeng.settingrepo.sdk.handler.FormatterSupporter;
+import com.dwarfeng.settingrepo.sdk.handler.WarmupDriverSupporter;
 import com.dwarfeng.settingrepo.stack.bean.entity.FormatterSupport;
+import com.dwarfeng.settingrepo.stack.bean.entity.WarmupDriverSupport;
 import com.dwarfeng.settingrepo.stack.handler.SupportHandler;
 import com.dwarfeng.settingrepo.stack.service.FormatterSupportMaintainService;
+import com.dwarfeng.settingrepo.stack.service.WarmupDriverSupportMaintainService;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
@@ -19,15 +22,21 @@ import java.util.stream.Collectors;
 public class SupportHandlerImpl implements SupportHandler {
 
     private final FormatterSupportMaintainService formatterSupportMaintainService;
+    private final WarmupDriverSupportMaintainService warmupDriverSupportMaintainService;
 
     private final List<FormatterSupporter> formatterSupporters;
+    private final List<WarmupDriverSupporter> warmupDriverSupporters;
 
     public SupportHandlerImpl(
             FormatterSupportMaintainService formatterSupportMaintainService,
-            List<FormatterSupporter> formatterSupporters
+            WarmupDriverSupportMaintainService warmupDriverSupportMaintainService,
+            List<FormatterSupporter> formatterSupporters,
+            List<WarmupDriverSupporter> warmupDriverSupporters
     ) {
         this.formatterSupportMaintainService = formatterSupportMaintainService;
+        this.warmupDriverSupportMaintainService = warmupDriverSupportMaintainService;
         this.formatterSupporters = Optional.ofNullable(formatterSupporters).orElse(Collections.emptyList());
+        this.warmupDriverSupporters = Optional.ofNullable(warmupDriverSupporters).orElse(Collections.emptyList());
     }
 
     @Override
@@ -51,5 +60,32 @@ public class SupportHandlerImpl implements SupportHandler {
                 supporter.provideExampleContent()
         )).collect(Collectors.toList());
         formatterSupportMaintainService.batchInsert(formatterSupports);
+    }
+
+    @Override
+    @BehaviorAnalyse
+    public void resetWarmupDriver() throws HandlerException {
+        try {
+            doResetWarmupDriver();
+        } catch (Exception e) {
+            throw HandlerExceptionHelper.parse(e);
+        }
+    }
+
+    private void doResetWarmupDriver() throws Exception {
+        // 清理当前数据库中的预热驱动器支持快照。
+        List<StringIdKey> warmupDriverKeys = warmupDriverSupportMaintainService.lookupAsList().stream()
+                .map(WarmupDriverSupport::getKey).collect(Collectors.toList());
+        warmupDriverSupportMaintainService.batchDelete(warmupDriverKeys);
+        // 使用当前 Spring 容器中已注册的支持器重新生成支持快照。
+        List<WarmupDriverSupport> warmupDriverSupports = warmupDriverSupporters.stream().map(
+                supporter -> new WarmupDriverSupport(
+                        new StringIdKey(supporter.provideType()),
+                        supporter.provideLabel(),
+                        supporter.provideDescription(),
+                        supporter.provideExampleParam()
+                )
+        ).collect(Collectors.toList());
+        warmupDriverSupportMaintainService.batchInsert(warmupDriverSupports);
     }
 }

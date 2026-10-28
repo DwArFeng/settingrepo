@@ -50,4 +50,12 @@ public interface ResetQosService extends Service {
      * @throws ServiceException 服务异常。
      */
     void resetFormat() throws ServiceException;
+
+    /**
+     * 重置预热。
+     *
+     * @throws ServiceException 服务异常。
+     * @since 3.1.0
+     */
+    void resetWarmup() throws ServiceException;
 }

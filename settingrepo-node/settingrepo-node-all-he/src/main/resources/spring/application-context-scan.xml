@@ -20,6 +20,7 @@
         <context:exclude-filter type="regex" expression="^com\.dwarfeng\.settingrepo\.impl\.handler\.formatter.*$"/>
         <context:exclude-filter type="regex" expression="^com\.dwarfeng\.settingrepo\.impl\.handler\.pusher.*$"/>
         <context:exclude-filter type="regex" expression="^com\.dwarfeng\.settingrepo\.impl\.handler\.resetter\..*$"/>
+        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.settingrepo\.impl\.handler\.wudriver\..*$"/>
     </context:component-scan>
     <!--扫描配置类所在的包。 -->
     <context:component-scan base-package="com.dwarfeng.settingrepo.node.all.he.configuration"/>

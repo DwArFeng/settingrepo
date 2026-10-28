@@ -24,4 +24,12 @@ public interface Pusher {
      * @throws HandlerException 处理器异常。
      */
     void formatReset() throws HandlerException;
+
+    /**
+     * 预热被重置时执行的调度。
+     *
+     * @throws HandlerException 处理器异常。
+     * @since 3.1.0
+     */
+    void warmupReset() throws HandlerException;
 }

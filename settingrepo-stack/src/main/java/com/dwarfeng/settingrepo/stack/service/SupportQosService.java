@@ -17,4 +17,12 @@ public interface SupportQosService extends Service {
      * @throws ServiceException 服务异常。
      */
     void resetFormatter() throws ServiceException;
+
+    /**
+     * 重置预热驱动器支持。
+     *
+     * @throws ServiceException 服务异常。
+     * @since 3.1.0
+     */
+    void resetWarmupDriver() throws ServiceException;
 }

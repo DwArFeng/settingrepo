@@ -35,4 +35,9 @@ public class PushHandlerImpl implements PushHandler {
     public void formatReset() throws HandlerException {
         pusher.formatReset();
     }
+
+    @Override
+    public void warmupReset() throws HandlerException {
+        pusher.warmupReset();
+    }
 }

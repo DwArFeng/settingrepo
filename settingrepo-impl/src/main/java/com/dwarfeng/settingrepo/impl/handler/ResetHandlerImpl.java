@@ -73,6 +73,16 @@ public class ResetHandlerImpl implements ResetHandler {
         }
     }
 
+    @Override
+    public void resetWarmup() throws HandlerException {
+        lock.lock();
+        try {
+            resetProcessor.resetWarmup();
+        } finally {
+            lock.unlock();
+        }
+    }
+
     @Component
     public static class ResetWorker implements Worker {
 

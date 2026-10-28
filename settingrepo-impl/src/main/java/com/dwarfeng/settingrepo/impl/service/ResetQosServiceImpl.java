@@ -80,4 +80,13 @@ public class ResetQosServiceImpl implements ResetQosService {
             throw ServiceExceptionHelper.logParse("重置格式化时发生异常", LogLevel.WARN, e, sem);
         }
     }
+
+    @Override
+    public void resetWarmup() throws ServiceException {
+        try {
+            resetHandler.resetWarmup();
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("重置预热时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
 }

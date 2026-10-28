@@ -17,4 +17,12 @@ public interface SupportHandler extends Handler {
      * @throws HandlerException 处理器异常。
      */
     void resetFormatter() throws HandlerException;
+
+    /**
+     * 重置预热驱动器支持。
+     *
+     * @throws HandlerException 处理器异常。
+     * @since 3.1.0
+     */
+    void resetWarmupDriver() throws HandlerException;
 }

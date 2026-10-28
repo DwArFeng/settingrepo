@@ -29,4 +29,13 @@ public class SupportQosServiceImpl implements SupportQosService {
             throw ServiceExceptionHelper.logParse("重置格式化器时发生异常", LogLevel.WARN, e, sem);
         }
     }
+
+    @Override
+    public void resetWarmupDriver() throws ServiceException {
+        try {
+            supportHandler.resetWarmupDriver();
+        } catch (HandlerException e) {
+            throw ServiceExceptionHelper.logParse("重置预热驱动器时发生异常", LogLevel.WARN, e, sem);
+        }
+    }
 }

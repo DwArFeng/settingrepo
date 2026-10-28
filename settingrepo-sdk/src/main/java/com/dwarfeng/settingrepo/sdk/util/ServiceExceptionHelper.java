@@ -50,6 +50,11 @@ public final class ServiceExceptionHelper {
         );
         map.put(NavigationNodeItemMismatchedException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_MISMATCHED);
         map.put(NavigationNodeItemNotExistsException.class, ServiceExceptionCodes.NAVIGATION_NODE_ITEM_NOT_EXISTS);
+        map.put(WarmupDriverException.class, ServiceExceptionCodes.WARMUP_DRIVER_FAILED);
+        map.put(
+                UnsupportedWarmupDriverTypeDriverException.class,
+                ServiceExceptionCodes.WARMUP_DRIVER_TYPE_UNSUPPORTED
+        );
         return map;
     }
 

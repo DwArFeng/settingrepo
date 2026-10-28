@@ -58,6 +58,17 @@ public class MultiPusher extends AbstractPusher {
     }
 
     @Override
+    public void warmupReset() {
+        for (Pusher delegate : delegates) {
+            try {
+                delegate.warmupReset();
+            } catch (Exception e) {
+                LOGGER.warn("代理推送器推送预热重置事件失败，异常信息如下: ", e);
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return "MultiPusher{" +
                 "pusherType='" + pusherType + '\'' +

@@ -44,5 +44,10 @@ public class ResetterHandlerImpl implements ResetterHandler {
         public void resetFormat() throws Exception {
             resetProcessor.resetFormat();
         }
+
+        @Override
+        public void resetWarmup() throws Exception {
+            resetProcessor.resetWarmup();
+        }
     }
 }

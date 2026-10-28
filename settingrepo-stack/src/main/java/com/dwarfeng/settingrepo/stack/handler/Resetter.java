@@ -49,5 +49,13 @@ public interface Resetter {
          * @throws Exception 执行重置时抛出的任何异常。
          */
         void resetFormat() throws Exception;
+
+        /**
+         * 重置预热。
+         *
+         * @throws Exception 执行重置时抛出的任何异常。
+         * @since 3.1.0
+         */
+        void resetWarmup() throws Exception;
     }
 }

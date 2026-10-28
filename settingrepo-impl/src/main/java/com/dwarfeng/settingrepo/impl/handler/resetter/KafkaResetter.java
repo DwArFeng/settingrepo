@@ -41,6 +41,8 @@ public class KafkaResetter extends AbstractResetter implements ConsumerSeekAware
 
     public static final String RESET_IDENTIFIER_FORMAT = "format";
 
+    public static final String RESET_IDENTIFIER_WARMUP = "warmup";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaResetter.class);
 
     private final KafkaListenerEndpointRegistry registry;
@@ -124,6 +126,14 @@ public class KafkaResetter extends AbstractResetter implements ConsumerSeekAware
                     context.resetFormat();
                 } catch (Exception e) {
                     LOGGER.warn("重置格式化时发生异常, 格式化将不会重置, 异常信息如下: ", e);
+                }
+            }
+            if (valueSet.contains(RESET_IDENTIFIER_WARMUP)) {
+                try {
+                    LOGGER.info("接收到预热重置消息, 正在重置预热...");
+                    context.resetWarmup();
+                } catch (Exception e) {
+                    LOGGER.warn("重置预热时发生异常, 预热将不会重置, 异常信息如下: ", e);
                 }
             }
             ack.acknowledge();

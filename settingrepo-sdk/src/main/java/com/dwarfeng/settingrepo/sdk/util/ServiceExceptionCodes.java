@@ -44,6 +44,10 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(110), "navigation node item mismatched");
     public static final ServiceException.Code NAVIGATION_NODE_ITEM_NOT_EXISTS =
             new ServiceException.Code(offset(120), "navigation node item not exists");
+    public static final ServiceException.Code WARMUP_DRIVER_FAILED =
+            new ServiceException.Code(offset(130), "warmup driver failed");
+    public static final ServiceException.Code WARMUP_DRIVER_TYPE_UNSUPPORTED =
+            new ServiceException.Code(offset(131), "warmup driver type unsupported");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -84,6 +88,8 @@ public final class ServiceExceptionCodes {
         NAVIGATION_NODE_ITEM_INDEX_CONFLICT.setCode(offset(100));
         NAVIGATION_NODE_ITEM_MISMATCHED.setCode(offset(110));
         NAVIGATION_NODE_ITEM_NOT_EXISTS.setCode(offset(120));
+        WARMUP_DRIVER_FAILED.setCode(offset(130));
+        WARMUP_DRIVER_TYPE_UNSUPPORTED.setCode(offset(131));
     }
 
     private ServiceExceptionCodes() {

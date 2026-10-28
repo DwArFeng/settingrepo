@@ -17,4 +17,12 @@ public interface ResetHandler extends StartableHandler {
      * @throws HandlerException 处理器异常。
      */
     void resetFormat() throws HandlerException;
+
+    /**
+     * 重置预热。
+     *
+     * @throws HandlerException 处理器异常。
+     * @since 3.1.0
+     */
+    void resetWarmup() throws HandlerException;
 }

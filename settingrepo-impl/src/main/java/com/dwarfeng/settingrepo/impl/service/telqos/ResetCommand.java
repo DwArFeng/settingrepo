@@ -26,14 +26,20 @@ public class ResetCommand extends CliCommand {
     private static final String COMMAND_OPTION_START = "start";
     private static final String COMMAND_OPTION_STOP = "stop";
     private static final String COMMAND_OPTION_STATUS = "status";
-    private static final String COMMAND_OPTION_RESET_FORMAT = "reset-format";
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String COMMAND_OPTION_RESET_FORMAT = "rf";
+    private static final String COMMAND_OPTION_RESET_FORMAT_LONG_OPT = "reset-format";
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String COMMAND_OPTION_RESET_WARMUP = "rw";
+    private static final String COMMAND_OPTION_RESET_WARMUP_LONG_OPT = "reset-warmup";
 
     private static final String[] COMMAND_OPTION_ARRAY = new String[]{
             COMMAND_OPTION_LOOKUP,
             COMMAND_OPTION_START,
             COMMAND_OPTION_STOP,
             COMMAND_OPTION_STATUS,
-            COMMAND_OPTION_RESET_FORMAT
+            COMMAND_OPTION_RESET_FORMAT,
+            COMMAND_OPTION_RESET_WARMUP
     };
 
     // endregion
@@ -62,7 +68,8 @@ public class ResetCommand extends CliCommand {
                 identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_START),
                 identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_STOP),
                 identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_STATUS),
-                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_RESET_FORMAT)
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_RESET_FORMAT),
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_RESET_WARMUP)
         };
         return CliCommandUtil.cliSyntax(patterns);
     }
@@ -73,8 +80,18 @@ public class ResetCommand extends CliCommand {
         list.add(Option.builder(COMMAND_OPTION_LOOKUP).optionalArg(true).hasArg(false).desc("查看重置处理器").build());
         list.add(Option.builder(COMMAND_OPTION_START).optionalArg(true).hasArg(false).desc("启动重置处理器").build());
         list.add(Option.builder(COMMAND_OPTION_STOP).optionalArg(true).hasArg(false).desc("停止重置处理器").build());
-        list.add(Option.builder(COMMAND_OPTION_STATUS).optionalArg(true).hasArg(false).desc("查看重置处理器状态").build());
-        list.add(Option.builder(COMMAND_OPTION_RESET_FORMAT).optionalArg(true).hasArg(false).desc("执行格式化重置操作").build());
+        list.add(
+                Option.builder(COMMAND_OPTION_STATUS).optionalArg(true).hasArg(false)
+                        .desc("查看重置处理器状态").build()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_RESET_FORMAT).longOpt(COMMAND_OPTION_RESET_FORMAT_LONG_OPT)
+                        .optionalArg(true).hasArg(false).desc("执行格式化重置操作").build()
+        );
+        list.add(
+                Option.builder(COMMAND_OPTION_RESET_WARMUP).longOpt(COMMAND_OPTION_RESET_WARMUP_LONG_OPT)
+                        .optionalArg(true).hasArg(false).desc("执行预热重置操作").build()
+        );
         return list;
     }
 
@@ -103,6 +120,10 @@ public class ResetCommand extends CliCommand {
                 break;
             case COMMAND_OPTION_RESET_FORMAT:
                 resetQosService.resetFormat();
+                context.sendMessage("重置成功!");
+                break;
+            case COMMAND_OPTION_RESET_WARMUP:
+                resetQosService.resetWarmup();
                 context.sendMessage("重置成功!");
                 break;
             default:
