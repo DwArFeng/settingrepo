@@ -4,6 +4,14 @@
 
 ### 功能构建
 
+- Telqos 运维手册更新。
+  - docs/telqos-manual/zh-CN/commands/KvNode.md。
+  - docs/telqos-manual/zh-CN/commands/MaintenanceCommands.md。
+  - docs/telqos-manual/zh-CN/commands/WarmupCommands.md。
+  - docs/telqos-manual/zh-CN/json-file/kvnode/clear-cache.json。
+  - docs/telqos-manual/zh-CN/CommandIndex.md。
+  - docs/telqos-manual/zh-CN/README.md。
+
 - Wiki 编写。
   - docs/wiki/zh-CN/PresetWarmupDriverImplements.md。
   - docs/wiki/zh-CN/Warmup.md。

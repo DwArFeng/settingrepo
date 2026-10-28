@@ -24,6 +24,7 @@
 | [BasicCommands](./commands/BasicCommands.md)             | `lc`、`man`、`quit`                                 |
 | [ThirdPartyCommands](./commands/ThirdPartyCommands.md)   | `datamark`、`dubbo`、`log4j2`、`memory`、`shutdown` |
 | [MaintenanceCommands](./commands/MaintenanceCommands.md) | `flc`、`reset`、`support`                           |
+| [WarmupCommands](./commands/WarmupCommands.md)           | `warmup`、`warmupdrive`                             |
 | [FileNodes](./commands/FileNodes.md)                     | `filelnode`、`filenode`                             |
 | [ImageNodes](./commands/ImageNodes.md)                   | `imglnode`、`imgnode`                               |
 | [TextNodes](./commands/TextNodes.md)                     | `txtnode`、`ltxtnode`                               |
@@ -73,7 +74,11 @@ txtnode -inspect -jf /opt/settingrepo/docs/telqos-manual/zh-CN/json-file/txtnode
 
 ## 安全注意事项
 
-- `remove`、`clear`、`clear-cache`、`update` 等操作可能覆盖或删除数据，执行前应确认 `category` 与 `args` 定位的节点。
+- `remove`、`clear`、`update` 等操作可能覆盖或删除数据，执行前应确认 `category` 与 `args` 定位的节点。
+- `clear-cache` 会清理查询缓存，但不删除业务数据；仍应确认缓存范围与节点定位，避免后续查询重新加载不符合预期的数据。
+- `kvnode -cc` 只清理键值对节点查询缓存；`reset -rw` 会重置预热机制并清理预热本地缓存，两者影响范围不同。
+- `warmup`、`warmupdrive` 的操作和状态查询依赖 Curator、预热驱动配置及预热设置，执行前应先确认集群运行状态。
+- `support --reset-warmup-driver` 会重建预热驱动器支持快照，但不修改驱动信息或预热本地缓存；执行后应核对当前驱动器配置和预热状态。
 - JSON 输入中的 `file_path` 是服务器本地路径。上传文件前应确认 Telqos 进程对源文件具有读取权限。
 - 下载和更新操作可能覆盖目标文件，应避免使用生产系统中的关键文件路径。
 - 不要在 JSON 文件中保存密码、令牌、私钥或其他敏感信息。

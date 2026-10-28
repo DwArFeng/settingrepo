@@ -4,12 +4,12 @@
 
 Telqos 命令可分为以下类别：
 
-| 类别         | 说明                                   | 文档                                                     |
-|--------------|----------------------------------------|----------------------------------------------------------|
-| 基础命令     | Telqos 内置的命令查询、帮助和退出功能  | [BasicCommands](./commands/BasicCommands.md)             |
-| 第三方命令   | Spring Telqos 集成或项目扩展的运维命令 | [ThirdPartyCommands](./commands/ThirdPartyCommands.md)   |
-| 服务维护命令 | 格式缓存、重置处理器和支持操作         | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
-| 节点操作命令 | Setting Repository 提供的业务节点操作  | 见下方业务命令表                                         |
+| 类别         | 说明                                       | 文档                                                     |
+|--------------|--------------------------------------------|----------------------------------------------------------|
+| 基础命令     | Telqos 内置的命令查询、帮助和退出功能      | [BasicCommands](./commands/BasicCommands.md)             |
+| 第三方命令   | Spring Telqos 集成或项目扩展的运维命令     | [ThirdPartyCommands](./commands/ThirdPartyCommands.md)   |
+| 服务维护命令 | 格式缓存、重置处理器、预热处理器和支持操作 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| 节点操作命令 | Setting Repository 提供的业务节点操作      | 见下方业务命令表                                         |
 
 ## 业务命令
 
@@ -28,11 +28,13 @@ Telqos 命令可分为以下类别：
 
 ## 服务维护命令
 
-| IDENTITY  | 说明                 | 使用 JSON | 文档                                                     |
-|-----------|----------------------|----------:|----------------------------------------------------------|
-| `flc`     | 格式化器本地缓存操作 |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
-| `reset`   | 重置处理器操作和查看 |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
-| `support` | 支持操作             |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| IDENTITY      | 说明                         | 使用 JSON | 文档                                                     |
+|---------------|------------------------------|----------:|----------------------------------------------------------|
+| `flc`         | 格式化器本地缓存操作         |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| `reset`       | 重置处理器操作和查看         |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| `support`     | 格式化器和预热驱动器支持操作 |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| `warmup`      | 预热处理器操作和查看         |        否 | [WarmupCommands](./commands/WarmupCommands.md)           |
+| `warmupdrive` | 预热驱动处理器状态查看       |        否 | [WarmupCommands](./commands/WarmupCommands.md)           |
 
 ## 命令发现
 

@@ -11,18 +11,20 @@ kvnode -ii,--inspect-item [-json json-string] [-jf json-file]
 kvnode -pi,--put-item [-json json-string] [-jf json-file]
 kvnode -ri,--remove-item [-json json-string] [-jf json-file]
 kvnode -clr,--clear [-json json-string] [-jf json-file]
+kvnode -cc,--clear-cache [-json json-string] [-jf json-file]
 ```
 
 ## Sub Command
 
-| option | 长选项         | 用途           | JSON 参考类                     | JSON 文件                                                  |
-|--------|----------------|----------------|---------------------------------|------------------------------------------------------------|
-| `cnt`  | `count`        | 查询条目数量   | `WebInputKvNodeCountInfo`       | [count.json](../json-file/kvnode/count.json)               |
-| `i`    | `inspect`      | 查看键值对节点 | `WebInputKvNodeInspectInfo`     | [inspect.json](../json-file/kvnode/inspect.json)           |
-| `ii`   | `inspect-item` | 查看指定条目   | `WebInputKvNodeItemInspectInfo` | [inspect-item.json](../json-file/kvnode/inspect-item.json) |
-| `pi`   | `put-item`     | 写入指定条目   | `WebInputKvNodeItemPutInfo`     | [put-item.json](../json-file/kvnode/put-item.json)         |
-| `ri`   | `remove-item`  | 移除指定条目   | `WebInputKvNodeItemRemoveInfo`  | [remove-item.json](../json-file/kvnode/remove-item.json)   |
-| `clr`  | `clear`        | 清空节点       | `WebInputKvNodeClearInfo`       | [clear.json](../json-file/kvnode/clear.json)               |
+| option | 长选项         | 用途               | JSON 参考类                         | JSON 文件                                                  |
+|--------|----------------|--------------------|-------------------------------------|------------------------------------------------------------|
+| `cnt`  | `count`        | 查询条目数量       | `WebInputKvNodeCountInfo`           | [count.json](../json-file/kvnode/count.json)               |
+| `i`    | `inspect`      | 查看键值对节点     | `WebInputKvNodeInspectInfo`         | [inspect.json](../json-file/kvnode/inspect.json)           |
+| `ii`   | `inspect-item` | 查看指定条目       | `WebInputKvNodeItemInspectInfo`     | [inspect-item.json](../json-file/kvnode/inspect-item.json) |
+| `pi`   | `put-item`     | 写入指定条目       | `WebInputKvNodeItemPutInfo`         | [put-item.json](../json-file/kvnode/put-item.json)         |
+| `ri`   | `remove-item`  | 移除指定条目       | `WebInputKvNodeItemRemoveInfo`      | [remove-item.json](../json-file/kvnode/remove-item.json)   |
+| `clr`  | `clear`        | 清空节点           | `WebInputKvNodeClearInfo`           | [clear.json](../json-file/kvnode/clear.json)               |
+| `cc`   | `clear-cache`  | 清除节点查询缓存   | `WebInputKvNodeClearCacheInfo`      | [clear-cache.json](../json-file/kvnode/clear-cache.json)   |
 
 ## 字段说明
 
@@ -33,8 +35,24 @@ kvnode -clr,--clear [-json json-string] [-jf json-file]
 | `item_string_id` | ii、pi、ri | 条目字符串 ID  |
 | `value`          | pi         | 条目值         |
 
+## 查询缓存
+
+`ii` 的条目查询结果可能保存在 Redis 缓存中。修改、移除条目或清空节点后，服务会清理对应节点的查询缓存。
+`cc` 可以主动清除由 `category` 和 `args` 定位的键值对节点查询缓存，不会修改该节点的业务条目。
+
+## 命令示例
+
+使用 JSON 文件清除指定节点的查询缓存：
+
+```text
+kvnode -cc -jf /opt/settingrepo/docs/telqos-manual/zh-CN/json-file/kvnode/clear-cache.json
+清理缓存成功
+OK
+```
+
 ## 风险提示
 
 - `pi` 会覆盖已有条目值。
 - `ri` 只删除指定条目，`clr` 会清空整个键值对节点。
+- `cc` 只清理查询缓存，不删除业务条目；后续 `ii` 查询会重新读取数据。
 - 执行 `ri` 或 `clr` 前应确认节点定位和条目范围。
