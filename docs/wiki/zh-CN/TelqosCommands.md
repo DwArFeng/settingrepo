@@ -9,15 +9,16 @@ lc
 
 ## 概览
 
-本文档主要介绍 Setting Repository 2.x 版本提供的 Telqos 命令。
+本文档介绍 Setting Repository 当前版本提供的 Telqos 命令。完整命令清单、可直接使用的 JSON 输入文件和
+各命令的详细字段说明参见 [Telqos Manual](../../telqos-manual/zh-CN/README.md)。
 
-Setting Repository 2.x 版本提供的 Telqos 命令分为两类：
+Setting Repository 提供的 Telqos 命令分为以下类别：
 
 - 基础命令：Telqos 项目的内置命令，包括列出命令和查看命令等维护性命令。
 - 第三方命令：Telqos 项目集成的第三方命令。
 - 服务命令：Setting Repository 2.x 版本提供的服务功能相关的命令。
 
-本文将会基于命令的一下几个方面进行介绍：
+本文将会基于命令的以下几个方面进行介绍：
 
 - 命令标识：命令的标识符。
 - 命令说明：命令的简要说明。
@@ -672,6 +673,68 @@ ltxtnode -download -jf your-json-file-here.json
 OK
 ```
 
+### kvnode
+
+命令标识：`kvnode`。
+
+命令说明：键值对节点操作服务。
+
+可用版本：`2.5.0`。`clear-cache` 子命令可用版本为 `3.1.0`。
+
+命令语法：
+
+```text
+usage: kvnode -cnt,--count [-json json-string] [-jf json-file]
+kvnode -i,--inspect [-json json-string] [-jf json-file]
+kvnode -ii,--inspect-item [-json json-string] [-jf json-file]
+kvnode -pi,--put-item [-json json-string] [-jf json-file]
+kvnode -ri,--remove-item [-json json-string] [-jf json-file]
+kvnode -clr,--clear [-json json-string] [-jf json-file]
+kvnode -cc,--clear-cache [-json json-string] [-jf json-file]
+键值对节点操作服务
+ -cc,--clear-cache       清除键值对节点缓存
+ -clr,--clear            清空键值对节点中的全部条目
+ -cnt,--count            查询键值对节点条目数量
+ -i,--inspect            查看键值对节点
+ -ii,--inspect-item      查看键值对节点中的指定条目
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
+ -pi,--put-item          向键值对节点中放入指定条目
+ -ri,--remove-item       移除键值对节点中的指定条目
+```
+
+JSON schema 参考：
+
+| option | reference class                                                     |
+|:-------|:--------------------------------------------------------------------|
+| cnt    | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeCountInfo       |
+| i      | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeInspectInfo     |
+| ii     | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeItemInspectInfo |
+| pi     | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeItemPutInfo     |
+| ri     | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeItemRemoveInfo  |
+| clr    | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeClearInfo       |
+| cc     | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputKvNodeClearCacheInfo  |
+
+命令示例 - 查看指定条目：
+
+```text
+kvnode -ii -jf your-json-file-here.json
+查询结果:
+  value: example value
+OK
+```
+
+命令示例 - 清除指定节点的查询缓存：
+
+```text
+kvnode -cc -jf your-json-file-here.json
+清理缓存成功
+OK
+```
+
+`clear-cache` 仅清理由 `category` 和 `args` 定位的查询缓存，不删除键值对条目。详细说明见
+[Kv Node](../../telqos-manual/zh-CN/commands/KvNode.md)。
+
 ### reset
 
 命令标识：`reset`。
@@ -687,13 +750,15 @@ usage: reset -l
 reset -start
 reset -stop
 reset -status
-reset --reset-format
+reset -rf,--reset-format
+reset -rw,--reset-warmup
 重置处理器操作/查看
-    --l              查看重置处理器
-    --reset-format   执行格式化重置操作
-    --start          启动重置处理器
-    --status         查看重置处理器状态
-    --stop           停止重置处理器
+ -l                      查看重置处理器
+ -rf,--reset-format      执行格式化重置操作
+ -rw,--reset-warmup      执行预热重置操作
+ -start                  启动重置处理器
+ -status                 查看重置处理器状态
+ -stop                   停止重置处理器
 ```
 
 命令示例 - 查看重置处理器：
@@ -717,10 +782,121 @@ OK
 命令示例 - 执行格式化重置操作：
 
 ```text
-reset --reset-format
+reset -rf
 重置成功!
 OK
 ```
+
+预热重置：
+
+```text
+reset -rw
+重置成功!
+OK
+```
+
+`reset -rf` 和 `reset -rw` 分别重置格式化缓存与预热机制，二者不等同于普通的业务缓存清理。
+
+### support
+
+命令标识：`support`。
+
+命令说明：重置格式化器或预热驱动器支持信息。
+
+可用版本：`3.1.0`。
+
+命令语法：
+
+```text
+usage: support --reset-formatter
+support --reset-warmup-driver
+支持操作
+ --reset-formatter       重置格式化器支持
+ --reset-warmup-driver   重置预热驱动器支持
+```
+
+重置格式化器支持：
+
+```text
+support --reset-formatter
+重置格式化器支持成功。
+OK
+```
+
+重置预热驱动器支持：
+
+```text
+support --reset-warmup-driver
+重置预热驱动器支持成功。
+OK
+```
+
+`support --reset-warmup-driver` 只重建 `WarmupDriverSupport` 快照，不修改
+`WarmupDriverInfo`、预热设置或本地缓存。详细执行过程见
+[Warmup](./Warmup.md) 和 [Maintenance Commands](../../telqos-manual/zh-CN/commands/MaintenanceCommands.md)。
+
+### warmup
+
+命令标识：`warmup`。
+
+命令说明：预热处理器操作/查看。
+
+可用版本：`3.1.0`。
+
+命令语法：
+
+```text
+usage: warmup -online
+warmup -offline
+warmup -start
+warmup -stop
+warmup -status
+预热处理器操作/查看
+ -offline   下线预热处理器
+ -online    上线预热处理器
+ -start     启动预热处理器
+ -status    查看预热处理器状态
+ -stop      停止预热处理器
+```
+
+命令示例 - 查看预热处理器状态：
+
+```text
+warmup -status
+online: true, latch holding: true, started: true, working: true.
+OK
+```
+
+`latch holding` 表示当前实例是否持有 Curator 预热领导者锁。只有持锁实例实际执行预热，
+因此多实例部署时应结合 `latch holding` 与 `working` 判断状态。
+
+### warmupdrive
+
+命令标识：`warmupdrive`。
+
+命令说明：预热驱动处理器操作/查看。当前实现只提供状态查询。
+
+可用版本：`3.1.0`。
+
+命令语法：
+
+```text
+usage: warmupdrive -status
+预热驱动处理器操作/查看
+ -status    查看预热驱动处理器状态
+```
+
+命令示例 - 查看预热驱动处理器状态：
+
+```text
+warmupdrive -status
+started: true.
+OK
+```
+
+驱动处理器已启动不等同于所有预热任务均已成功执行。预热运行条件与驱动器配置见
+[Warmup](./Warmup.md)、[Preset Warmup Driver Implements](./PresetWarmupDriverImplements.md) 和
+[Warmup Commands](../../telqos-manual/zh-CN/commands/WarmupCommands.md)。
 
 ### settingnode
 

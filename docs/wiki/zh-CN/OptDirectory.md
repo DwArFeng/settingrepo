@@ -8,7 +8,8 @@
 opt
 ├─ opt-formatter.xml
 ├─ opt-pusher.xml
-└─ opt-resetter.xml
+├─ opt-resetter.xml
+└─ opt-warmup-driver.xml
 ```
 
 所有的可选配置都为每个单独的可选项提供了加载配置，默认是注释的，如果用户需要使用某个可选项，
@@ -140,6 +141,62 @@ opt
         <!--
         <context:include-filter
                 type="assignable" expression="com.dwarfeng.settingrepo.impl.handler.resetter.DubboResetter"
+        />
+        -->
+    </context:component-scan>
+</beans>
+```
+
+## opt-warmup-driver.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringFacetInspection -->
+<beans
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+>
+
+    <!-- 扫描 handler 的实现包。 -->
+    <context:component-scan base-package="com.dwarfeng.settingrepo.impl.handler.wudriver" use-default-filters="false">
+        <!-- 加载 CronWarmupDriver -->
+        <!--
+        <context:include-filter
+                type="assignable"
+                expression="com.dwarfeng.settingrepo.impl.handler.wudriver.CronWarmupDriverProvider"
+        />
+        <context:include-filter
+                type="assignable"
+                expression="com.dwarfeng.settingrepo.impl.handler.wudriver.CronWarmupDriverSupporter"
+        />
+        -->
+
+        <!-- 加载 FixedDelayWarmupDriver -->
+        <!--
+        <context:include-filter
+                type="assignable"
+                expression="com.dwarfeng.settingrepo.impl.handler.wudriver.FixedDelayWarmupDriverProvider"
+        />
+        <context:include-filter
+                type="assignable"
+                expression="com.dwarfeng.settingrepo.impl.handler.wudriver.FixedDelayWarmupDriverSupporter"
+        />
+        -->
+
+        <!-- 加载 FixedRateWarmupDriver -->
+        <!--
+        <context:include-filter
+                type="assignable"
+                expression="com.dwarfeng.settingrepo.impl.handler.wudriver.FixedRateWarmupDriverProvider"
+        />
+        <context:include-filter
+                type="assignable"
+                expression="com.dwarfeng.settingrepo.impl.handler.wudriver.FixedRateWarmupDriverSupporter"
         />
         -->
     </context:component-scan>

@@ -4,6 +4,13 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/Formatter.md。
+  - docs/wiki/zh-CN/OptDirectory.md。
+  - docs/wiki/zh-CN/TelqosCommands.md。
+  - docs/wiki/zh-CN/UsingTelqos.md。
+
 - 实现预设预热驱动器。
   - com.dwarfeng.settingrepo.impl.handler.wudriver.CronWarmupDriverProvider。
   - com.dwarfeng.settingrepo.impl.handler.wudriver.CronWarmupDriverSupporter。

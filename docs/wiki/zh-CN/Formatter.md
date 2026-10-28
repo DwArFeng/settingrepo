@@ -150,7 +150,7 @@ SDK 中的 `AbstractFormatterRegistry` 已实现类型匹配与基础支持信�
 可通过 `support --reset-formatter` 将内置类型、标签、说明和示例内容写入数据库。
 
 修改 `formatterParam` 后，已经构造并缓存的格式化器不会自动替换。
-应先执行 `flc -c` 清除本地缓存，或执行 `reset --reset-format` 完成格式化重置，使后续请求按照新配置重新构造格式化器。
+应先执行 `flc -c` 清除本地缓存，或执行 `reset -rf` 完成格式化重置，使后续请求按照新配置重新构造格式化器。
 在多节点部署中，还应通过项目配置的推送机制通知其它节点清理各自的格式化器缓存。
 
 Groovy 格式化器会动态编译 `formatterParam` 中的脚本并实例化处理器，

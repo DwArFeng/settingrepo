@@ -7,6 +7,10 @@
 ```text
 conf
 │
+├─curator
+│      connection.properties
+│      latch-path.properties
+│
 ├─database
 │      connection.properties
 │      performance.properties
@@ -37,10 +41,12 @@ conf
 │      exception.properties
 │      iahn.properties
 │      image-thumbnail.properties
+│      kv.properties
 │      launcher.properties
 │      navigation.properties
 │      push.properties
 │      reset.properties
+│      warmup-driver.properties
 │
 └─telqos
         connection.properties
@@ -113,6 +119,62 @@ com.dwarfeng.settingrepo.data_source.min_idle=0
 # etc...
 ```
 
+预热机制新增以下两个数据标记处理器：
+
+```properties
+#---------------------------------WarmupSetting----------------------------------------
+com.dwarfeng.settingrepo.datamark.warmup_setting.resource_url=classpath:datamark/default.storage
+com.dwarfeng.settingrepo.datamark.warmup_setting.resource_charset=UTF-8
+com.dwarfeng.settingrepo.datamark.warmup_setting.update_allowed=true
+#
+#---------------------------------WarmupDriverInfo----------------------------------------
+com.dwarfeng.settingrepo.datamark.warmup_driver_info.resource_url=classpath:datamark/default.storage
+com.dwarfeng.settingrepo.datamark.warmup_driver_info.resource_charset=UTF-8
+com.dwarfeng.settingrepo.datamark.warmup_driver_info.update_allowed=true
+```
+
+这两个资源用于预热设置和预热驱动信息的数据标记。修改资源路径、字符集或更新许可时，应与其他实体数据标记配置
+保持一致的运维策略。
+
+## curator 目录
+
+| 文件名                | 说明                           |
+|-----------------------|--------------------------------|
+| connection.properties | ZooKeeper 连接、会话与重试配置 |
+| latch-path.properties | 预热领导者锁路径配置           |
+
+### connection.properties
+
+Curator 连接配置文件，预热处理器通过它连接 ZooKeeper，以便在集群内确定预热工作节点。
+
+```properties
+# 连接字符，即 ZooKeeper 地址。
+com.dwarfeng.settingrepo.curator.connect.connect_string=your-host-here:2181
+# 会话超时时间。
+com.dwarfeng.settingrepo.curator.connect.session_timeout=60000
+# 连接超时时间。
+com.dwarfeng.settingrepo.curator.connect.connection_timeout=15000
+# 第一次重试时的间隔时间，每重试一次，间隔时间都会指数增加，直到最大的间隔时间。
+com.dwarfeng.settingrepo.curator.retry_policy.base_sleep_time=1000
+# 最大重试次数。
+com.dwarfeng.settingrepo.curator.retry_policy.max_retries=10
+# 单次重试最大的间隔时间。
+com.dwarfeng.settingrepo.curator.retry_policy.max_sleep=60000
+```
+
+其中 `com.dwarfeng.settingrepo.curator.connect.connect_string` 必须替换为实际可访问的 ZooKeeper 地址。
+
+### latch-path.properties
+
+预热领导者锁路径配置。
+
+```properties
+# 预热服务的领导者锁路径。
+com.dwarfeng.settingrepo.curator.latch_path.warmup.leader_latch=/settingrepo/warmup/leader_latch
+```
+
+同一集群中的实例应使用相同的锁路径。修改锁路径会使新连接实例与使用旧路径的实例参与不同的预热选举。
+
 ## dubbo 目录
 
 | 文件名                | 说明               |
@@ -128,6 +190,7 @@ com.dwarfeng.settingrepo.dubbo.registry.zookeeper.address=zookeeper://your-host-
 com.dwarfeng.settingrepo.dubbo.registry.zookeeper.timeout=3000
 com.dwarfeng.settingrepo.dubbo.protocol.dubbo.port=20000
 com.dwarfeng.settingrepo.dubbo.protocol.dubbo.host=your-host-here
+com.dwarfeng.settingrepo.dubbo.protocol.hessian.port=30000
 com.dwarfeng.settingrepo.dubbo.provider.group=
 com.dwarfeng.settingrepo.dubbo.consumer.snowflake.group=
 ```
@@ -268,11 +331,11 @@ com.dwarfeng.settingrepo.ftp.root_path=settingrepo
 Redis 连接配置文件。
 
 ```properties
-# ip 地址
+# ip 地址。
 com.dwarfeng.settingrepo.redis.hostName=your-host-here
-# 端口号
+# 端口号。
 com.dwarfeng.settingrepo.redis.port=6379
-# 如果有密码
+# 如果有密码。
 com.dwarfeng.settingrepo.redis.password=your-password-here
 # etc...
 ```
@@ -298,7 +361,8 @@ Redis 利用该配置文件，为缓存的主键添加前缀，以示区分。
 
 ```properties
 # 格式化器支持对象的主键格式。
-com.dwarfeng.settingrepo.cache.prefix.entity.formatter_support=com.dwarfeng.settingrepo.entity.settingrepo.formatter_support.
+com.dwarfeng.settingrepo.cache.prefix.entity.formatter_support=\
+  com.dwarfeng.settingrepo.entity.settingrepo.formatter_support.
 # etc...
 ```
 
@@ -325,9 +389,12 @@ com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support=3600000
 | exception.properties       | ServiceException 的异常代码的偏移量配置    |
 | iahn.properties            | 国际化节点配置文件                         |
 | image-thumbnail.properties | 图片缩略图配置文件                         |
+| kv.properties              | 键值对节点查询缓存配置                     |
 | launcher.properties        | 启动器配置文件                             |
+| navigation.properties      | 导航节点配置文件                           |
 | push.properties            | 推送服务配置文件                           |
 | reset.properties           | 重置服务配置文件                           |
+| warmup-driver.properties   | 预热驱动器配置文件                         |
 
 ### background.properties
 
@@ -383,6 +450,21 @@ com.dwarfeng.settingrepo.iahn.cache.timeout.locale_map=3600000
 com.dwarfeng.settingrepo.iahn.cache.prefix.message_map=com.dwarfeng.settingrepo.iahn.cache.message_map.
 # 国际化节点消息映射缓存的超时时间。
 com.dwarfeng.settingrepo.iahn.cache.timeout.message_map=3600000
+#
+# 国际化节点地区列表缓存的前缀。
+com.dwarfeng.settingrepo.iahn.cache.prefix.locale_list=com.dwarfeng.settingrepo.iahn.cache.locale_list.
+# 国际化节点地区列表缓存的超时时间。
+com.dwarfeng.settingrepo.iahn.cache.timeout.locale_list=3600000
+#
+# 国际化节点 Mek 列表缓存的前缀。
+com.dwarfeng.settingrepo.iahn.cache.prefix.mek_list=com.dwarfeng.settingrepo.iahn.cache.mek_list.
+# 国际化节点 Mek 列表缓存的超时时间。
+com.dwarfeng.settingrepo.iahn.cache.timeout.mek_list=3600000
+#
+# 国际化节点消息表缓存的前缀。
+com.dwarfeng.settingrepo.iahn.cache.prefix.message_table=com.dwarfeng.settingrepo.iahn.cache.message_table.
+# 国际化节点消息表缓存的超时时间。
+com.dwarfeng.settingrepo.iahn.cache.timeout.message_table=3600000
 ```
 
 用于定义国际化节点在其业务逻辑中需要使用的配置项。
@@ -419,11 +501,23 @@ com.dwarfeng.settingrepo.image_thumbnail.output_format=jpg
 ```properties
 # 程序启动完成后，是否重置格式化器支持。
 com.dwarfeng.settingrepo.launcher.reset_formatter_support=true
+#
+# 程序启动完成后，是否重置预热驱动器支持。
+com.dwarfeng.settingrepo.launcher.reset_warmup_driver_support=true
+#
 # 程序启动完成后，启动重置的延时时间。
 # 有些数据仓库以及重置器在启动后可能会需要一些时间进行自身的初始化，调整该参数以妥善的处理这些数据源和推送器。
 # 该参数等于 0，意味着启动后立即启动重置服务。
 # 该参数小于 0，意味着程序不主动启动重置服务，需要手动启动。
 com.dwarfeng.settingrepo.launcher.start_reset_delay=30000
+# 程序启动完成后，上线预热的延时时间。
+# 该参数等于 0，意味着启动后立即上线预热服务。
+# 该参数小于 0，意味着程序不主动上线预热服务，需要手动上线。
+com.dwarfeng.settingrepo.launcher.online_warmup_delay=3000
+# 程序启动完成后，启动预热的延时时间。
+# 该参数等于 0，意味着启动后立即启动预热服务。
+# 该参数小于 0，意味着程序不主动启动预热服务，需要手动启动。
+com.dwarfeng.settingrepo.launcher.enable_warmup_delay=3500
 ```
 
 该配置文件决定了服务被运行后，哪些功能将会自动被执行。
@@ -432,6 +526,23 @@ com.dwarfeng.settingrepo.launcher.start_reset_delay=30000
 专注与业务的处理； 另一部分则不执行数据业务并上线微服务，专注于响应调用方。
 
 自动执行是可选的配置功能，任何启动时没有自动执行的功能模块，均可以通过服务的 telqos 系统随时进行启用。
+
+预热上线与启动延时分别由 `online_warmup_delay` 和 `enable_warmup_delay` 控制。若服务尚未完成数据源或推送器初始化，
+应按实际启动耗时调整这两个参数，避免过早执行预热。预热机制的运行条件与 Telqos 操作见 [Warmup](./Warmup.md)。
+
+### kv.properties
+
+键值对节点查询缓存配置。
+
+```properties
+# 键值对节点查询结果缓存的前缀。
+com.dwarfeng.settingrepo.kv.cache.prefix.inspect_result=com.dwarfeng.settingrepo.kv.cache.inspect_result.
+# 键值对节点查询结果缓存的超时时间。
+com.dwarfeng.settingrepo.kv.cache.timeout.inspect_result=3600000
+```
+
+超时时间的单位是毫秒。`kvnode -ii` 的条目查询结果可命中该缓存，`kvnode -cc` 可以按节点定位清理缓存。
+具体命令见 [Kv Node](../../telqos-manual/zh-CN/commands/KvNode.md)。
 
 ### navigation.properties
 
@@ -537,6 +648,30 @@ com.dwarfeng.settingrepo.resetter.kafka.bootstrap_servers=your-host-here:9092
 
 在项目第一次启动之前，您需要修改 `opt/opt-resetter.xml`，决定项目中需要使用哪些重置器。您只需要修改使用的重置器的配置。
 
+### warmup-driver.properties
+
+预热驱动器配置文件。当前 `cron_driver`、`fixed_delay_driver` 和 `fixed_rate_driver` 均没有额外的配置文件参数，
+调度参数由预热驱动信息提供。
+
+```properties
+###################################################
+#                      cron                       #
+###################################################
+# Cron 驱动没有任何配置。
+#
+###################################################
+#                   fixed_delay                   #
+###################################################
+# FixedDelay 驱动没有任何配置。
+#
+###################################################
+#                    fixed_rate                   #
+###################################################
+# FixedRate 驱动没有任何配置。
+```
+
+驱动提供器和支持器是否加载由 `opt/opt-warmup-driver.xml` 决定，参见 [Opt Directory](./OptDirectory.md)。
+
 ## telqos 目录
 
 | 文件名                | 说明     |
@@ -560,7 +695,9 @@ com.dwarfeng.settingrepo.telqos.blacklist_regex=
 
 如果您的项目中有多个包含 Telqos 模块的服务，您应该修改 `com.dwarfeng.settingrepo.telqos.port` 的值，以避免端口冲突。
 
-请根据操作系统的默认字符集，修改 `com.dwarfeng.settingrepo.telqos.charset` 的值，以避免乱码。一般情况下，Windows 系统的默认字符集为 `GBK`，
-Linux 系统的默认字符集为 `UTF-8`。
+请根据操作系统的默认字符集，修改 `com.dwarfeng.settingrepo.telqos.charset` 的值，以避免乱码。
+一般情况下，Windows 系统的默认字符集为 `GBK`，Linux 系统的默认字符集为 `UTF-8`。
 
-如果您希望限制 Telqos 的使用范围，您可以修改 `com.dwarfeng.settingrepo.telqos.whitelist_regex` 和 `com.dwarfeng.settingrepo.telqos.blacklist_regex` 的值。
+如果您希望限制 Telqos 的使用范围，您可以修改以下配置项的值：
+- `com.dwarfeng.settingrepo.telqos.whitelist_regex`。
+- `com.dwarfeng.settingrepo.telqos.blacklist_regex`。

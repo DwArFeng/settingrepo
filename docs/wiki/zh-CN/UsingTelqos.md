@@ -84,3 +84,6 @@ SETTINGREPO QOS 运维系统                                                    
 ## 参阅
 
 - [Telqos Commands](./TelqosCommands.md) - Telqos 命令，详细说明了本项目的 Telqos 命令。
+- [Telqos Manual](../../telqos-manual/zh-CN/README.md) - Telqos 使用手册，包含可直接使用的 JSON 输入文件。
+- [Warmup](./Warmup.md) - 预热机制，详细说明了预热处理器、驱动器和缓存的作用关系。
+- [Preset Warmup Driver Implements](./PresetWarmupDriverImplements.md) - 预设预热驱动器实现，详细说明了内置驱动器的参数和执行方式。
