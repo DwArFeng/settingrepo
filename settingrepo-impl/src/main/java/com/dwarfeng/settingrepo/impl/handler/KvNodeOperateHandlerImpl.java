@@ -150,20 +150,19 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public KvNodeItemInspectResult inspectItem(KvNodeItemInspectInfo info) throws HandlerException {
         return doInspectItem(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public KvNodeItemInspectResult inspectItemWithResetTtl(KvNodeItemInspectInfo info) throws HandlerException {
         return doInspectItem(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private KvNodeItemInspectResult doInspectItem(KvNodeItemInspectInfo info, boolean resetTtl)
             throws HandlerException {
         try {
@@ -363,6 +362,7 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public void clearCache(KvNodeClearCacheInfo info) throws HandlerException {

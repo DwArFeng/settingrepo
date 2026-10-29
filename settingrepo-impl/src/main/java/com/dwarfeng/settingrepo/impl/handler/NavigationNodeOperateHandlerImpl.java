@@ -112,20 +112,19 @@ public class NavigationNodeOperateHandlerImpl implements NavigationNodeOperateHa
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public NavigationNodeInspectResult inspect(NavigationNodeInspectInfo info) throws HandlerException {
         return doInspect(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public NavigationNodeInspectResult inspectWithResetTtl(NavigationNodeInspectInfo info) throws HandlerException {
         return doInspect(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private NavigationNodeInspectResult doInspect(NavigationNodeInspectInfo info, boolean resetTtl)
             throws HandlerException {
         try {

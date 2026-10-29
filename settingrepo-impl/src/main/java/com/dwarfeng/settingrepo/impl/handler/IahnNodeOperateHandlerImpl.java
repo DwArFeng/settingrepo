@@ -92,14 +92,12 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         this.handlerValidator = handlerValidator;
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public IahnNodeMessageInspectResult inspectMessage(IahnNodeMessageInspectInfo info) throws HandlerException {
         return doInspectMessage(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -108,6 +106,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectMessage(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private IahnNodeMessageInspectResult doInspectMessage(IahnNodeMessageInspectInfo info, boolean resetTtl)
             throws HandlerException {
         try {
@@ -192,7 +191,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public IahnNodeMessageInspectByLocaleResult batchInspectMessageByLocale(IahnNodeMessageInspectByLocaleInfo info)
@@ -200,7 +198,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doBatchInspectMessageByLocale(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -210,6 +207,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doBatchInspectMessageByLocale(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private IahnNodeMessageInspectByLocaleResult doBatchInspectMessageByLocale(
             IahnNodeMessageInspectByLocaleInfo info, boolean resetTtl
     ) throws HandlerException {
@@ -407,7 +405,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         ).collect(Collectors.toList());
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -416,7 +413,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectLocaleList(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -425,6 +421,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectLocaleList(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private IahnNodeLocaleListInspectResult doInspectLocaleList(
             IahnNodeLocaleListInspectInfo info, boolean resetTtl
     ) throws HandlerException {
@@ -496,7 +493,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -504,7 +500,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectMekList(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -513,6 +508,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectMekList(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private IahnNodeMekListInspectResult doInspectMekList(IahnNodeMekListInspectInfo info, boolean resetTtl)
             throws HandlerException {
         try {
@@ -582,7 +578,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -591,7 +586,6 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectMessageTable(info, false);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Nullable
     @Override
@@ -600,6 +594,7 @@ public class IahnNodeOperateHandlerImpl implements IahnNodeOperateHandler {
         return doInspectMessageTable(info, true);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private IahnNodeMessageTableInspectResult doInspectMessageTable(
             IahnNodeMessageTableInspectInfo info, boolean resetTtl
     ) throws HandlerException {
