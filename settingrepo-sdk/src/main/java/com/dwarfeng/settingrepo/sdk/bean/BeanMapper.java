@@ -637,6 +637,77 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     TextNodePutInfo textNodePutInfoFromWebInput(WebInputTextNodePutInfo webInputTextNodePutInfo);
 
+    FastJsonTextListNodeInspectResult textListNodeInspectResultToFastJson(
+            TextListNodeInspectResult textListNodeInspectResult
+    );
+
+    @InheritInverseConfiguration
+    TextListNodeInspectResult textListNodeInspectResultFromFastJson(
+            FastJsonTextListNodeInspectResult fastJsonTextListNodeInspectResult
+    );
+
+    FastJsonTextListNodeSizeResult textListNodeSizeResultToFastJson(TextListNodeSizeResult textListNodeSizeResult);
+
+    @InheritInverseConfiguration
+    TextListNodeSizeResult textListNodeSizeResultFromFastJson(
+            FastJsonTextListNodeSizeResult fastJsonTextListNodeSizeResult
+    );
+
+    WebInputTextListNodeChangeOrderInfo textListNodeChangeOrderInfoToWebInput(
+            TextListNodeChangeOrderInfo textListNodeChangeOrderInfo
+    );
+
+    @InheritInverseConfiguration
+    TextListNodeChangeOrderInfo textListNodeChangeOrderInfoFromWebInput(
+            WebInputTextListNodeChangeOrderInfo webInputTextListNodeChangeOrderInfo
+    );
+
+    WebInputTextListNodeInspectInfo textListNodeInspectInfoToWebInput(TextListNodeInspectInfo textListNodeInspectInfo);
+
+    @InheritInverseConfiguration
+    TextListNodeInspectInfo textListNodeInspectInfoFromWebInput(
+            WebInputTextListNodeInspectInfo webInputTextListNodeInspectInfo
+    );
+
+    WebInputTextListNodeRemoveInfo textListNodeRemoveInfoToWebInput(TextListNodeRemoveInfo textListNodeRemoveInfo);
+
+    @InheritInverseConfiguration
+    TextListNodeRemoveInfo textListNodeRemoveInfoFromWebInput(
+            WebInputTextListNodeRemoveInfo webInputTextListNodeRemoveInfo
+    );
+
+    WebInputTextListNodeSizeInfo textListNodeSizeInfoToWebInput(TextListNodeSizeInfo textListNodeSizeInfo);
+
+    @InheritInverseConfiguration
+    TextListNodeSizeInfo textListNodeSizeInfoFromWebInput(WebInputTextListNodeSizeInfo webInputTextListNodeSizeInfo);
+
+    WebInputTextListNodeTextFetchInfo textListNodeTextFetchInfoToWebInput(
+            TextListNodeTextFetchInfo textListNodeTextFetchInfo
+    );
+
+    @InheritInverseConfiguration
+    TextListNodeTextFetchInfo textListNodeTextFetchInfoFromWebInput(
+            WebInputTextListNodeTextFetchInfo webInputTextListNodeTextFetchInfo
+    );
+
+    WebInputTextListNodeTextInsertInfo textListNodeTextInsertInfoToWebInput(
+            TextListNodeTextInsertInfo textListNodeTextInsertInfo
+    );
+
+    @InheritInverseConfiguration
+    TextListNodeTextInsertInfo textListNodeTextInsertInfoFromWebInput(
+            WebInputTextListNodeTextInsertInfo webInputTextListNodeTextInsertInfo
+    );
+
+    WebInputTextListNodeTextUpdateInfo textListNodeTextUpdateInfoToWebInput(
+            TextListNodeTextUpdateInfo textListNodeTextUpdateInfo
+    );
+
+    @InheritInverseConfiguration
+    TextListNodeTextUpdateInfo textListNodeTextUpdateInfoFromWebInput(
+            WebInputTextListNodeTextUpdateInfo webInputTextListNodeTextUpdateInfo
+    );
+
     WebInputIahnNodeLocaleListInspectInfo iahnNodeLocaleListInspectInfoToWebInput(
             IahnNodeLocaleListInspectInfo iahnNodeLocaleListInspectInfo
     );

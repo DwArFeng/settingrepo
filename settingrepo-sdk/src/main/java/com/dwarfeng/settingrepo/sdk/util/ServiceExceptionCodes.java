@@ -48,6 +48,8 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(130), "warmup driver failed");
     public static final ServiceException.Code WARMUP_DRIVER_TYPE_UNSUPPORTED =
             new ServiceException.Code(offset(131), "warmup driver type unsupported");
+    public static final ServiceException.Code TEXT_LIST_NODE_INDEX_OUT_OF_BOUND =
+            new ServiceException.Code(offset(140), "text list node index out of bound");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -90,6 +92,7 @@ public final class ServiceExceptionCodes {
         NAVIGATION_NODE_ITEM_NOT_EXISTS.setCode(offset(120));
         WARMUP_DRIVER_FAILED.setCode(offset(130));
         WARMUP_DRIVER_TYPE_UNSUPPORTED.setCode(offset(131));
+        TEXT_LIST_NODE_INDEX_OUT_OF_BOUND.setCode(offset(140));
     }
 
     private ServiceExceptionCodes() {

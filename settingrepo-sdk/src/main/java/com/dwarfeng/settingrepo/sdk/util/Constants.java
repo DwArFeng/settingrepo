@@ -14,21 +14,14 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 常量类。
  *
- * <p>
- * 预热缓存类型采用独立于设置节点类型的枚举空间，并从 0 开始按节点类别划分十位段：
- * <ul>
- *     <li>KvNode：0-9</li>
- *     <li>NavigationNode：10-19</li>
- *     <li>IahnNode：20-29</li>
- * </ul>
- * 段内余量用于同类节点后续新增缓存，不得改为全局连续追加。
- *
  * @author DwArFeng
  * @since 2.0.0
  */
 public final class Constants {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Constants.class);
+
+    // region 设置节点类型。
 
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_TEXT = 0;
@@ -68,6 +61,14 @@ public final class Constants {
      */
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_KV = 8;
+
+    /**
+     * @since 3.2.0
+     */
+    @SettingNodeTypeItem
+    public static final int SETTING_NODE_TYPE_TEXT_LIST = 9;
+
+    // endregion
 
     /**
      * 键值对节点查看结果缓存。
