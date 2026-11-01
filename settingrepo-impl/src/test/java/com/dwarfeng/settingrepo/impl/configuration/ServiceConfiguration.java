@@ -34,6 +34,10 @@ public class ServiceConfiguration {
     private final SettingNodeDao settingNodeDao;
     private final TextNodeDao textNodeDao;
     private final TextNodeCache textNodeCache;
+    private final TextListNodeCrudOperation textListNodeCrudOperation;
+    private final TextListNodeDao textListNodeDao;
+    private final TextListNodeItemCrudOperation textListNodeItemCrudOperation;
+    private final TextListNodeItemDao textListNodeItemDao;
     private final ImageNodeCrudOperation imageNodeCrudOperation;
     private final ImageNodeDao imageNodeDao;
     private final ImageListNodeCrudOperation imageListNodeCrudOperation;
@@ -95,6 +99,10 @@ public class ServiceConfiguration {
             SettingNodeDao settingNodeDao,
             TextNodeDao textNodeDao,
             TextNodeCache textNodeCache,
+            TextListNodeCrudOperation textListNodeCrudOperation,
+            TextListNodeDao textListNodeDao,
+            TextListNodeItemCrudOperation textListNodeItemCrudOperation,
+            TextListNodeItemDao textListNodeItemDao,
             ImageNodeCrudOperation imageNodeCrudOperation,
             ImageNodeDao imageNodeDao,
             ImageListNodeCrudOperation imageListNodeCrudOperation,
@@ -142,6 +150,10 @@ public class ServiceConfiguration {
         this.settingNodeDao = settingNodeDao;
         this.textNodeDao = textNodeDao;
         this.textNodeCache = textNodeCache;
+        this.textListNodeCrudOperation = textListNodeCrudOperation;
+        this.textListNodeDao = textListNodeDao;
+        this.textListNodeItemCrudOperation = textListNodeItemCrudOperation;
+        this.textListNodeItemDao = textListNodeItemDao;
         this.imageNodeCrudOperation = imageNodeCrudOperation;
         this.imageNodeDao = imageNodeDao;
         this.imageListNodeCrudOperation = imageListNodeCrudOperation;
@@ -293,6 +305,62 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 textNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, TextListNode> textListNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                textListNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<TextListNode> textListNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                textListNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<TextListNode> textListNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                textListNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<LongIdKey, TextListNodeItem> textListNodeItemCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                textListNodeItemCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<TextListNodeItem> textListNodeItemDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                textListNodeItemDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<TextListNodeItem> textListNodeItemDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                textListNodeItemDao
         );
     }
 

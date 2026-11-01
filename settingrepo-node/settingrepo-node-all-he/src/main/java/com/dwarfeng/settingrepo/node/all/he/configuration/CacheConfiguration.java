@@ -35,6 +35,10 @@ public class CacheConfiguration {
     private String settingNodePrefix;
     @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.text_node}")
     private String textNodePrefix;
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.text_list_node}")
+    private String textListNodePrefix;
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.text_list_node_item}")
+    private String textListNodeItemPrefix;
     @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.image_node}")
     private String imageNodePrefix;
     @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.image_list_node}")
@@ -122,6 +126,31 @@ public class CacheConfiguration {
                 new StringIdStringKeyFormatter(textNodePrefix),
                 new MapStructBeanTransformer<>(
                         TextNode.class, FastJsonTextNode.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, TextListNode, FastJsonTextListNode> textListNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonTextListNode>) template,
+                new StringIdStringKeyFormatter(textListNodePrefix),
+                new MapStructBeanTransformer<>(
+                        TextListNode.class, FastJsonTextListNode.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<LongIdKey, TextListNodeItem, FastJsonTextListNodeItem>
+    textListNodeItemRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonTextListNodeItem>) template,
+                new LongIdStringKeyFormatter(textListNodeItemPrefix),
+                new MapStructBeanTransformer<>(
+                        TextListNodeItem.class, FastJsonTextListNodeItem.class, BeanMapper.class
                 )
         );
     }

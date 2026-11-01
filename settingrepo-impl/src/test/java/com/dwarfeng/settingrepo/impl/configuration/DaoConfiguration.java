@@ -35,6 +35,8 @@ public class DaoConfiguration {
     private final SettingCategoryPresetCriteriaMaker settingCategoryPresetCriteriaMaker;
     private final SettingNodePresetCriteriaMaker settingNodePresetCriteriaMaker;
     private final TextNodePresetCriteriaMaker textNodePresetCriteriaMaker;
+    private final TextListNodePresetCriteriaMaker textListNodePresetCriteriaMaker;
+    private final TextListNodeItemPresetCriteriaMaker textListNodeItemPresetCriteriaMaker;
     private final ImageNodePresetCriteriaMaker imageNodePresetCriteriaMaker;
     private final ImageListNodePresetCriteriaMaker imageListNodePresetCriteriaMaker;
     private final ImageListNodeItemPresetCriteriaMaker imageListNodeItemPresetCriteriaMaker;
@@ -63,6 +65,8 @@ public class DaoConfiguration {
             SettingCategoryPresetCriteriaMaker settingCategoryPresetCriteriaMaker,
             SettingNodePresetCriteriaMaker settingNodePresetCriteriaMaker,
             TextNodePresetCriteriaMaker textNodePresetCriteriaMaker,
+            TextListNodePresetCriteriaMaker textListNodePresetCriteriaMaker,
+            TextListNodeItemPresetCriteriaMaker textListNodeItemPresetCriteriaMaker,
             ImageNodePresetCriteriaMaker imageNodePresetCriteriaMaker,
             ImageListNodePresetCriteriaMaker imageListNodePresetCriteriaMaker,
             ImageListNodeItemPresetCriteriaMaker imageListNodeItemPresetCriteriaMaker,
@@ -87,6 +91,8 @@ public class DaoConfiguration {
         this.settingCategoryPresetCriteriaMaker = settingCategoryPresetCriteriaMaker;
         this.settingNodePresetCriteriaMaker = settingNodePresetCriteriaMaker;
         this.textNodePresetCriteriaMaker = textNodePresetCriteriaMaker;
+        this.textListNodePresetCriteriaMaker = textListNodePresetCriteriaMaker;
+        this.textListNodeItemPresetCriteriaMaker = textListNodeItemPresetCriteriaMaker;
         this.imageNodePresetCriteriaMaker = imageNodePresetCriteriaMaker;
         this.imageListNodePresetCriteriaMaker = imageListNodePresetCriteriaMaker;
         this.imageListNodeItemPresetCriteriaMaker = imageListNodeItemPresetCriteriaMaker;
@@ -248,6 +254,78 @@ public class DaoConfiguration {
                 new MapStructBeanTransformer<>(TextNode.class, HibernateTextNode.class, BeanMapper.class),
                 HibernateTextNode.class,
                 textNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, TextListNode, HibernateTextListNode>
+    textListNodeSupportHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(TextListNode.class, HibernateTextListNode.class, BeanMapper.class),
+                HibernateTextListNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<TextListNode, HibernateTextListNode> textListNodeSupportHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(TextListNode.class, HibernateTextListNode.class, BeanMapper.class),
+                HibernateTextListNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<TextListNode, HibernateTextListNode> textListNodeSupportHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(TextListNode.class, HibernateTextListNode.class, BeanMapper.class),
+                HibernateTextListNode.class,
+                textListNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, TextListNodeItem, HibernateTextListNodeItem>
+    textListNodeItemSupportHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(LongIdKey.class, HibernateLongIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        TextListNodeItem.class, HibernateTextListNodeItem.class, BeanMapper.class
+                ),
+                HibernateTextListNodeItem.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<TextListNodeItem, HibernateTextListNodeItem>
+    textListNodeItemSupportHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(
+                        TextListNodeItem.class, HibernateTextListNodeItem.class, BeanMapper.class
+                ),
+                HibernateTextListNodeItem.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<TextListNodeItem, HibernateTextListNodeItem>
+    textListNodeItemSupportHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(
+                        TextListNodeItem.class, HibernateTextListNodeItem.class, BeanMapper.class
+                ),
+                HibernateTextListNodeItem.class,
+                textListNodeItemPresetCriteriaMaker
         );
     }
 
@@ -866,8 +944,8 @@ public class DaoConfiguration {
     }
 
     @Bean
-    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, WarmupDriverSupport, HibernateWarmupDriverSupport>
-    warmupDriverSupportSupportHibernateBatchBaseDao() {
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, WarmupDriverSupport,
+            HibernateWarmupDriverSupport> warmupDriverSupportSupportHibernateBatchBaseDao() {
         return new HibernateBatchBaseDao<>(
                 template,
                 new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),

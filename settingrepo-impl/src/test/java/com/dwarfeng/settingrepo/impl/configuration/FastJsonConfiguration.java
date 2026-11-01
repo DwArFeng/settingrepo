@@ -21,6 +21,8 @@ public class FastJsonConfiguration {
         ParserConfig.getGlobalInstance().addAccept(FastJsonSettingCategory.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonSettingNode.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonTextNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonTextListNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonTextListNodeItem.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonImageNode.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonImageListNode.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonImageListNodeItem.class.getCanonicalName());

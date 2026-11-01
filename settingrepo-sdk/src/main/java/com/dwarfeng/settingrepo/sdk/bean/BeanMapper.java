@@ -120,6 +120,23 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     IahnNodeMessage iahnNodeMessageFromFastJson(FastJsonIahnNodeMessage fastJsonIahnNodeMessage);
 
+    FastJsonTextListNode textListNodeToFastJson(TextListNode textListNode);
+
+    @InheritInverseConfiguration
+    TextListNode textListNodeFromFastJson(FastJsonTextListNode fastJsonTextListNode);
+
+    FastJsonTextListNodeItem textListNodeItemToFastJson(TextListNodeItem textListNodeItem);
+
+    @InheritInverseConfiguration
+    TextListNodeItem textListNodeItemFromFastJson(FastJsonTextListNodeItem fastJsonTextListNodeItem);
+
+    JSFixedFastJsonTextListNodeItem textListNodeItemToJSFixedFastJson(TextListNodeItem textListNodeItem);
+
+    @InheritInverseConfiguration
+    TextListNodeItem textListNodeItemFromJSFixedFastJson(
+            JSFixedFastJsonTextListNodeItem jSFixedFastJsonTextListNodeItem
+    );
+
     FastJsonImageListNode imageListNodeToFastJson(ImageListNode imageListNode);
 
     @InheritInverseConfiguration

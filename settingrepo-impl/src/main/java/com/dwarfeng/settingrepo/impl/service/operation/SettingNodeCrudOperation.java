@@ -23,6 +23,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final TextNodeDao textNodeDao;
     private final TextNodeCache textNodeCache;
 
+    private final TextListNodeDao textListNodeDao;
+    private final TextListNodeCrudOperation textListNodeCrudOperation;
+
     private final LongTextNodeDao longTextNodeDao;
     private final LongTextNodeCrudOperation longTextNodeCrudOperation;
 
@@ -55,6 +58,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             SettingNodeCache settingNodeCache,
             TextNodeDao textNodeDao,
             TextNodeCache textNodeCache,
+            TextListNodeDao textListNodeDao,
+            TextListNodeCrudOperation textListNodeCrudOperation,
             LongTextNodeDao longTextNodeDao,
             LongTextNodeCrudOperation longTextNodeCrudOperation,
             ImageNodeDao imageNodeDao,
@@ -76,6 +81,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.settingNodeCache = settingNodeCache;
         this.textNodeDao = textNodeDao;
         this.textNodeCache = textNodeCache;
+        this.textListNodeDao = textListNodeDao;
+        this.textListNodeCrudOperation = textListNodeCrudOperation;
         this.longTextNodeDao = longTextNodeDao;
         this.longTextNodeCrudOperation = longTextNodeCrudOperation;
         this.imageNodeDao = imageNodeDao;
@@ -132,6 +139,11 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         if (textNodeDao.exists(key)) {
             textNodeDao.delete(key);
             textNodeCache.delete(key);
+        }
+
+        // 删除与该设置节点相关的文本列表节点。
+        if (textListNodeDao.exists(key)) {
+            textListNodeCrudOperation.delete(key);
         }
 
         // 删除与该设置节点相关的长文本节点。

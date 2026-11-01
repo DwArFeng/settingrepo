@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.TextListNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.TextListNodeItem。
+
 - 键值对节点功能优化。
   - 增加键值对节点查询结果缓存的预热能力，并区分节点查询与节点条目查询的预热配置。
   - 为键值对节点条目查询增加缓存支持，并在数据变更后清理关联缓存。

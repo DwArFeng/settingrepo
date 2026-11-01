@@ -78,6 +78,16 @@
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
     />
     <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.TextListNodeMaintainService"
+            ref="textListNodeMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.TextListNodeItemMaintainService"
+            ref="textListNodeItemMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.ImageNodeMaintainService"
             ref="imageNodeMaintainServiceImpl"
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"

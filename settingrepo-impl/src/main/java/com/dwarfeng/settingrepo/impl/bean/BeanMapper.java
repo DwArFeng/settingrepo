@@ -124,6 +124,23 @@ public interface BeanMapper {
     @Mapping(target = "modifiedDatamark", ignore = true)
     @Mapping(target = "items", ignore = true)
     @Mapping(target = "createdDatamark", ignore = true)
+    HibernateTextListNode textListNodeToHibernate(TextListNode textListNode);
+
+    @InheritInverseConfiguration
+    TextListNode textListNodeFromHibernate(HibernateTextListNode hibernateTextListNode);
+
+    @Mapping(target = "nodeStringId", ignore = true)
+    @Mapping(target = "node", ignore = true)
+    @Mapping(target = "longId", ignore = true)
+    HibernateTextListNodeItem textListNodeItemToHibernate(TextListNodeItem textListNodeItem);
+
+    @InheritInverseConfiguration
+    TextListNodeItem textListNodeItemFromHibernate(HibernateTextListNodeItem hibernateTextListNodeItem);
+
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "items", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
     HibernateImageListNode imageListNodeToHibernate(ImageListNode imageListNode);
 
     @InheritInverseConfiguration
