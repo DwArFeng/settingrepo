@@ -23,6 +23,7 @@ public class WarmupSetting implements Entity<LongIdKey> {
      * <p>
      * int 枚举，可能的值为：
      * <ul>
+     *     <li>键值对节点查看结果缓存</li>
      *     <li>键值对节点条目查看结果缓存</li>
      *     <li>导航节点查看结果缓存</li>
      *     <li>国际化节点地区映射缓存</li>
@@ -45,6 +46,11 @@ public class WarmupSetting implements Entity<LongIdKey> {
      *         <th>目标类型</th>
      *         <th>是否需要</th>
      *         <th>字段含义</th>
+     *     </tr>
+     *     <tr>
+     *         <td>键值对节点查看结果缓存</td>
+     *         <td>是</td>
+     *         <td>设置类别的主键字符串</td>
      *     </tr>
      *     <tr>
      *         <td>键值对节点条目查看结果缓存</td>
@@ -97,6 +103,11 @@ public class WarmupSetting implements Entity<LongIdKey> {
      *         <th>字段含义</th>
      *     </tr>
      *     <tr>
+     *         <td>键值对节点查看结果缓存</td>
+     *         <td>否</td>
+     *         <td>无</td>
+     *     </tr>
+     *     <tr>
      *         <td>键值对节点条目查看结果缓存</td>
      *         <td>是</td>
      *         <td>条目的字符串主键</td>
@@ -145,6 +156,11 @@ public class WarmupSetting implements Entity<LongIdKey> {
      *         <th>目标类型</th>
      *         <th>是否需要</th>
      *         <th>字段含义</th>
+     *     </tr>
+     *     <tr>
+     *         <td>键值对节点查看结果缓存</td>
+     *         <td>否</td>
+     *         <td>无</td>
      *     </tr>
      *     <tr>
      *         <td>键值对节点条目查看结果缓存</td>
@@ -197,6 +213,11 @@ public class WarmupSetting implements Entity<LongIdKey> {
      *         <th>字段含义</th>
      *     </tr>
      *     <tr>
+     *         <td>键值对节点查看结果缓存</td>
+     *         <td>否</td>
+     *         <td>无</td>
+     *     </tr>
+     *     <tr>
      *         <td>键值对节点条目查看结果缓存</td>
      *         <td>否</td>
      *         <td>无</td>
@@ -247,6 +268,11 @@ public class WarmupSetting implements Entity<LongIdKey> {
      *         <th>字段含义</th>
      *     </tr>
      *     <tr>
+     *         <td>键值对节点查看结果缓存</td>
+     *         <td>否</td>
+     *         <td>无</td>
+     *     </tr>
+     *     <tr>
      *         <td>键值对节点条目查看结果缓存</td>
      *         <td>否</td>
      *         <td>无</td>
@@ -295,6 +321,11 @@ public class WarmupSetting implements Entity<LongIdKey> {
      *         <th>目标类型</th>
      *         <th>是否需要</th>
      *         <th>字段含义</th>
+     *     </tr>
+     *     <tr>
+     *         <td>键值对节点查看结果缓存</td>
+     *         <td>是</td>
+     *         <td>设置类别所属节点的参数数组</td>
      *     </tr>
      *     <tr>
      *         <td>键值对节点条目查看结果缓存</td>

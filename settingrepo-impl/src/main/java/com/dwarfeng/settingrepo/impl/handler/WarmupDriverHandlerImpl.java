@@ -77,7 +77,10 @@ public class WarmupDriverHandlerImpl implements WarmupDriverHandler {
 
             switch (warmupSetting.getType()) {
                 case Constants.WARMUP_CACHE_TYPE_KV_NODE_INSPECT_RESULT:
-                    warmupKvNodeInspectResult(warmupSetting);
+                    warmupKvNodeInspect(warmupSetting);
+                    break;
+                case Constants.WARMUP_CACHE_TYPE_KV_NODE_INSPECT_ITEM_RESULT:
+                    warmupKvNodeInspectItem(warmupSetting);
                     break;
                 case Constants.WARMUP_CACHE_TYPE_NAVIGATION_NODE_INSPECT_RESULT:
                     warmupNavigationNodeInspectResult(warmupSetting);
@@ -103,12 +106,24 @@ public class WarmupDriverHandlerImpl implements WarmupDriverHandler {
         }
 
         /**
+         * 预热键值对节点查看结果缓存。
+         *
+         * @param warmupSetting 预热设置。
+         * @throws Exception 方法执行过程中发生的任何异常。
+         */
+        private void warmupKvNodeInspect(WarmupSetting warmupSetting) throws Exception {
+            kvNodeOperateHandler.inspectWithResetTtl(new KvNodeInspectInfo(
+                    warmupSetting.getTargetStringAlpha(), warmupSetting.getTargetStringArrayAlpha()
+            ));
+        }
+
+        /**
          * 预热键值对节点条目查看结果缓存。
          *
          * @param warmupSetting 预热设置。
          * @throws Exception 方法执行过程中发生的任何异常。
          */
-        private void warmupKvNodeInspectResult(WarmupSetting warmupSetting) throws Exception {
+        private void warmupKvNodeInspectItem(WarmupSetting warmupSetting) throws Exception {
             kvNodeOperateHandler.inspectItemWithResetTtl(new KvNodeItemInspectInfo(
                     warmupSetting.getTargetStringAlpha(), warmupSetting.getTargetStringArrayAlpha(),
                     warmupSetting.getTargetStringBravo()

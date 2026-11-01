@@ -32,6 +32,18 @@ public class FastJsonKvNodeInspectResult implements Bean {
         }
     }
 
+    public static KvNodeInspectResult toStackBean(FastJsonKvNodeInspectResult fastJson) {
+        if (Objects.isNull(fastJson)) {
+            return null;
+        } else {
+            return new KvNodeInspectResult(
+                    Optional.ofNullable(fastJson.getItems()).map(
+                            f -> f.stream().map(FastJsonItem::toStackBean).collect(Collectors.toList())
+                    ).orElse(null)
+            );
+        }
+    }
+
     @JSONField(name = "items", ordinal = 1)
     private List<FastJsonItem> items;
 
@@ -75,6 +87,14 @@ public class FastJsonKvNodeInspectResult implements Bean {
                         item.getItemStringId(),
                         item.getValue()
                 );
+            }
+        }
+
+        public static Item toStackBean(FastJsonItem fastJson) {
+            if (Objects.isNull(fastJson)) {
+                return null;
+            } else {
+                return new Item(fastJson.getItemStringId(), fastJson.getValue());
             }
         }
 

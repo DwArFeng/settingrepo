@@ -70,12 +70,20 @@ public final class Constants {
     public static final int SETTING_NODE_TYPE_KV = 8;
 
     /**
-     * 键值对节点条目查看结果缓存。
+     * 键值对节点查看结果缓存。
      *
-     * @since 3.1.0
+     * @since 3.2.0
      */
     @WarmupCacheTypeItem
     public static final int WARMUP_CACHE_TYPE_KV_NODE_INSPECT_RESULT = 0;
+
+    /**
+     * 键值对节点条目查看结果缓存。
+     *
+     * @since 3.2.0
+     */
+    @WarmupCacheTypeItem
+    public static final int WARMUP_CACHE_TYPE_KV_NODE_INSPECT_ITEM_RESULT = 1;
 
     /**
      * 导航节点查看结果缓存。

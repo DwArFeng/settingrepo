@@ -31,6 +31,20 @@ public interface KvNodeOperateHandler extends Handler {
     KvNodeInspectResult inspect(KvNodeInspectInfo info) throws HandlerException;
 
     /**
+     * 查看键值对节点，并重置查看结果缓存 TTL。
+     *
+     * <p>
+     * 查询逻辑与 {@link #inspect(KvNodeInspectInfo)} 完全一致。<br>
+     * 当查看结果缓存命中时，额外将缓存的生存时间重置为配置值。
+     *
+     * @param info 键值对节点查看信息。
+     * @return 键值对节点查看结果。
+     * @throws HandlerException 处理器异常。
+     * @since 3.2.0
+     */
+    KvNodeInspectResult inspectWithResetTtl(KvNodeInspectInfo info) throws HandlerException;
+
+    /**
      * 查看键值对节点中的指定条目。
      *
      * @param info 键值对节点条目查看信息。
@@ -49,7 +63,7 @@ public interface KvNodeOperateHandler extends Handler {
      * @param info 键值对节点条目查看信息。
      * @return 键值对节点条目查看结果。
      * @throws HandlerException 处理器异常。
-     * @since 3.1.0
+     * @since 3.2.0
      */
     KvNodeItemInspectResult inspectItemWithResetTtl(KvNodeItemInspectInfo info) throws HandlerException;
 
@@ -85,7 +99,7 @@ public interface KvNodeOperateHandler extends Handler {
      *
      * @param info 缓存清理信息。
      * @throws HandlerException 处理器异常。
-     * @since 3.1.0
+     * @since 3.2.0
      */
     void clearCache(KvNodeClearCacheInfo info) throws HandlerException;
 }

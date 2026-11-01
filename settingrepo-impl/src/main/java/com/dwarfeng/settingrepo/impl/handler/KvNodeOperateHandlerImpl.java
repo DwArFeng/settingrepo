@@ -1,5 +1,6 @@
 package com.dwarfeng.settingrepo.impl.handler;
 
+import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonKvNodeInspectResult;
 import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonKvNodeItemInspectResult;
 import com.dwarfeng.settingrepo.sdk.util.Constants;
 import com.dwarfeng.settingrepo.stack.bean.dto.*;
@@ -105,6 +106,17 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
     @BehaviorAnalyse
     @Override
     public KvNodeInspectResult inspect(KvNodeInspectInfo info) throws HandlerException {
+        return doInspect(info, false);
+    }
+
+    @BehaviorAnalyse
+    @Override
+    public KvNodeInspectResult inspectWithResetTtl(KvNodeInspectInfo info) throws HandlerException {
+        return doInspect(info, true);
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    private KvNodeInspectResult doInspect(KvNodeInspectInfo info, boolean resetTtl) throws HandlerException {
         try {
             // 展开参数。
             String category = info.getCategory();
@@ -125,26 +137,32 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
                 return null;
             }
 
-            // 若键值对节点记录不存在则初始化，保证后续查询一致。
-            ensureKvNode(settingNodeKey);
-
-            // 按 itemStringId 升序查询该节点下全部条目。
-            List<KvNodeItem> kvNodeItems = kvNodeItemMaintainService.lookupAsList(
-                    KvNodeItemMaintainService.CHILD_FOR_NODE_ITEM_STRING_ID_ASC, new Object[]{settingNodeKey}
-            );
-
-            // 映射为查看结果条目列表。
-            List<KvNodeInspectResult.Item> items = kvNodeItems.stream()
-                    .map(
-                            kvNodeItem -> new KvNodeInspectResult.Item(
-                                    kvNodeItem.getKey().getItemStringId(),
-                                    kvNodeItem.getValue()
-                            )
-                    )
-                    .collect(Collectors.toList());
-
-            // 构造 KvNodeInspectResult 并返回。
-            return new KvNodeInspectResult(items);
+            KvNodeInspectResult result;
+            String inspectResultCacheKey = parseCacheKey(inspectResultCachePrefix, settingNodeKey);
+            if (redisTemplate.hasKey(inspectResultCacheKey)) {
+                result = FastJsonKvNodeInspectResult.toStackBean(
+                        (FastJsonKvNodeInspectResult) redisTemplate.opsForValue().get(inspectResultCacheKey)
+                );
+                if (resetTtl) {
+                    redisTemplate.expire(inspectResultCacheKey, inspectResultCacheTimeout, TimeUnit.MILLISECONDS);
+                }
+            } else {
+                ensureKvNode(settingNodeKey);
+                List<KvNodeItem> kvNodeItems = kvNodeItemMaintainService.lookupAsList(
+                        KvNodeItemMaintainService.CHILD_FOR_NODE_ITEM_STRING_ID_ASC, new Object[]{settingNodeKey}
+                );
+                List<KvNodeInspectResult.Item> items = kvNodeItems.stream()
+                        .map(kvNodeItem -> new KvNodeInspectResult.Item(
+                                kvNodeItem.getKey().getItemStringId(), kvNodeItem.getValue()
+                        ))
+                        .collect(Collectors.toList());
+                result = new KvNodeInspectResult(items);
+                redisTemplate.opsForValue().set(
+                        inspectResultCacheKey, Objects.requireNonNull(FastJsonKvNodeInspectResult.of(result)),
+                        inspectResultCacheTimeout, TimeUnit.MILLISECONDS
+                );
+            }
+            return result;
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -433,6 +451,10 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
 
     private String parseCacheKey(String prefix, StringIdKey settingNodeKey, String itemStringId) {
         return prefix + settingNodeKey.getStringId() + "." + itemStringId;
+    }
+
+    private String parseCacheKey(String prefix, StringIdKey settingNodeKey) {
+        return prefix + settingNodeKey.getStringId();
     }
 
     private String parseCacheGeneralFormat(String prefix, StringIdKey settingNodeKey) {
