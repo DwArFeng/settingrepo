@@ -8,6 +8,9 @@
 
 ### Bug 修复
 
+- 修复部分 telqos 指令中的 bug。
+  - 修复设置节点查询将部分已知类型的节点显示为未知的 bug。
+
 - 优化部分类中部分方法的行为分析行为。
   - com.dwarfeng.settingrepo.impl.cache.WarmupDriverInfoCacheImpl。
   - com.dwarfeng.settingrepo.impl.cache.WarmupSettingCacheImpl。

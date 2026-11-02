@@ -196,6 +196,16 @@ public class SettingNodeCommand extends CliCommand {
                 return "图片";
             case Constants.SETTING_NODE_TYPE_IMAGE_LIST:
                 return "图片列表";
+            case Constants.SETTING_NODE_TYPE_IAHN:
+                return "国际化";
+            case Constants.SETTING_NODE_TYPE_FILE:
+                return "文件";
+            case Constants.SETTING_NODE_TYPE_FILE_LIST:
+                return "文件列表";
+            case Constants.SETTING_NODE_TYPE_NAVIGATION:
+                return "导航";
+            case Constants.SETTING_NODE_TYPE_KV:
+                return "键值对";
             default:
                 return "未知";
         }
