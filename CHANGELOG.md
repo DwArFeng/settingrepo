@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.SettingNodeCommand。
+
 - 新增实体操作服务。
   - com.dwarfeng.settingrepo.stack.handler.VideoListNodeOperateHandler。
   - com.dwarfeng.settingrepo.stack.handler.VideoNodeOperateHandler。

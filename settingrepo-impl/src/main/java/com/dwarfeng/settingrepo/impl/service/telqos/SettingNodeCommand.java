@@ -206,6 +206,12 @@ public class SettingNodeCommand extends CliCommand {
                 return "导航";
             case Constants.SETTING_NODE_TYPE_KV:
                 return "键值对";
+            case Constants.SETTING_NODE_TYPE_TEXT_LIST:
+                return "文本列表";
+            case Constants.SETTING_NODE_TYPE_VIDEO:
+                return "视频";
+            case Constants.SETTING_NODE_TYPE_VIDEO_LIST:
+                return "视频列表";
             default:
                 return "未知";
         }
