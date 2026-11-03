@@ -8,7 +8,9 @@
 
 ### Bug 修复
 
-- (无)
+- 优化部分类中部分方法的行为分析行为。
+  - com.dwarfeng.settingrepo.impl.cache.WarmupDriverInfoCacheImpl。
+  - com.dwarfeng.settingrepo.impl.cache.WarmupSettingCacheImpl。
 
 ### 功能移除
 
