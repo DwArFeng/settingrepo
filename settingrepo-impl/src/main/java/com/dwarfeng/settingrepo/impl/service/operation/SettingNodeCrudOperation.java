@@ -23,6 +23,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final TextNodeDao textNodeDao;
     private final TextNodeCache textNodeCache;
 
+    private final LongTextNodeDao longTextNodeDao;
+    private final LongTextNodeCrudOperation longTextNodeCrudOperation;
+
     private final ImageNodeDao imageNodeDao;
     private final ImageNodeCrudOperation imageNodeCrudOperation;
 
@@ -41,6 +44,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final NavigationNodeDao navigationNodeDao;
     private final NavigationNodeCrudOperation navigationNodeCrudOperation;
 
+    private final KvNodeDao kvNodeDao;
+    private final KvNodeCrudOperation kvNodeCrudOperation;
+
     @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
@@ -49,6 +55,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             SettingNodeCache settingNodeCache,
             TextNodeDao textNodeDao,
             TextNodeCache textNodeCache,
+            LongTextNodeDao longTextNodeDao,
+            LongTextNodeCrudOperation longTextNodeCrudOperation,
             ImageNodeDao imageNodeDao,
             ImageNodeCrudOperation imageNodeCrudOperation,
             ImageListNodeDao imageListNodeDao,
@@ -60,12 +68,16 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             FileListNodeDao fileListNodeDao,
             FileListNodeCrudOperation fileListNodeCrudOperation,
             NavigationNodeDao navigationNodeDao,
-            NavigationNodeCrudOperation navigationNodeCrudOperation
+            NavigationNodeCrudOperation navigationNodeCrudOperation,
+            KvNodeDao kvNodeDao,
+            KvNodeCrudOperation kvNodeCrudOperation
     ) {
         this.settingNodeDao = settingNodeDao;
         this.settingNodeCache = settingNodeCache;
         this.textNodeDao = textNodeDao;
         this.textNodeCache = textNodeCache;
+        this.longTextNodeDao = longTextNodeDao;
+        this.longTextNodeCrudOperation = longTextNodeCrudOperation;
         this.imageNodeDao = imageNodeDao;
         this.imageNodeCrudOperation = imageNodeCrudOperation;
         this.imageListNodeDao = imageListNodeDao;
@@ -78,6 +90,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.fileListNodeCrudOperation = fileListNodeCrudOperation;
         this.navigationNodeDao = navigationNodeDao;
         this.navigationNodeCrudOperation = navigationNodeCrudOperation;
+        this.kvNodeDao = kvNodeDao;
+        this.kvNodeCrudOperation = kvNodeCrudOperation;
     }
 
     @Override
@@ -111,12 +125,18 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         settingNodeDao.update(settingNode);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     public void delete(StringIdKey key) throws Exception {
         // 删除与该设置节点相关的文本节点。
         if (textNodeDao.exists(key)) {
             textNodeDao.delete(key);
             textNodeCache.delete(key);
+        }
+
+        // 删除与该设置节点相关的长文本节点。
+        if (longTextNodeDao.exists(key)) {
+            longTextNodeCrudOperation.delete(key);
         }
 
         // 删除与该设置节点相关的图片节点。
@@ -147,6 +167,11 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         // 删除与该设置节点相关的导航节点。
         if (navigationNodeDao.exists(key)) {
             navigationNodeCrudOperation.delete(key);
+        }
+
+        // 删除与该设置节点相关的键值对节点。
+        if (kvNodeDao.exists(key)) {
+            kvNodeCrudOperation.delete(key);
         }
 
         settingNodeDao.delete(key);

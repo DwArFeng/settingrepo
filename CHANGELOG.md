@@ -8,6 +8,9 @@
 
 ### Bug 修复
 
+- 修复部分 CrudOperation 类在删除节点实体时未级联删除部分相关实体的 bug。
+  - com.dwarfeng.settingrepo.impl.service.operation.SettingNodeCrudOperation。
+
 - 修复部分 telqos 指令中的 bug。
   - 修复设置节点查询将部分已知类型的节点显示为未知的 bug。
 
