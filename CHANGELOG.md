@@ -5,6 +5,8 @@
 ### 功能构建
 
 - 新增 telqos 指令。
+  - com.dwarfeng.settingrepo.impl.service.telqos.VideoListNodeCommand。
+  - com.dwarfeng.settingrepo.impl.service.telqos.VideoNodeCommand。
   - com.dwarfeng.settingrepo.impl.service.telqos.TextListNodeCommand。
 
 - 优化 telqos 指令。
