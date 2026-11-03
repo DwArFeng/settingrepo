@@ -9,7 +9,7 @@
 
 - Telqos 的连接方式、端口、字符集和基础使用规则。
 - Setting Repository 提供的基础命令、第三方命令和服务功能命令。
-- 文件节点、图片节点、文本节点、国际化节点、键值对节点、导航节点和设置节点的操作方法。
+- 文件节点、图片节点、视频节点、文本节点、文本列表节点、国际化节点、键值对节点、导航节点和设置节点的操作方法。
 - `-json` 与 `-jf` 选项的差异，以及 JSON 输入文件的格式规范。
 
 各命令的具体可用版本以命令页面中的说明为准。
@@ -27,11 +27,13 @@
 | [WarmupCommands](./commands/WarmupCommands.md)           | `warmup`、`warmupdrive`                             |
 | [FileNodes](./commands/FileNodes.md)                     | `filelnode`、`filenode`                             |
 | [ImageNodes](./commands/ImageNodes.md)                   | `imglnode`、`imgnode`                               |
-| [TextNodes](./commands/TextNodes.md)                     | `txtnode`、`ltxtnode`                               |
+| [TextNodes](./commands/TextNodes.md)                     | `txtnode`、`textlnode`                              |
+| [LongTextNode](./commands/LongTextNode.md)               | `ltxtnode`                                          |
 | [IahnNode](./commands/IahnNode.md)                       | `iahnnode`                                          |
 | [KvNode](./commands/KvNode.md)                           | `kvnode`                                            |
 | [NavigationNode](./commands/NavigationNode.md)           | `navigationnode`                                    |
 | [SettingNode](./commands/SettingNode.md)                 | `settingnode`                                       |
+| [VideoNodes](./commands/VideoNodes.md)                   | `videolnode`、`videonode`                           |
 
 ## JSON 文件
 
@@ -49,7 +51,10 @@ json-file/
 ├── ltxtnode/
 ├── navigationnode/
 ├── settingnode/
-└── txtnode/
+├── txtlnode/
+├── txtnode/
+├── videolnode/
+└── videonode/
 ```
 
 修改 JSON 文件后，可直接通过 `-jf` 使用。例如：

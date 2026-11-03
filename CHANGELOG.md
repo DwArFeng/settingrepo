@@ -4,6 +4,17 @@
 
 ### 功能构建
 
+- Telqos 运维手册更新。
+  - docs/telqos-manual/zh-CN/commands/LongTextNode.md。
+  - docs/telqos-manual/zh-CN/commands/TextNodes.md。
+  - docs/telqos-manual/zh-CN/commands/VideoNodes.md。
+  - docs/telqos-manual/zh-CN/json-file/txtlnode。
+  - docs/telqos-manual/zh-CN/json-file/videolnode。
+  - docs/telqos-manual/zh-CN/json-file/videonode。
+  - docs/telqos-manual/zh-CN/CommandIndex.md。
+  - docs/telqos-manual/zh-CN/JsonInput.md。
+  - docs/telqos-manual/zh-CN/README.md。
+
 - Wiki 更新。
   - docs/wiki/zh-CN/ConfDirectory.md。
   - docs/wiki/zh-CN/TelqosCommands.md。

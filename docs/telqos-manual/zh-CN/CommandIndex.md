@@ -20,21 +20,24 @@ Telqos 命令可分为以下类别：
 | `imglnode`       | 图片列表节点操作服务 | [json-file/imglnode](./json-file/imglnode)             | [ImageNodes](./commands/ImageNodes.md)         |
 | `imgnode`        | 图片节点操作服务     | [json-file/imgnode](./json-file/imgnode)               | [ImageNodes](./commands/ImageNodes.md)         |
 | `txtnode`        | 文本节点操作服务     | [json-file/txtnode](./json-file/txtnode)               | [TextNodes](./commands/TextNodes.md)           |
-| `ltxtnode`       | 长文本节点操作服务   | [json-file/ltxtnode](./json-file/ltxtnode)             | [TextNodes](./commands/TextNodes.md)           |
+| `ltxtnode`       | 长文本节点操作服务   | [json-file/ltxtnode](./json-file/ltxtnode)             | [LongTextNode](./commands/LongTextNode.md)     |
 | `iahnnode`       | 国际化节点操作服务   | [json-file/iahnnode](./json-file/iahnnode)             | [IahnNode](./commands/IahnNode.md)             |
 | `kvnode`         | 键值对节点操作服务   | [json-file/kvnode](./json-file/kvnode)                 | [KvNode](./commands/KvNode.md)                 |
 | `navigationnode` | 导航节点操作服务     | [json-file/navigationnode](./json-file/navigationnode) | [NavigationNode](./commands/NavigationNode.md) |
 | `settingnode`    | 设置节点操作服务     | [json-file/settingnode](./json-file/settingnode)       | [SettingNode](./commands/SettingNode.md)       |
+| `textlnode`      | 文本列表节点操作服务 | [json-file/txtlnode](./json-file/txtlnode)             | [TextNodes](./commands/TextNodes.md)           |
+| `videolnode`     | 视频列表节点操作服务 | [json-file/videolnode](./json-file/videolnode)         | [VideoNodes](./commands/VideoNodes.md)         |
+| `videonode`      | 视频节点操作服务     | [json-file/videonode](./json-file/videonode)           | [VideoNodes](./commands/VideoNodes.md)         |
 
 ## 服务维护命令
 
 | IDENTITY      | 说明                         | 使用 JSON | 文档                                                     |
-|---------------|------------------------------|----------:|----------------------------------------------------------|
-| `flc`         | 格式化器本地缓存操作         |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
-| `reset`       | 重置处理器操作和查看         |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
-| `support`     | 格式化器和预热驱动器支持操作 |        否 | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
-| `warmup`      | 预热处理器操作和查看         |        否 | [WarmupCommands](./commands/WarmupCommands.md)           |
-| `warmupdrive` | 预热驱动处理器状态查看       |        否 | [WarmupCommands](./commands/WarmupCommands.md)           |
+|---------------|------------------------------|-----------|----------------------------------------------------------|
+| `flc`         | 格式化器本地缓存操作         | 否        | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| `reset`       | 重置处理器操作和查看         | 否        | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| `support`     | 格式化器和预热驱动器支持操作 | 否        | [MaintenanceCommands](./commands/MaintenanceCommands.md) |
+| `warmup`      | 预热处理器操作和查看         | 否        | [WarmupCommands](./commands/WarmupCommands.md)           |
+| `warmupdrive` | 预热驱动处理器状态查看       | 否        | [WarmupCommands](./commands/WarmupCommands.md)           |
 
 ## 命令发现
 

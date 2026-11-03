@@ -1,0 +1,8 @@
+{
+  "category": "quickstart.demo",
+  "args": [
+    "example"
+  ],
+  "file_path": "confext/telqos/videonode/demo.mp4",
+  "cover_file_path": "confext/telqos/videonode/demo.jpg"
+}
