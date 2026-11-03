@@ -71,22 +71,22 @@ public class TextNodeOperateHandlerImpl implements TextNodeOperateHandler {
                 return null;
             }
 
-            // 获取文本节点。
+            // 获取文本节点实体。
             TextNode textNode = textNodeMaintainService.getIfExists(settingNodeKey);
 
-            // 如果文本节点不存在，则初始化，并插入或更新实体。
+            // 如果文本节点实体不存在，则直接返回 null。
             if (Objects.isNull(textNode)) {
-                textNode = new TextNode(settingNodeKey, null);
-                textNodeMaintainService.insertOrUpdate(textNode);
+                return null;
             }
 
-            // 构造结果并返回。
+            // 构造 TextNodeInspectResult 并返回。
             return new TextNodeInspectResult(textNode.getValue());
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public void put(TextNodePutInfo info) throws HandlerException {
@@ -120,22 +120,21 @@ public class TextNodeOperateHandlerImpl implements TextNodeOperateHandler {
                 settingNode.setLastModifiedDate(new Date());
             }
 
+            // 插入或更新设置节点。
+            settingNodeMaintainService.insertOrUpdate(settingNode);
+
             // 构造文本节点实体。
             TextNode textNode = new TextNode(settingNodeKey, value);
 
             // 插入或更新文本节点。
             textNodeMaintainService.insertOrUpdate(textNode);
-
-            // 更新设置节点属性。
-            settingNode.setLastModifiedDate(new Date());
-
-            // 插入或更新设置节点。
-            settingNodeMaintainService.insertOrUpdate(settingNode);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
     }
 
+    // 为了代码的可读性，不简化此方法。
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean settingNodeMatching(SettingNode settingNode) {
         if (Objects.isNull(settingNode)) {
             return false;

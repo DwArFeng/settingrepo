@@ -8,6 +8,10 @@
 
 ### Bug 修复
 
+- 修复文本节点部分操作方法的 bug。
+  - 修复文本节点 put 操作写入顺序不合理的 bug。
+  - 修复文本节点 inspect 操作带有写入副作用的 bug。
+
 - 修复部分 CrudOperation 类在删除节点实体时未级联删除部分相关实体的 bug。
   - com.dwarfeng.settingrepo.impl.service.operation.SettingNodeCrudOperation。
 
