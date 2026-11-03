@@ -4,7 +4,12 @@ TODO 待实现
 
 ```text
 lc
-16  txtnode       文本节点操作服务
+1   datamark      数据标记服务
+etc...
+19  videolnode    视频列表节点操作服务
+20  videonode     视频节点操作服务
+----------------------------
+共 20 条
 ```
 
 ## 概览
@@ -55,10 +60,50 @@ lc
 1   datamark      数据标记服务
 2   dubbo         分布式服务上线/下线
 etc...
-15  shutdown      关闭/重启程序
-16  txtnode       文本节点操作服务
+19  videolnode    视频列表节点操作服务
+20  videonode     视频节点操作服务
 ----------------------------
-共 16 条
+共 20 条
+OK
+```
+
+命令示例 - 列出特定命令：
+
+```text
+lc -p i
+1   iahnnode   国际化节点操作服务
+2   imglnode   图片列表节点操作服务
+3   imgnode    图片节点操作服务
+-------------------------
+共 3 条
+OK
+```
+
+命令标识：`lc`。
+
+命令说明：列出指令。
+
+可用版本：`1.0.0`。
+
+命令语法：
+
+```text
+usage: lc [-p prefix|--prefix prefix]
+列出指令
+ -p,--prefix <prefix>   列出包含指定前缀的命令
+```
+
+命令示例 - 列出所有指令：
+
+```text
+lc
+1   datamark      数据标记服务
+2   dubbo         分布式服务上线/下线
+etc...
+19  videolnode    视频列表节点操作服务
+20  videonode     视频节点操作服务
+----------------------------
+共 20 条
 OK
 ```
 
@@ -947,6 +992,239 @@ settingnode -inspect -jf your-json-file-here.json
   type: 0 (文本)
   lastModifiedDate: 2025-06-29 14:27:28.02
   remark: 由 settingrepo 自动生成的文本节点
+OK
+```
+
+### textlnode
+
+命令标识：`textlnode`。
+
+命令说明：文本列表节点操作服务。
+
+可用版本：`3.2.0`。
+
+命令语法：
+
+```text
+usage: textlnode -size [-json json-string] [-jf json-file]
+textlnode -inspect [-json json-string] [-jf json-file]
+textlnode -fetch [-json json-string] [-jf json-file]
+textlnode -insert [-json json-string] [-jf json-file]
+textlnode -update [-json json-string] [-jf json-file]
+textlnode -co [-json json-string] [-jf json-file]
+textlnode -remove [-json json-string] [-jf json-file]
+文本列表节点操作服务
+ -co,--change-order      更改文本列表节点的顺序
+ -fetch                  拉取文本列表节点文本
+ -inspect                查看文本列表节点
+ -insert                 插入文本列表节点文本
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
+ -remove                 移除文本列表节点
+ -size                   获取文本列表节点的大小
+ -update                 更新文本列表节点文本
+```
+
+JSON schema 参考：
+
+| option   | reference class                                                               |
+|:---------|:------------------------------------------------------------------------------|
+| size     | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeSizeInfo            |
+| inspect  | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeInspectInfo         |
+| fetch    | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeTextFetchInfo       |
+| insert   | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeTextInsertInfo      |
+| update   | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeTextUpdateInfo      |
+| co       | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeChangeOrderInfo     |
+| remove   | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputTextListNodeRemoveInfo          |
+
+命令示例 - 获取文本列表节点的大小：
+
+```text
+textlnode -size -jf your-json-file-here.json
+文本列表节点的大小:
+  size: 3
+OK
+```
+
+命令示例 - 查看文本列表节点：
+
+```text
+textlnode -inspect -jf your-json-file-here.json
+查看结果:
+  items: total size: 3
+    0/3:
+      index: 0
+      nullFlag: false
+    etc...
+    2/3:
+      index: 2
+      nullFlag: false
+OK
+```
+
+命令示例 - 拉取文本列表节点文本：
+
+```text
+textlnode -fetch -jf your-json-file-here.json
+拉取结果:
+  content: first
+OK
+```
+
+命令示例 - 插入文本列表节点文本：
+
+```text
+textlnode -insert -jf your-json-file-here.json
+插入成功
+OK
+```
+
+命令示例 - 更新文本列表节点文本：
+
+```text
+textlnode -update -jf your-json-file-here.json
+更新成功
+OK
+```
+
+命令示例 - 更改文本列表节点的顺序：
+
+```text
+textlnode -co -jf your-json-file-here.json
+更改顺序成功
+OK
+```
+
+命令示例 - 移除文本列表节点：
+
+```text
+textlnode -remove -jf your-json-file-here.json
+移除成功
+OK
+```
+
+### videolnode
+
+命令标识：`videolnode`。
+
+命令说明：视频列表节点操作服务。
+
+可用版本：`3.2.0`。
+
+命令语法：
+
+```text
+usage: videolnode -size [-json json-string] [-jf json-file]
+videolnode -inspect [-json json-string] [-jf json-file]
+videolnode -download [-json json-string] [-jf json-file]
+videolnode -upload [-json json-string] [-jf json-file]
+videolnode -update [-json json-string] [-jf json-file]
+videolnode -co [-json json-string] [-jf json-file]
+videolnode -remove [-json json-string] [-jf json-file]
+视频列表节点操作服务
+ -co,--change-order      更改视频列表节点的顺序
+ -download               下载视频列表节点文件
+ -inspect                查看视频列表节点
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
+ -remove                 移除视频列表节点
+ -size                   获取视频列表节点的大小
+ -update                 更新视频列表节点文件
+ -upload                 上传视频列表节点文件
+```
+
+JSON schema 参考：
+
+| option   | reference class                                                                |
+|:---------|:-------------------------------------------------------------------------------|
+| size     | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputVideoListNodeSizeInfo            |
+| inspect  | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputVideoListNodeInspectInfo         |
+| download | com.dwarfeng.settingrepo.impl.service.telqos.VideoListNodeCommand.DownloadInfo |
+| upload   | com.dwarfeng.settingrepo.impl.service.telqos.VideoListNodeCommand.UploadInfo   |
+| update   | com.dwarfeng.settingrepo.impl.service.telqos.VideoListNodeCommand.UpdateInfo   |
+| co       | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputVideoListNodeChangeOrderInfo     |
+| remove   | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputVideoListNodeRemoveInfo          |
+
+命令示例 - 获取视频列表节点的大小：
+
+```text
+videolnode -size -jf your-json-file-here.json
+视频列表节点的大小:
+  size: 2
+OK
+```
+
+命令示例 - 查看视频列表节点：
+
+```text
+videolnode -inspect -jf your-json-file-here.json
+查看结果:
+  items: total size: 2
+    0/2:
+      nullFlag: false
+      originName: demo1.mp4
+      length: 10485760
+    etc...
+    1/2:
+      nullFlag: false
+      originName: demo2.mp4
+      length: 20971520
+OK
+```
+
+命令示例 - 下载视频列表节点文件：
+
+```text
+videolnode -download -jf your-json-file-here.json
+文件下载成功
+OK
+```
+
+### videonode
+
+命令标识：`videonode`。
+
+命令说明：视频节点操作服务。
+
+可用版本：`3.2.0`。
+
+命令语法：
+
+```text
+usage: videonode -inspect [-json json-string] [-jf json-file]
+videonode -download [-json json-string] [-jf json-file]
+videonode -upload [-json json-string] [-jf json-file]
+视频节点操作服务
+ -download               下载视频节点文件
+ -inspect                查看视频节点
+ -jf,--json-file <arg>   JSON 文件
+ -json <arg>             JSON 字符串
+ -upload                 上传视频节点文件
+```
+
+JSON schema 参考：
+
+| option   | reference class                                                            |
+|:---------|:---------------------------------------------------------------------------|
+| inspect  | com.dwarfeng.settingrepo.sdk.bean.dto.WebInputVideoNodeInspectInfo         |
+| download | com.dwarfeng.settingrepo.impl.service.telqos.VideoNodeCommand.DownloadInfo |
+| upload   | com.dwarfeng.settingrepo.impl.service.telqos.VideoNodeCommand.UploadInfo   |
+
+命令示例 - 查看视频节点：
+
+```text
+videonode -inspect -jf your-json-file-here.json
+查看结果:
+  originName: demo.mp4
+  length: 10485760
+OK
+```
+
+命令示例 - 下载视频节点文件：
+
+```text
+videonode -download -jf your-json-file-here.json
+文件下载成功
 OK
 ```
 

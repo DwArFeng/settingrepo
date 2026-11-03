@@ -46,6 +46,7 @@ conf
 │      navigation.properties
 │      push.properties
 │      reset.properties
+│      video-thumbnail.properties
 │      warmup-driver.properties
 │
 └─telqos
@@ -494,6 +495,21 @@ com.dwarfeng.settingrepo.image_thumbnail.output_format=jpg
 
 如果调用者能够提前确定缩略图展示区域的尺寸，则可对该参数进行调整，以输出足够清晰的缩略图。
 
+### video-thumbnail.properties
+
+视频缩略图配置文件。
+
+```properties
+# 视频节点缩略图的宽度。
+com.dwarfeng.settingrepo.video_thumbnail.width=980
+# 视频节点缩略图的高度。
+com.dwarfeng.settingrepo.video_thumbnail.height=540
+# 视频节点缩略图的质量。
+com.dwarfeng.settingrepo.video_thumbnail.quality=0.5
+# 视频节点缩略图的输出格式。
+com.dwarfeng.settingrepo.video_thumbnail.output_format=jpg
+```
+
 ### launcher.properties
 
 启动器配置文件，决定了启动时的一些行为。
@@ -511,10 +527,12 @@ com.dwarfeng.settingrepo.launcher.reset_warmup_driver_support=true
 # 该参数小于 0，意味着程序不主动启动重置服务，需要手动启动。
 com.dwarfeng.settingrepo.launcher.start_reset_delay=30000
 # 程序启动完成后，上线预热的延时时间。
+# 有些数据仓库以及预热处理器在启动后可能会需要一些时间进行自身的初始化，调整该参数以妥善的处理这些数据源和推送器。
 # 该参数等于 0，意味着启动后立即上线预热服务。
 # 该参数小于 0，意味着程序不主动上线预热服务，需要手动上线。
 com.dwarfeng.settingrepo.launcher.online_warmup_delay=3000
 # 程序启动完成后，启动预热的延时时间。
+# 有些数据仓库以及预热处理器在启动后可能会需要一些时间进行自身的初始化，调整该参数以妥善的处理这些数据源和推送器。
 # 该参数等于 0，意味着启动后立即启动预热服务。
 # 该参数小于 0，意味着程序不主动启动预热服务，需要手动启动。
 com.dwarfeng.settingrepo.launcher.enable_warmup_delay=3500

@@ -4,6 +4,11 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/TelqosCommands.md。
+  - docs/wiki/zh-CN/Warmup.md。
+
 - 新增 telqos 指令。
   - com.dwarfeng.settingrepo.impl.service.telqos.VideoListNodeCommand。
   - com.dwarfeng.settingrepo.impl.service.telqos.VideoNodeCommand。
