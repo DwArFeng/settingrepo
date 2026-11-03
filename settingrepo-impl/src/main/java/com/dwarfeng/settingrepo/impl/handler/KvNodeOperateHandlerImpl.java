@@ -102,7 +102,6 @@ public class KvNodeOperateHandlerImpl implements KvNodeOperateHandler {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public KvNodeInspectResult inspect(KvNodeInspectInfo info) throws HandlerException {

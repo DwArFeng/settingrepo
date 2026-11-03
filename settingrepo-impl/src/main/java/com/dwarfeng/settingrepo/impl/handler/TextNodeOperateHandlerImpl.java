@@ -86,7 +86,6 @@ public class TextNodeOperateHandlerImpl implements TextNodeOperateHandler {
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     @BehaviorAnalyse
     @Override
     public void put(TextNodePutInfo info) throws HandlerException {
