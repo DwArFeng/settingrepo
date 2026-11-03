@@ -1052,5 +1052,90 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     KvNodeItemRemoveInfo kvNodeItemRemoveInfoFromWebInput(WebInputKvNodeItemRemoveInfo webInputKvNodeItemRemoveInfo);
 
+    FastJsonVideoListNodeInspectResult videoListNodeInspectResultToFastJson(VideoListNodeInspectResult videoListNodeInspectResult);
+
+    @InheritInverseConfiguration
+    VideoListNodeInspectResult videoListNodeInspectResultFromFastJson(FastJsonVideoListNodeInspectResult fastJsonVideoListNodeInspectResult);
+
+    FastJsonVideoListNodeSizeResult videoListNodeSizeResultToFastJson(VideoListNodeSizeResult videoListNodeSizeResult);
+
+    @InheritInverseConfiguration
+    VideoListNodeSizeResult videoListNodeSizeResultFromFastJson(FastJsonVideoListNodeSizeResult fastJsonVideoListNodeSizeResult);
+
+    FastJsonVideoNodeInspectResult videoNodeInspectResultToFastJson(VideoNodeInspectResult videoNodeInspectResult);
+
+    @InheritInverseConfiguration
+    VideoNodeInspectResult videoNodeInspectResultFromFastJson(FastJsonVideoNodeInspectResult fastJsonVideoNodeInspectResult);
+
+    WebInputVideoListNodeChangeOrderInfo videoListNodeChangeOrderInfoToWebInput(VideoListNodeChangeOrderInfo videoListNodeChangeOrderInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeChangeOrderInfo videoListNodeChangeOrderInfoFromWebInput(WebInputVideoListNodeChangeOrderInfo webInputVideoListNodeChangeOrderInfo);
+
+    WebInputVideoListNodeFileDownloadInfo videoListNodeFileDownloadInfoToWebInput(VideoListNodeFileDownloadInfo videoListNodeFileDownloadInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeFileDownloadInfo videoListNodeFileDownloadInfoFromWebInput(WebInputVideoListNodeFileDownloadInfo webInputVideoListNodeFileDownloadInfo);
+
+    WebInputVideoListNodeFileStreamDownloadInfo videoListNodeFileStreamDownloadInfoToWebInput(VideoListNodeFileStreamDownloadInfo videoListNodeFileStreamDownloadInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeFileStreamDownloadInfo videoListNodeFileStreamDownloadInfoFromWebInput(WebInputVideoListNodeFileStreamDownloadInfo webInputVideoListNodeFileStreamDownloadInfo);
+
+    WebInputVideoListNodeFileUpdateInfo videoListNodeFileUpdateInfoToWebInput(VideoListNodeFileUpdateInfo videoListNodeFileUpdateInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeFileUpdateInfo videoListNodeFileUpdateInfoFromWebInput(WebInputVideoListNodeFileUpdateInfo webInputVideoListNodeFileUpdateInfo);
+
+    WebInputVideoListNodeFileUploadInfo videoListNodeFileUploadInfoToWebInput(VideoListNodeFileUploadInfo videoListNodeFileUploadInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeFileUploadInfo videoListNodeFileUploadInfoFromWebInput(WebInputVideoListNodeFileUploadInfo webInputVideoListNodeFileUploadInfo);
+
+    WebInputVideoListNodeInspectInfo videoListNodeInspectInfoToWebInput(VideoListNodeInspectInfo videoListNodeInspectInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeInspectInfo videoListNodeInspectInfoFromWebInput(WebInputVideoListNodeInspectInfo webInputVideoListNodeInspectInfo);
+
+    WebInputVideoListNodeRemoveInfo videoListNodeRemoveInfoToWebInput(VideoListNodeRemoveInfo videoListNodeRemoveInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeRemoveInfo videoListNodeRemoveInfoFromWebInput(WebInputVideoListNodeRemoveInfo webInputVideoListNodeRemoveInfo);
+
+    WebInputVideoListNodeSizeInfo videoListNodeSizeInfoToWebInput(VideoListNodeSizeInfo videoListNodeSizeInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeSizeInfo videoListNodeSizeInfoFromWebInput(WebInputVideoListNodeSizeInfo webInputVideoListNodeSizeInfo);
+
+    WebInputVideoListNodeThumbnailDownloadInfo videoListNodeThumbnailDownloadInfoToWebInput(VideoListNodeThumbnailDownloadInfo videoListNodeThumbnailDownloadInfo);
+
+    @InheritInverseConfiguration
+    VideoListNodeThumbnailDownloadInfo videoListNodeThumbnailDownloadInfoFromWebInput(WebInputVideoListNodeThumbnailDownloadInfo webInputVideoListNodeThumbnailDownloadInfo);
+
+    WebInputVideoNodeFileDownloadInfo videoNodeFileDownloadInfoToWebInput(VideoNodeFileDownloadInfo videoNodeFileDownloadInfo);
+
+    @InheritInverseConfiguration
+    VideoNodeFileDownloadInfo videoNodeFileDownloadInfoFromWebInput(WebInputVideoNodeFileDownloadInfo webInputVideoNodeFileDownloadInfo);
+
+    WebInputVideoNodeFileStreamDownloadInfo videoNodeFileStreamDownloadInfoToWebInput(VideoNodeFileStreamDownloadInfo videoNodeFileStreamDownloadInfo);
+
+    @InheritInverseConfiguration
+    VideoNodeFileStreamDownloadInfo videoNodeFileStreamDownloadInfoFromWebInput(WebInputVideoNodeFileStreamDownloadInfo webInputVideoNodeFileStreamDownloadInfo);
+
+    WebInputVideoNodeFileUploadInfo videoNodeFileUploadInfoToWebInput(VideoNodeFileUploadInfo videoNodeFileUploadInfo);
+
+    @InheritInverseConfiguration
+    VideoNodeFileUploadInfo videoNodeFileUploadInfoFromWebInput(WebInputVideoNodeFileUploadInfo webInputVideoNodeFileUploadInfo);
+
+    WebInputVideoNodeInspectInfo videoNodeInspectInfoToWebInput(VideoNodeInspectInfo videoNodeInspectInfo);
+
+    @InheritInverseConfiguration
+    VideoNodeInspectInfo videoNodeInspectInfoFromWebInput(WebInputVideoNodeInspectInfo webInputVideoNodeInspectInfo);
+
+    WebInputVideoNodeThumbnailDownloadInfo videoNodeThumbnailDownloadInfoToWebInput(VideoNodeThumbnailDownloadInfo videoNodeThumbnailDownloadInfo);
+
+    @InheritInverseConfiguration
+    VideoNodeThumbnailDownloadInfo videoNodeThumbnailDownloadInfoFromWebInput(WebInputVideoNodeThumbnailDownloadInfo webInputVideoNodeThumbnailDownloadInfo);
+
     // endregion
 }

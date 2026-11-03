@@ -56,6 +56,7 @@ public final class ServiceExceptionHelper {
                 ServiceExceptionCodes.WARMUP_DRIVER_TYPE_UNSUPPORTED
         );
         map.put(TextListNodeIndexOutOfBoundException.class, ServiceExceptionCodes.TEXT_LIST_NODE_INDEX_OUT_OF_BOUND);
+        map.put(VideoListNodeIndexOutOfBoundException.class, ServiceExceptionCodes.VIDEO_LIST_NODE_INDEX_OUT_OF_BOUND);
         return map;
     }
 

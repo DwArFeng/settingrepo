@@ -236,6 +236,12 @@
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
     />
     <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.VideoListNodeOperateService"
+            ref="videoListNodeOperateServiceImpl"
+            protocol="hessian"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.VideoListNodeItemMaintainService"
             ref="videoListNodeItemMaintainServiceImpl"
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
@@ -243,6 +249,12 @@
     <dubbo:service
             interface="com.dwarfeng.settingrepo.stack.service.VideoNodeMaintainService"
             ref="videoNodeMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.VideoNodeOperateService"
+            ref="videoNodeOperateServiceImpl"
+            protocol="hessian"
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
     />
 

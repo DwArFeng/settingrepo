@@ -5,6 +5,8 @@
 ### 功能构建
 
 - 新增实体操作服务。
+  - com.dwarfeng.settingrepo.stack.handler.VideoListNodeOperateHandler。
+  - com.dwarfeng.settingrepo.stack.handler.VideoNodeOperateHandler。
   - com.dwarfeng.settingrepo.stack.service.TextListNodeOperateService。
 
 - 建立实体以及维护服务，并通过单元测试。

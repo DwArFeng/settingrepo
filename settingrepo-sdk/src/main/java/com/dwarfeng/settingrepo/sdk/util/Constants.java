@@ -68,6 +68,18 @@ public final class Constants {
     @SettingNodeTypeItem
     public static final int SETTING_NODE_TYPE_TEXT_LIST = 9;
 
+    /**
+     * @since 3.2.0
+     */
+    @SettingNodeTypeItem
+    public static final int SETTING_NODE_TYPE_VIDEO = 10;
+
+    /**
+     * @since 3.2.0
+     */
+    @SettingNodeTypeItem
+    public static final int SETTING_NODE_TYPE_VIDEO_LIST = 11;
+
     // endregion
 
     /**
