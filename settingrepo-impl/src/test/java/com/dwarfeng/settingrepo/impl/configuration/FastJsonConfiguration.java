@@ -45,6 +45,9 @@ public class FastJsonConfiguration {
         ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupDriverInfo.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupDriverSupport.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupSetting.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonVideoNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonVideoListNode.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonVideoListNodeItem.class.getCanonicalName());
         LOGGER.debug("FastJson autotype 白名单配置完毕");
     }
 }

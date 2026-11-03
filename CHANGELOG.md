@@ -5,6 +5,9 @@
 ### 功能构建
 
 - 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.settingrepo.stack.bean.entity.VideoListNode。
+  - com.dwarfeng.settingrepo.stack.bean.entity.VideoListNodeItem。
+  - com.dwarfeng.settingrepo.stack.bean.entity.VideoNode。
   - com.dwarfeng.settingrepo.stack.bean.entity.TextListNode。
   - com.dwarfeng.settingrepo.stack.bean.entity.TextListNodeItem。
 

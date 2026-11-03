@@ -50,6 +50,12 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
     private final KvNodeDao kvNodeDao;
     private final KvNodeCrudOperation kvNodeCrudOperation;
 
+    private final VideoListNodeDao videoListNodeDao;
+    private final VideoListNodeCrudOperation videoListNodeCrudOperation;
+
+    private final VideoNodeDao videoNodeDao;
+    private final VideoNodeCrudOperation videoNodeCrudOperation;
+
     @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.setting_node}")
     private long settingNodeTimeout;
 
@@ -66,6 +72,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             ImageNodeCrudOperation imageNodeCrudOperation,
             ImageListNodeDao imageListNodeDao,
             ImageListNodeCrudOperation imageListNodeCrudOperation,
+            VideoNodeDao videoNodeDao,
+            VideoNodeCrudOperation videoNodeCrudOperation,
             IahnNodeDao iahnNodeDao,
             IahnNodeCrudOperation iahnNodeCrudOperation,
             FileNodeDao fileNodeDao,
@@ -75,7 +83,9 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
             NavigationNodeDao navigationNodeDao,
             NavigationNodeCrudOperation navigationNodeCrudOperation,
             KvNodeDao kvNodeDao,
-            KvNodeCrudOperation kvNodeCrudOperation
+            KvNodeCrudOperation kvNodeCrudOperation,
+            VideoListNodeDao videoListNodeDao,
+            VideoListNodeCrudOperation videoListNodeCrudOperation
     ) {
         this.settingNodeDao = settingNodeDao;
         this.settingNodeCache = settingNodeCache;
@@ -89,6 +99,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.imageNodeCrudOperation = imageNodeCrudOperation;
         this.imageListNodeDao = imageListNodeDao;
         this.imageListNodeCrudOperation = imageListNodeCrudOperation;
+        this.videoNodeDao = videoNodeDao;
+        this.videoNodeCrudOperation = videoNodeCrudOperation;
         this.iahnNodeDao = iahnNodeDao;
         this.iahnNodeCrudOperation = iahnNodeCrudOperation;
         this.fileNodeDao = fileNodeDao;
@@ -99,6 +111,8 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         this.navigationNodeCrudOperation = navigationNodeCrudOperation;
         this.kvNodeDao = kvNodeDao;
         this.kvNodeCrudOperation = kvNodeCrudOperation;
+        this.videoListNodeDao = videoListNodeDao;
+        this.videoListNodeCrudOperation = videoListNodeCrudOperation;
     }
 
     @Override
@@ -184,6 +198,16 @@ public class SettingNodeCrudOperation implements BatchCrudOperation<StringIdKey,
         // 删除与该设置节点相关的键值对节点。
         if (kvNodeDao.exists(key)) {
             kvNodeCrudOperation.delete(key);
+        }
+
+        // 删除与该设置节点相关的视频列表节点。
+        if (videoListNodeDao.exists(key)) {
+            videoListNodeCrudOperation.delete(key);
+        }
+
+        // 删除与该设置节点相关的视频节点。
+        if (videoNodeDao.exists(key)) {
+            videoNodeCrudOperation.delete(key);
         }
 
         settingNodeDao.delete(key);

@@ -282,5 +282,30 @@ public interface BeanMapper {
             HibernateWarmupDriverSupport hibernateWarmupDriverSupport
     );
 
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateVideoNode videoNodeToHibernate(VideoNode videoNode);
+
+    @InheritInverseConfiguration
+    VideoNode videoNodeFromHibernate(HibernateVideoNode hibernateVideoNode);
+
+    @Mapping(target = "stringId", ignore = true)
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "items", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
+    HibernateVideoListNode videoListNodeToHibernate(VideoListNode videoListNode);
+
+    @InheritInverseConfiguration
+    VideoListNode videoListNodeFromHibernate(HibernateVideoListNode hibernateVideoListNode);
+
+    @Mapping(target = "nodeStringId", ignore = true)
+    @Mapping(target = "node", ignore = true)
+    @Mapping(target = "longId", ignore = true)
+    HibernateVideoListNodeItem videoListNodeItemToHibernate(VideoListNodeItem videoListNodeItem);
+
+    @InheritInverseConfiguration
+    VideoListNodeItem videoListNodeItemFromHibernate(HibernateVideoListNodeItem hibernateVideoListNodeItem);
+
     // endregion
 }

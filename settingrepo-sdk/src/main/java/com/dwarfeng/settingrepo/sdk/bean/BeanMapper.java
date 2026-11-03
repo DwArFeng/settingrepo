@@ -268,6 +268,28 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     WarmupDriverInfo warmupDriverInfoFromWebInput(WebInputWarmupDriverInfo webInputWarmupDriverInfo);
 
+    FastJsonVideoNode videoNodeToFastJson(VideoNode videoNode);
+
+    @InheritInverseConfiguration
+    VideoNode videoNodeFromFastJson(FastJsonVideoNode fastJsonVideoNode);
+
+    FastJsonVideoListNode videoListNodeToFastJson(VideoListNode videoListNode);
+
+    @InheritInverseConfiguration
+    VideoListNode videoListNodeFromFastJson(FastJsonVideoListNode fastJsonVideoListNode);
+
+    FastJsonVideoListNodeItem videoListNodeItemToFastJson(VideoListNodeItem videoListNodeItem);
+
+    @InheritInverseConfiguration
+    VideoListNodeItem videoListNodeItemFromFastJson(FastJsonVideoListNodeItem fastJsonVideoListNodeItem);
+
+    JSFixedFastJsonVideoListNodeItem videoListNodeItemToJSFixedFastJson(VideoListNodeItem videoListNodeItem);
+
+    @InheritInverseConfiguration
+    VideoListNodeItem videoListNodeItemFromJSFixedFastJson(
+            JSFixedFastJsonVideoListNodeItem jSFixedFastJsonVideoListNodeItem
+    );
+
     // endregion
 
     // region Settingrepo DTO

@@ -55,6 +55,9 @@ public class DaoConfiguration {
     private final WarmupSettingPresetCriteriaMaker warmupSettingPresetCriteriaMaker;
     private final WarmupDriverInfoPresetCriteriaMaker warmupDriverInfoPresetCriteriaMaker;
     private final WarmupDriverSupportPresetCriteriaMaker warmupDriverSupportPresetCriteriaMaker;
+    private final VideoNodePresetCriteriaMaker videoNodePresetCriteriaMaker;
+    private final VideoListNodePresetCriteriaMaker videoListNodePresetCriteriaMaker;
+    private final VideoListNodeItemPresetCriteriaMaker videoListNodeItemPresetCriteriaMaker;
 
     @Value("${com.dwarfeng.settingrepo.hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -84,7 +87,10 @@ public class DaoConfiguration {
             KvNodeItemPresetCriteriaMaker kvNodeItemPresetCriteriaMaker,
             WarmupSettingPresetCriteriaMaker warmupSettingPresetCriteriaMaker,
             WarmupDriverInfoPresetCriteriaMaker warmupDriverInfoPresetCriteriaMaker,
-            WarmupDriverSupportPresetCriteriaMaker warmupDriverSupportPresetCriteriaMaker
+            WarmupDriverSupportPresetCriteriaMaker warmupDriverSupportPresetCriteriaMaker,
+            VideoNodePresetCriteriaMaker videoNodePresetCriteriaMaker,
+            VideoListNodePresetCriteriaMaker videoListNodePresetCriteriaMaker,
+            VideoListNodeItemPresetCriteriaMaker videoListNodeItemPresetCriteriaMaker
     ) {
         this.template = template;
         this.formatterSupportPresetCriteriaMaker = formatterSupportPresetCriteriaMaker;
@@ -111,6 +117,9 @@ public class DaoConfiguration {
         this.warmupSettingPresetCriteriaMaker = warmupSettingPresetCriteriaMaker;
         this.warmupDriverInfoPresetCriteriaMaker = warmupDriverInfoPresetCriteriaMaker;
         this.warmupDriverSupportPresetCriteriaMaker = warmupDriverSupportPresetCriteriaMaker;
+        this.videoNodePresetCriteriaMaker = videoNodePresetCriteriaMaker;
+        this.videoListNodePresetCriteriaMaker = videoListNodePresetCriteriaMaker;
+        this.videoListNodeItemPresetCriteriaMaker = videoListNodeItemPresetCriteriaMaker;
     }
 
     @Bean
@@ -980,6 +989,116 @@ public class DaoConfiguration {
                 ),
                 HibernateWarmupDriverSupport.class,
                 warmupDriverSupportPresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, VideoNode, HibernateVideoNode>
+    videoNodeHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(VideoNode.class, HibernateVideoNode.class, BeanMapper.class),
+                HibernateVideoNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<VideoNode, HibernateVideoNode> videoNodeHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(VideoNode.class, HibernateVideoNode.class, BeanMapper.class),
+                HibernateVideoNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<VideoNode, HibernateVideoNode> videoNodeHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(VideoNode.class, HibernateVideoNode.class, BeanMapper.class),
+                HibernateVideoNode.class,
+                videoNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<StringIdKey, HibernateStringIdKey, VideoListNode, HibernateVideoListNode>
+    videoListNodeHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(StringIdKey.class, HibernateStringIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        VideoListNode.class, HibernateVideoListNode.class, BeanMapper.class
+                ),
+                HibernateVideoListNode.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<VideoListNode, HibernateVideoListNode> videoListNodeHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(
+                        VideoListNode.class, HibernateVideoListNode.class, BeanMapper.class
+                ),
+                HibernateVideoListNode.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<VideoListNode, HibernateVideoListNode> videoListNodeHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(
+                        VideoListNode.class, HibernateVideoListNode.class, BeanMapper.class
+                ),
+                HibernateVideoListNode.class,
+                videoListNodePresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, VideoListNodeItem, HibernateVideoListNodeItem>
+    videoListNodeItemHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                template,
+                new MapStructBeanTransformer<>(LongIdKey.class, HibernateLongIdKey.class, BeanMapper.class),
+                new MapStructBeanTransformer<>(
+                        VideoListNodeItem.class, HibernateVideoListNodeItem.class, BeanMapper.class
+                ),
+                HibernateVideoListNodeItem.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<VideoListNodeItem, HibernateVideoListNodeItem>
+    videoListNodeItemHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(
+                        VideoListNodeItem.class, HibernateVideoListNodeItem.class, BeanMapper.class
+                ),
+                HibernateVideoListNodeItem.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<VideoListNodeItem, HibernateVideoListNodeItem>
+    videoListNodeItemHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                template,
+                new MapStructBeanTransformer<>(
+                        VideoListNodeItem.class, HibernateVideoListNodeItem.class, BeanMapper.class
+                ),
+                HibernateVideoListNodeItem.class,
+                videoListNodeItemPresetCriteriaMaker
         );
     }
 }

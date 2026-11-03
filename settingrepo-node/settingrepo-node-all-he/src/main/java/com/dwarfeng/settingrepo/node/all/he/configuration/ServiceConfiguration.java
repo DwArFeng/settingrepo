@@ -74,6 +74,12 @@ public class ServiceConfiguration {
     private final WarmupDriverSupportCache warmupDriverSupportCache;
     private final WarmupSettingCrudOperation warmupSettingCrudOperation;
     private final WarmupSettingDao warmupSettingDao;
+    private final VideoNodeCrudOperation videoNodeCrudOperation;
+    private final VideoNodeDao videoNodeDao;
+    private final VideoListNodeCrudOperation videoListNodeCrudOperation;
+    private final VideoListNodeDao videoListNodeDao;
+    private final VideoListNodeItemCrudOperation videoListNodeItemCrudOperation;
+    private final VideoListNodeItemDao videoListNodeItemDao;
 
     @Value("${com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support}")
     private long formatterSupportTimeout;
@@ -138,7 +144,13 @@ public class ServiceConfiguration {
             WarmupDriverSupportDao warmupDriverSupportDao,
             WarmupDriverSupportCache warmupDriverSupportCache,
             WarmupSettingCrudOperation warmupSettingCrudOperation,
-            WarmupSettingDao warmupSettingDao
+            WarmupSettingDao warmupSettingDao,
+            VideoNodeCrudOperation videoNodeCrudOperation,
+            VideoNodeDao videoNodeDao,
+            VideoListNodeCrudOperation videoListNodeCrudOperation,
+            VideoListNodeDao videoListNodeDao,
+            VideoListNodeItemCrudOperation videoListNodeItemCrudOperation,
+            VideoListNodeItemDao videoListNodeItemDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -190,6 +202,12 @@ public class ServiceConfiguration {
         this.warmupDriverSupportCache = warmupDriverSupportCache;
         this.warmupSettingCrudOperation = warmupSettingCrudOperation;
         this.warmupSettingDao = warmupSettingDao;
+        this.videoNodeCrudOperation = videoNodeCrudOperation;
+        this.videoNodeDao = videoNodeDao;
+        this.videoListNodeCrudOperation = videoListNodeCrudOperation;
+        this.videoListNodeDao = videoListNodeDao;
+        this.videoListNodeItemCrudOperation = videoListNodeItemCrudOperation;
+        this.videoListNodeItemDao = videoListNodeItemDao;
     }
 
     @Bean
@@ -873,6 +891,90 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 warmupSettingDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, VideoNode> videoNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<VideoNode> videoNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<VideoNode> videoNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<StringIdKey, VideoListNode> videoListNodeCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoListNodeCrudOperation,
+                new ExceptionKeyGenerator<>()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<VideoListNode> videoListNodeDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoListNodeDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<VideoListNode> videoListNodeDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoListNodeDao
+        );
+    }
+
+    @Bean
+    public CustomBatchCrudService<LongIdKey, VideoListNodeItem> videoListNodeItemCustomBatchCrudService() {
+        return new CustomBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoListNodeItemCrudOperation,
+                generateConfiguration.snowflakeLongIdKeyGenerator()
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<VideoListNodeItem> videoListNodeItemDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoListNodeItemDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<VideoListNodeItem> videoListNodeItemDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                videoListNodeItemDao
         );
     }
 }

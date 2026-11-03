@@ -75,6 +75,12 @@ public class CacheConfiguration {
     private String warmupDriverInfoPrefix;
     @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.warmup_driver_support}")
     private String warmupDriverSupportPrefix;
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.video_node}")
+    private String videoNodePrefix;
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.video_list_node}")
+    private String videoListNodePrefix;
+    @Value("${com.dwarfeng.settingrepo.cache.prefix.entity.video_list_node_item}")
+    private String videoListNodeItemPrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -365,6 +371,43 @@ public class CacheConfiguration {
                 new StringIdStringKeyFormatter(warmupDriverSupportPrefix),
                 new MapStructBeanTransformer<>(
                         WarmupDriverSupport.class, FastJsonWarmupDriverSupport.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, VideoNode, FastJsonVideoNode> videoNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonVideoNode>) template,
+                new StringIdStringKeyFormatter(videoNodePrefix),
+                new MapStructBeanTransformer<>(
+                        VideoNode.class, FastJsonVideoNode.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<StringIdKey, VideoListNode, FastJsonVideoListNode> videoListNodeRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonVideoListNode>) template,
+                new StringIdStringKeyFormatter(videoListNodePrefix),
+                new MapStructBeanTransformer<>(
+                        VideoListNode.class, FastJsonVideoListNode.class, BeanMapper.class
+                )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<LongIdKey, VideoListNodeItem, FastJsonVideoListNodeItem>
+    videoListNodeItemRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonVideoListNodeItem>) template,
+                new LongIdStringKeyFormatter(videoListNodeItemPrefix),
+                new MapStructBeanTransformer<>(
+                        VideoListNodeItem.class, FastJsonVideoListNodeItem.class, BeanMapper.class
                 )
         );
     }

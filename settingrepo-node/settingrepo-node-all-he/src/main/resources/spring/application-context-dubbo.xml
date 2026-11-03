@@ -225,6 +225,21 @@
             ref="warmupDriverSupportMaintainServiceImpl"
             group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
     />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.VideoListNodeMaintainService"
+            ref="videoListNodeMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.VideoListNodeItemMaintainService"
+            ref="videoListNodeItemMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
+    <dubbo:service
+            interface="com.dwarfeng.settingrepo.stack.service.VideoNodeMaintainService"
+            ref="videoNodeMaintainServiceImpl"
+            group="${com.dwarfeng.settingrepo.dubbo.provider.group}"
+    />
 
     <!-- endregion -->
 

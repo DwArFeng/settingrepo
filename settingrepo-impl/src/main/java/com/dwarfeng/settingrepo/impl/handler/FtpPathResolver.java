@@ -24,6 +24,8 @@ public class FtpPathResolver {
     public static final char ROOT_PATH_STRING_SEPARATOR = '/';
     public static final String ROOT_PATH_STRING_SEPARATOR_STRING = String.valueOf(ROOT_PATH_STRING_SEPARATOR);
 
+    // region 相对路径
+
     /**
      * 图片节点文件的相对路径。
      */
@@ -63,6 +65,36 @@ public class FtpPathResolver {
      */
     public static final String[] RELATIVE_FILE_LIST_NODE_FILE = new String[]{"file-list-node-file"};
 
+    /**
+     * 视频节点文件的相对路径。
+     *
+     * @since 3.2.0
+     */
+    public static final String[] RELATIVE_VIDEO_NODE_FILE = new String[]{"video-node-file"};
+
+    /**
+     * 视频节点缩略图的相对路径。
+     *
+     * @since 3.2.0
+     */
+    public static final String[] RELATIVE_VIDEO_NODE_THUMBNAIL = new String[]{"video-node-thumbnail"};
+
+    /**
+     * 视频列表节点文件的相对路径。
+     *
+     * @since 3.2.0
+     */
+    public static final String[] RELATIVE_VIDEO_LIST_NODE_FILE = new String[]{"video-list-node-file"};
+
+    /**
+     * 视频列表节点缩略图的相对路径。
+     *
+     * @since 3.2.0
+     */
+    public static final String[] RELATIVE_VIDEO_LIST_NODE_THUMBNAIL = new String[]{"video-list-node-thumbnail"};
+
+    // endregion
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FtpPathResolver.class);
 
     @Value("${com.dwarfeng.settingrepo.ftp.root_path}")
@@ -85,9 +117,13 @@ public class FtpPathResolver {
      *     <li>{@link #RELATIVE_IMAGE_NODE_THUMBNAIL}</li>
      *     <li>{@link #RELATIVE_IMAGE_LIST_NODE_FILE}</li>
      *     <li>{@link #RELATIVE_IMAGE_LIST_NODE_THUMBNAIL}</li>
+     *     <li>{@link #RELATIVE_VIDEO_NODE_FILE}</li>
+     *     <li>{@link #RELATIVE_VIDEO_NODE_THUMBNAIL}</li>
      *     <li>{@link #RELATIVE_LONG_TEXT_NODE_FILE}</li>
      *     <li>{@link #RELATIVE_FILE_NODE_FILE}</li>
      *     <li>{@link #RELATIVE_FILE_LIST_NODE_FILE}</li>
+     *     <li>{@link #RELATIVE_VIDEO_LIST_NODE_FILE}</li>
+     *     <li>{@link #RELATIVE_VIDEO_LIST_NODE_THUMBNAIL}</li>
      * </ul>
      *
      * @param relativePath 相对路径。
