@@ -653,6 +653,15 @@ public interface BeanMapper {
             FastJsonTextListNodeSizeResult fastJsonTextListNodeSizeResult
     );
 
+    FastJsonTextListNodeTextFetchResult textListNodeTextFetchResultToFastJson(
+            TextListNodeTextFetchResult textListNodeTextFetchResult
+    );
+
+    @InheritInverseConfiguration
+    TextListNodeTextFetchResult textListNodeTextFetchResultFromFastJson(
+            FastJsonTextListNodeTextFetchResult fastJsonTextListNodeTextFetchResult
+    );
+
     WebInputTextListNodeChangeOrderInfo textListNodeChangeOrderInfoToWebInput(
             TextListNodeChangeOrderInfo textListNodeChangeOrderInfo
     );

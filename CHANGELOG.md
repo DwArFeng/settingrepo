@@ -8,7 +8,8 @@
 
 ### Bug 修复
 
-- (无)
+- 补充项目中缺失的 DTO 对象。
+  - com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonTextListNodeTextFetchResult。
 
 ### 功能移除
 
