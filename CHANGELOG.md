@@ -8,6 +8,8 @@
 
 ### Bug 修复
 
+- 修复 `FastJsonConfiguration` 缺少部分 autoType 白名单配置的 bug。
+
 - 补充项目中缺失的 DTO 对象。
   - com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonTextListNodeTextFetchResult。
 

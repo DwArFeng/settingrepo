@@ -1,10 +1,7 @@
 package com.dwarfeng.settingrepo.node.all.he.configuration;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonIahnNodeLocaleListInspectResult;
-import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonIahnNodeMekListInspectResult;
-import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonIahnNodeMessageTableInspectResult;
-import com.dwarfeng.settingrepo.sdk.bean.dto.FastJsonNavigationNodeInspectResult;
+import com.dwarfeng.settingrepo.sdk.bean.dto.*;
 import com.dwarfeng.settingrepo.sdk.bean.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +38,8 @@ public class FastJsonConfiguration {
         ParserConfig.getGlobalInstance().addAccept(FastJsonIahnNodeLocaleListInspectResult.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonIahnNodeMekListInspectResult.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonIahnNodeMessageTableInspectResult.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonKvNodeInspectResult.class.getCanonicalName());
+        ParserConfig.getGlobalInstance().addAccept(FastJsonKvNodeItemInspectResult.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonNavigationNodeInspectResult.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupDriverInfo.class.getCanonicalName());
         ParserConfig.getGlobalInstance().addAccept(FastJsonWarmupDriverSupport.class.getCanonicalName());
