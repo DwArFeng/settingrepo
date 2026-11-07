@@ -51,24 +51,24 @@ public class WebInputWarmupSetting implements Bean {
     @ValidWarmupCacheType
     private int type;
 
-    @JSONField(name = "targetStringAlpha")
+    @JSONField(name = "target_string_alpha")
     @NotNull
     @NotEmpty
     private String targetStringAlpha;
 
-    @JSONField(name = "targetStringBravo")
+    @JSONField(name = "target_string_bravo")
     private String targetStringBravo;
 
-    @JSONField(name = "targetStringCharlie")
+    @JSONField(name = "target_string_charlie")
     private String targetStringCharlie;
 
-    @JSONField(name = "targetStringDelta")
+    @JSONField(name = "target_string_delta")
     private String targetStringDelta;
 
-    @JSONField(name = "targetStringEcho")
+    @JSONField(name = "target_string_echo")
     private String targetStringEcho;
 
-    @JSONField(name = "targetStringArrayAlpha")
+    @JSONField(name = "target_string_array_alpha")
     @NotNull
     private String[] targetStringArrayAlpha;
 

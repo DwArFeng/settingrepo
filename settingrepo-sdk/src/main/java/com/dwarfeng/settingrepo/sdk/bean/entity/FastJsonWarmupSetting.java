@@ -43,22 +43,22 @@ public class FastJsonWarmupSetting implements Bean {
     @JSONField(name = "type", ordinal = 2)
     private int type;
 
-    @JSONField(name = "targetStringAlpha", ordinal = 3)
+    @JSONField(name = "target_string_alpha", ordinal = 3)
     private String targetStringAlpha;
 
-    @JSONField(name = "targetStringBravo", ordinal = 4)
+    @JSONField(name = "target_string_bravo", ordinal = 4)
     private String targetStringBravo;
 
-    @JSONField(name = "targetStringCharlie", ordinal = 5)
+    @JSONField(name = "target_string_charlie", ordinal = 5)
     private String targetStringCharlie;
 
-    @JSONField(name = "targetStringDelta", ordinal = 6)
+    @JSONField(name = "target_string_delta", ordinal = 6)
     private String targetStringDelta;
 
-    @JSONField(name = "targetStringEcho", ordinal = 7)
+    @JSONField(name = "target_string_echo", ordinal = 7)
     private String targetStringEcho;
 
-    @JSONField(name = "targetStringArrayAlpha", ordinal = 8)
+    @JSONField(name = "target_string_array_alpha", ordinal = 8)
     private String[] targetStringArrayAlpha;
 
     @JSONField(name = "enabled", ordinal = 9)

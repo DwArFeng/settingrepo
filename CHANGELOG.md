@@ -19,7 +19,10 @@
 
 ### Bug 修复
 
-- (无)
+- 修复部分 DTO 实体中错误的字段注解。
+  - com.dwarfeng.settingrepo.sdk.bean.entity.FastJsonWarmupSetting。
+  - com.dwarfeng.settingrepo.sdk.bean.entity.JSFixedFastJsonWarmupSetting。
+  - com.dwarfeng.settingrepo.sdk.bean.entity.WebInputWarmupSetting。
 
 ### 功能移除
 
