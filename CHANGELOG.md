@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 依赖升级。
+  - 升级 `guava` 依赖版本为 `33.7.1-jre` 以规避漏洞。
+
 - `settingrepo-sdk` 子模块类优化代码换行格式。
   - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
 
