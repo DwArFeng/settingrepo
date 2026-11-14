@@ -4,7 +4,8 @@
 
 ### 功能构建
 
-- (无)
+- `settingrepo-stack` 子模块类优化代码换行格式。
+  - com.dwarfeng.settingrepo.stack.bean.dto.VideoNodeFileUploadInfo。
 
 ### Bug 修复
 

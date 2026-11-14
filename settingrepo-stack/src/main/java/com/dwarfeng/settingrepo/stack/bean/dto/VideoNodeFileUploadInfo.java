@@ -23,7 +23,9 @@ public class VideoNodeFileUploadInfo implements Dto {
     public VideoNodeFileUploadInfo() {
     }
 
-    public VideoNodeFileUploadInfo(String category, String[] args, String originName, byte[] content, byte[] coverContent) {
+    public VideoNodeFileUploadInfo(
+            String category, String[] args, String originName, byte[] content, byte[] coverContent
+    ) {
         this.category = category;
         this.args = args;
         this.originName = originName;
