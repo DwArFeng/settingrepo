@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- `settingrepo-impl` 子模块类优化代码换行格式。
+  - com.dwarfeng.settingrepo.impl.service.VideoListNodeItemMaintainServiceImpl。
+  - com.dwarfeng.settingrepo.impl.service.VideoListNodeMaintainServiceImpl。
+
 - `settingrepo-stack` 子模块类优化代码换行格式。
   - com.dwarfeng.settingrepo.stack.bean.dto.VideoNodeFileUploadInfo。
 

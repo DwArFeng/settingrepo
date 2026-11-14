@@ -174,7 +174,8 @@ public class VideoListNodeItemMaintainServiceImpl implements VideoListNodeItemMa
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public List<LongIdKey> batchInsertIfNotExists(@SkipRecord List<VideoListNodeItem> entities) throws ServiceException {
+    public List<LongIdKey> batchInsertIfNotExists(@SkipRecord List<VideoListNodeItem> entities)
+            throws ServiceException {
         return crudService.batchInsertIfNotExists(entities);
     }
 
@@ -228,7 +229,8 @@ public class VideoListNodeItemMaintainServiceImpl implements VideoListNodeItemMa
     @BehaviorAnalyse
     @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public PagedData<VideoListNodeItem> lookup(String preset, Object[] objs, PagingInfo pagingInfo) throws ServiceException {
+    public PagedData<VideoListNodeItem> lookup(String preset, Object[] objs, PagingInfo pagingInfo)
+            throws ServiceException {
         return presetLookupService.lookup(preset, objs, pagingInfo);
     }
 
