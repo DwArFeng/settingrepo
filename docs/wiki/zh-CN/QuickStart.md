@@ -247,7 +247,7 @@ VALUES (
   '通过自定义的 Groovy 脚本将设置类别参数格式化为设置节点主键。',
   'import com.dwarfeng.settingrepo.impl.handler.formatter.GroovyFormatterRegistry
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory
-import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey
+import com.dwarfeng.subgrade.stack.bean.key.StringIdKey
 
 @SuppressWarnings("GrPackage")
 class ExampleFormatterProcessor implements GroovyFormatterRegistry.Processor {
@@ -270,10 +270,10 @@ INSERT INTO `tbl_setting_category` (
 )
 VALUES (
   'quickstart.demo',
-  'settingrepo-node',
+  'settingrepo-node-all-he',
   'import com.dwarfeng.settingrepo.impl.handler.formatter.GroovyFormatterRegistry
 import com.dwarfeng.settingrepo.stack.bean.entity.SettingCategory
-import com.dwarfeng.subgrade.basic.stack.bean.key.StringIdKey
+import com.dwarfeng.subgrade.stack.bean.key.StringIdKey
 
 @SuppressWarnings("GrPackage")
 class QuickStartFormatterProcessor implements GroovyFormatterRegistry.Processor {
@@ -288,8 +288,8 @@ class QuickStartFormatterProcessor implements GroovyFormatterRegistry.Processor 
 }
 ',
   'groovy_formatter',
-  'settingrepo-node',
-  'QuickStart 典型设置类别，覆盖文本、键值、导航和国际化节点'
+  'settingrepo-node-all-he',
+  'QuickStart 典型设置类别，覆盖文本、长文本、键值、导航和国际化节点'
 )
 ON DUPLICATE KEY UPDATE
   `created_datamark` = VALUES(`created_datamark`),
@@ -298,31 +298,31 @@ ON DUPLICATE KEY UPDATE
   `modified_datamark` = VALUES(`modified_datamark`),
   `remark` = VALUES(`remark`);
 
--- 节点类型：0-文本，4-国际化，7-导航，8-键值。
+-- 节点类型：0-文本，1-长文本，4-国际化，7-导航，8-键值。
 INSERT INTO `tbl_setting_node` (
   `id`, `args`, `category`, `created_datamark`, `last_modified_date`, `modified_datamark`, `reachable`,
   `remark`, `type`
 )
 VALUES
   (
-    'quickstart.demo.text', '["text"]', 'quickstart.demo', 'settingrepo-node',
-    '2026-01-01 00:00:00.000000', 'settingrepo-node', b'1', 'QuickStart 应用基础配置', 0
+    'quickstart.demo.text', '["text"]', 'quickstart.demo', 'settingrepo-node-all-he',
+    '2026-01-01 00:00:00.000000', 'settingrepo-node-all-he', b'1', 'QuickStart 应用基础配置', 0
   ),
   (
-    'quickstart.demo.iahn', '["iahn"]', 'quickstart.demo', 'settingrepo-node',
-    '2026-01-01 00:00:00.000000', 'settingrepo-node', b'1', 'QuickStart 中英文国际化文案', 4
+    'quickstart.demo.iahn', '["iahn"]', 'quickstart.demo', 'settingrepo-node-all-he',
+    '2026-01-01 00:00:00.000000', 'settingrepo-node-all-he', b'1', 'QuickStart 中英文国际化文案', 4
   ),
   (
-    'quickstart.demo.long-text', '["long-text"]', 'quickstart.demo', 'settingrepo-node',
-    '2026-01-01 00:00:00.000000', 'settingrepo-node', b'1', 'QuickStart 可为空的长文本节点', 1
+    'quickstart.demo.long-text', '["long-text"]', 'quickstart.demo', 'settingrepo-node-all-he',
+    '2026-01-01 00:00:00.000000', 'settingrepo-node-all-he', b'1', 'QuickStart 可为空的长文本节点', 1
   ),
   (
-    'quickstart.demo.navigation', '["navigation"]', 'quickstart.demo', 'settingrepo-node',
-    '2026-01-01 00:00:00.000000', 'settingrepo-node', b'1', 'QuickStart 分层导航菜单', 7
+    'quickstart.demo.navigation', '["navigation"]', 'quickstart.demo', 'settingrepo-node-all-he',
+    '2026-01-01 00:00:00.000000', 'settingrepo-node-all-he', b'1', 'QuickStart 分层导航菜单', 7
   ),
   (
-    'quickstart.demo.kv', '["kv"]', 'quickstart.demo', 'settingrepo-node',
-    '2026-01-01 00:00:00.000000', 'settingrepo-node', b'1', 'QuickStart 功能开关与运行参数', 8
+    'quickstart.demo.kv', '["kv"]', 'quickstart.demo', 'settingrepo-node-all-he',
+    '2026-01-01 00:00:00.000000', 'settingrepo-node-all-he', b'1', 'QuickStart 功能开关与运行参数', 8
   )
 ON DUPLICATE KEY UPDATE
   `args` = VALUES(`args`),
@@ -337,8 +337,8 @@ ON DUPLICATE KEY UPDATE
 INSERT INTO `tbl_text_node` (`id`, `created_datamark`, `modified_datamark`, `value`)
 VALUES (
   'quickstart.demo.text',
-  'settingrepo-node',
-  'settingrepo-node',
+  'settingrepo-node-all-he',
+  'settingrepo-node-all-he',
   '{"applicationName":"SettingRepo QuickStart","theme":"light","pageSize":20,"maintenance":false}'
 )
 ON DUPLICATE KEY UPDATE
@@ -351,7 +351,7 @@ INSERT INTO `tbl_long_text_node` (
   `id`, `created_datamark`, `length`, `modified_datamark`, `null_flag`, `preview`, `store_name`
 )
 VALUES (
-  'quickstart.demo.long-text', 'settingrepo-node', 0, 'settingrepo-node', b'1', NULL,
+  'quickstart.demo.long-text', 'settingrepo-node-all-he', 0, 'settingrepo-node-all-he', b'1', NULL,
   'quickstart.demo.long-text.empty'
 )
 ON DUPLICATE KEY UPDATE
@@ -363,7 +363,7 @@ ON DUPLICATE KEY UPDATE
   `store_name` = VALUES(`store_name`);
 
 INSERT INTO `tbl_kv_node` (`id`, `count`, `created_datamark`, `modified_datamark`)
-VALUES ('quickstart.demo.kv', 4, 'settingrepo-node', 'settingrepo-node')
+VALUES ('quickstart.demo.kv', 4, 'settingrepo-node-all-he', 'settingrepo-node-all-he')
 ON DUPLICATE KEY UPDATE
   `count` = VALUES(`count`),
   `created_datamark` = VALUES(`created_datamark`),
@@ -382,8 +382,8 @@ INSERT INTO `tbl_navigation_node` (`id`, `content`, `created_datamark`, `modifie
 VALUES (
   'quickstart.demo.navigation',
   '{"defaultNodeKey":"quickstart.dashboard","ezNavEnabled":true,"ezNavMaxActiveItem":10,"ezNavRestoreWhenLogin":"restore-pinned"}',
-  'settingrepo-node',
-  'settingrepo-node',
+  'settingrepo-node-all-he',
+  'settingrepo-node-all-he',
   3
 )
 ON DUPLICATE KEY UPDATE
@@ -461,7 +461,7 @@ ON DUPLICATE KEY UPDATE
   `remark` = VALUES(`remark`);
 
 INSERT INTO `tbl_iahn_node` (`id`, `created_datamark`, `modified_datamark`)
-VALUES ('quickstart.demo.iahn', 'settingrepo-node', 'settingrepo-node')
+VALUES ('quickstart.demo.iahn', 'settingrepo-node-all-he', 'settingrepo-node-all-he')
 ON DUPLICATE KEY UPDATE
   `created_datamark` = VALUES(`created_datamark`),
   `modified_datamark` = VALUES(`modified_datamark`);

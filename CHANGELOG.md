@@ -4,6 +4,18 @@
 
 ### 功能构建
 
+- 更新 README.md。
+
+- Wiki 更新。
+  - docs/wiki/zh-CN/BatchScripts.md。
+  - docs/wiki/zh-CN/ConfDirectory.md。
+  - docs/wiki/zh-CN/InstallToCentos.md。
+  - docs/wiki/zh-CN/Introduction.md。
+  - docs/wiki/zh-CN/QuickStart.md。
+  - docs/wiki/zh-CN/ShellScripts.md。
+  - docs/wiki/zh-CN/SystemRequirements.md。
+  - docs/wiki/zh-CN/Warmup.md。
+
 - 依赖升级。
   - 升级 `guava` 依赖版本为 `33.7.1-jre` 以规避漏洞。
 

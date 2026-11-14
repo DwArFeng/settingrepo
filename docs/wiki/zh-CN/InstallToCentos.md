@@ -28,7 +28,7 @@
 ```shell
 cd /usr/local
 tar -zxvf settingrepo-all-he-${version}-release.tar.gz
-mv settingrepo-all-he-${version}-release settingrepo
+mv settingrepo-all-he-${version} settingrepo
 ```
 
 ## 更改启停脚本
@@ -92,7 +92,7 @@ sudo systemctl start settingrepo
 监视日志。
 
 ```shell
-tail -f /var/log/settingrepo/info.log
+tail -f /usr/local/settingrepo/logs/info.log
 ```
 
 *注意：如果 Settingrepo 安装在其它位置，则需要修改监视路径。*

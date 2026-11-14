@@ -207,7 +207,7 @@ Telqos 命令 `reset -rw` 使用预热重置能力，`warmup` 控制预热处理
 预热领导者锁路径由 `conf/curator/latch-path.properties` 配置，
 启动时的预热上线与启用延时由 `conf/settingrepo/launcher.properties` 控制。
 
-预热驱动信息通过 `settingrepo/warmup-driver.properties` 提供额外配置；当前三种预设驱动器没有由该文件提供额外参数。
+预热驱动信息通过 `conf/settingrepo/warmup-driver.properties` 提供额外配置；当前三种预设驱动器没有由该文件提供额外参数。
 当前 `Launcher` 加载 `file:opt/opt*.xml` 与 `file:optext/opt*.xml`，发布资源中的
 `opt/opt-warmup-driver.xml` 默认未启用任何驱动器。需要启用预设驱动器时，应同时取消对应
 Provider 与 Supporter 的注释并重启服务，再确认驱动器已注册。

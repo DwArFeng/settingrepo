@@ -11,7 +11,7 @@
 - Windows 10。
 - CentOS 7。
 
-*说明：以上清单中软件的版本为推荐版本，其它版本见下文详细测试列表。*
+*说明：以上清单中操作系统的版本为推荐版本，其它版本见下文详细测试列表。*
 
 ## 软件需求
 
@@ -22,7 +22,7 @@
    - MySQL 8.0.19。
 - Redis 5.0.7。
 - Zookeeper 3.5.5。
-- snowflake-distributed-service 1.6.4.a。
+- snowflake-distributed-service 2.0.2.a。
 
 *说明：以上清单中软件的版本为推荐版本，其它版本见下文详细测试列表。*
 

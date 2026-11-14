@@ -390,6 +390,7 @@ com.dwarfeng.settingrepo.cache.timeout.entity.formatter_support=3600000
 | exception.properties       | ServiceException 的异常代码的偏移量配置    |
 | iahn.properties            | 国际化节点配置文件                         |
 | image-thumbnail.properties | 图片缩略图配置文件                         |
+| video-thumbnail.properties | 视频缩略图配置文件                         |
 | kv.properties              | 键值对节点查询缓存配置                     |
 | launcher.properties        | 启动器配置文件                             |
 | navigation.properties      | 导航节点配置文件                           |
