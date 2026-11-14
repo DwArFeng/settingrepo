@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- `settingrepo-sdk` 子模块类优化代码换行格式。
+  - com.dwarfeng.settingrepo.sdk.bean.BeanMapper。
+
 - `settingrepo-impl` 子模块类优化代码换行格式。
   - com.dwarfeng.settingrepo.impl.service.VideoListNodeItemMaintainServiceImpl。
   - com.dwarfeng.settingrepo.impl.service.VideoListNodeMaintainServiceImpl。
